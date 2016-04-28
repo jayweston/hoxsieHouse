@@ -1,0 +1,1 @@
+{"virtualbox":{"/home/vagrant/techuity-app":{"type":null,"mount_options":[],"guestpath":"/home/vagrant/techuity-app","hostpath":"/home/jayweston/Documents/git/hoxsieHouse","disabled":false,"__vagrantfile":true},"/vagrant":{"guestpath":"/vagrant","hostpath":"/home/jayweston/Documents/git/hoxsieHouse","disabled":false,"__vagrantfile":true}}}
