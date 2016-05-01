@@ -19,10 +19,9 @@ class PostImageController extends Controller
 		$post_image = new PostImage();
 		$post_image->post_id = $post->id;
 		$this->authorize($post_image);
-		$post = Post::findOrFail($request['post']);
 		$files = $request->file('images');
 		$rules = ['image' => 'required','image' => 'image']; 
-		if( !empty($files) ){
+		if( !empty($files[0]) ){
 			foreach ($files as $file) {
 				$validator = Validator::make(['image' => $file], $rules);
 				if ($validator->fails()) {
@@ -50,8 +49,6 @@ class PostImageController extends Controller
 		$post_image = PostImage::findOrFail($id);
 		$this->authorize($post_image);
 		$post_image->update($request->all());
-		$message = ['success'=>'Nailed it.'];
-		$retval['messages'] = $message;
 		$retval['success'] = true;
 		return Response::json($retval);
     }
