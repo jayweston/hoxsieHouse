@@ -12,7 +12,7 @@ class Post extends Model
 
 	public function images()
 	{
-		return $this->hasMany('App\Models\PostImage');
+		return $this->hasMany('App\Models\PostImage')->orderBy('order', 'ASC');
 	}
 
 	public static function isValidPostType($string)
@@ -53,5 +53,15 @@ class Post extends Model
 		foreach ($posts as $post)
 			$dropdown[$post->id] = $post->title;
 		return $dropdown;
+	}
+
+	public function numberOfImages()
+	{
+		return count(PostImage::where('post_id',$this->id)->get());
+	}
+
+	public function isAvailable()
+	{
+		return $this->avialable_at < \Carbon\Carbon::now();
 	}
 }

@@ -34,3 +34,10 @@ display: table;
 	margin-bottom: .5em;
 }
 
+.post_draft{
+	background-color: rgba(255, 0, 0, 0.4);
+}
+
+.post_unAvailable{
+	background-color: rgba(0, 255, 0, 0.4);
+}

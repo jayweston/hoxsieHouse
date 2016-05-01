@@ -9,3 +9,5 @@ Homestead.json
 .env.php
 .env
 .env.example
+.*
+!/.gitignore
