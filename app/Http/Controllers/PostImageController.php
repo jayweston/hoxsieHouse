@@ -7,32 +7,60 @@ use App\Http\Requests;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\PostImage;
+use Response;
+use Storage;
+use Validator;
 
 class PostImageController extends Controller
 {
     public function store(Request $request)
     {
-	dd($request->all());
-	$post_image = new PostImage();
-	$this->authorize($post_image);
-	$post_image = PostImage::create($request->all());
-	return redirect('post/');
+		$post = Post::findOrFail($request['post']);
+		$post_image = new PostImage();
+		$post_image->post_id = $post->id;
+		$this->authorize($post_image);
+		$post = Post::findOrFail($request['post']);
+		$files = $request->file('images');
+		$rules = ['image' => 'required','image' => 'image']; 
+		if( !empty($files) ){
+			foreach ($files as $file) {
+				$validator = Validator::make(['image' => $file], $rules);
+				if ($validator->fails()) {
+
+				}else{
+					Storage::put($file->getClientOriginalName(),file_get_contents($file));
+					$image = new PostImage();
+					$image->order = $post->numberOfImages()+1;
+					$image->name = $file->getClientOriginalName();
+					$image->post_id = $request['post'];
+					$image->save();
+					\File::move(storage_path().'/app/'.$file->getClientOriginalName(), public_path().'/images/blog/'.$request['post'].'/'.$file->getClientOriginalName());
+				}
+			}
+		}
+		return redirect('post/'.$request['post'].'/edit');
     }
 
     public function update(Request $request, $id)
     {
-	dd($request->all());
-	$post_image = new PostImage();
-	$this->authorize($post_image);
-	$post_image->update($request->all());
-	return redirect('post/');
+		$retval = [
+			'success' => false,
+			'messages' => [],
+		];
+		$post_image = PostImage::findOrFail($id);
+		$this->authorize($post_image);
+		$post_image->update($request->all());
+		$message = ['success'=>'Nailed it.'];
+		$retval['messages'] = $message;
+		$retval['success'] = true;
+		return Response::json($retval);
     }
 
     public function destroy($id)
     {
-	$post_image = PostImage::findOrFail($id);
-	$this->authorize($post_image);
-	$post_image->delete();
-	return redirect('post/'.$post_image->post()->id.'/edit');
+		$post_image = PostImage::findOrFail($id);
+		$this->authorize($post_image);
+		$post_image->delete();
+		return redirect('post/'.$post_image->post()->id.'/edit');
     }
 }
