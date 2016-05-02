@@ -9,9 +9,9 @@ class PostTableSeeder extends Seeder
 
 	public function run()
 	{
-		DB::table('posts')->insert(['avialable_at'=>'2016-04-12', 'user_id'=>'1', 'title'=>'The Start of Questival', 'post_type'=>'travel', 'content'=>file_get_contents(realpath(dirname(__FILE__)) . '/data/post_1.html')]);
-		DB::table('posts')->insert(['avialable_at'=>'2016-04-04', 'user_id'=>'1', 'title'=>'Roaring Camp Railroad', 'post_type'=>'travel', 'content'=>file_get_contents(realpath(dirname(__FILE__)) . '/data/post_2.html')]);
-		DB::table('posts')->insert(['avialable_at'=>'2015-11-17', 'user_id'=>'1', 'title'=>'Page, Arizona Balloon Regatta', 'post_type'=>'travel', 'content'=>file_get_contents(realpath(dirname(__FILE__)) . '/data/post_3.html')]);
+		DB::table('posts')->insert(['avialable_at'=>'2017-04-12', 'user_id'=>'1', 'title'=>'The Start of Questival', 'post_type'=>'travel', 'content'=>file_get_contents(realpath(dirname(__FILE__)) . '/data/post_1.html')]);
+		DB::table('posts')->insert(['avialable_at'=>'2016-04-04', 'user_id'=>'1', 'title'=>'Roaring Camp Railroad', 'post_type'=>'travel', 'content'=>file_get_contents(realpath(dirname(__FILE__)) . '/data/post_2.html'), 'draft'=>'1']);
+		DB::table('posts')->insert(['avialable_at'=>'2015-11-17', 'user_id'=>'1', 'title'=>'Page, Arizona Balloon Regatta', 'post_type'=>'travel', 'content'=>file_get_contents(realpath(dirname(__FILE__)) . '/data/post_3.html'), 'draft'=>'1']);
 		DB::table('posts')->insert(['avialable_at'=>'2015-11-15', 'user_id'=>'1', 'title'=>'Big Cottonwood Canyon in September', 'post_type'=>'travel', 'content'=>file_get_contents(realpath(dirname(__FILE__)) . '/data/post_4.html')]);
 		DB::table('posts')->insert(['avialable_at'=>'2015-09-29', 'user_id'=>'1', 'title'=>'Park City - Final Day!', 'post_type'=>'travel', 'content'=>file_get_contents(realpath(dirname(__FILE__)) . '/data/post_5.html')]);
 		DB::table('posts')->insert(['avialable_at'=>'2015-09-29', 'user_id'=>'1', 'title'=>'Park City Getaway - Saturday!', 'post_type'=>'travel', 'content'=>file_get_contents(realpath(dirname(__FILE__)) . '/data/post_6.html')]);
