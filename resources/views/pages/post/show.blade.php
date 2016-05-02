@@ -13,7 +13,6 @@
 			<div class="item owl-section">
 				<div class="owl-label">{{ $image->label }}</div>
 				<img src="/images/blog/{{ $post->id }}/{{ $image->name }}" height="300px" class="owl-image" />
-
 			</div>
 		@endforeach
 	</div>
