@@ -3,18 +3,22 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePostImagesTable extends Migration
+class CreatePostMetaTable extends Migration
 {
 	public function up()
 	{
-		Schema::create('post_images', function (Blueprint $table) {
+		Schema::create('post_metas', function (Blueprint $table) {
 			/* Columns */
 			$table->increments('id');
 			$table->integer('post_id')->unsigned();
-			$table->integer('old_post_id')->unsigned();
-			$table->string('name');
-			$table->string('label');
-			$table->integer('order');
+			$table->string('title');
+			$table->string('description');
+			$table->double('lat', 15, 8);
+			$table->double('long', 15, 8);
+			$table->string('street');
+			$table->string('city');
+			$table->integer('zip');
+			$table->string('country');
 			$table->timestamps();
 
 			/* Relationships */
@@ -27,6 +31,6 @@ class CreatePostImagesTable extends Migration
 
 	public function down()
 	{
-		Schema::drop('post_images');
+		Schema::drop('post_metas');
 	}
 }

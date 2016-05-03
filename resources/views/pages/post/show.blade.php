@@ -9,7 +9,7 @@
 	@endif @endif
 	<div class="post-title">{{ $post->title }}</div>
 	<div class="post-images owl-carousel">
-		@foreach ($post->images as $image)
+		@foreach ($post->carouselImages as $image)
 			<div class="item owl-section">
 				<div class="owl-label">{{ $image->label }}</div>
 				<img src="/images/blog/{{ $post->id }}/{{ $image->name }}" height="300px" class="owl-image" />

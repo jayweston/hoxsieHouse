@@ -15,6 +15,16 @@ class Post extends Model
 		return $this->hasMany('App\Models\PostImage')->orderBy('order', 'ASC');
 	}
 
+	public function carouselImages()
+	{
+		return $this->hasMany('App\Models\PostImage')->where('order', '>','0')->orderBy('order', 'ASC');
+	}
+
+	public function meta()
+	{
+		return PostMeta::where('post_id',$this->id)->first();
+	}
+
 	public static function isValidPostType($string)
 	{
 		$type = \DB::select(\DB::raw('SHOW COLUMNS FROM posts WHERE Field = "post_type"'))[0]->Type;

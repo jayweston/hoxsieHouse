@@ -5,6 +5,7 @@
 	<div class="row">
 		<button onclick="selectEditImages()" class="btn btn-default pull-right">Edit Images</button>
 		<button onclick="selectUpoadImages()" class="btn btn-default pull-right">Upload Images</button>
+		<button onclick="selectMeta()" class="btn btn-default pull-right">Meta</button>
 		<button onclick="selectContent()" class="btn btn-default pull-right">Content</button>
 	</div>
 
@@ -41,6 +42,52 @@
 		{!! Form::close() !!}
 	</div>
 
+	<div id="post_meta">
+		<h2>Post Meta</h2>
+			@if ($post->meta())
+				{!! Form::model($post->meta(), ['action' => ['PostMetaController@update',$post->meta()->id], 'method'=>'PATCH']) !!}
+			@else
+				{!! Form::open(['action' => ['PostMetaController@store']]) !!}
+			@endif
+				{{ Form::hidden('post_id',$post->id) }}
+			<div class="form-group">
+				{!! Form::label('title','Title') !!}
+				{!! Form::text('title', null, ['class' =>'form-control']) !!}
+			</div>
+			<div class="form-group">
+				{!! Form::label('description','Description') !!}
+				{!! Form::text('description', null, ['class' =>'form-control']) !!}
+			</div>
+			<div class="form-group">
+				{!! Form::label('lat','Latitude') !!}
+				{!! Form::text('lat', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+			</div>
+			<div class="form-group">
+				{!! Form::label('long','Longitude') !!}
+				{!! Form::text('long', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+			</div>
+			<div class="form-group">
+				{!! Form::label('street','Street') !!}
+				{!! Form::text('street', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+			</div>
+			<div class="form-group">
+				{!! Form::label('city','City') !!}
+				{!! Form::text('city', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+			</div>
+			<div class="form-group">
+				{!! Form::label('zip','Zip') !!}
+				{!! Form::text('zip', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+			</div>
+			<div class="form-group">
+				{!! Form::label('country','Country') !!}
+				{!! Form::text('country', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+			</div>
+			<div class="form-group">
+				{!! Form::submit('Save', ['class' =>'btn btn-primary form-control']) !!}
+			</div>
+		{!! Form::close() !!}
+	</div>
+
 	<div id="upload_images">
 		<h2>Upload Images</h2>
 		{!! Form::open(['action' => ['PostImageController@store'], 'files'=>true]) !!}
@@ -65,7 +112,7 @@
 						<th class="hidden-xs hidden-sm col-md-3 col-lg-3">Post</th>
 						<th class="hidden-xs col-sm-1 col-md-1 col-lg-1">order</th>
 						<th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Image</th>
-						<th class="col-xs-9 col-sm-8 col-md-5 col-lg-5">Label</th>
+						<th class="col-xs-9 col-sm-8 col-md-3 col-lg-3">Label</th>
 						<th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Delete</th>
 					</tr>
 				</thead>
@@ -73,7 +120,7 @@
 					@foreach ($post->images as $image)
 						<tr>
 							<td class="hidden-xs hidden-sm col-md-3 col-lg-3">{!! Form::select('post_id',App\Models\Post::getPostTitleDropdown() ,$image->post_id, ['class' =>'form-control ajax_submit', 'data-image_id'=>$image->id]) !!}</td>
-							<td class="hidden-xs col-sm-1 col-md-1 col-lg-1">{!! Form::selectRange('order', 0, count($post->images), $image->order, ['class' =>'form-control  ajax_submit', 'data-image_id'=>$image->id]) !!}</td>
+							<td class="hidden-xs col-sm-1 col-md-1 col-lg-1">{!! Form::select('order', $image->getOrderDropdown(), $image->order, ['class' =>'form-control  ajax_submit', 'data-image_id'=>$image->id]) !!}</td>
 							<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/images/blog/{{ $post->id }}/{{ $image->name }}" style="max-height:90%; max-width:90%" /></td>
 							<td class="col-xs-9 col-sm-8 col-md-5 col-lg-5">{!! Form::textarea('label', $image->label, ['class' =>'form-control  ajax_submit', 'data-image_id'=>$image->id]) !!}</td>
 							<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
@@ -92,7 +139,9 @@
 	<div id="spinner" class="text-center">
 		<img src="/images/spinner.gif" />
 	</div>
-
+{{ Form::open(['action' => ['PostImageController@update',6], 'method' => 'Put']) }}
+								{{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+								{{ Form::close() }}
 @endsection
 
 @section('scripts')
@@ -108,21 +157,32 @@
 		$("#edit_images").hide();
 		$("#upload_images").hide();
 		$("#spinner").hide();
+		$("#post_meta").hide();
 
 		function selectUpoadImages() {
 			$("#upload_images").show();
 			$("#post_content").hide();
 			$("#edit_images").hide();
 			$("#spinner").hide();
+			$("#post_meta").hide();
 		}
 		function selectEditImages() {
 			$("#edit_images").show();
 			$("#post_content").hide();
 			$("#upload_images").hide();
 			$("#spinner").hide();
+			$("#post_meta").hide();
 		}
 		function selectContent() {
 			$("#post_content").show();
+			$("#edit_images").hide();
+			$("#upload_images").hide();
+			$("#spinner").hide();
+			$("#post_meta").hide();
+		}
+		function selectMeta() {
+			$("#post_meta").show();
+			$("#post_content").hide();
 			$("#edit_images").hide();
 			$("#upload_images").hide();
 			$("#spinner").hide();
@@ -132,6 +192,7 @@
 			$("#edit_images").hide();
 			$("#upload_images").hide();
 			$("#spinner").show();
+			$("#post_meta").hide();
 		});
 	</script>
 	<script type="text/javascript">
