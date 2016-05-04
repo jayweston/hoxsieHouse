@@ -1,7 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
-
+	<div class="alert alert-warning alert-block hidden" id="notification_error">
+		<button type="button" class="close" onclick="$('#notification_error').addClass('hidden')">&times;</button>
+		<h4>Error</h4>
+		<div class="notification_message"></div>
+	</div>
 	<div class="row">
 		<button onclick="selectEditImages()" class="btn btn-default pull-right">Edit Images</button>
 		<button onclick="selectUpoadImages()" class="btn btn-default pull-right">Upload Images</button>
@@ -112,7 +116,7 @@
 						<th class="hidden-xs hidden-sm col-md-3 col-lg-3">Post</th>
 						<th class="hidden-xs col-sm-1 col-md-1 col-lg-1">order</th>
 						<th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Image</th>
-						<th class="col-xs-9 col-sm-8 col-md-3 col-lg-3">Label</th>
+						<th class="col-xs-9 col-sm-8 col-md-5 col-lg-5">Label</th>
 						<th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Delete</th>
 					</tr>
 				</thead>
@@ -139,9 +143,6 @@
 	<div id="spinner" class="text-center">
 		<img src="/images/spinner.gif" />
 	</div>
-{{ Form::open(['action' => ['PostImageController@update',6], 'method' => 'Put']) }}
-								{{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
-								{{ Form::close() }}
 @endsection
 
 @section('scripts')
@@ -212,15 +213,18 @@
 						if(val)
 							txt = txt + val + '<br>';
 					});
-					if(txt)
-						console.log(txt);
+					if(!txt)
+						txt = 'There was a problem saving your response.  Please try again.';
+					$('.notification_message').html('');
+					$('.notification_message').html(txt);
+					$('#notification_error').removeClass('hidden');
 				}
-				var txt = 'There was a problem saving your response.  Please try again.'
-				console.log(txt);
 			})
 			.error(function(){
-				var txt = '404'
-				console.log(txt);
+				var txt = 'There was a problem saving your response.  Please try again.';
+				$('.notification_message').html('');
+				$('.notification_message').html(txt);
+				$('#notification_error').removeClass('hidden');
 			});
 		});
 	</script>

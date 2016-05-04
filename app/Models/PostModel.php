@@ -9,6 +9,7 @@ class Post extends Model
 {
 	use SoftDeletes;
 	protected $fillable = ['user_id', 'post_type', 'draft', 'title', 'content', 'summary', 'avialable_at'];
+	const SITE_NAMES = ['foodie'=>'HoxsieHouse Eats','review'=>'Reviews of HoxsieHouse','travel'=>'The Adventures of HoxsieHouse'];
 
 	public function images()
 	{
@@ -20,9 +21,27 @@ class Post extends Model
 		return $this->hasMany('App\Models\PostImage')->where('order', '>','0')->orderBy('order', 'ASC');
 	}
 
+	public function thumbnail()
+	{
+		return PostImage::where('post_id',$this->id)->where('order', -1)->first();
+	}
+
+	public function thumbnailPath()
+	{
+		$image = PostImage::where('post_id',$this->id)->where('order', -1)->first();
+		if ( !empty($image->id) ){
+			return \URL::to('/images/blog/'.$image->post_id.'/'.$image->name); 
+		}else{
+			return \URL::to('/images/blog/thumbnail.png');
+		}
+	}
+
 	public function meta()
 	{
-		return PostMeta::where('post_id',$this->id)->first();
+		$meta = PostMeta::where('post_id',$this->id)->first();
+		if (empty($meta->id))
+			return new PostMeta();
+		return $meta;
 	}
 
 	public static function isValidPostType($string)
