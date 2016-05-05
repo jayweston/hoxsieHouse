@@ -30,9 +30,9 @@ class PostMetaController extends Controller
 
     public function destroy($id)
     {
+    	$post_meta = PostMeta::findOrFail($id);
     	$post_id = $post_meta->post_id;
-		$post_meta = PostMeta::findOrFail($id);
-		$this->authorize($post_image);
+		$this->authorize($post_meta);
 		$post_meta->delete();
 		return redirect('post/'.$post_id.'/edit');
     }

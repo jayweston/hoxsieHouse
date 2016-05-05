@@ -1,5 +1,24 @@
 @extends('layouts.app')
 
+@section('meta-general')
+	<meta name="robots" content="noindex,nofollow" />
+	@parent
+@stop
+
+@section('title','')
+@section('description','')
+@section('tags','')
+@section('lat','')
+@section('long','')
+@section('street','')
+@section('city','')
+@section('zip','')
+@section('country','')
+@section('image','')
+@section('site_name','')
+@section('created_at','')
+
+
 @section('content')
 	{!! Form::model($user, ['action' => ['UserController@update',$user->id], 'method'=>'PATCH']) !!}
 		<div class="form-group">

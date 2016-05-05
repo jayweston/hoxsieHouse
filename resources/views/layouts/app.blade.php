@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-@include('includes.meta')
+	@include('includes.meta')
+	
 	@section('css')
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/css/style.css" rel="stylesheet">

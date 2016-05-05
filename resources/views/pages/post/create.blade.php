@@ -1,5 +1,22 @@
 @extends('layouts.app')
 
+@section('meta-general')
+	<meta name="robots" content="noindex,nofollow" />
+	@parent
+@stop
+@section('title','')
+@section('description','')
+@section('tags','')
+@section('lat','')
+@section('long','')
+@section('street','')
+@section('city','')
+@section('zip','')
+@section('country','')
+@section('image','')
+@section('site_name','')
+@section('created_at','')
+
 @section('content')
 	{!! Form::open(['action' => ['PostController@store']]) !!}
 		<div class="form-group">
@@ -7,8 +24,8 @@
 			{!! Form::text('title', null, ['class' =>'form-control']) !!}
 		</div>
 		<div class="form-group">
-			{!! Form::label('post_type','Type') !!}
-			{!! Form::select('post_type',App\Models\Post::arrayToDropdown(App\Models\Post::getPostTypes()) ,null, ['class' =>'form-control','placeholder' => '...']) !!}
+			{!! Form::label('post','Type') !!}
+			{!! Form::select('post',App\Models\Post::arrayToDropdown(App\Models\Post::getPostTypes()) ,null, ['class' =>'form-control','placeholder' => '...']) !!}
 		</div>
 		<div class="form-group">
 			{!! Form::label('summary','Summary') !!}

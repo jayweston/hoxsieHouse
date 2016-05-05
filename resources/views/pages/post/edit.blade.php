@@ -1,5 +1,22 @@
 @extends('layouts.app')
 
+@section('meta-general')
+	<meta name="robots" content="noindex,nofollow" />
+	@parent
+@stop
+@section('title','')
+@section('description','')
+@section('tags','')
+@section('lat','')
+@section('long','')
+@section('street','')
+@section('city','')
+@section('zip','')
+@section('country','')
+@section('image','')
+@section('site_name','')
+@section('created_at','')
+
 @section('content')
 	<div class="alert alert-warning alert-block hidden" id="notification_error">
 		<button type="button" class="close" onclick="$('#notification_error').addClass('hidden')">&times;</button>
@@ -21,8 +38,8 @@
 				{!! Form::text('title', null, ['class' =>'form-control']) !!}
 			</div>
 			<div class="form-group">
-				{!! Form::label('post_type','Type') !!}
-				{!! Form::select('post_type',App\Models\Post::arrayToDropdown(App\Models\Post::getPostTypes()) ,null, ['class' =>'form-control','placeholder' => '...']) !!}
+				{!! Form::label('type','Type') !!}
+				{!! Form::select('type',App\Models\Post::arrayToDropdown(App\Models\Post::getPostTypes()) ,$post->type, ['class' =>'form-control','placeholder' => '...']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('summary','Summary') !!}
@@ -48,7 +65,7 @@
 
 	<div id="post_meta">
 		<h2>Post Meta</h2>
-			@if ($post->meta())
+			@if ( !empty($post->meta()->id) )
 				{!! Form::model($post->meta(), ['action' => ['PostMetaController@update',$post->meta()->id], 'method'=>'PATCH']) !!}
 			@else
 				{!! Form::open(['action' => ['PostMetaController@store']]) !!}
@@ -90,6 +107,13 @@
 				{!! Form::submit('Save', ['class' =>'btn btn-primary form-control']) !!}
 			</div>
 		{!! Form::close() !!}
+		@if ( !empty($post->meta()->id) )
+			<div class="form-group">
+				{{ Form::open(['action' => ['PostMetaController@destroy',$post->meta()->id], 'method' => 'DELETE']) }}
+				{{ Form::submit('Delete', ['class' => 'btn btn-danger form-control'])}}
+				{{ Form::close() }}
+			</div>
+		@endif
 	</div>
 
 	<div id="upload_images">

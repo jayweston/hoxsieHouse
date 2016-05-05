@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class Post extends Model
 {
 	use SoftDeletes;
-	protected $fillable = ['user_id', 'post_type', 'draft', 'title', 'content', 'summary', 'avialable_at'];
+	protected $fillable = ['user_id', 'post', 'draft', 'title', 'content', 'summary', 'avialable_at'];
 	const SITE_NAMES = ['foodie'=>'HoxsieHouse Eats','review'=>'Reviews of HoxsieHouse','travel'=>'The Adventures of HoxsieHouse'];
 
 	public function images()
@@ -36,6 +36,17 @@ class Post extends Model
 		}
 	}
 
+	public function description()
+	{
+		
+		if ( empty($this->summary) ){
+			$content = preg_replace("/\<[^)]+\>/","",$this->content);
+			return substr($content,0,200)."..."; 
+		}else{
+			return $this->summary;
+		}
+	}
+
 	public function meta()
 	{
 		$meta = PostMeta::where('post_id',$this->id)->first();
@@ -46,7 +57,7 @@ class Post extends Model
 
 	public static function isValidPostType($string)
 	{
-		$type = \DB::select(\DB::raw('SHOW COLUMNS FROM posts WHERE Field = "post_type"'))[0]->Type;
+		$type = \DB::select(\DB::raw('SHOW COLUMNS FROM posts WHERE Field = "type"'))[0]->Type;
 		preg_match('/^enum\((.*)\)$/', $type, $matches);
 		$values = array();
 		foreach(explode(',', $matches[1]) as $value){
@@ -57,7 +68,7 @@ class Post extends Model
 
 	public static function getPostTypes()
 	{
-		$type = \DB::select(\DB::raw('SHOW COLUMNS FROM posts WHERE Field = "post_type"'))[0]->Type;
+		$type = \DB::select(\DB::raw('SHOW COLUMNS FROM posts WHERE Field = "type"'))[0]->Type;
 		preg_match('/^enum\((.*)\)$/', $type, $matches);
 		$values = array();
 		foreach(explode(',', $matches[1]) as $value){

@@ -170,7 +170,6 @@ class PostImagesTableSeeder extends Seeder
 		$data[] = ['post_id'=> '36', 'name'=> 'img03.jpg'];
 		$data[] = ['post_id'=> '36', 'name'=> 'img02.jpg'];
 		$data[] = ['post_id'=> '36', 'name'=> 'img01.jpg'];
-		$data[] = ['post_id'=> '2', 'name'=> '03.jpg'];
 		$data[] = ['post_id'=> '2', 'name'=> '02.jpg'];
 		$data[] = ['post_id'=> '2', 'name'=> '01.jpg'];
 		$data[] = ['post_id'=> '61', 'name'=> 'img02.jpg'];
@@ -509,7 +508,6 @@ class PostImagesTableSeeder extends Seeder
 		$data[] = ['post_id'=> '1', 'name'=> '13.jpeg'];
 		$data[] = ['post_id'=> '1', 'name'=> '11.jpeg'];
 		$data[] = ['post_id'=> '1', 'name'=> '06.jpeg'];
-		$data[] = ['post_id'=> '1', 'name'=> '14.jpeg'];
 		$data[] = ['post_id'=> '1', 'name'=> '05.jpeg'];
 		$data[] = ['post_id'=> '1', 'name'=> '08.jpeg'];
 		$data[] = ['post_id'=> '1', 'name'=> '03.jpeg'];
@@ -1229,6 +1227,15 @@ class PostImagesTableSeeder extends Seeder
 		$data[] = ['post_id'=> '39', 'name'=> 'img03.JPG'];
 		$data[] = ['post_id'=> '39', 'name'=> 'img02.JPG'];
 		$data[] = ['post_id'=> '39', 'name'=> 'img15.JPG'];
+		DB::table('post_images')->insert($data);
+		$data = [];
+		$data[] = ['post_id'=> '3', 'order'=> '-1', 'name'=> 'thumbnail.png'];
+		$data[] = ['post_id'=> '5', 'order'=> '-1', 'name'=> 'thumbnail.png'];
+		$data[] = ['post_id'=> '2', 'order'=> '-1', 'name'=> '03.png'];
+		$data[] = ['post_id'=> '1', 'order'=> '-1', 'name'=> '14.png'];
+		$data[] = ['post_id'=> '6', 'order'=> '-1', 'name'=> 'thumbnail.png'];
+		$data[] = ['post_id'=> '7', 'order'=> '-1', 'name'=> 'thumbnail.png'];
+		$data[] = ['post_id'=> '8', 'order'=> '-1', 'name'=> 'thumbnail.png'];
 		DB::table('post_images')->insert($data);
 	}
 }

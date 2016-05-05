@@ -1,26 +1,33 @@
 @extends('layouts.app')
-
-@section('title',$post->meta()->title)
-@section('description',$post->meta()->description)
+@include('includes.meta')
+@section('title','')
+@section('description','')
 @section('tags','')
-@section('lat',$post->meta()->lat)
-@section('long',$post->meta()->long)
-@section('street',$post->meta()->street)
-@section('city',$post->meta()->city)
-@section('zip',$post->meta()->zip)
-@section('country',$post->meta()->country)
-@section('image',$post->thumbnailPath())
-@section('site_name',App\Models\Post::SITE_NAMES[$post->post_type])
-@section('created_at',$post->avialable_at)
+@section('lat','')
+@section('long','')
+@section('street','')
+@section('city','')
+@section('zip','')
+@section('country','')
+@section('image','')
+@section('site_name','')
+@section('created_at','')
 
 @section('content')
+	<div class="row">
 	@foreach($posts as $post)
-		<div class="row @if($post->draft == true) post_draft @endif @if(!$post->isAvailable()) post_unAvailable @endif">
-			Title: <a href="/post/{{ $post->id }}">{{ $post->title }}</a><br/>
-			Summary: {!! $post->summary !!}<br/>
-			Date: {!! $post->avialable_at !!}
+		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
+			<div class="thumbnail_transform @if($post->draft == true) post_draft @endif @if(!$post->isAvailable()) post_unAvailable @endif">
+				<figure>
+					<div class="thumbnail_title">{{ $post->title }}<br/>{!! date_format(date_create($post->avialable_at),"j-F-Y") !!}</div>
+					<a href="/post/{{ $post->id }}"><img src="{{ $post->thumbnailPath() }}" /></a>
+					<a href="/post/{{ $post->id }}"><figcaption>{{ $post->description() }}</figcaption></a>
+				</figure>
+			</div>
 		</div>
-		<hr/>
 	@endforeach
-	{!! $posts->render() !!}
+	</div>
+		<div class="row text-center ">
+			{!! $posts->render() !!}
+		</div>
 @endsection

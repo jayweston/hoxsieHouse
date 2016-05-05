@@ -10,10 +10,11 @@
 @section('zip',$post->meta()->zip)
 @section('country',$post->meta()->country)
 @section('image',$post->thumbnailPath())
-@section('site_name',App\Models\Post::SITE_NAMES[$post->post_type])
+@section('site_name',App\Models\Post::SITE_NAMES[$post->type])
 @section('created_at',$post->avialable_at)
 
 @section('content')
+	{{ $post->meta()->description }}
 	@if(!Auth::guest()) @if( (Auth::user()->type == App\Models\User::TYPE_ADMIN) || (App\Models\User::isPostMine($post->id)) )
 		<div class="form-group">
 			<a href="/post/{{ $post->id }}/edit" class="btn btn-primary pull-left">Edit</a>
