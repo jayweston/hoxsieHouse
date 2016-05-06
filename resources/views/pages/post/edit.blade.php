@@ -170,7 +170,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('li').removeClass('active');
-			$('#nav_{{ $post->type }}').addClass('active');
+			$('#nav_post_{{ $post->type }}').addClass('active');
 			$('#nav_post_dropdown').addClass('active');
 		});	
 	</script>
