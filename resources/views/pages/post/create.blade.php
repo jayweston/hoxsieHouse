@@ -20,8 +20,8 @@
 			{!! Form::text('title', null, ['class' =>'form-control']) !!}
 		</div>
 		<div class="form-group">
-			{!! Form::label('post','Type') !!}
-			{!! Form::select('post',App\Models\Post::arrayToDropdown(App\Models\Post::getPostTypes()) ,null, ['class' =>'form-control','placeholder' => '...']) !!}
+			{!! Form::label('type','Type') !!}
+			{!! Form::select('type',App\Models\Post::arrayToDropdown(App\Models\Post::getPostTypes()) ,null, ['class' =>'form-control','placeholder' => '...']) !!}
 		</div>
 		<div class="form-group">
 			{!! Form::label('summary','Summary') !!}
@@ -50,7 +50,7 @@
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('li').removeClass('active');
-			$('#nav_create_post').addClass('active');
+			$('#nav_post_create').addClass('active');
 			$('#nav_post_dropdown').addClass('active');
 		});	
 	</script>
