@@ -11,7 +11,7 @@ class CreatePostsTable extends Migration
 			/* Columns */
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
-			$table->enum('post_type', [
+			$table->enum('type', [
 				'foodie',
 				'review',
 				'travel'

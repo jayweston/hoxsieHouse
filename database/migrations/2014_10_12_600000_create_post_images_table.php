@@ -11,9 +11,10 @@ class CreatePostImagesTable extends Migration
 			/* Columns */
 			$table->increments('id');
 			$table->integer('post_id')->unsigned();
+			$table->integer('old_post_id')->unsigned();
 			$table->string('name');
 			$table->string('label');
-			$table->integer('order')->unsigned();
+			$table->integer('order');
 			$table->timestamps();
 
 			/* Relationships */
