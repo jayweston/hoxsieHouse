@@ -18,3 +18,13 @@
 			{!! $posts->render() !!}
 		</div>
 @endsection
+@section('scripts')
+	@parent
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('li').removeClass('active');
+			$('#nav_post_{{ $post_type }}').addClass('active');
+			$('#nav_post_dropdown').addClass('active');
+		});	
+	</script>
+@stop
