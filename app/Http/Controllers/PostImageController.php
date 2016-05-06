@@ -29,9 +29,10 @@ class PostImageController extends Controller
 				}else{
 					Storage::put($file->getClientOriginalName(),file_get_contents($file));
 					$image = new PostImage();
-					$image->order = $post->numberOfImages()+1;
+					$image->order = 0;
 					$image->name = $file->getClientOriginalName();
 					$image->post_id = $request['post'];
+					$image->old_post_id = $request['post'];
 					$image->save();
 					\File::move(storage_path().'/app/'.$file->getClientOriginalName(), public_path().'/images/blog/'.$request['post'].'/'.$file->getClientOriginalName());
 				}
@@ -48,9 +49,24 @@ class PostImageController extends Controller
 		];
 		$post_image = PostImage::findOrFail($id);
 		$this->authorize($post_image);
-		$post_image->update($request->all());
-		$retval['success'] = true;
-		return Response::json($retval);
+		if( !empty($request['post_id']) ){
+			$request->request->add(['order' => '0']);
+		}
+		if ($request['order'] == '-1'){
+			$results = $post_image->thumbnailable();
+			if ($results == 'true'){
+				$post_image->update($request->all());
+				$retval['success'] = true;
+				return Response::json($retval);
+			}else{
+				$retval['messages'] = [$results];
+				return Response::json($retval);
+			}
+		}else{
+			$post_image->update($request->all());
+			$retval['success'] = true;
+			return Response::json($retval);
+		}
     }
 
     public function destroy($id)

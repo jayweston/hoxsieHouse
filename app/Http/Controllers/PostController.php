@@ -12,15 +12,15 @@ class PostController extends Controller
 {
     public function index()
     {
-		$post_type = \Request::input('type');
+		$type = \Request::input('type');
 		if (\Auth::guest() || \Auth::user()->type == User::TYPE_VIEWER)
-			if (Post::isValidPostType($post_type))
-				$posts = Post::where('post_type', $post_type)->where('draft', false)->where('avialable_at','<' ,\Carbon\Carbon::now())->paginate(10);
+			if (Post::isValidPostType($type))
+				$posts = Post::where('type', $type)->where('draft', false)->where('avialable_at','<' ,\Carbon\Carbon::now())->paginate(10);
 			else
 				$posts = Post::where('avialable_at','<' ,\Carbon\Carbon::now())->where('draft', false)->paginate(10);
 		else
-			if (Post::isValidPostType($post_type))
-				$posts = Post::where('post_type', $post_type)->paginate(10);
+			if (Post::isValidPostType($type))
+				$posts = Post::where('type', $type)->paginate(10);
 			else
 				$posts = Post::paginate(10);
 		$view_data['posts'] = $posts;

@@ -1,5 +1,18 @@
 @extends('layouts.app')
 
+@section('meta-general')
+	@parent
+	<meta name="robots" content="noindex,nofollow" />
+	@section('title', 'Create post' )
+	@section('description','Create new post for HoxsieHouse Blog.')
+@stop
+
+@section('meta-location') @stop
+@section('meta-google') @stop
+@section('meta-twitter') @stop
+@section('meta-facebook') @stop
+@section('meta-pintrest') @stop
+
 @section('content')
 	{!! Form::open(['action' => ['PostController@store']]) !!}
 		<div class="form-group">
@@ -7,8 +20,8 @@
 			{!! Form::text('title', null, ['class' =>'form-control']) !!}
 		</div>
 		<div class="form-group">
-			{!! Form::label('post_type','Type') !!}
-			{!! Form::select('post_type',App\Models\Post::arrayToDropdown(App\Models\Post::getPostTypes()) ,null, ['class' =>'form-control','placeholder' => '...']) !!}
+			{!! Form::label('post','Type') !!}
+			{!! Form::select('post',App\Models\Post::arrayToDropdown(App\Models\Post::getPostTypes()) ,null, ['class' =>'form-control','placeholder' => '...']) !!}
 		</div>
 		<div class="form-group">
 			{!! Form::label('summary','Summary') !!}
