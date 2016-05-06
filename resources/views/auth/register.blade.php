@@ -80,3 +80,12 @@
     </div>
 </div>
 @endsection
+@section('scripts')
+    @parent
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('li').removeClass('active');
+            $('#nav_register').addClass('active');
+        }); 
+    </script>
+@stop

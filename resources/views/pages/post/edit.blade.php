@@ -167,6 +167,13 @@
 
 @section('scripts')
 	@parent
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('li').removeClass('active');
+			$('#nav_{{ $post->type }}').addClass('active');
+			$('#nav_post_dropdown').addClass('active');
+		});	
+	</script>
 	<script src="/js/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript">
 		tinymce.init({

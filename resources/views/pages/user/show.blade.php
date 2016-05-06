@@ -51,3 +51,13 @@
 	Summary:
 	link:
 @endsection
+@section('scripts')
+	@parent
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('li').removeClass('active');
+			$('#nav_account_show').addClass('active');
+			$('#nav_account_dropdown').addClass('active');
+		});	
+	</script>
+@stop

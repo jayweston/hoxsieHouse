@@ -76,6 +76,13 @@
 @section('scripts')
 	@parent
 	<script src="/js/owl.carousel.min.js"></script>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('li').removeClass('active');
+			$('#nav_{{ $post->type }}').addClass('active');
+			$('#nav_post_dropdown').addClass('active');
+		});	
+	</script>
 	<script>
 		var owl = $('.owl-carousel');
 		owl.owlCarousel({

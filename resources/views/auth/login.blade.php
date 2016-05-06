@@ -64,3 +64,12 @@
     </div>
 </div>
 @endsection
+@section('scripts')
+    @parent
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('li').removeClass('active');
+            $('#nav_login').addClass('active');
+        }); 
+    </script>
+@stop

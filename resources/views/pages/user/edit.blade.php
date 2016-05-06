@@ -43,3 +43,14 @@
 		{!! Form::close() !!}
 	</div>
 @endsection
+
+@section('scripts')
+	@parent
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('li').removeClass('active');
+			$('#nav_account_edit').addClass('active');
+			$('#nav_account_dropdown').addClass('active');
+		});	
+	</script>
+@stop
