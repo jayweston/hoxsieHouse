@@ -32,6 +32,7 @@ class PostImageController extends Controller
 					$image->order = 0;
 					$image->name = $file->getClientOriginalName();
 					$image->post_id = $request['post'];
+					$image->old_post_id = $request['post'];
 					$image->save();
 					\File::move(storage_path().'/app/'.$file->getClientOriginalName(), public_path().'/images/blog/'.$request['post'].'/'.$file->getClientOriginalName());
 				}
@@ -48,22 +49,19 @@ class PostImageController extends Controller
 		];
 		$post_image = PostImage::findOrFail($id);
 		$this->authorize($post_image);
+		if( !empty($request['post_id']) ){
+			$request->request->add(['order' => '0']);
+		}
 		if ($request['order'] == '-1'){
-			$image_resolution = getimagesize(public_path().'/images/blog/'.$post_image->post_id.'/'.$post_image->name);
-			if ( ($image_resolution[0] != 250) || ($image_resolution[1] != 250) ){
-				$retval['messages'] = ["Image resolution is ".$image_resolution[0]."x".$image_resolution[1]." and should be 250x250."];
+			$results = $post_image->thumbnailable();
+			if ($results == 'true'){
+				$post_image->update($request->all());
+				$retval['success'] = true;
+				return Response::json($retval);
+			}else{
+				$retval['messages'] = [$results];
 				return Response::json($retval);
 			}
-
-			$extention = substr($post_image->name,-3);
-			if (strtolower($extention) != 'png'){
-				$retval['messages'] = ["Image type is ".$extention." and should be png."];
-				return Response::json($retval);
-			}
-			
-			$post_image->update($request->all());
-			$retval['success'] = true;
-			return Response::json($retval);
 		}else{
 			$post_image->update($request->all());
 			$retval['success'] = true;

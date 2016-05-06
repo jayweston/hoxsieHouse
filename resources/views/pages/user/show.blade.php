@@ -1,22 +1,17 @@
 @extends('layouts.app')
 
 @section('meta-general')
-	<meta name="robots" content="noindex,nofollow" />
 	@parent
+	<meta name="robots" content="noindex,nofollow" />
+	@section('title', $user->name )
+	@section('description','View a users info including their posts and comments made.')
 @stop
 
-@section('title','')
-@section('description','')
-@section('tags','')
-@section('lat','')
-@section('long','')
-@section('street','')
-@section('city','')
-@section('zip','')
-@section('country','')
-@section('image','')
-@section('site_name','')
-@section('created_at','')
+@section('meta-location') @stop
+@section('meta-google') @stop
+@section('meta-twitter') @stop
+@section('meta-facebook') @stop
+@section('meta-pintrest') @stop
 
 @section('content')
 

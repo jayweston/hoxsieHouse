@@ -1,21 +1,17 @@
 @extends('layouts.app')
 
 @section('meta-general')
-	<meta name="robots" content="noindex,nofollow" />
 	@parent
+	<meta name="robots" content="noindex,nofollow" />
+	@section('title', 'Edit: '.$post->title)
+	@section('description','Edit post content, meta, and images.')
 @stop
-@section('title','')
-@section('description','')
-@section('tags','')
-@section('lat','')
-@section('long','')
-@section('street','')
-@section('city','')
-@section('zip','')
-@section('country','')
-@section('image','')
-@section('site_name','')
-@section('created_at','')
+
+@section('meta-location') @stop
+@section('meta-google') @stop
+@section('meta-twitter') @stop
+@section('meta-facebook') @stop
+@section('meta-pintrest') @stop
 
 @section('content')
 	<div class="alert alert-warning alert-block hidden" id="notification_error">
@@ -51,7 +47,7 @@
 			</div>
 			<div class="form-group">
 				{!! Form::label('avialable_at','Publish On') !!}
-				{!! Form::input('datetime', 'avialable_at', date('Y-m-d h:i:sa'), ['class' =>'form-control']) !!}
+				{!! Form::input('datetime', 'avialable_at', null, ['class' =>'form-control']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('draft','Draft') !!}
@@ -149,7 +145,7 @@
 						<tr>
 							<td class="hidden-xs hidden-sm col-md-3 col-lg-3">{!! Form::select('post_id',App\Models\Post::getPostTitleDropdown() ,$image->post_id, ['class' =>'form-control ajax_submit', 'data-image_id'=>$image->id]) !!}</td>
 							<td class="hidden-xs col-sm-1 col-md-1 col-lg-1">{!! Form::select('order', $image->getOrderDropdown(), $image->order, ['class' =>'form-control  ajax_submit', 'data-image_id'=>$image->id]) !!}</td>
-							<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img src="/images/blog/{{ $post->id }}/{{ $image->name }}" style="max-height:90%; max-width:90%" /></td>
+							<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img class="@if($image->thumbnailable() == 'true') thumbnailable @endif" src="/images/blog/{{ $post->id }}/{{ $image->name }}" style="max-height:90%; max-width:90%" /></td>
 							<td class="col-xs-9 col-sm-8 col-md-5 col-lg-5">{!! Form::textarea('label', $image->label, ['class' =>'form-control  ajax_submit', 'data-image_id'=>$image->id]) !!}</td>
 							<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 								{{ Form::open(['action' => ['PostImageController@destroy',$image->id], 'method' => 'DELETE']) }}

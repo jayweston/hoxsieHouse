@@ -49,7 +49,7 @@ display: table;
 	width:250px;
 	height:250px;
 	overflow:hidden;
-	margin:0 auto 15; 
+	margin:0 auto 30px; 
 }
 
 .thumbnail_transform figure {
@@ -75,7 +75,7 @@ display: table;
 	left:0;
 	width:100%;
 	height:100%;
-	color:fff;
+	color:white;
 	font-weight: bold;
 	padding:15px 30px;
 	background-color:rgba(26,76,110,0.80);
@@ -113,7 +113,7 @@ display: table;
 	transform:rotateY(180deg);
 }
 .thumbnail_title{
-	color:fff;
+	color:white;
 	font-weight: bold;
 	padding:5px 15px;
 	position:absolute;
@@ -125,4 +125,8 @@ display: table;
 	-webkit-transition:all 1s;
 	-moz-transition:all 1s;
 	transition:all 1s;
+}
+.thumbnailable{
+	border: solid;
+	color:red;
 }

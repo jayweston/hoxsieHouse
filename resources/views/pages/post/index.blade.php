@@ -1,17 +1,4 @@
 @extends('layouts.app')
-@include('includes.meta')
-@section('title','')
-@section('description','')
-@section('tags','')
-@section('lat','')
-@section('long','')
-@section('street','')
-@section('city','')
-@section('zip','')
-@section('country','')
-@section('image','')
-@section('site_name','')
-@section('created_at','')
 
 @section('content')
 	<div class="row">

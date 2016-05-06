@@ -1,17 +1,52 @@
 @extends('layouts.app')
 
-@section('title',$post->meta()->title)
-@section('description',$post->meta()->description)
-@section('tags','')
-@section('lat',$post->meta()->lat)
-@section('long',$post->meta()->long)
-@section('street',$post->meta()->street)
-@section('city',$post->meta()->city)
-@section('zip',$post->meta()->zip)
-@section('country',$post->meta()->country)
-@section('image',$post->thumbnailPath())
-@section('site_name',App\Models\Post::SITE_NAMES[$post->type])
-@section('created_at',$post->avialable_at)
+@if(!empty($post->meta()->title))
+	@section('title',$post->meta()->title)
+@endif
+
+@if(!empty($post->meta()->description))
+	@section('description',$post->meta()->description)
+@endif
+
+@if(false)
+	@section('tags','')
+@endif
+
+@if(!empty($post->meta()->lat))
+	@section('lat',$post->meta()->lat)
+@endif
+
+@if(!empty($post->meta()->long))
+	@section('long',$post->meta()->long)
+@endif
+
+@if(!empty($post->meta()->street))
+	@section('street',$post->meta()->street)
+@endif
+
+@if(!empty($post->meta()->city))
+	@section('city',$post->meta()->city)
+@endif
+
+@if(!empty($post->meta()->zip))
+	@section('zip',$post->meta()->zip)
+@endif
+
+@if(!empty($post->meta()->country))
+	@section('country',$post->meta()->country)
+@endif
+
+@if(!empty($post->thumbnailPath()))
+	@section('image',$post->thumbnailPath())
+@endif
+
+@if(!empty( App\Models\Post::SITE_NAMES[$post->type] ))
+	@section('site_name',App\Models\Post::SITE_NAMES[$post->type])
+@endif
+
+@if(!empty($post->avialable_at))
+	@section('created_at',$post->avialable_at)
+@endif
 
 @section('content')
 	{{ $post->meta()->description }}
