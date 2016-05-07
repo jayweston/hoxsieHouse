@@ -15,11 +15,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	use Authenticatable, CanResetPassword;
 	use SoftDeletes;
 	protected $fillable = ['name', 'email', 'password'];
-
+	/*
+	 * Static variables for user types. 
+	*/
 	const TYPE_ADMIN = 'admin';
 	const TYPE_WRITER = 'writer';
 	const TYPE_VIEWER = 'viewer';
-
+	/*
+	 * Static funtion that return true if the given post belongs to
+	 * the current logged in user.
+	*/
 	public static function isPostMine($post_id)
 	{
 		$post = Post::findOrFail($post_id);

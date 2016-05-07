@@ -49,14 +49,19 @@
 @endif
 
 @section('content')
-	{{ $post->meta()->description }}
+
+	{{-- Admin controls --}}
 	@if(!Auth::guest()) @if( (Auth::user()->type == App\Models\User::TYPE_ADMIN) || (App\Models\User::isPostMine($post->id)) )
 		<div class="form-group">
 			<a href="/post/{{ $post->id }}/edit" class="btn btn-primary pull-left">Edit</a>
 			{!! Form::open(['action' => ['PostController@destroy', $post->id], 'method' => 'delete']) !!}	{!! Form::submit('Delete', ['class' =>'btn btn-danger pull-right']) !!}	{!! Form::close() !!}<br/>
 		</div>
 	@endif @endif
+
+	{{-- Post Title --}}
 	<div class="post-title">{{ $post->title }}</div>
+
+	{{-- Image Carousel --}}
 	<div class="post-images owl-carousel">
 		@foreach ($post->carouselImages as $image)
 			<div class="item owl-section">
@@ -65,6 +70,8 @@
 			</div>
 		@endforeach
 	</div>
+
+	{{-- Post content --}}
 	<div class="post-content">{!! $post->content !!}</div>
 @endsection
 
@@ -75,7 +82,7 @@
 
 @section('scripts')
 	@parent
-	<script src="/js/owl.carousel.min.js"></script>
+	{{-- set the active navbar --}}
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('li').removeClass('active');
@@ -83,6 +90,8 @@
 			$('#nav_post_dropdown').addClass('active');
 		});	
 	</script>
+	{{-- Owl carousel --}}
+	<script src="/js/owl.carousel.min.js"></script>
 	<script>
 		var owl = $('.owl-carousel');
 		owl.owlCarousel({

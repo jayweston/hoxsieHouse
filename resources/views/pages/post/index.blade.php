@@ -18,6 +18,7 @@
 			{!! $posts->render() !!}
 		</div>
 @endsection
+
 @section('scripts')
 	@parent
 	<script type="text/javascript">
