@@ -10,6 +10,9 @@ use App\Models\PostMeta;
 
 class PostMetaController extends Controller
 {
+	/*
+	 * Allows post owners and admins to create post meta data.
+	*/
     public function store(Request $request)
     {
 		$post = Post::findOrFail($request['post_id']);
@@ -19,7 +22,9 @@ class PostMetaController extends Controller
 		PostMeta::create($request->all());
 		return redirect('post/'.$request['post_id'].'/edit');
     }
-
+	/*
+	 * Allows post owners and admins to update post meta data.
+	*/
     public function update(Request $request, $id)
     {
 		$post_meta = PostMeta::findOrFail($id);
@@ -27,7 +32,9 @@ class PostMetaController extends Controller
 		$post_meta->update($request->all());
 		return redirect('post/'.$post_meta->post_id.'/edit');
     }
-
+	/*
+	 * Allows post owners and admins to delete post meta data.
+	*/
     public function destroy($id)
     {
     	$post_meta = PostMeta::findOrFail($id);

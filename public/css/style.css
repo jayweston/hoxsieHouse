@@ -1,10 +1,6 @@
-.post-title{
-	font-size:200%;
-	font-weight: bold;
-	text-align: center;
-	margin-bottom: 1em;
-}
-
+/*
+ * Owl Carousl
+*/
 .owl-next{
 	display: inline-block;
 	text-align:center;
@@ -29,11 +25,22 @@ display: table;
   display: table-caption;
   caption-side: bottom;
 }
+/*
+ * Display post
+*/
+.post-title{
+	font-size:200%;
+	font-weight: bold;
+	text-align: center;
+	margin-bottom: 1em;
+}
 
 .post-paragraph{
 	margin-bottom: .5em;
 }
-
+/*
+ * Post Index Page
+*/
 .post_draft{
 	border: solid;
 	color:red;

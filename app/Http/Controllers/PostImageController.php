@@ -13,6 +13,9 @@ use Validator;
 
 class PostImageController extends Controller
 {
+	/*
+	 * Save new images to post.
+	*/
     public function store(Request $request)
     {
 		$post = Post::findOrFail($request['post']);
@@ -22,11 +25,13 @@ class PostImageController extends Controller
 		$files = $request->file('images');
 		$rules = ['image' => 'required','image' => 'image']; 
 		if( !empty($files[0]) ){
+			// Ability to upload multiple files.
 			foreach ($files as $file) {
 				$validator = Validator::make(['image' => $file], $rules);
 				if ($validator->fails()) {
-
+					//If the image is not valid just skip to the next one (like a .doc was uploaded).
 				}else{
+					// Save image and move it to proper directory.
 					Storage::put($file->getClientOriginalName(),file_get_contents($file));
 					$image = new PostImage();
 					$image->order = 0;
@@ -40,7 +45,9 @@ class PostImageController extends Controller
 		}
 		return redirect('post/'.$request['post'].'/edit');
     }
-
+	/*
+	 * Alow admins and post creaters to update current post.
+	*/
     public function update(Request $request, $id)
     {
 		$retval = [
@@ -49,10 +56,13 @@ class PostImageController extends Controller
 		];
 		$post_image = PostImage::findOrFail($id);
 		$this->authorize($post_image);
+		//If changing the post that this image belongs to then set the post order back to 0.
 		if( !empty($request['post_id']) ){
 			$request->request->add(['order' => '0']);
 		}
+		//If changing post to thumbnail then add some extr checks
 		if ($request['order'] == '-1'){
+			//Make sure image is a png and 250x250
 			$results = $post_image->thumbnailable();
 			if ($results == 'true'){
 				$post_image->update($request->all());
@@ -68,7 +78,9 @@ class PostImageController extends Controller
 			return Response::json($retval);
 		}
     }
-
+	/*
+	 * Alow admins and post creaters to delete current post.
+	*/
     public function destroy($id)
     {
 		$post_image = PostImage::findOrFail($id);

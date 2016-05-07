@@ -14,11 +14,14 @@
 @section('meta-pintrest') @stop
 
 @section('content')
+	{{-- Display error messages for bad inputs --}}
 	<div class="alert alert-warning alert-block hidden" id="notification_error">
 		<button type="button" class="close" onclick="$('#notification_error').addClass('hidden')">&times;</button>
 		<h4>Error</h4>
 		<div class="notification_message"></div>
 	</div>
+
+	{{-- Buttons for what to desplay--}}
 	<div class="row">
 		<button onclick="selectEditImages()" class="btn btn-default pull-right">Edit Images</button>
 		<button onclick="selectUpoadImages()" class="btn btn-default pull-right">Upload Images</button>
@@ -26,6 +29,7 @@
 		<button onclick="selectContent()" class="btn btn-default pull-right">Content</button>
 	</div>
 
+	{{-- Edit post content --}}
 	<div id="post_content">
 		<h2>Post Content</h2>
 		{!! Form::model($post, ['action' => ['PostController@update',$post->id], 'method'=>'PATCH']) !!}
@@ -59,6 +63,7 @@
 		{!! Form::close() !!}
 	</div>
 
+	{{-- Edit post meta --}}
 	<div id="post_meta">
 		<h2>Post Meta</h2>
 			@if ( !empty($post->meta()->id) )
@@ -112,6 +117,7 @@
 		@endif
 	</div>
 
+	{{-- Upload images to post --}}
 	<div id="upload_images">
 		<h2>Upload Images</h2>
 		{!! Form::open(['action' => ['PostImageController@store'], 'files'=>true]) !!}
@@ -127,6 +133,7 @@
 		{!! Form::close() !!}
 	</div>
 
+	{{-- Edit uploaded images --}}
 	<div id="edit_images">
 		<h2>Edit Images</h2>
 		<div class="table-responsive">
