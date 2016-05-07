@@ -21,7 +21,7 @@
 		</div>
 		<div class="form-group">
 			{!! Form::label('type','Type') !!}
-			{!! Form::select('type',App\Models\Post::arrayToDropdown(App\Models\Post::getPostTypes()) ,null, ['class' =>'form-control','placeholder' => '...']) !!}
+			{!! Form::select('type',App\Models\Post::getPostTypesDropdown() ,null, ['class' =>'form-control','placeholder' => '...']) !!}
 		</div>
 		<div class="form-group">
 			{!! Form::label('summary','Summary') !!}

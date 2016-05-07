@@ -14,7 +14,7 @@
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Posts<span class="caret"></span></a>
 				<ul class="dropdown-menu">
 					<li class="" id="nav_post_all"><a href="{{ url('/post') }}">All</a></li>
-					@foreach (App\Models\Post::arrayToDropdown(App\Models\Post::getPostTypes()) as $type => $name )
+					@foreach (App\Models\Post::getPostTypesDropdown() as $type => $name )
 						<li class="" id="nav_post_{{ $type }}"><a href="{{ url('/post?type='.$type) }}">{{ $name }}</a></li>
 					@endforeach
 					@if (!Auth::guest())
