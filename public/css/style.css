@@ -38,6 +38,10 @@ display: table;
 .post-paragraph{
 	margin-bottom: .5em;
 }
+
+.post_button{
+	margin-right: 1em;	
+}
 /*
  * Post Index Page
 */

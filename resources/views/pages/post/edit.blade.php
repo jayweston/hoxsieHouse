@@ -23,10 +23,11 @@
 
 	{{-- Buttons for what to desplay--}}
 	<div class="row">
-		<button onclick="selectEditImages()" class="btn btn-default pull-right">Edit Images</button>
-		<button onclick="selectUpoadImages()" class="btn btn-default pull-right">Upload Images</button>
-		<button onclick="selectMeta()" class="btn btn-default pull-right">Meta</button>
-		<button onclick="selectContent()" class="btn btn-default pull-right">Content</button>
+		<button onclick="selectEditImages()" class="btn btn-default pull-right post_button">Edit Images</button>
+		<button onclick="selectUpoadImages()" class="btn btn-default pull-right post_button">Upload Images</button>
+		<button onclick="selectMeta()" class="btn btn-default pull-right post_button">Meta</button>
+		<button onclick="selectTags()" class="btn btn-default pull-right post_button">Tags</button>
+		<button onclick="selectContent()" class="btn btn-default pull-right post_button">Content</button>
 	</div>
 
 	{{-- Edit post content --}}
@@ -167,6 +168,34 @@
 		</div>
 	</div>
 
+	{{-- Edit post tags --}}
+	<div id="edit_tags">
+		<h2>Edit Tags</h2>
+		<div class="table-responsive">
+			<table class="table table-bordered table-striped">
+				<thead>
+					<tr>
+						<th class="hidden-xs col-sm-1 col-md-1 col-lg-1">Order</th>
+						<th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Tag</th>
+						<th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Delete</th>
+					</tr>
+				</thead>
+				<tbody>
+					@for($i=0; $i<10; $i++)
+						<tr>
+							<td class="hidden-xs col-sm-1 col-md-1 col-lg-1">Order</td>
+							<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">tag</td>
+							<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">{{ $i }}
+								Delete
+							</td>
+						</tr>
+					@endfor
+				</tbody>
+			</table>
+		</div>
+	</div>
+
+	{{-- Spinner --}}
 	<div id="spinner" class="text-center">
 		<img src="/images/spinner.gif" />
 	</div>
@@ -193,6 +222,7 @@
 		$("#upload_images").hide();
 		$("#spinner").hide();
 		$("#post_meta").hide();
+		$("#post_tags").hide();
 
 		function selectUpoadImages() {
 			$("#upload_images").show();
@@ -200,6 +230,7 @@
 			$("#edit_images").hide();
 			$("#spinner").hide();
 			$("#post_meta").hide();
+			$("#post_tags").hide();
 		}
 		function selectEditImages() {
 			$("#edit_images").show();
@@ -207,6 +238,7 @@
 			$("#upload_images").hide();
 			$("#spinner").hide();
 			$("#post_meta").hide();
+			$("#post_tags").hide();
 		}
 		function selectContent() {
 			$("#post_content").show();
@@ -214,9 +246,19 @@
 			$("#upload_images").hide();
 			$("#spinner").hide();
 			$("#post_meta").hide();
+			$("#post_tags").hide();
 		}
 		function selectMeta() {
 			$("#post_meta").show();
+			$("#post_content").hide();
+			$("#edit_images").hide();
+			$("#upload_images").hide();
+			$("#spinner").hide();
+			$("#post_tags").hide();
+		}
+		function selectTags() {
+			$("#post_tags").show();
+			$("#post_meta").hide();
 			$("#post_content").hide();
 			$("#edit_images").hide();
 			$("#upload_images").hide();
