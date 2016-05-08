@@ -17,10 +17,10 @@ class PostTagController extends Controller
     public function store(Request $request)
     {
 		$post = Post::findOrFail($request['post_id']);
-		$post_meta = new PostMeta();
-		$post_meta->post_id = $post->id;
-		$this->authorize($post_meta);
-		PostMeta::create($request->all());
+		$post_tag = new PostTag();
+		$post_tag->post_id = $post->id;
+		$this->authorize($post_tag);
+		PostTag::create($request->all());
 		return redirect('post/'.$request['post_id'].'/edit');
     }
 	/*
@@ -28,20 +28,20 @@ class PostTagController extends Controller
 	*/
     public function update(Request $request, $id)
     {
-		$post_meta = PostMeta::findOrFail($id);
-		$this->authorize($post_meta);
-		$post_meta->update($request->all());
-		return redirect('post/'.$post_meta->post_id.'/edit');
+		$post_tag = PostTag::findOrFail($id);
+		$this->authorize($post_tag);
+		$post_tag->update($request->all());
+		return redirect('post/'.$post_tag->post_id.'/edit');
     }
 	/*
 	 * Allows post owners and admins to delete post meta data.
 	*/
     public function destroy($id)
     {
-    	$post_meta = PostMeta::findOrFail($id);
-    	$post_id = $post_meta->post_id;
-		$this->authorize($post_meta);
-		$post_meta->delete();
+    	$post_tag = PostTag::findOrFail($id);
+    	$post_id = $post_tag->post_id;
+		$this->authorize($post_tag);
+		$post_tag->delete();
 		return redirect('post/'.$post_id.'/edit');
     }
 }
