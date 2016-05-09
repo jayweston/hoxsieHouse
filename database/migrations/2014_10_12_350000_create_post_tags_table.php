@@ -12,6 +12,7 @@ class CreatePostTagsTable extends Migration
 			$table->increments('id');
 			$table->integer('post_id')->unsigned();
 			$table->integer('tag_id')->unsigned();
+			$table->integer('order')->unsigned();
 			$table->timestamps();
 			$table->softDeletes();
 

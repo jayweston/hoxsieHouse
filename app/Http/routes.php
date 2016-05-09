@@ -18,7 +18,7 @@ Route::resource('/post', 'PostController');
 Route::resource('/user', 'UserController');
 Route::resource('/postimage', 'PostImageController', ['only' => ['store', 'update','destroy']]);
 Route::resource('/postmeta', 'PostMetaController', ['only' => ['store', 'update','destroy']]);
-Route::resource('/posttags', 'PostTagController', ['only' => ['store', 'update','destroy']]);
+Route::resource('/posttag', 'PostTagController', ['only' => ['store', 'update','destroy']]);
 
 Route::get('/test', function () {
 

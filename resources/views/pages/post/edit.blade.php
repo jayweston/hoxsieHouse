@@ -151,10 +151,10 @@
 				<tbody>
 					@foreach ($post->images as $image)
 						<tr>
-							<td class="hidden-xs hidden-sm col-md-3 col-lg-3">{!! Form::select('post_id',App\Models\Post::getPostTitleDropdown() ,$image->post_id, ['class' =>'form-control ajax_submit', 'data-image_id'=>$image->id]) !!}</td>
-							<td class="hidden-xs col-sm-1 col-md-1 col-lg-1">{!! Form::select('order', $image->getOrderDropdown(), $image->order, ['class' =>'form-control  ajax_submit', 'data-image_id'=>$image->id]) !!}</td>
+							<td class="hidden-xs hidden-sm col-md-3 col-lg-3">{!! Form::select('post_id',App\Models\Post::getPostTitleDropdown() ,$image->post_id, ['class' =>'form-control ajax_submit', 'data-id'=>$image->id, 'data-url'=>'postimage']) !!}</td>
+							<td class="hidden-xs col-sm-1 col-md-1 col-lg-1">{!! Form::select('order', $image->getOrderDropdown(), $image->order, ['class' =>'form-control  ajax_submit', 'data-id'=>$image->id, 'data-url'=>'postimage']) !!}</td>
 							<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img class="@if($image->thumbnailable() == 'true') thumbnailable @endif" src="/images/blog/{{ $post->id }}/{{ $image->name }}" style="max-height:90%; max-width:90%" /></td>
-							<td class="col-xs-9 col-sm-8 col-md-5 col-lg-5">{!! Form::textarea('label', $image->label, ['class' =>'form-control  ajax_submit', 'data-image_id'=>$image->id]) !!}</td>
+							<td class="col-xs-9 col-sm-8 col-md-5 col-lg-5">{!! Form::textarea('label', $image->label, ['class' =>'form-control  ajax_submit', 'data-id'=>$image->id, 'data-url'=>'postimage']) !!}</td>
 							<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 								{{ Form::open(['action' => ['PostImageController@destroy',$image->id], 'method' => 'DELETE']) }}
 								{{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
@@ -175,18 +175,30 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="hidden-xs col-sm-1 col-md-1 col-lg-1">Order</th>
-						<th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Tag</th>
-						<th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Delete</th>
+						<th class="col-xs-1 col-sm-2 col-md-2 col-lg-2">Order</th>
+						<th class="col-xs-5 col-sm-4 col-md-4 col-lg-4">Existing Tag</th>
+						<th class="col-xs-5 col-sm-4 col-md-4 col-lg-4">New Tag</th>
+						<th class="col-xs-1 col-sm-2 col-md-2 col-lg-2">Delete</th>
 					</tr>
 				</thead>
 				<tbody>
 					@for($i=0; $i<10; $i++)
 						<tr>
-							<td class="hidden-xs col-sm-1 col-md-1 col-lg-1">Order</td>
-							<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">tag</td>
-							<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">{{ $i }}
-								Delete
+							<td class="col-xs-1 col-sm-2 col-md-2 col-lg-2">
+								{!! Form::select('order',['0'=> 'N/A', '1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10'] ,App\Models\PostTag::getPostTag($post->id ,$i+1)->order, ['class' =>'form-control ajax_submit', 'data-id'=>App\Models\PostTag::getPostTag($post->id ,$i+1)->id, 'data-url'=>'posttag']) !!}
+							</td>
+							<td class="col-xs-5 col-sm-4 col-md-4 col-lg-4">
+								{!! Form::select('tag_id',App\Models\Tag::getTagDropdown() ,App\Models\PostTag::getTag($post->id ,$i+1)->id, ['class' =>'form-control ajax_submit', 'data-id'=>App\Models\PostTag::getPostTag($post->id ,$i+1)->id, 'data-url'=>'posttag']) !!}
+							</td>
+							<td class="col-xs-5 col-sm-4 col-md-4 col-lg-4">
+								{!! Form::text('new_tag', null, ['class' =>'form-control ajax_submit', 'data-id'=>App\Models\PostTag::getPostTag($post->id ,$i+1)->id, 'data-url'=>'posttag']) !!}
+							</td>
+							<td class="col-xs-1 col-sm-2 col-md-2 col-lg-2">
+								@if (App\Models\PostTag::getPostTag($post->id ,$i+1)->id != '0')
+								{{ Form::open(['action' => ['PostTagController@destroy',App\Models\PostTag::getPostTag($post->id ,$i+1)->id], 'method' => 'DELETE']) }}
+								{{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+								{{ Form::close() }}
+								@endif
 							</td>
 						</tr>
 					@endfor
@@ -279,7 +291,7 @@
 				_token: $("input[name=_token]").val(),
 			};
 			data[$(this).attr('name')] = $(this).val();
-			$.post('/postimage/'+$(this).data('image_id'), data, function(result){
+			$.post('/'+$(this).data('url')+'/'+$(this).data('id'), data, function(result){
 				if(result.success){
 					return;
 				}

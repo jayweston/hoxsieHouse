@@ -8,6 +8,7 @@ use App\Models\Post;
 use App\Models\User;
 use App\Models\Tag;
 use App\Models\PostTag;
+use Response;
 
 class PostTagController extends Controller
 {
@@ -28,10 +29,36 @@ class PostTagController extends Controller
 	*/
     public function update(Request $request, $id)
     {
-		$post_tag = PostTag::findOrFail($id);
-		$this->authorize($post_tag);
-		$post_tag->update($request->all());
-		return redirect('post/'.$post_tag->post_id.'/edit');
+		$retval = [
+			'success' => false,
+			'messages' => [],
+		];
+		$retval['messages'] = ["Progress"];
+		$retval['messages'] = $request->all();
+		return Response::json($retval);
+		$post_image = PostImage::findOrFail($id);
+		$this->authorize($post_image);
+		//If changing the post that this image belongs to then set the post order back to 0.
+		if( !empty($request['post_id']) ){
+			$request->request->add(['order' => '0']);
+		}
+		//If changing post to thumbnail then add some extr checks
+		if ($request['order'] == '-1'){
+			//Make sure image is a png and 250x250
+			$results = $post_image->thumbnailable();
+			if ($results == 'true'){
+				$post_image->update($request->all());
+				$retval['success'] = true;
+				return Response::json($retval);
+			}else{
+				$retval['messages'] = [$results];
+				return Response::json($retval);
+			}
+		}else{
+			$post_image->update($request->all());
+			$retval['success'] = true;
+			return Response::json($retval);
+		}
     }
 	/*
 	 * Allows post owners and admins to delete post meta data.
