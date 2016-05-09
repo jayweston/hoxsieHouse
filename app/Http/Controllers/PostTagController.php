@@ -12,6 +12,7 @@ use Response;
 
 class PostTagController extends Controller
 {
+
 	/*
 	 * Allows post owners and admins to create post meta data.
 	*/
@@ -33,32 +34,27 @@ class PostTagController extends Controller
 			'success' => false,
 			'messages' => [],
 		];
-		$retval['messages'] = ["Progress"];
-		$retval['messages'] = $request->all();
-		return Response::json($retval);
-		$post_image = PostImage::findOrFail($id);
-		$this->authorize($post_image);
-		//If changing the post that this image belongs to then set the post order back to 0.
-		if( !empty($request['post_id']) ){
-			$request->request->add(['order' => '0']);
-		}
-		//If changing post to thumbnail then add some extr checks
-		if ($request['order'] == '-1'){
-			//Make sure image is a png and 250x250
-			$results = $post_image->thumbnailable();
-			if ($results == 'true'){
-				$post_image->update($request->all());
+		if ($id=='0'){
+
+		}else{
+			if ( !empty($request['new_tag']) ){
+				$tag = new Tag();
+				$tag->name = $request['new_tag'];
+				$tag->save();
+				$post_tag = PostTag::findOrFail($id);
+				$post_tag->tag_id = $tag->id;
 				$retval['success'] = true;
 				return Response::json($retval);
 			}else{
-				$retval['messages'] = [$results];
+				$post_tag = PostTag::findOrFail($id);
+				$post_tag->update($request->all());
+				$retval['success'] = true;
 				return Response::json($retval);
 			}
-		}else{
-			$post_image->update($request->all());
-			$retval['success'] = true;
-			return Response::json($retval);
 		}
+
+		$retval['messages'] = $request->all();
+		return Response::json($retval);
     }
 	/*
 	 * Allows post owners and admins to delete post meta data.
@@ -72,3 +68,4 @@ class PostTagController extends Controller
 		return redirect('post/'.$post_id.'/edit');
     }
 }
+t

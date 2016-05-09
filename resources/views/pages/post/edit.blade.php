@@ -291,9 +291,13 @@
 				_token: $("input[name=_token]").val(),
 			};
 			data[$(this).attr('name')] = $(this).val();
+			if ( $(this).data('url') == 'posttag'){
+				data['post_id'] = '{{ $post->id }}';
+			}
 			$.post('/'+$(this).data('url')+'/'+$(this).data('id'), data, function(result){
 				if(result.success){
-					return;
+					$('.notification_message').html('');
+					$('#notification_error').addClass('hidden');
 				}
 				if(result.messages)  {
 					var txt = '';

@@ -9,7 +9,7 @@ class PostTag extends Model
 {
 	use SoftDeletes;
 
-	protected $fillable = ['post_id', 'tag_id'];
+	protected $fillable = ['post_id', 'tag_id', 'order'];
 	/*
 	 * Return a post model for the post assocaited with this post_tag.
 	*/
