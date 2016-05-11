@@ -10,10 +10,9 @@
 | and give it the controller to call when that URI is requested.
 |
 */
-
-Route::get('/', function () { return view('welcome'); });
 Route::auth();
-Route::get('/home', 'HomeController@index');
+Route::get('/', 'PostController@index');
+Route::get('/home', 'PostController@index');
 Route::resource('/post', 'PostController');
 Route::resource('/user', 'UserController');
 Route::resource('/postimage', 'PostImageController', ['only' => ['store', 'update','destroy']]);
