@@ -7,8 +7,6 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PostTag extends Model
 {
-	use SoftDeletes;
-
 	protected $fillable = ['post_id', 'tag_id', 'order'];
 	/*
 	 * Return a post model for the post assocaited with this post_tag.
@@ -25,7 +23,7 @@ class PostTag extends Model
 		return Tag::where('id',$this->tag_id)->first();
 	}
 	/*
-	 * 
+	 * Static function that return a post tag model based on the post_id and post order given.
 	*/
 	public static function getPostTag($post_id ,$order){
 		$post_tag = PostTag::where('post_id', $post_id)->where('order', $order)->first();
@@ -38,7 +36,7 @@ class PostTag extends Model
 		}
 	}
 	/*
-	 * 
+	 * Static function that return a tag model based on the post_id and post order given. 
 	*/
 	public static function getTag($post_id ,$order){
 		$post_tag = PostTag::where('post_id', $post_id)->where('order', $order)->first();
@@ -49,6 +47,5 @@ class PostTag extends Model
 			$tag->id = 0;
 			return $tag;
 		}
-
 	}
 }

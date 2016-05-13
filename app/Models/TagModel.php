@@ -6,7 +6,11 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tag extends Model
 {
+	protected $fillable = ['name'];
 
+	/*
+	 * Static function that returns a dropdown list of all of the tags in the database.
+	*/
 	public static function getTagDropdown()
 	{
 		$dropdown = [];

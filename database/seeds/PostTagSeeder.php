@@ -13,6 +13,9 @@ class PostTagTableSeeder extends Seeder
 		$data[] = ['id'=> '3', 'name'=>'tag_3' ];
 		$data[] = ['id'=> '4', 'name'=>'tag_4' ];
 		$data[] = ['id'=> '5', 'name'=>'tag_5' ];
+		$data[] = ['id'=> '6', 'name'=>'tag_6' ];
+		$data[] = ['id'=> '7', 'name'=>'tag_7' ];
+		$data[] = ['id'=> '8', 'name'=>'tag_8' ];
 		DB::table('tags')->insert($data);
 		$data = [];
 		$data[] = ['id'=> '1', 'post_id'=>'1', 'tag_id'=>'1', 'order'=>'1' ];
