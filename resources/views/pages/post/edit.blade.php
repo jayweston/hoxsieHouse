@@ -23,10 +23,11 @@
 
 	{{-- Buttons for what to desplay--}}
 	<div class="row">
-		<button onclick="selectEditImages()" class="btn btn-default pull-right">Edit Images</button>
-		<button onclick="selectUpoadImages()" class="btn btn-default pull-right">Upload Images</button>
-		<button onclick="selectMeta()" class="btn btn-default pull-right">Meta</button>
-		<button onclick="selectContent()" class="btn btn-default pull-right">Content</button>
+		<button onclick="selectEditImages()" class="btn btn-default pull-right post_button">Edit Images</button>
+		<button onclick="selectUpoadImages()" class="btn btn-default pull-right post_button">Upload Images</button>
+		<button onclick="selectMeta()" class="btn btn-default pull-right post_button">Meta</button>
+		<button onclick="selectTags()" class="btn btn-default pull-right post_button">Tags</button>
+		<button onclick="selectContent()" class="btn btn-default pull-right post_button">Content</button>
 	</div>
 
 	{{-- Edit post content --}}
@@ -150,10 +151,10 @@
 				<tbody>
 					@foreach ($post->images as $image)
 						<tr>
-							<td class="hidden-xs hidden-sm col-md-3 col-lg-3">{!! Form::select('post_id',App\Models\Post::getPostTitleDropdown() ,$image->post_id, ['class' =>'form-control ajax_submit', 'data-image_id'=>$image->id]) !!}</td>
-							<td class="hidden-xs col-sm-1 col-md-1 col-lg-1">{!! Form::select('order', $image->getOrderDropdown(), $image->order, ['class' =>'form-control  ajax_submit', 'data-image_id'=>$image->id]) !!}</td>
+							<td class="hidden-xs hidden-sm col-md-3 col-lg-3">{!! Form::select('post_id',App\Models\Post::getPostTitleDropdown() ,$image->post_id, ['class' =>'form-control ajax_submit', 'data-id'=>$image->id]) !!}</td>
+							<td class="hidden-xs col-sm-1 col-md-1 col-lg-1">{!! Form::select('order', $image->getOrderDropdown(), $image->order, ['class' =>'form-control  ajax_submit', 'data-id'=>$image->id]) !!}</td>
 							<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img class="@if($image->thumbnailable() == 'true') thumbnailable @endif" src="/images/blog/{{ $post->id }}/{{ $image->name }}" style="max-height:90%; max-width:90%" /></td>
-							<td class="col-xs-9 col-sm-8 col-md-5 col-lg-5">{!! Form::textarea('label', $image->label, ['class' =>'form-control  ajax_submit', 'data-image_id'=>$image->id]) !!}</td>
+							<td class="col-xs-9 col-sm-8 col-md-5 col-lg-5">{!! Form::textarea('label', $image->label, ['class' =>'form-control  ajax_submit', 'data-id'=>$image->id]) !!}</td>
 							<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 								{{ Form::open(['action' => ['PostImageController@destroy',$image->id], 'method' => 'DELETE']) }}
 								{{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
@@ -161,12 +162,46 @@
 							</td>
 						</tr>
 					@endforeach
-
 				</tbody>
 			</table>
 		</div>
 	</div>
 
+	{{-- Edit post tags --}}
+	<div id="edit_tags">
+		<h2>Edit Tags</h2>
+		{!! Form::open(['action' => ['PostTagController@update',$post->id], 'method'=>'PATCH']) !!}
+			<div class="table-responsive">
+				<table class="table table-bordered table-striped">
+					<thead>
+						<tr>
+							<th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Order</th>
+							<th class="col-xs-5 col-sm-5 col-md-5 col-lg-5">Existing Tag</th>
+							<th class="col-xs-5 col-sm-5 col-md-5 col-lg-5">New Tag</th>
+						</tr>
+					</thead>
+					<tbody>
+						@for($i=0; $i<10; $i++)
+							<tr>
+								<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+									{!! Form::select($i.'[]',['0'=> 'Remove', '1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10'] ,App\Models\PostTag::getPostTag($post->id ,$i+1)->order, ['class' =>'form-control', 'data-id'=>App\Models\PostTag::getPostTag($post->id ,$i+1)->id, 'data-url'=>'posttag']) !!}
+								</td>
+								<td class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+									{!! Form::select($i.'[]',App\Models\Tag::getTagDropdown() ,App\Models\PostTag::getTag($post->id ,$i+1)->id, ['class' =>'form-control', 'data-id'=>App\Models\PostTag::getPostTag($post->id ,$i+1)->id, 'data-url'=>'posttag']) !!}
+								</td>
+								<td class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
+									{!! Form::text($i.'[]', null, ['class' =>'form-control', 'data-id'=>App\Models\PostTag::getPostTag($post->id ,$i+1)->id, 'data-url'=>'posttag']) !!}
+								</td>
+							</tr>
+						@endfor
+					</tbody>
+				</table>
+			</div>
+			{!! Form::submit('Save', ['class' =>'btn btn-primary form-control']) !!}
+		{{ Form::close() }}
+	</div>
+
+	{{-- Spinner --}}
 	<div id="spinner" class="text-center">
 		<img src="/images/spinner.gif" />
 	</div>
@@ -193,6 +228,7 @@
 		$("#upload_images").hide();
 		$("#spinner").hide();
 		$("#post_meta").hide();
+		$("#edit_tags").hide();
 
 		function selectUpoadImages() {
 			$("#upload_images").show();
@@ -200,6 +236,7 @@
 			$("#edit_images").hide();
 			$("#spinner").hide();
 			$("#post_meta").hide();
+			$("#edit_tags").hide();
 		}
 		function selectEditImages() {
 			$("#edit_images").show();
@@ -207,6 +244,7 @@
 			$("#upload_images").hide();
 			$("#spinner").hide();
 			$("#post_meta").hide();
+			$("#edit_tags").hide();
 		}
 		function selectContent() {
 			$("#post_content").show();
@@ -214,9 +252,19 @@
 			$("#upload_images").hide();
 			$("#spinner").hide();
 			$("#post_meta").hide();
+			$("#edit_tags").hide();
 		}
 		function selectMeta() {
 			$("#post_meta").show();
+			$("#post_content").hide();
+			$("#edit_images").hide();
+			$("#upload_images").hide();
+			$("#spinner").hide();
+			$("#edit_tags").hide();
+		}
+		function selectTags() {
+			$("#edit_tags").show();
+			$("#post_meta").hide();
 			$("#post_content").hide();
 			$("#edit_images").hide();
 			$("#upload_images").hide();
@@ -228,6 +276,7 @@
 			$("#upload_images").hide();
 			$("#spinner").show();
 			$("#post_meta").hide();
+			$("#edit_tags").hide();
 		});
 	</script>
 	<script type="text/javascript">
@@ -237,11 +286,11 @@
 				_token: $("input[name=_token]").val(),
 			};
 			data[$(this).attr('name')] = $(this).val();
-			$.post('/postimage/'+$(this).data('image_id'), data, function(result){
+			$.post('/postimage/'+$(this).data('id'), data, function(result){
 				if(result.success){
-					return;
-				}
-				if(result.messages)  {
+					$('.notification_message').html('');
+					$('#notification_error').addClass('hidden');
+				} else if(result.messages)  {
 					var txt = '';
 					$.each(result.messages, function(index, val)  {
 						if(val)

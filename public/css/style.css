@@ -38,6 +38,10 @@ display: table;
 .post-paragraph{
 	margin-bottom: .5em;
 }
+
+.post_button{
+	margin-right: 1em;	
+}
 /*
  * Post Index Page
 */
@@ -87,18 +91,19 @@ display: table;
 	padding:15px 30px;
 	background-color:rgba(26,76,110,0.80);
 	backface-visibility:hidden;
+	-webkit-backface-visibility: hidden;
 	-webkit-transform:rotateY(-180deg);
 	-moz-transform:rotateY(-180deg);
 	transform:rotateY(-180deg);
-	-webkit-transition:all 1s;
-	-moz-transition:all .1s;
-	transition:all 1s;
+	-webkit-transition:all .5s;
+	-moz-transition:all .5s;
+	transition:all .5s;
 }
 
 .thumbnail_transform figure img {
-	-webkit-transition:all 1s;
-	-moz-transition:all 1s;
-	transition:all 1s;
+	-webkit-transition:all .5s;
+	-moz-transition:all .5s;
+	transition:all .5s;
 }
 
 .thumbnail_transform figure:hover img,figure.hover img {
@@ -129,9 +134,9 @@ display: table;
 	width:100%;
 	z-index:12;
 	background-color:rgba(0,0,0,0.50);
-	-webkit-transition:all 1s;
-	-moz-transition:all 1s;
-	transition:all 1s;
+	-webkit-transition:all .5s;
+	-moz-transition:all .5s;
+	transition:all .5s;
 }
 .thumbnailable{
 	border: solid;
