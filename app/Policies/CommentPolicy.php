@@ -13,9 +13,9 @@ class CommentPolicy
 	public function __construct()
 	{
 	}
-    /*
-     * Allow admins and writers that this post belongs to save it. 
-    */
+	/*
+	 * Allow admins and writers that this post belongs to save it. 
+	*/
 	public function store(User $user, Comment $comment)
 	{
 		$allowed = [

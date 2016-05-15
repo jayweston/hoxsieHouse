@@ -20,13 +20,6 @@ class Comment extends Model
 		return User::where('id',$this->user_id)->first();
 	}
 	/*
-	 * Return the user model associated with this comment
-	*/
-	public function user()
-	{
-		return User::where('id',$this->user_id)->first();
-	}
-	/*
 	 * Return the post model associated with this comment
 	*/
 	public function post()
