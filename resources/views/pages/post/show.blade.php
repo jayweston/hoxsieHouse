@@ -73,6 +73,50 @@
 
 	{{-- Post content --}}
 	<div class="post-content">{!! $post->content !!}</div>
+
+	{{-- Show post comment --}}
+	<div class="post_comments">
+		@if ( empty(App\Models\Comment::comments($post->id)[0]) )
+			<div class="post_comment">
+				There are no comments to display.
+			</div>
+		@else
+			@foreach( App\Models\Comment::comments($post->id) as $comment)
+				<div class="post_comment level_{{ $comment->level }}">
+					<div class="comment_head row">
+						<div class="comment_name pull-left">
+							{{ $comment->user()->name }}
+						</div>
+						<div class="comment_date pull-left">
+							{{ $comment->timeElapsed() }}
+						</div>
+					</div>
+					<div class="comment_body row">
+						{{ $comment->comment }}
+					</div>
+					<div class="comment_reply row hidden">
+						{!! Form::open(['action' => ['CommentController@store']]) !!}
+							{!! Form::hidden('post_id',$post->id) !!}
+							{!! Form::hidden('parent_id',$comment->id) !!}
+							{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
+							{!! Form::submit('Save', ['class' =>'btn btn-primary pull-left']) !!}
+						{!! Form::close() !!}
+						{!! Form::submit('Close', ['class' =>'btn ajax-reply comment-hide']) !!}
+					</div>
+					<div class="comment_reply_button">
+						{!! Form::submit('Replay', ['class' =>'btn ajax-reply comment-show']) !!}
+					</div>
+				</div>
+			@endforeach
+		@endif
+		<div class="level_1">
+			{!! Form::open(['action' => ['CommentController@store']]) !!}
+				{!! Form::hidden('post_id',$post->id) !!}
+				{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
+				{!! Form::submit('Save', ['class' =>'btn btn-primary']) !!}
+			{!! Form::close() !!}
+		</div>
+	</div>
 @endsection
 
 @section('css')
@@ -111,10 +155,20 @@
 		})
 
 		$('.stop').on('click',function(){
-			owl.trigger('autoplay.stop.owl')
+			owl.tri4gger('autoplay.stop.owl')
 		})
-
 		$( "p" ).prev( ".owl-image" ).css( "width", "yellow" );
 		$( "p" ).width()
+	</script>
+	<script>
+		$(function () {
+			$('.ajax-reply').on('click', function () {
+				$(this).parent().parent().find('.comment_reply').toggleClass('hidden');
+				$(this).parent().parent().find('.comment-show').addClass('hidden');
+			});
+			$('.comment-hide').on('click', function () {
+				$(this).parent().parent().find('.comment-show').removeClass('hidden');
+			});
+		});
 	</script>
 @stop

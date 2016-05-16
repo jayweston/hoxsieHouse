@@ -21,18 +21,6 @@ class Post extends Model
 		return $this->hasMany('App\Models\PostImage')->orderBy('order', 'ASC');
 	}
 	/*
-	 * Return the comment models associated with this post
-	*/
-	public function comments()
-	{
-		$comments = Comment::where('post_id',$this->post_id)->get(); 
-		if ( empty($comments[0]->id) ){
-			return new Comment();
-		}else{
-			return $comments;
-		}
-	}
-	/*
 	 * Returns an array of image models that are associated with this post. Images has to 
 	 * have an order greater than 0 (-1 = thumbnail 0 = hidden from carousel).
 	*/

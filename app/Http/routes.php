@@ -21,5 +21,6 @@ Route::resource('/posttag', 'PostTagController', ['only' => ['update']]);
 Route::resource('/comment', 'CommentController', ['only' => ['store']]);
 
 Route::get('/test', function () {
-
+	$comments = App\Models\Comment::comments('1'); 
+	dd($comments);
 });

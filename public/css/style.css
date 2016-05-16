@@ -141,3 +141,41 @@ display: table;
 	border: solid;
 	color:red;
 }
+/*
+ * Post comments
+*/
+.comment_name{
+	margin-right: 20px;
+}
+.level_1{
+	margin-left: 5px;
+	padding-left: 15px;
+}
+.level_2{
+	margin-left: 15px;
+	padding-left: 30px;
+	border-left: 2px solid #c5c1ad;
+}
+.level_3{
+	margin-left: 30px;
+	padding-left: 30px;
+	border-left: 2px solid #c5c1ad;
+}
+.level_4{
+	margin-left: 45px;
+	padding-left: 30px;
+	border-left: 2px solid #c5c1ad;
+}
+.post_comments{
+	border: 2px solid #000000;
+}
+.post_comment{
+	margin-top: 10px;
+	margin-bottom: 15px;
+}
+.comment_textbox{
+	width:97%;
+}
+.comment-hide{
+	margin-left:15px;
+}

@@ -17,6 +17,7 @@ class CommentController extends Controller
 	{
 		$comment = new Comment();
 		$this->authorize($comment);
+		$request->request->add(['user_id' => \Auth::id()]);
 		Comment::create($request->all());
 		return redirect('post/'.$request['post_id']);
 	}
