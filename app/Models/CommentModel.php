@@ -11,7 +11,7 @@ class Comment extends Model
 	/*
 	 * Static array defining comment depth for each user.
 	*/
-	const DEPTH = [User::TYPE_ADMIN=>'2',User::TYPE_WRITER=>'2',User::TYPE_VIEWER=>'1'];
+	const DEPTH = [User::TYPE_ADMIN=>3,User::TYPE_WRITER=>2,User::TYPE_VIEWER=>1];
 	/*
 	 * Return the user associated with this comment
 	*/
@@ -38,17 +38,7 @@ class Comment extends Model
 		}
 	}
 	/*
-	 * Return the child models associated with this comment
-	
-	public function children()
-	{
-		$comments = Comment::where('parent_id',$this->id)->get();
-		if ( empty($comments[0]->id) ){
-			return new Comment();
-		}else{
-			return $comments;
-		}
-	}
+	 * Helper recursive function for comments function.
 	*/
 	private static function children($current){
 		$children = Comment::where('parent_id',$current->id)->orderBy('created_at', 'ASC')->get();
@@ -62,7 +52,9 @@ class Comment extends Model
 		}
 		return $tree;
 	}
-
+	/*
+	 * Returns a tree of comments for a given post.
+	*/
 	public static function comments($post_id){
 		$comments=Comment::where('post_id',$post_id)->where('parent_id',null)->orderBy('created_at', 'ASC')->get();
 		$comments_array=[];
@@ -78,28 +70,16 @@ class Comment extends Model
 		
 		return $comments_array;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	/*
+	 * Returns boolean if the user can add comment to the given level.
+	*/
+	public static function canComment($level){
+		if (\Auth::check()){
+			return $level <= Comment::DEPTH[\Auth::user()->type];
+		}else{
+			return $level <= 0;
+		}
+	}
 	/*
 	 * Return the time elapsed since this date was posted
 	*/

@@ -94,27 +94,32 @@
 					<div class="comment_body row">
 						{{ $comment->comment }}
 					</div>
-					<div class="comment_reply row hidden">
-						{!! Form::open(['action' => ['CommentController@store']]) !!}
-							{!! Form::hidden('post_id',$post->id) !!}
-							{!! Form::hidden('parent_id',$comment->id) !!}
-							{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
-							{!! Form::submit('Save', ['class' =>'btn btn-primary pull-left']) !!}
-						{!! Form::close() !!}
-						{!! Form::submit('Close', ['class' =>'btn ajax-reply comment-hide']) !!}
-					</div>
-					<div class="comment_reply_button">
-						{!! Form::submit('Replay', ['class' =>'btn ajax-reply comment-show']) !!}
-					</div>
+					@if( App\Models\Comment::canComment($comment->level) )
+						<div class="comment_reply row hidden">
+							{!! Form::open(['action' => ['CommentController@store']]) !!}
+								{!! Form::hidden('post_id',$post->id) !!}
+								{!! Form::hidden('parent_id',$comment->id) !!}
+								{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
+								{!! Form::submit('Save', ['class' =>'btn btn-primary pull-left']) !!}
+							{!! Form::close() !!}
+							{!! Form::submit('Close', ['class' =>'btn ajax-reply comment-hide']) !!}
+
+						</div>
+						<div class="comment_reply_button">
+							{!! Form::submit('Replay', ['class' =>'btn ajax-reply comment-show']) !!}
+						</div>
+					@endif
 				</div>
 			@endforeach
 		@endif
 		<div class="level_1">
+			@if( App\Models\Comment::canComment(1) )
 			{!! Form::open(['action' => ['CommentController@store']]) !!}
 				{!! Form::hidden('post_id',$post->id) !!}
 				{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
 				{!! Form::submit('Save', ['class' =>'btn btn-primary']) !!}
 			{!! Form::close() !!}
+			@endif
 		</div>
 	</div>
 @endsection
