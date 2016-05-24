@@ -35,4 +35,14 @@ class CommentPolicy
 				return false;
 		}
 	}
+	/*
+	 * Allow admins to delete comments. 
+	*/
+	public function destroy(User $user, Comment $comment)
+	{
+		$allowed = [
+			User::TYPE_ADMIN,
+		];
+		return in_array($user->type, $allowed);
+	}
 }

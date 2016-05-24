@@ -90,12 +90,19 @@
 						<div class="comment_date pull-left">
 							{{ $comment->timeElapsed() }}
 						</div>
+						@if ( !Auth::guest() )
+						@if ( Auth::user()->type == App\Models\User::TYPE_ADMIN )
+								{{ Form::open(['action' => ['CommentController@destroy',$comment->id], 'method' => 'DELETE']) }}
+								{!! Form::button('<span class="glyphicon glyphicon-trash"></span>', ['type'=>'submit', 'class' => 'glyph_button']) !!}</span>
+								{{ Form::close() }}
+						@endif
+						@endif
 					</div>
 					<div class="comment_body row">
 						{{ $comment->comment }}
 					</div>
 					@if( App\Models\Comment::canComment($comment->level) )
-						<div class="comment_reply row hidden">
+						<div class="comment_reply hidden">
 							{!! Form::open(['action' => ['CommentController@store']]) !!}
 								{!! Form::hidden('post_id',$post->id) !!}
 								{!! Form::hidden('parent_id',$comment->id) !!}
@@ -103,7 +110,6 @@
 								{!! Form::submit('Save', ['class' =>'btn btn-primary pull-left']) !!}
 							{!! Form::close() !!}
 							{!! Form::submit('Close', ['class' =>'btn ajax-reply comment-hide']) !!}
-
 						</div>
 						<div class="comment_reply_button">
 							{!! Form::submit('Replay', ['class' =>'btn ajax-reply comment-show']) !!}

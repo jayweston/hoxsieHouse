@@ -22,4 +22,15 @@ class CommentController extends Controller
 		Comment::create($request->all());
 		return redirect('post/'.$request['post_id']);
 	}
+	/*
+	 * Allow admins to dete comments.
+	*/
+	public function destroy($id)
+	{
+		$comment = Comment::findOrFail($id);
+		$post_id = $comment->post_id;
+		$this->authorize($comment);
+		$comment->delete();
+		return redirect('post/'.$post_id);
+	}
 }
