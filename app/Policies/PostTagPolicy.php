@@ -13,9 +13,9 @@ class PostTagPolicy
 	public function __construct()
 	{
 	}
-    /*
-     * Allow admins and post others to save tags to this post. 
-    */
+	/*
+	 * Allow admins and post others to save tags to this post. 
+	*/
 	public function store(User $user, PostTag $post_tag)
 	{
 		if ($user->id == $post_tag->post()->user_id && $user->type == User::TYPE_WRITER)
@@ -25,9 +25,9 @@ class PostTagPolicy
 		];
 		return in_array($user->type, $allowed);
 	}
-    /*
-     * Allow admins and post others to update tags to this post. 
-    */
+	/*
+	 * Allow admins and post others to update tags to this post. 
+	*/
 	public function update(User $user, PostTag $post_tag)
 	{
 		if ($user->id == $post_tag->post()->user_id && $user->type == User::TYPE_WRITER)
@@ -37,9 +37,9 @@ class PostTagPolicy
 		];
 		return in_array($user->type, $allowed);
 	}
-    /*
-     * Allow admins and post others to delete tags to thid post. 
-    */
+	/*
+	 * Allow admins and post others to delete tags to thid post. 
+	*/
 	public function destroy(User $user, PostTag $post_tag)
 	{
 		if ($user->id == $post_tag->post()->user_id && $user->type == User::TYPE_WRITER)

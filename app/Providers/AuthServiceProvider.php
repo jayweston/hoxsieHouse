@@ -13,6 +13,7 @@ class AuthServiceProvider extends ServiceProvider
 		'App\Models\PostImage' => 'App\Policies\PostImagePolicy',
 		'App\Models\PostMeta' => 'App\Policies\PostMetaPolicy',
 		'App\Models\PostTag' => 'App\Policies\PostTagPolicy',
+		'App\Models\Comment' => 'App\Policies\CommentPolicy',
 	];
 
 

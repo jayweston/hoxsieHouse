@@ -30,4 +30,16 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		$post = Post::findOrFail($post_id);
 		return $post->user_id == Auth::user()->id;
 	}
+	/*
+	 * Return the comment models associated with this user
+	*/
+	public function comments()
+	{
+		$comments = Comment::where('user_id',$this->user_id)->get(); 
+		if ( empty($comments[0]->id) ){
+			return new Comment();
+		}else{
+			return $comments;
+		}
+	}
 }

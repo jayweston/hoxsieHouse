@@ -16,8 +16,8 @@ class PostImageController extends Controller
 	/*
 	 * Save new images to post.
 	*/
-    public function store(Request $request)
-    {
+	public function store(Request $request)
+	{
 		$post = Post::findOrFail($request['post']);
 		$post_image = new PostImage();
 		$post_image->post_id = $post->id;
@@ -44,12 +44,12 @@ class PostImageController extends Controller
 			}
 		}
 		return redirect('post/'.$request['post'].'/edit');
-    }
+	}
 	/*
 	 * Alow admins and post creaters to update current post.
 	*/
-    public function update(Request $request, $id)
-    {
+	public function update(Request $request, $id)
+	{
 		$retval = [
 			'success' => false,
 			'messages' => [],
@@ -77,15 +77,15 @@ class PostImageController extends Controller
 			$retval['success'] = true;
 			return Response::json($retval);
 		}
-    }
+	}
 	/*
 	 * Alow admins and post creaters to delete current post.
 	*/
-    public function destroy($id)
-    {
+	public function destroy($id)
+	{
 		$post_image = PostImage::findOrFail($id);
 		$this->authorize($post_image);
 		$post_image->delete();
 		return redirect('post/'.$post_image->post()->id.'/edit');
-    }
+	}
 }

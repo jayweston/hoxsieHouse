@@ -18,7 +18,9 @@ Route::resource('/user', 'UserController');
 Route::resource('/postimage', 'PostImageController', ['only' => ['store', 'update','destroy']]);
 Route::resource('/postmeta', 'PostMetaController', ['only' => ['store', 'update','destroy']]);
 Route::resource('/posttag', 'PostTagController', ['only' => ['update']]);
+Route::resource('/comment', 'CommentController', ['only' => ['store','destroy']]);
 
 Route::get('/test', function () {
-
+	$comments = App\Models\Comment::comments('1'); 
+	dd($comments);
 });

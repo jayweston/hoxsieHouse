@@ -13,9 +13,9 @@ class PostMetaPolicy
 	public function __construct()
 	{
 	}
-    /*
-     * Allow admins and writers that this post belongs to save it. 
-    */
+	/*
+	 * Allow admins and writers that this post belongs to save it. 
+	*/
 	public function store(User $user, PostMeta $post_meta)
 	{
 		if ($user->id == $post_meta->post()->user_id && $user->type == User::TYPE_WRITER)
@@ -25,9 +25,9 @@ class PostMetaPolicy
 		];
 		return in_array($user->type, $allowed);
 	}
-    /*
-     * Allow admins and writers that this post belongs to save it. 
-    */
+	/*
+	 * Allow admins and writers that this post belongs to save it. 
+	*/
 	public function update(User $user, PostMeta $post_meta)
 	{
 		if ($user->id == $post_meta->post()->user_id && $user->type == User::TYPE_WRITER)
@@ -37,9 +37,9 @@ class PostMetaPolicy
 		];
 		return in_array($user->type, $allowed);
 	}
-    /*
-     * Allow admins and writers that this post belongs to save it. 
-    */
+	/*
+	 * Allow admins and writers that this post belongs to save it. 
+	*/
 	public function destroy(User $user, PostMeta $post_meta)
 	{
 		if ($user->id == $post_meta->post()->user_id && $user->type == User::TYPE_WRITER)
