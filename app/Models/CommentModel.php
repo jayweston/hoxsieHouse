@@ -81,6 +81,17 @@ class Comment extends Model
 		}
 	}
 	/*
+	 * Returns the current level for the given comment.
+	*/
+	public function level(){
+		$comments = Comment::comments($this->post_id);
+		foreach($comments as $comment){
+			if ($comment->id == $this->id)
+				return $comment->level;
+		}
+		return 0;
+	}
+	/*
 	 * Return the time elapsed since this date was posted
 	*/
 	public function timeElapsed()

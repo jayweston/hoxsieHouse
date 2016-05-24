@@ -16,6 +16,7 @@ class CommentController extends Controller
 	public function store(Request $request)
 	{
 		$comment = new Comment();
+		$comment->parent_id = $request->input('parent_id');
 		$this->authorize($comment);
 		$request->request->add(['user_id' => \Auth::id()]);
 		Comment::create($request->all());
