@@ -21,21 +21,21 @@ class PostController extends Controller
 		if (\Auth::guest() || \Auth::user()->type == User::TYPE_VIEWER)
 			// If the URL param is a valid post type (foodie, review, travel...) add it to sql query.
 			if (Post::isValidPostType($type)){
-				$posts = Post::where('type', $type)->where('draft', false)->where('avialable_at','<' ,\Carbon\Carbon::now())->paginate(10);
+				$posts = Post::where('type', $type)->where('draft', false)->where('avialable_at','<' ,\Carbon\Carbon::now())->paginate(12);
 			}
 			// if not valif post type then send all posts.
 			else{
 				$type="all";
-				$posts = Post::where('avialable_at','<' ,\Carbon\Carbon::now())->where('draft', false)->paginate(10);
+				$posts = Post::where('avialable_at','<' ,\Carbon\Carbon::now())->where('draft', false)->paginate(12);
 			}
 		else{
 			// Same logic from above but with admins/writers.  Also they can see draft and future posts.
 			if (Post::isValidPostType($type)){
-				$posts = Post::where('type', $type)->paginate(10);
+				$posts = Post::where('type', $type)->paginate(12);
 			}
 			else{
 				$type="all";
-				$posts = Post::paginate(10);
+				$posts = Post::paginate(12);
 			}
 		}
 		$view_data['posts'] = $posts;
