@@ -70,14 +70,7 @@ display: table;
 	cursor:pointer;
 }
 
-.thumbnail_transform figure figcaption {
-	position:absolute;
-	-webkit-box-sizing:border-box;
-	-moz-box-sizing:border-box;
-	box-sizing:border-box;
-}
-
-.thumbnail_transform figure figcaption {
+.thumbnail_transform figcaption {
 	top:0;
 	left:0;
 	width:100%;
@@ -94,9 +87,13 @@ display: table;
 	-webkit-transition:all .5s;
 	-moz-transition:all .5s;
 	transition:all .5s;
+	position:absolute;
+	-webkit-box-sizing:border-box;
+	-moz-box-sizing:border-box;
+	box-sizing:border-box;
 }
 
-.thumbnail_transform figure img {
+.thumbnail_transform img {
 	position:relative;
 	-webkit-transition:all .5s;
 	-moz-transition:all .5s;
@@ -105,24 +102,50 @@ display: table;
 	width: 250px;
 }
 
-.thumbnail_transform figure:hover img,figure.hover img {
+.thumbnail_transform:not(:focus):hover img{
 	-webkit-transform:rotateY(180deg);
 	-moz-transform:rotateY(180deg);
 	transform:rotateY(180deg);
 }
-.thumbnail_transform figure:hover figcaption,figure.hover figcaption {
+
+.thumbnail_transform:not(:focus):hover figcaption {
 	-webkit-transform:rotateY(0);
 	-moz-transform:rotateY(0);
 	transform:rotateY(0);
 }
 
-.thumbnail_transform figure:hover .thumbnail_title{
+.thumbnail_transform:not(:focus):hover .thumbnail_title{
 	color: transparent;
 	background-color:rgba(0,0,0,0);
 	-webkit-transform:rotateY(180deg);
 	-moz-transform:rotateY(180deg);
 	transform:rotateY(180deg);
 }
+
+.thumbnail_transform:focus{
+	outline: none;
+}
+
+.hovered img{
+	-webkit-transform:rotateY(180deg);
+	-moz-transform:rotateY(180deg);
+	transform:rotateY(180deg);
+}
+
+.hovered figcaption {
+	-webkit-transform:rotateY(0);
+	-moz-transform:rotateY(0);
+	transform:rotateY(0);
+}
+
+.hovered .thumbnail_title{
+	color: transparent;
+	background-color:rgba(0,0,0,0);
+	-webkit-transform:rotateY(180deg);
+	-moz-transform:rotateY(180deg);
+	transform:rotateY(180deg);
+}
+
 .thumbnail_title{
 	color:white;
 	font-weight: bold;
@@ -137,9 +160,25 @@ display: table;
 	-moz-transition:all .5s;
 	transition:all .5s;
 }
+
 .thumbnailable{
 	border: solid;
 	color:red;
+}
+
+.swipe_image{
+	z-index:20;
+	position:absolute;
+	height: 100px;
+	width: 100px;
+	top:25%;
+	left:40%;
+    pointer-events:none;
+}
+
+.swipe_image+.thumbnail_transform{
+	opacity: 0.70;
+	filter: alpha(opacity=70);
 }
 /*
  * Post comments
