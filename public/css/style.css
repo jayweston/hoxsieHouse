@@ -224,3 +224,46 @@ display: table;
 	border: 0;
 	background: transparent;
 }
+/*
+ * Footer
+*/
+#footer{
+	background-color: #f8f8f8;
+	position: relative;
+	min-height: 50px;
+	margin-top: 20px;
+	border: 1px solid #e7e7e7;
+}
+
+.footer_row{
+	text-align: center;
+}
+
+.mail_icon img, .social_icon img{
+	height: 24px;
+	width: 24px;
+
+}
+
+.contact_us_links, .social_links, .nav_sites, .sister_sites{
+	list-style: none;
+}
+
+.contact_us_links li, .social_links li{
+	display: inline;
+	padding-right:5px;
+}
+
+.nav_sites li, .sister_sites li{
+	
+}
+/*
+ * dashboard
+*/
+.heading{
+
+}
+
+.title{
+	
+}

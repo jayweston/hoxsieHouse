@@ -11,8 +11,7 @@
 |
 */
 Route::auth();
-Route::get('/', 'PostController@index');
-Route::get('/home', 'PostController@index');
+Route::get('/', 'DashboardController@index');
 Route::resource('/post', 'PostController');
 Route::resource('/user', 'UserController');
 Route::resource('/postimage', 'PostImageController', ['only' => ['store', 'update','destroy']]);
