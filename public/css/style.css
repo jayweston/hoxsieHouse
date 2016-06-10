@@ -245,13 +245,17 @@ display: table;
 
 }
 
-.contact_us_links, .social_links{
+.contact_us_links, .social_links, .nav_sites, .sister_sites{
 	list-style: none;
 }
 
 .contact_us_links li, .social_links li{
 	display: inline;
 	padding-right:5px;
+}
+
+.nav_sites li, .sister_sites li{
+	
 }
 /*
  * dashboard
