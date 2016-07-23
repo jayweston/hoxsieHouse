@@ -74,6 +74,14 @@ class Post extends Model
 		return $meta;
 	}
 	/*
+	 * Return the tag models of all tags associated with this post.
+	*/
+	public function tags()
+	{
+		$tag_ids = PostTag::where('post_id',$this->id)->pluck('tag_id')->toArray();
+		return Tag::find($tag_ids);
+	}
+	/*
 	 * Static function that return true if the given string is a possible post type. 
 	*/
 	public static function isValidPostType($string)

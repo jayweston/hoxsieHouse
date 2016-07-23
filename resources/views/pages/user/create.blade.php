@@ -42,7 +42,7 @@
 		$(document).ready(function(){
 			$('li').removeClass('active');
 			$('#nav_account_create').addClass('active');
-			$('#nav_account_dropdown').addClass('active');
+			$('#nav_admin_dropdown').addClass('active');
 		});	
 	</script>
 @stop

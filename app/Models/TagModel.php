@@ -20,4 +20,19 @@ class Tag extends Model
 		}
 		return $dropdown;
 	}
+	/*
+	 * Return the number of posts that this tag was used in.
+	*/
+	public function getPostCount()
+	{
+		return PostTag::where('tag_id',$this->id)->count();
+	}
+	/*
+	 * Return the post models assocaited with this tag.
+	*/
+	public function posts()
+	{
+		$post_ids = PostTag::where('tag_id',$this->id)->pluck('post_id')->toArray();
+		return Post::find($post_ids);
+	}
 }

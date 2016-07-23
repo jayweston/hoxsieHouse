@@ -110,6 +110,7 @@
 			</div>
 		{!! Form::close() !!}
 		@if ( !empty($post->meta()->id) )
+			lkjslkj
 			<div class="form-group">
 				{{ Form::open(['action' => ['PostMetaController@destroy',$post->meta()->id], 'method' => 'DELETE']) }}
 				{{ Form::submit('Delete', ['class' => 'btn btn-danger form-control'])}}
@@ -184,7 +185,7 @@
 						@for($i=0; $i<10; $i++)
 							<tr>
 								<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
-									{!! Form::select($i.'[]',['0'=> 'Remove', '1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10'] ,App\Models\PostTag::getPostTag($post->id ,$i+1)->order, ['class' =>'form-control', 'data-id'=>App\Models\PostTag::getPostTag($post->id ,$i+1)->id, 'data-url'=>'posttag']) !!}
+									{!! Form::select($i.'[]',['0'=> 'Remove', '1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10'] ,$i+1, ['class' =>'form-control', 'data-id'=>App\Models\PostTag::getPostTag($post->id ,$i+1)->id, 'data-url'=>'posttag']) !!}
 								</td>
 								<td class="col-xs-5 col-sm-5 col-md-5 col-lg-5">
 									{!! Form::select($i.'[]',App\Models\Tag::getTagDropdown() ,App\Models\PostTag::getTag($post->id ,$i+1)->id, ['class' =>'form-control', 'data-id'=>App\Models\PostTag::getPostTag($post->id ,$i+1)->id, 'data-url'=>'posttag']) !!}

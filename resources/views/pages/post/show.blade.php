@@ -71,6 +71,13 @@
 		@endforeach
 	</div>
 
+	{{-- Post Tags --}}
+	<div class="post-tags">
+		@foreach ($post->tags() as $tag)
+			<li><a href="/tag/{{ $tag->id }}">{{ $tag->name }}</li></a>
+		@endforeach
+	</div>
+
 	{{-- Post content --}}
 	<div class="post-content">{!! $post->content !!}</div>
 
