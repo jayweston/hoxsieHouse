@@ -31,7 +31,7 @@ class PostTagController extends Controller
 		foreach($inputs as $input){
 			// Skip if the order is set to 0.
 			if ($input[0] != '0'){
-				//Skip if the only the order is set. 
+				//Skip if the only the order is set.
 				if($input[1] == '0' && $input[2] == ''){
 					continue;
 				}

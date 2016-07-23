@@ -20,12 +20,6 @@
 					@foreach (App\Models\Post::getPostTypesDropdown() as $type => $name )
 						<li class="" id="nav_post_{{ $type }}"><a href="{{ url('/post?type='.$type) }}">{{ $name }}</a></li>
 					@endforeach
-					@if (!Auth::guest())
-					@if ((Auth::user()->type == App\Models\User::TYPE_ADMIN) || (Auth::user()->type == App\Models\User::TYPE_WRITER))
-						<li role="separator" class="divider"></li>
-						<li class="" id="nav_post_create"><a href="{{ url('/post/create') }}">Create</a></li>
-					@endif
-					@endif
 				</ul>
 			</li>
 		</ul>
@@ -43,14 +37,26 @@
 						<li class="" id="nav_account_show"><a href="{{ url('/user/'.Auth::user()->id) }}">Details</a></li>
 						<li class="" id="nav_account_list"><a href="{{ url('/user/') }}">Other Users</a></li>
 						<li class="" id="nav_account_edit"><a href="{{ url('/user/'.Auth::user()->id.'/edit') }}">Edit</a></li>
-						@if ((Auth::user()->type == App\Models\User::TYPE_ADMIN) || (Auth::user()->type == App\Models\User::TYPE_WRITER))
-							<li class="" id="nav_account_create"><a href="{{ url('/user/create') }}">Create</a></li>
-						@endif
 						<li role="separator" class="divider"></li>
 						<li class="" id="nav_logout"><a href="{{ url('/logout') }}">Logout</a></li>
 					</ul>
 				</li>
 			@endif
 		</ul>
+		{{--
+			Right side dropdown for Admins
+		--}}
+			@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\User::TYPE_ADMIN) || (Auth::user()->type == App\Models\User::TYPE_WRITER))
+				<ul class="nav navbar-nav navbar-right">
+					<li class="dropdown" id="nav_admin_dropdown">
+						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
+						<ul class="dropdown-menu">
+							<li class="" id="nav_account_create"><a href="{{ url('/user/create') }}">Create User</a></li>
+							<li class="" id="nav_post_create"><a href="{{ url('/post/create') }}">Create Post</a></li>
+							<li class="" id="nav_tag_list"><a href="{{ url('/tag/') }}">Edit Tags</a></li>
+						</ul>
+					</li>
+				</ul>
+			@endif @endif
 	</div>
 </nav>
