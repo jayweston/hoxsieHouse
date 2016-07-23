@@ -260,10 +260,29 @@ display: table;
 /*
  * dashboard
 */
-.heading{
-
+.blog_container{
 }
 
-.title{
+.blog_container_image a img{
+	max-width: 90%;
+}
+
+.dashboard_post{
+	text-align: left;
+	width: 800px;
+	max-width: 90%;
+	margin:0 auto;
+	margin-top: 10px;
+}
+
+.dashboard_post_title{
+	font-weight: bold;
+}
+
+.dashboard_post_date{
+	font-weight: bold;
+}
+
+.dashboard_post_snipit{
 	
 }
