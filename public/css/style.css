@@ -286,3 +286,16 @@ display: table;
 .dashboard_post_snipit{
 	
 }
+/*
+ * dashboard
+*/
+.post-tags li{
+	display: inline;
+}
+.post-tags li:after {
+	content: ", ";
+	color: #337ab7;
+}
+.post-tags li:last-child:after {
+	content: "";
+}
