@@ -54,7 +54,7 @@
 						<td><a href="/user/{{ $user->id }}/edit" class="btn btn-info">Edit</a></td>
 						<td>
 							{{ Form::open(['action' => ['UserController@destroy', $user->id], 'method' => 'DELETE']) }}
-							{{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+							{{ Form::submit('Delete', ['class' => 'btn btn-danger confirm', 'data-confirm' => 'Are you sure you want to delete this account?']) }}
 							{{ Form::close() }}
 						</td>
 						@endif @endif
@@ -73,5 +73,10 @@
 			$('#nav_account_list').addClass('active');
 			$('#nav_account_dropdown').addClass('active');
 		});	
+	</script>
+	<script type="text/javascript">
+		$('.confirm').on('click', function (e) {
+			return !!confirm($(this).data('confirm'));
+		});
 	</script>
 @stop

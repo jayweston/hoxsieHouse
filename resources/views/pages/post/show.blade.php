@@ -54,7 +54,7 @@
 	@if(!Auth::guest()) @if( (Auth::user()->type == App\Models\User::TYPE_ADMIN) || (App\Models\User::isPostMine($post->id)) )
 		<div class="form-group">
 			<a href="/post/{{ $post->id }}/edit" class="btn btn-primary pull-left">Edit</a>
-			{!! Form::open(['action' => ['PostController@destroy', $post->id], 'method' => 'delete']) !!}	{!! Form::submit('Delete', ['class' =>'btn btn-danger pull-right']) !!}	{!! Form::close() !!}<br/>
+			{!! Form::open(['action' => ['PostController@destroy', $post->id], 'method' => 'delete']) !!}	{!! Form::submit('Delete', ['class' =>'btn btn-danger pull-right confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) !!}	{!! Form::close() !!}<br/>
 		</div>
 	@endif @endif
 
@@ -100,7 +100,7 @@
 						@if ( !Auth::guest() )
 						@if ( Auth::user()->type == App\Models\User::TYPE_ADMIN )
 								{{ Form::open(['action' => ['CommentController@destroy',$comment->id], 'method' => 'DELETE']) }}
-								{!! Form::button('<span class="glyphicon glyphicon-trash"></span>', ['type'=>'submit', 'class' => 'glyph_button']) !!}</span>
+								{!! Form::button('<span class="glyphicon glyphicon-trash"></span>', ['type'=>'submit', 'class' => 'glyph_button confirm', 'data-confirm' => 'Are you sure you want to delete this comment?']) !!}</span>
 								{{ Form::close() }}
 						@endif
 						@endif
@@ -187,6 +187,11 @@
 			$('.comment-hide').on('click', function () {
 				$(this).parent().parent().find('.comment-show').removeClass('hidden');
 			});
+		});
+	</script>
+	<script type="text/javascript">
+		$('.confirm').on('click', function (e) {
+			return !!confirm($(this).data('confirm'));
 		});
 	</script>
 @stop

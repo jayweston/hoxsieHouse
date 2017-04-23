@@ -113,7 +113,7 @@
 			lkjslkj
 			<div class="form-group">
 				{{ Form::open(['action' => ['PostMetaController@destroy',$post->meta()->id], 'method' => 'DELETE']) }}
-				{{ Form::submit('Delete', ['class' => 'btn btn-danger form-control'])}}
+				{{ Form::submit('Delete', ['class' => 'btn btn-danger form-control confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) }}
 				{{ Form::close() }}
 			</div>
 		@endif
@@ -158,7 +158,7 @@
 							<td class="col-xs-9 col-sm-8 col-md-5 col-lg-5">{!! Form::textarea('label', $image->label, ['class' =>'form-control  ajax_submit', 'data-id'=>$image->id]) !!}</td>
 							<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
 								{{ Form::open(['action' => ['PostImageController@destroy',$image->id], 'method' => 'DELETE']) }}
-								{{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
+								{{ Form::submit('Delete', ['class' => 'btn btn-danger confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) }}
 								{{ Form::close() }}
 							</td>
 						</tr>
@@ -310,6 +310,11 @@
 				$('.notification_message').html(txt);
 				$('#notification_error').removeClass('hidden');
 			});
+		});
+	</script>
+	<script type="text/javascript">
+		$('.confirm').on('click', function (e) {
+			return !!confirm($(this).data('confirm'));
 		});
 	</script>
 @stop
