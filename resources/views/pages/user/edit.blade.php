@@ -24,10 +24,12 @@
 			{!! Form::label('email','Email') !!}
 			{!! Form::text('email', null, ['class' =>'form-control']) !!}
 		</div>
+		@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\User::TYPE_ADMIN))
 		<div class="form-group">
 			{!! Form::label('type','User Type') !!}
-			{!! Form::select('type', ['L' => 'Large', 'S' => 'Small'], 'S',['class' =>'form-control']) !!}
+			{!! Form::select('type', $user->getUserTypesDropdown(), $user->type,['class' =>'form-control']) !!}
 		</div>
+		@endif @endif
 		<div class="form-group">
 			{!! Form::label('password','Password') !!}
 			{!! Form::password('content', ['class' =>'form-control']) !!}

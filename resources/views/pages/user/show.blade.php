@@ -21,26 +21,34 @@
 			<thead>
 				<tr>
 					<th>Name</th>
+					@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\User::TYPE_ADMIN))
 					<th>Email</th>
+					@endif @endif
+					<th>Date Joined</th>
+					@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\User::TYPE_ADMIN))
 					<th>Type</th>
-					<th>Date Added</th>
 					<th>Edit</th>
 					<th>Delete</th>
+					@endif @endif
 				</tr>
 			</thead>
 
 			<tbody>
 				<tr>
 					<td>{{ $user->name }}</td>
+					@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\User::TYPE_ADMIN))
 					<td>{{ $user->email }}</td>
-					<td>{{ $user->type }}</td>
+					@endif @endif
 					<td>{{ $user->created_at->format('Y-m-d') }}</td>
+					@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\User::TYPE_ADMIN))
+					<td>{{ $user->type }}</td>
 					<td><a href="/user/{{ $user->id }}/edit" class="btn btn-info">Edit</a></td>
 					<td>
 						{{ Form::open(['action' => ['UserController@destroy',$user->id], 'method' => 'DELETE']) }}
 						{{ Form::submit('Delete', ['class' => 'btn btn-danger'])}}
 						{{ Form::close() }}
 					</td>
+					@endif @endif
 				</tr>
 			</tbody>
 		</table>
