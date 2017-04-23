@@ -25,6 +25,10 @@
 			{!! Form::text('email', null, ['class' =>'form-control']) !!}
 		</div>
 		<div class="form-group">
+			{!! Form::label('type','User Type') !!}
+			{!! Form::select('type', ['L' => 'Large', 'S' => 'Small'], 'S',['class' =>'form-control']) !!}
+		</div>
+		<div class="form-group">
 			{!! Form::label('password','Password') !!}
 			{!! Form::password('content', ['class' =>'form-control']) !!}
 		</div>
