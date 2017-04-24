@@ -45,7 +45,7 @@
 
 	<div class="form-group">
 		{!! Form::open(['action' => ['UserController@destroy',$user->id], 'method' => 'DELETE']) !!}
-			{!! Form::submit('Delete', ['class' => 'btn btn-danger form-control confirm', 'data-confirm' => 'Are you sure you want to delete this account?']) }}
+			{!! Form::submit('Delete', ['class' => 'btn btn-danger form-control confirm', 'data-confirm' => 'Are you sure you want to delete this account?']) !!}
 		{!! Form::close() !!}
 	</div>
 @endsection
