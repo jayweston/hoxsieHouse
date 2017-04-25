@@ -23,6 +23,12 @@
 			{!! Form::label('email','Email') !!}
 			{!! Form::text('email', null, ['class' =>'form-control']) !!}
 		</div>
+		@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\User::TYPE_ADMIN))
+		<div class="form-group">
+			{!! Form::label('type','User Type') !!}
+			{!! Form::select('type', App\Models\User::getUserTypesDropdown(), App\Models\User::TYPE_VIEWER, ['class' =>'form-control']) !!}
+		</div>
+		@endif @endif
 		<div class="form-group">
 			{!! Form::label('password','Password') !!}
 			{!! Form::password('content', ['class' =>'form-control']) !!}

@@ -68,6 +68,11 @@ class UserController extends Controller
 	{
 		$user = User::findOrFail($id);
 		$this->authorize($user);
+		if(\Auth::user()->type != User::TYPE_ADMIN){
+			$this->validate($request, [
+				'type' => 'in:'.$user->type
+			]);
+		}
 		$user->update($request->all());
 		return redirect('user/'.$id);
 	}

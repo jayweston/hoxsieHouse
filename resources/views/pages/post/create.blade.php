@@ -32,8 +32,13 @@
 			{!! Form::textarea('content', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
 		</div>
 		<div class="form-group">
-			{!! Form::label('avialable_at','Publish On') !!}
-			{!! Form::input('datetime', 'avialable_at', date('Y-m-d h:i:sa'), ['class' =>'form-control']) !!}
+			<label for="avialable_at">Publish On</label>
+			<div class='input-group date' id='datetimepicker'>
+				<span class="input-group-addon">
+					<span class="glyphicon glyphicon-calendar"></span>
+				</span>
+				<input class="form-control" name="avialable_at" type="datetime" id="avialable_at" />
+			</div>
 		</div>
 		<div class="form-group">
 			{!! Form::label('draft','Draft') !!}
@@ -47,6 +52,12 @@
 
 @section('scripts')
 	@parent
+	<script src="/js/tinymce/tinymce.min.js"></script>
+	<script src="/js/moment.min.js"></script>
+	<script type="text/javascript" src="/js/bootstrap/transition.js"></script>
+	<script type="text/javascript" src="/js/bootstrap/collapse.js"></script>
+	<script type="text/javascript" src="/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
+	<script type="text/javascript"> $(function () { $('#datetimepicker').datetimepicker({format: 'YYYY-MM-DD hh:mm:ssa'}); }); </script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('li').removeClass('active');
@@ -54,7 +65,7 @@
 			$('#nav_admin_dropdown').addClass('active');
 		});	
 	</script>
-	<script src="/js/tinymce/tinymce.min.js"></script>
+
 	<script>
 		tinymce.init({
 			selector: '#mytextarea',

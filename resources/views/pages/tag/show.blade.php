@@ -31,7 +31,7 @@
 
 		<div class="tag-delete">
 			{{ Form::open(['action' => ['TagController@destroy', $tag->id], 'method' => 'DELETE']) }}
-			{{ Form::submit('Delete', ['class' => 'btn btn-danger form-control'])}}
+			{{ Form::submit('Delete', ['class' => 'btn btn-danger form-control confirm', 'data-confirm' => 'Are you sure you want to delete this tag?']) }}
 			{{ Form::close() }}
 		</div>
 	@endif @endif
@@ -57,5 +57,10 @@
 			$('#nav_account_show').addClass('active');
 			$('#nav_account_dropdown').addClass('active');
 		});	
+	</script>
+	<script type="text/javascript">
+		$('.confirm').on('click', function (e) {
+			return !!confirm($(this).data('confirm'));
+		});
 	</script>
 @stop

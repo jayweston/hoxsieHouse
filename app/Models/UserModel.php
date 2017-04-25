@@ -14,7 +14,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
 	use Authenticatable, CanResetPassword;
 	use SoftDeletes;
-	protected $fillable = ['name', 'email', 'password'];
+	protected $fillable = ['name', 'email', 'type', 'password'];
 	/*
 	 * Static variables for user types. 
 	*/
@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $post->user_id == Auth::user()->id;
 	}
 	/*
-	 * Return the comment models associated with this user
+	 * Return the comments associated with this user
 	*/
 	public function comments()
 	{
@@ -41,5 +41,43 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		}else{
 			return $comments;
 		}
+	}
+	/*
+	 * Static function that returns all of the available user types in dropdown
+	 * form.
+	*/
+	public static function getUserTypesDropdown()
+	{
+		// Get all possible sql enums for type in user table.
+		$type = \DB::select(\DB::raw('SHOW COLUMNS FROM users WHERE Field = "type"'))[0]->Type;
+		preg_match('/^enum\((.*)\)$/', $type, $matches);
+		$values = [];
+		foreach(explode(',', $matches[1]) as $value){
+		    $values[] = trim($value, "'");
+		}
+		// Create dropdown list of the enums.
+		$dropdown_list = [];
+		foreach($values as $value){
+			$dropdown_list[$value] = ucfirst($value);
+		}
+		return $dropdown_list;		
+	}
+	/*
+	 * Return the posts associated with given user.
+	*/
+	public static function getUserPosts($user_id)
+	{
+		$posts = new Post();
+		$posts = Post::where('user_id',$user_id)->get(); 
+		return $posts;
+	}
+	/*
+	 * Return the comments associated with given user.
+	*/
+	public static function getUserComments($user_id)
+	{
+		$comments = new Comment();
+		$comments = Comment::where('user_id',$user_id)->get(); 
+		return $comments;
 	}
 }

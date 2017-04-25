@@ -24,6 +24,12 @@
 			{!! Form::label('email','Email') !!}
 			{!! Form::text('email', null, ['class' =>'form-control']) !!}
 		</div>
+		@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\User::TYPE_ADMIN))
+		<div class="form-group">
+			{!! Form::label('type','User Type') !!}
+			{!! Form::select('type', $user->getUserTypesDropdown(), $user->type,['class' =>'form-control']) !!}
+		</div>
+		@endif @endif
 		<div class="form-group">
 			{!! Form::label('password','Password') !!}
 			{!! Form::password('content', ['class' =>'form-control']) !!}
@@ -39,7 +45,7 @@
 
 	<div class="form-group">
 		{!! Form::open(['action' => ['UserController@destroy',$user->id], 'method' => 'DELETE']) !!}
-			{!! Form::submit('Delete', ['class' => 'btn btn-danger form-control']) !!}
+			{!! Form::submit('Delete', ['class' => 'btn btn-danger form-control confirm', 'data-confirm' => 'Are you sure you want to delete this account?']) !!}
 		{!! Form::close() !!}
 	</div>
 @endsection
@@ -52,5 +58,10 @@
 			$('#nav_account_edit').addClass('active');
 			$('#nav_account_dropdown').addClass('active');
 		});	
+	</script>
+	<script type="text/javascript">
+		$('.confirm').on('click', function (e) {
+			return !!confirm($(this).data('confirm'));
+		});
 	</script>
 @stop

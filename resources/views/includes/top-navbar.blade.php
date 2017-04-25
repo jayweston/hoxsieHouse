@@ -35,8 +35,8 @@
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li class="" id="nav_account_show"><a href="{{ url('/user/'.Auth::user()->id) }}">Details</a></li>
-						<li class="" id="nav_account_list"><a href="{{ url('/user/') }}">Other Users</a></li>
 						<li class="" id="nav_account_edit"><a href="{{ url('/user/'.Auth::user()->id.'/edit') }}">Edit</a></li>
+						<li class="" id="nav_account_list"><a href="{{ url('/user/') }}">Other Users</a></li>
 						<li role="separator" class="divider"></li>
 						<li class="" id="nav_logout"><a href="{{ url('/logout') }}">Logout</a></li>
 					</ul>
@@ -51,9 +51,13 @@
 					<li class="dropdown" id="nav_admin_dropdown">
 						<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin<span class="caret"></span></a>
 						<ul class="dropdown-menu">
+							@if (Auth::user()->type == App\Models\User::TYPE_ADMIN)
 							<li class="" id="nav_account_create"><a href="{{ url('/user/create') }}">Create User</a></li>
+							@endif
 							<li class="" id="nav_post_create"><a href="{{ url('/post/create') }}">Create Post</a></li>
+							@if (Auth::user()->type == App\Models\User::TYPE_ADMIN)
 							<li class="" id="nav_tag_list"><a href="{{ url('/tag/') }}">Edit Tags</a></li>
+							@endif
 						</ul>
 					</li>
 				</ul>
