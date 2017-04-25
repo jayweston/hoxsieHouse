@@ -19,6 +19,16 @@ class PostMetaController extends Controller
 		$post_meta = new PostMeta();
 		$post_meta->post_id = $post->id;
 		$this->authorize($post_meta);
+		$this->validate($request, [
+			'title' => 'min:1|max:255|string',
+			'description' => 'min:1|max:255|string',
+			'lat' => 'min:1|max:20|string',
+			'long' => 'max:20|string',
+			'street' => 'min:1|max:255|string',
+			'city' => 'min:1|max:255|string',
+			'zip' => 'digits:5|integer',
+			'country' => 'min:1|max:50|string',
+		]);
 		PostMeta::create($request->all());
 		return redirect('post/'.$request['post_id'].'/edit');
 	}
@@ -29,6 +39,16 @@ class PostMetaController extends Controller
 	{
 		$post_meta = PostMeta::findOrFail($id);
 		$this->authorize($post_meta);
+		$this->validate($request, [
+			'title' => 'min:1|max:255|string',
+			'description' => 'min:1|max:255|string',
+			'lat' => 'min:1|max:20|string',
+			'long' => 'max:20|string',
+			'street' => 'min:1|max:255|string',
+			'city' => 'min:1|max:255|string',
+			'zip' => 'digits:5|integer',
+			'country' => 'min:1|max:50|string',
+		]);
 		$post_meta->update($request->all());
 		return redirect('post/'.$post_meta->post_id.'/edit');
 	}

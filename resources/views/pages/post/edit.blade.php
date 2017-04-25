@@ -115,7 +115,6 @@
 			</div>
 		{!! Form::close() !!}
 		@if ( !empty($post->meta()->id) )
-			lkjslkj
 			<div class="form-group">
 				{{ Form::open(['action' => ['PostMetaController@destroy',$post->meta()->id], 'method' => 'DELETE']) }}
 				{{ Form::submit('Delete', ['class' => 'btn btn-danger form-control confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) }}

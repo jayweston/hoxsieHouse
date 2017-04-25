@@ -58,6 +58,14 @@ class PostController extends Controller
 	{
 		$post = new Post();
 		$this->authorize($post);
+		$this->validate($request, [
+			'title' => 'required|string|min:4|max:255|unique:posts,title',
+			'summary' => 'required|string|min:4|max:255',
+			'type' => 'required|in:foodie,review,travel',
+			'content' => 'required|string',
+			'avialable_at' => 'required|date',
+			'draft' => 'required|boolean',
+		]);
 		$request->request->add(['user_id' => \Auth::user()->id]);
 		$post = Post::create($request->all());
 		return redirect('post/'.$post->id);
@@ -96,6 +104,19 @@ class PostController extends Controller
 	{
 		$post = Post::findOrFail($id);
 		$this->authorize($post);
+		$this->validate($request, [
+			'title' => 'required|string|min:4|max:255',
+			'summary' => 'required|string|min:4|max:255',
+			'type' => 'required|in:foodie,review,travel',
+			'content' => 'required|string',
+			'avialable_at' => 'required|date',
+			'draft' => 'required|boolean',
+		]);
+		if ($request->title != $post->title){
+			$this->validate($request, [
+				'title' => 'unique:posts,title',
+			]);
+		}
 		$post->update($request->all());
 		return redirect('post/'.$id);
 	}

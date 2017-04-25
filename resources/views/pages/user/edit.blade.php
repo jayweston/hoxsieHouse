@@ -32,11 +32,11 @@
 		@endif @endif
 		<div class="form-group">
 			{!! Form::label('password','Password') !!}
-			{!! Form::password('content', ['class' =>'form-control']) !!}
+			{!! Form::password('password', ['class' =>'form-control']) !!}
 		</div>
 		<div class="form-group">
-			{!! Form::label('password_confirm','Conformation') !!}
-			{!! Form::password('content_confirm', ['class' =>'form-control']) !!}
+			{!! Form::label('password_confirmation','Conformation') !!}
+			{!! Form::password('password_confirmation', ['class' =>'form-control']) !!}
 		</div>
 		<div class="form-group">
 			{!! Form::submit('Save', ['class' =>'btn btn-primary form-control']) !!}
