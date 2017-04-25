@@ -34,6 +34,9 @@ class TagController extends Controller
 	{
 		$tag = Tag::findOrFail($id);
 		$this->authorize($tag);
+		$this->validate($request, [
+			'name' => 'required|string|min:1|max:255|unique:tags,name'
+		]);
 		$tag->update($request->all());
 		return redirect('tag/');
 	}

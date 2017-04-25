@@ -36,6 +36,22 @@ class UserController extends Controller
 	{
 		$user = new User();
 		$this->authorize($user);
+		if(\Auth::user()->type != User::TYPE_ADMIN){
+			$this->validate($request, [
+				'type' => 'in:'.$user->type
+			]);
+		}
+		$this->validate($request, [
+			'name' => 'required|string|min:4|max:255|unique:users,name',
+			'email' => 'required|email|max:255|unique:users,email',
+			'type' => 'exists:users,type',
+			'password' => 'min:6|confirmed'
+		]);
+		if ($request->email != $user->email){
+			$this->validate($request, [
+				'email' => 'required|email|max:255|unique:users,email',
+			]);
+		}
 		$user = User::create($request->all());
 		return redirect('user/'.$user->id);
 	}
@@ -71,6 +87,22 @@ class UserController extends Controller
 		if(\Auth::user()->type != User::TYPE_ADMIN){
 			$this->validate($request, [
 				'type' => 'in:'.$user->type
+			]);
+		}
+		$this->validate($request, [
+			'name' => 'required|string|min:4|max:255',
+			'email' => 'required|email|max:255',
+			'type' => 'exists:users,type',
+			'password' => 'min:6|confirmed'
+		]);
+		if ($request->email != $user->email){
+			$this->validate($request, [
+				'email' => 'required|email|max:255|unique:users,email',
+			]);
+		}
+		if ($request->name != $user->name){
+			$this->validate($request, [
+				'name' => 'required|string|min:4|max:255|unique:users,name',
 			]);
 		}
 		$user->update($request->all());

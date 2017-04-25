@@ -18,6 +18,9 @@ class CommentController extends Controller
 		$comment = new Comment();
 		$comment->parent_id = $request->input('parent_id');
 		$this->authorize($comment);
+		$this->validate($request, [
+			'comment' => 'required|min:3|string',
+		]);
 		$request->request->add(['user_id' => \Auth::id()]);
 		Comment::create($request->all());
 		return redirect('post/'.$request['post_id']);
