@@ -31,7 +31,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 		return $post->user_id == Auth::user()->id;
 	}
 	/*
-	 * Return the comment models associated with this user
+	 * Return the comments associated with this user
 	*/
 	public function comments()
 	{
@@ -61,5 +61,23 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 			$dropdown_list[$value] = ucfirst($value);
 		}
 		return $dropdown_list;		
+	}
+	/*
+	 * Return the posts associated with given user.
+	*/
+	public static function getUserPosts($user_id)
+	{
+		$posts = new Post();
+		$posts = Post::where('user_id',$user_id)->get(); 
+		return $posts;
+	}
+	/*
+	 * Return the comments associated with given user.
+	*/
+	public static function getUserComments($user_id)
+	{
+		$comments = new Comment();
+		$comments = Comment::where('user_id',$user_id)->get(); 
+		return $comments;
 	}
 }

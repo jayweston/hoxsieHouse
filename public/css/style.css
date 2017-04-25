@@ -1,6 +1,6 @@
 /*
- * Owl Carousl
 */
+ * Owl Carousl
 .owl-next{
 	display: inline-block;
 	text-align:center;
@@ -287,7 +287,7 @@ display: table;
 	
 }
 /*
- * dashboard
+ * Posts
 */
 .post-tags li{
 	display: inline;
@@ -298,4 +298,25 @@ display: table;
 }
 .post-tags li:last-child:after {
 	content: "";
+}
+/*
+ * Pagination for posts on User page
+*/
+#post-paginate, #comment-paginate
+{
+	width:300px;
+}
+#post-paginate ol, #comment-paginate
+{
+	display:block;
+	margin-bottom:10px;
+}
+.easyPaginateNav a 
+{
+	padding:10px;
+}
+.easyPaginateNav a.current 
+{
+	font-weight:bold;
+	text-decoration:underline;
 }
