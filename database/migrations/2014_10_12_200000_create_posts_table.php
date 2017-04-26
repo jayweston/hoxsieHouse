@@ -19,7 +19,7 @@ class CreatePostsTable extends Migration
 			$table->boolean('draft')->default(false);
 			$table->string('title');
 			$table->longText('content');
-			$table->string('summary');
+			$table->string('summary')->nullable();
 			$table->dateTime('avialable_at');
 			$table->timestamps();
 			$table->softDeletes();
