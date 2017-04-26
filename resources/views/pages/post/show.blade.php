@@ -111,7 +111,7 @@
 							<li>
 								@if ( !Auth::guest() ) @if ( Auth::user()->type == App\Models\User::TYPE_ADMIN )
 									{{ Form::open(['action' => ['CommentController@destroy',$comment->id], 'method' => 'DELETE']) }}
-									{!! Form::button('<a href="javascript:void(0)">delete</a>', ['type'=>'submit', 'class' => 'glyph_button confirm', 'data-confirm' => 'Are you sure you want to delete this comment?']) !!}</span>
+									{!! Form::button('delete', ['type'=>'submit', 'class' => 'btn btn-link confirm', 'data-confirm' => 'Are you sure you want to delete this comment?']) !!}</span>
 									{{ Form::close() }}
 								@endif @endif
 							</li>
@@ -137,6 +137,20 @@
 			@endif
 		@endforeach
 	@endif
+	<hr/>
+	<div class="comment comment_reply level_1">
+		<div class="panel panel-default">
+			<div class="panel-heading">Make a comment on the post</div>
+			<div class="panel-body">
+				{!! Form::open(['action' => ['CommentController@store']]) !!}
+					{!! Form::hidden('post_id',$post->id) !!}
+					{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
+					{!! Form::submit('111', ['type'=>'submit', 'class' =>'comment-submit-action hidden']) !!}
+				{!! Form::close() !!}
+			</div>
+			<div class="panel-footer"><a href="javascript:void(0)" class="comment-submit-link">save</a></div>
+		</div>
+	</div>
 @endsection
 
 @section('css')
