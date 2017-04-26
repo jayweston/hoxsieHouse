@@ -11,7 +11,7 @@ class Comment extends Model
 	/*
 	 * Static array defining comment depth for each user.
 	*/
-	const DEPTH = [User::TYPE_ADMIN=>3,User::TYPE_WRITER=>2,User::TYPE_VIEWER=>1];
+	const DEPTH = [User::TYPE_ADMIN=>2,User::TYPE_WRITER=>2,User::TYPE_VIEWER=>1];
 	/*
 	 * Return the user associated with this comment
 	*/
