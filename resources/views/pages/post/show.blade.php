@@ -82,59 +82,61 @@
 	<div class="post-content">{!! $post->content !!}</div>
 
 	{{-- Show post comment --}}
-	<div class="post_comments">
-		@if ( empty(App\Models\Comment::comments($post->id)[0]) )
-			<div class="post_comment">
-				There are no comments to display.
-			</div>
-		@else
-			@foreach( App\Models\Comment::comments($post->id) as $comment)
-				<div class="post_comment level_{{ $comment->level }}">
-					<div class="comment_head row">
-						<div class="comment_name pull-left">
-							{{ $comment->user()->name }}
-						</div>
-						<div class="comment_date pull-left">
-							{{ $comment->timeElapsed() }}
-						</div>
-						@if ( !Auth::guest() )
-						@if ( Auth::user()->type == App\Models\User::TYPE_ADMIN )
-								{{ Form::open(['action' => ['CommentController@destroy',$comment->id], 'method' => 'DELETE']) }}
-								{!! Form::button('<span class="glyphicon glyphicon-trash"></span>', ['type'=>'submit', 'class' => 'glyph_button confirm', 'data-confirm' => 'Are you sure you want to delete this comment?']) !!}</span>
-								{{ Form::close() }}
-						@endif
-						@endif
+	<hr/>
+	<h3>Comments</h3>
+	@if ( empty(App\Models\Comment::comments($post->id)[0]) )
+		<div class="post_comment">
+			There are no comments to display.
+		</div>
+	@else
+		@foreach( App\Models\Comment::comments($post->id) as $comment)
+			<div class="comment level_{{ $comment->level }}">
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						<ul class="list-inline">
+							<li>{{ $comment->user()->name }}</li>
+							<li class="pull-right">{{ $comment->timeElapsed() }}</li>
+						</ul>
 					</div>
-					<div class="comment_body row">
+					<div class="panel-body">
 						{{ $comment->comment }}
 					</div>
-					@if( App\Models\Comment::canComment($comment->level) )
-						<div class="comment_reply hidden">
+					<div class="panel-footer">
+						<ul class="list-inline">
+							<li>
+								@if( App\Models\Comment::canComment($comment->level) )
+									<a href="javascript:void(0)" class="ajax-show-reply">reply</a>
+								@endif
+							</li>
+							<li>
+								@if ( !Auth::guest() ) @if ( Auth::user()->type == App\Models\User::TYPE_ADMIN )
+									{{ Form::open(['action' => ['CommentController@destroy',$comment->id], 'method' => 'DELETE']) }}
+									{!! Form::button('<a href="javascript:void(0)">delete</a>', ['type'=>'submit', 'class' => 'glyph_button confirm', 'data-confirm' => 'Are you sure you want to delete this comment?']) !!}</span>
+									{{ Form::close() }}
+								@endif @endif
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+			@if( App\Models\Comment::canComment($comment->level) )
+				<div class="comment comment_reply hidden level_{{ $comment->level+1 }}">
+					<div class="panel panel-default">
+						<div class="panel-heading">Reply to {{ $comment->user()->name }}'s comment</div>
+						<div class="panel-body">
 							{!! Form::open(['action' => ['CommentController@store']]) !!}
 								{!! Form::hidden('post_id',$post->id) !!}
 								{!! Form::hidden('parent_id',$comment->id) !!}
 								{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
-								{!! Form::submit('Save', ['class' =>'btn btn-primary pull-left']) !!}
+								{!! Form::submit('111', ['type'=>'submit', 'class' =>'comment-submit-action hidden']) !!}
 							{!! Form::close() !!}
-							{!! Form::submit('Close', ['class' =>'btn ajax-reply comment-hide']) !!}
 						</div>
-						<div class="comment_reply_button">
-							{!! Form::submit('Replay', ['class' =>'btn ajax-reply comment-show']) !!}
-						</div>
-					@endif
+						<div class="panel-footer"><a href="javascript:void(0)" class="comment-submit-link">save</a></div>
+					</div>
 				</div>
-			@endforeach
-		@endif
-		<div class="level_1">
-			@if( App\Models\Comment::canComment(1) )
-			{!! Form::open(['action' => ['CommentController@store']]) !!}
-				{!! Form::hidden('post_id',$post->id) !!}
-				{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
-				{!! Form::submit('Save', ['class' =>'btn btn-primary']) !!}
-			{!! Form::close() !!}
 			@endif
-		</div>
-	</div>
+		@endforeach
+	@endif
 @endsection
 
 @section('css')
@@ -180,12 +182,11 @@
 	</script>
 	<script>
 		$(function () {
-			$('.ajax-reply').on('click', function () {
-				$(this).parent().parent().find('.comment_reply').toggleClass('hidden');
-				$(this).parent().parent().find('.comment-show').addClass('hidden');
+			$('.ajax-show-reply').on('click', function () {
+				$(this).parent().parent().parent().parent().parent().next('.comment_reply').toggleClass('hidden');
 			});
-			$('.comment-hide').on('click', function () {
-				$(this).parent().parent().find('.comment-show').removeClass('hidden');
+			$('.comment-submit-link').on('click', function () {
+				$(this).parent().parent().find('.comment-submit-action').click();
 			});
 		});
 	</script>
