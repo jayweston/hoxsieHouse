@@ -2,24 +2,36 @@
 
 namespace App\Providers;
 
-use Illuminate\Contracts\Auth\Access\Gate as GateContract;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
-	protected $policies = [
-		'App\Models\Post' => 'App\Policies\PostPolicy',
-		'App\Models\User' => 'App\Policies\UserPolicy',
-		'App\Models\PostImage' => 'App\Policies\PostImagePolicy',
-		'App\Models\PostMeta' => 'App\Policies\PostMetaPolicy',
-		'App\Models\PostTag' => 'App\Policies\PostTagPolicy',
-		'App\Models\Comment' => 'App\Policies\CommentPolicy',
-		'App\Models\Tag' => 'App\Policies\TagPolicy',
-	];
+    /**
+     * The policy mappings for the application.
+     *
+     * @var array
+     */
+    protected $policies = [
+        \App\Models\User::class => \App\Policies\UserPolicy::class,
+        \App\Models\Post::class => \App\Policies\PostPolicy::class,
+        \App\Models\PostImage::class => \App\Policies\PostImagePolicy::class,
+        \App\Models\PostMeta::class => \App\Policies\PostMetaPolicy::class,
+        \App\Models\PostTag::class => \App\Policies\PostTagPolicy::class,
+        \App\Models\Comment::class => \App\Policies\CommentPolicy::class,
+        \App\Models\Tag::class => \App\Policies\TagPolicy::class
 
+    ];
 
-	public function boot(GateContract $gate)
-	{
-		$this->registerPolicies($gate);
-	}
+    /**
+     * Register any authentication / authorization services.
+     *
+     * @return void
+     */
+    public function boot()
+    {
+        $this->registerPolicies();
+
+        //
+    }
 }

@@ -218,7 +218,7 @@
 	<script type="text/javascript" src="/js/bootstrap/transition.js"></script>
 	<script type="text/javascript" src="/js/bootstrap/collapse.js"></script>
 	<script type="text/javascript" src="/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
-	<script type="text/javascript"> $(function () { $('#datetimepicker').datetimepicker({format: 'YYYY-MM-DD hh:mm:ssa'}); }); </script>
+	<script type="text/javascript"> $(function () { $('#datetimepicker').datetimepicker({format: 'YYYY-MM-DD HH:mm:ss'}); }); </script>
 	<script type="text/javascript">
 		$(document).ready(function(){
 			$('li').removeClass('active');

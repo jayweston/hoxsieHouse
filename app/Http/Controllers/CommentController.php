@@ -17,7 +17,7 @@ class CommentController extends Controller
 	{
 		$comment = new Comment();
 		$comment->parent_id = $request->input('parent_id');
-		$this->authorize($comment);
+		$this->authorize('store', $comment);
 		$this->validate($request, [
 			'comment' => 'required|min:3|string',
 		]);
@@ -32,7 +32,7 @@ class CommentController extends Controller
 	{
 		$comment = Comment::findOrFail($id);
 		$post_id = $comment->post_id;
-		$this->authorize($comment);
+		$this->authorize('destroy', $comment);
 		$comment->delete();
 		return redirect('post/'.$post_id);
 	}

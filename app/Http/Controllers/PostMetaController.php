@@ -18,7 +18,7 @@ class PostMetaController extends Controller
 		$post = Post::findOrFail($request['post_id']);
 		$post_meta = new PostMeta();
 		$post_meta->post_id = $post->id;
-		$this->authorize($post_meta);
+		$this->authorize('store', $post_meta);
 		$this->validate($request, [
 			'title' => 'min:1|max:255|string',
 			'description' => 'min:1|max:255|string',
@@ -38,7 +38,7 @@ class PostMetaController extends Controller
 	public function update(Request $request, $id)
 	{
 		$post_meta = PostMeta::findOrFail($id);
-		$this->authorize($post_meta);
+		$this->authorize('update', $post_meta);
 		$this->validate($request, [
 			'title' => 'min:1|max:255|string',
 			'description' => 'min:1|max:255|string',
@@ -59,7 +59,7 @@ class PostMetaController extends Controller
 	{
 		$post_meta = PostMeta::findOrFail($id);
 		$post_id = $post_meta->post_id;
-		$this->authorize($post_meta);
+		$this->authorize('destroy', $post_meta);
 		$post_meta->delete();
 		return redirect('post/'.$post_id.'/edit');
 	}

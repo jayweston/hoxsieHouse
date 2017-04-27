@@ -1232,6 +1232,6 @@ class PostImagesTableSeeder extends Seeder
 		$data[] = ['post_id'=> '7', 'order'=> '-1', 'name'=> 'thumbnail.png'];
 		$data[] = ['post_id'=> '8', 'order'=> '-1', 'name'=> 'thumbnail.png'];
 		DB::table('post_images')->insert($data);
-		DB::update("update `post_images` set `old_post_id` = `post_id` where `old_post_id` = '0'");
+		DB::update("update `post_images` set `old_post_id` = `post_id` where `post_id` < 100 ");
 	}
 }

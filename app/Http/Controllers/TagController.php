@@ -33,7 +33,7 @@ class TagController extends Controller
 	public function update(Request $request, $id)
 	{
 		$tag = Tag::findOrFail($id);
-		$this->authorize($tag);
+		$this->authorize('update', $tag);
 		$this->validate($request, [
 			'name' => 'required|string|min:1|max:255|unique:tags,name'
 		]);
@@ -46,7 +46,7 @@ class TagController extends Controller
 	public function destroy($id)
 	{
 		$tag = Tag::findOrFail($id);
-		$this->authorize($tag);
+		$this->authorize('destroy', $tag);
 		$tag->delete();
 		return redirect('tag/');
 	}

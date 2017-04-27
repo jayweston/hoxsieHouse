@@ -137,20 +137,22 @@
 			@endif
 		@endforeach
 	@endif
-	<hr/>
-	<div class="comment comment_reply level_1">
-		<div class="panel panel-default">
-			<div class="panel-heading">Make a comment on the post</div>
-			<div class="panel-body">
-				{!! Form::open(['action' => ['CommentController@store']]) !!}
-					{!! Form::hidden('post_id',$post->id) !!}
-					{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
-					{!! Form::submit('111', ['type'=>'submit', 'class' =>'comment-submit-action hidden']) !!}
-				{!! Form::close() !!}
+	@if ( !Auth::guest() )
+		<hr/>
+		<div class="comment comment_reply level_1">
+			<div class="panel panel-default">
+				<div class="panel-heading">Make a comment on the post</div>
+				<div class="panel-body">
+					{!! Form::open(['action' => ['CommentController@store']]) !!}
+						{!! Form::hidden('post_id',$post->id) !!}
+						{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
+						{!! Form::submit('111', ['type'=>'submit', 'class' =>'comment-submit-action hidden']) !!}
+					{!! Form::close() !!}
+				</div>
+				<div class="panel-footer"><a href="javascript:void(0)" class="comment-submit-link">save</a></div>
 			</div>
-			<div class="panel-footer"><a href="javascript:void(0)" class="comment-submit-link">save</a></div>
 		</div>
-	</div>
+	@endif
 @endsection
 
 @section('css')

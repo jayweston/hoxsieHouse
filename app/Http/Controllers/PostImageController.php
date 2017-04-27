@@ -21,7 +21,7 @@ class PostImageController extends Controller
 		$post = Post::findOrFail($request['post']);
 		$post_image = new PostImage();
 		$post_image->post_id = $post->id;
-		$this->authorize($post_image);
+		$this->authorize('store', $post_image);
 		$files = $request->file('images');
 		$rules = ['image' => 'required','image' => 'image']; 
 		if( !empty($files[0]) ){
@@ -52,15 +52,15 @@ class PostImageController extends Controller
 	{
 		$retval = [
 			'success' => false,
-			'messages' => [],
+			'messages' => [''],
 		];
 		$post_image = PostImage::findOrFail($id);
-		$this->authorize($post_image);
+		$this->authorize('update', $post_image);
 		//If changing the post that this image belongs to then set the post order back to 0.
 		if( !empty($request['post_id']) ){
 			$request->request->add(['order' => '0']);
 		}
-		//If changing post to thumbnail then add some extr checks
+		//If changing post to thumbnail then add some extra checks
 		if ($request['order'] == '-1'){
 			//Make sure image is a png and 250x250
 			$results = $post_image->thumbnailable();
@@ -84,7 +84,7 @@ class PostImageController extends Controller
 	public function destroy($id)
 	{
 		$post_image = PostImage::findOrFail($id);
-		$this->authorize($post_image);
+		$this->authorize('destroy', $post_image);
 		$post_image->delete();
 		return redirect('post/'.$post_image->post()->id.'/edit');
 	}
