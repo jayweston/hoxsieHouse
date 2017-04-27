@@ -13,14 +13,14 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
-        'App\Models\Post' => 'App\Policies\PostPolicy',
-        'App\Models\User' => 'App\Policies\UserPolicy',
-        'App\Models\PostImage' => 'App\Policies\PostImagePolicy',
-        'App\Models\PostMeta' => 'App\Policies\PostMetaPolicy',
-        'App\Models\PostTag' => 'App\Policies\PostTagPolicy',
-        'App\Models\Comment' => 'App\Policies\CommentPolicy',
-        'App\Models\Tag' => 'App\Policies\TagPolicy',
+        \App\Models\User::class => \App\Policies\UserPolicy::class,
+        \App\Models\Post::class => \App\Policies\PostPolicy::class,
+        \App\Models\PostImage::class => \App\Policies\PostImagePolicy::class,
+        \App\Models\PostMeta::class => \App\Policies\PostMetaPolicy::class,
+        \App\Models\PostTag::class => \App\Policies\PostTagPolicy::class,
+        \App\Models\Comment::class => \App\Policies\CommentPolicy::class,
+        \App\Models\Tag::class => \App\Policies\TagPolicy::class
+
     ];
 
     /**

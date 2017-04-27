@@ -48,7 +48,7 @@ class PostController extends Controller
 	public function create()
 	{
 		$post = new Post();
-		$this->authorize($post);
+		$this->authorize('create', $post);
 		return view('pages.post.create');
 	}
 	/*
@@ -57,7 +57,7 @@ class PostController extends Controller
 	public function store(Request $request)
 	{
 		$post = new Post();
-		$this->authorize($post);
+		$this->authorize('store', $post);
 		$this->validate($request, [
 			'title' => 'required|string|min:4|max:255|unique:posts,title',
 			'summary' => 'required|string|min:4|max:255',
@@ -93,7 +93,7 @@ class PostController extends Controller
 	public function edit($id)
 	{
 		$post = Post::findOrFail($id);
-		$this->authorize($post);
+		$this->authorize('edit', $post);
 		$view_data['post'] = $post;
 		return view('pages.post.edit', $view_data);
 	}
@@ -103,7 +103,7 @@ class PostController extends Controller
 	public function update(Request $request, $id)
 	{
 		$post = Post::findOrFail($id);
-		$this->authorize($post);
+		$this->authorize('update', $post);
 		$this->validate($request, [
 			'title' => 'required|string|min:4|max:255',
 			'summary' => 'required|string|min:4|max:255',
@@ -126,7 +126,7 @@ class PostController extends Controller
 	public function destroy($id)
 	{
 		$post = Post::findOrFail($id);
-		$this->authorize($post);
+		$this->authorize('destroy', $post);
 		$post->delete();
 		return redirect('post/');
 	}

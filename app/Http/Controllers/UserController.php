@@ -14,7 +14,7 @@ class UserController extends Controller
 	public function index()
 	{
 		$user = new User();
-		$this->authorize($user);
+		$this->authorize('index', $user);
 		$users = User::paginate(10);
 		$view_data['users'] = $users;
 		return view('pages.user.index', $view_data);
@@ -26,7 +26,7 @@ class UserController extends Controller
 	public function create()
 	{
 		$user = new User();
-		$this->authorize($user);
+		$this->authorize('create', $user);
 		return view('pages.user.create');
 	}
 	/*
@@ -35,7 +35,7 @@ class UserController extends Controller
 	public function store(Request $request)
 	{
 		$user = new User();
-		$this->authorize($user);
+		$this->authorize('store', $user);
 		if(\Auth::user()->type != User::TYPE_ADMIN){
 			$this->validate($request, [
 				'type' => 'in:'.$user->type
@@ -62,7 +62,7 @@ class UserController extends Controller
 	public function show($id)
 	{
 		$user = User::findOrFail($id);
-		$this->authorize($user);
+		$this->authorize('show', $user);
 		$view_data['user'] = $user;
 		return view('pages.user.show', $view_data);
 	}
@@ -73,7 +73,7 @@ class UserController extends Controller
 	public function edit($id)
 	{
 		$user = User::findOrFail($id);
-		$this->authorize($user);
+		$this->authorize('edit', $user);
 		$view_data['user'] = $user;
 		return view('pages.user.edit', $view_data);
 	}
@@ -83,17 +83,18 @@ class UserController extends Controller
 	public function update(Request $request, $id)
 	{
 		$user = User::findOrFail($id);
-		$this->authorize($user);
+		$this->authorize('update', $user);
 		if(\Auth::user()->type != User::TYPE_ADMIN){
 			$this->validate($request, [
 				'type' => 'in:'.$user->type
 			]);
 		}
+		if ( $request->password == null ){ $request->offsetUnset('password'); }
 		$this->validate($request, [
 			'name' => 'required|string|min:4|max:255',
 			'email' => 'required|email|max:255',
 			'type' => 'exists:users,type',
-			'password' => 'min:6|confirmed'
+			'password' => 'nullable|min:6|confirmed'
 		]);
 		if ($request->email != $user->email){
 			$this->validate($request, [
@@ -114,7 +115,7 @@ class UserController extends Controller
 	public function destroy($id)
 	{
 		$user = User::findOrFail($id);
-		$this->authorize($user);
+		$this->authorize('destroy', $user);
 		$user->delete();
 		return redirect('user/');
 	}

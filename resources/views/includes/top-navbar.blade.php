@@ -28,8 +28,8 @@
 		--}}
 		<ul class="nav navbar-nav navbar-right">
 			@if (Auth::guest())
-				<li class="" id="nav_login"><a href="{{ url('/login') }}">Login</a></li>
-				<li class="" id="nav_register"><a href="{{ url('/register') }}">Register</a></li>
+				<li class="" id="nav_login"><a href="{{ route('login').'?redirect='.Request::path() }}">Login</a></li>
+				<li class="" id="nav_register"><a href="{{ route('register') }}">Register</a></li>
 			@else
 				<li class="dropdown" id="nav_account_dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
@@ -38,7 +38,7 @@
 						<li class="" id="nav_account_edit"><a href="{{ url('/user/'.Auth::user()->id.'/edit') }}">Edit</a></li>
 						<li class="" id="nav_account_list"><a href="{{ url('/user/') }}">Other Users</a></li>
 						<li role="separator" class="divider"></li>
-						<li class="" id="nav_logout"><a href="{{ url('/logout') }}">Logout</a></li>
+						<li class="" id="nav_logout"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
 					</ul>
 				</li>
 			@endif
@@ -64,3 +64,4 @@
 			@endif @endif
 	</div>
 </nav>
+<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>

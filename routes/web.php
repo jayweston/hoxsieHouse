@@ -1,5 +1,5 @@
 <?php
-
+use Illuminate\Http\Request;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +20,4 @@ Route::resource('/postimage', 'PostImageController', ['only' => ['store', 'updat
 Route::resource('/postmeta', 'PostMetaController', ['only' => ['store', 'update','destroy']]);
 Route::resource('/posttag', 'PostTagController', ['only' => ['update']]);
 Route::resource('/comment', 'CommentController', ['only' => ['store','destroy']]);
-Route::get('/test', function () {
-	dd("test");
-});
+Route::get('/test', function () { dd("test"); });
