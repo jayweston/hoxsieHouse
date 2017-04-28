@@ -76,19 +76,35 @@ class LoginController extends Controller
     public function findOrCreateUser($user, $provider)
     {
         $authUser = User::where('email', $user->email)->first();
-        if ($authUser) {
+        if ($provider == 'instagram'){
+            $authUser = User::where('instagram_id', $user->id)->first();
+            if ($authUser){
+                return $authUser;
+            }else{
+                return User::create([
+                    'name' => $user->name,
+                    $provider.'_id' => $user->id
+                ]);                
+            }
+        }elseif ($authUser) {
         	if ( ($provider == 'facebook') && ($authUser->facebook_id == null) )
         		$authUser->update(["facebook_id" => $user->id]);
         	elseif ( ($provider == 'twitter') && ($authUser->twitter_id == null) )
         		$authUser->update(["twitter_id" => $user->id]);
+            elseif ( ($provider == 'google') && ($authUser->google_id == null) )
+                $authUser->update(["google_id" => $user->id]);
+            elseif ( ($provider == 'pinterest') && ($authUser->pinterest_id == null) )
+                $authUser->update(["pinterest_id" => $user->id]);
+
         	if ($authUser->name == null)
         		$authUser->update(["name" => $user->name]);
             return $authUser;
+        }else{    
+            return User::create([
+                'name' => $user->name,
+                'email' => $user->email,
+                $provider.'_id' => $user->id
+            ]);
         }
-        return User::create([
-            'name' => $user->name,
-            'email' => $user->email,
-            $provider.'_id' => $user->id
-        ]);
     }    
 }

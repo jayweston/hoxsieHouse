@@ -9,6 +9,35 @@ use App\Models\User;
 class UserController extends Controller
 {
 	/*
+	 * Allow admins to view create user page.
+	*/
+	public function create()
+	{
+		$user = new User();
+		$this->authorize('create', $user);
+		return view('pages.user.create');
+	}
+	/*
+	 * Allows admins to create users.
+	*/
+	public function store(Request $request)
+	{
+		$user = new User();
+		$this->authorize('store', $user);
+		if(\Auth::user()->type != User::TYPE_ADMIN){
+			$this->validate($request, [
+				'type' => 'in:'.$user->type
+			]);
+		}
+		$this->validate($request, [
+			'name' => 'required|string|min:4|max:255|unique:users,name',
+			'email' => 'required|email|max:255|unique:users,email',
+			'type' => 'exists:users,type',
+		]);
+		$user = User::create($request->all());
+		return redirect('user/'.$user->id);
+	}
+	/*
 	 * List all current users.  Avialable to all logged in users.
 	*/
 	public function index()

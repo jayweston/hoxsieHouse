@@ -44,4 +44,19 @@ return [
         'client_secret' => env('FACEBOOK_SECRET'),
         'redirect'      => env('FACEBOOK_URL'),
     ],
+	'google' => [
+        'client_id'     => env('GOOGLE_ID'),
+        'client_secret' => env('GOOGLE_SECRET'),
+        'redirect'      => env('GOOGLE_URL'),
+    ],
+	'instagram' => [
+        'client_id'     => env('INSTAGRAM_ID'),
+        'client_secret' => env('INSTAGRAM_SECRET'),
+        'redirect'      => env('INSTAGRAM_URL'),
+    ],
+	'pinterest' => [
+        'client_id'     => env('PINTEREST_ID'),
+        'client_secret' => env('PINTEREST_SECRET'),
+        'redirect'      => env('PINTEREST_URL'),
+    ],
 ];
