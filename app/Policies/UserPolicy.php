@@ -13,6 +13,13 @@ class UserPolicy
 	{
 	}
 	/*
+	 * Allow admins and writers to view the create page. 
+	*/
+	public function create(User $user, Post $post)
+	{
+		return true;
+	}
+	/*
 	 * Allow all logged in users to see the list of users.
 	*/
 	public function index(User $current_user, User $user)
@@ -21,28 +28,6 @@ class UserPolicy
 			User::TYPE_ADMIN,
 			User::TYPE_WRITER,
 			User::TYPE_VIEWER,
-		];
-		return in_array($current_user->type, $allowed);
-	}
-	/*
-	 * Allow admins see the ceeate user page (the registration pages is covered
-	 * via a different policy).
-	*/
-	public function create(User $current_user, User $user)
-	{
-		$allowed = [
-			User::TYPE_ADMIN
-		];
-		return in_array($current_user->type, $allowed);
-	}
-	/*
-	 * Allow admins to ceeate a new account (the registration pages is covered
-	 * via a different policy).
-	*/
-	public function store(User $current_user, User $user)
-	{
-		$allowed = [
-			User::TYPE_ADMIN
 		];
 		return in_array($current_user->type, $allowed);
 	}

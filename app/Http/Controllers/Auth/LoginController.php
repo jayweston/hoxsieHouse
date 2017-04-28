@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
-
+use Laravel\Socialite\Facades\Socialite;
+use App\Models\User;
 
 class LoginController extends Controller
 {
@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/1';
 
     /**
      * Create a new controller instance.
@@ -43,11 +43,9 @@ class LoginController extends Controller
 
     protected function redirectTo()
     {
-        $fullURL = \Request::server('HTTP_REFERER');
-        $reference = "login?redirect=";
-        $pos = strpos($fullURL, $reference);
-        $redirectTo = substr($fullURL, $pos+strlen($reference));
-       return '/'.$redirectTo;
+    	$redirectPath=session()->get('httpReferer');
+    	session()->forget('httpReferer');
+		return '/'.$redirectPath;
     }
 
     public function logout(Request $request)
@@ -57,4 +55,40 @@ class LoginController extends Controller
         $request->session()->regenerate();
         return \Redirect::back();
     }
+
+    public function redirectToProvider($provider)
+    {
+		$fullURL = \Request::server('HTTP_REFERER');
+		$reference = "?redirect=";
+		$pos = strpos($fullURL, $reference);
+		session(['httpReferer' => substr($fullURL, $pos+strlen($reference))]);
+		return Socialite::driver($provider)->redirect();
+    }
+
+    public function handleProviderCallback($provider)
+    {
+        $user = Socialite::driver($provider)->user();
+        $authUser = $this->findOrCreateUser($user, $provider);
+        Auth::login($authUser, true);
+        return redirect($this->redirectTo().'/');
+    }
+
+    public function findOrCreateUser($user, $provider)
+    {
+        $authUser = User::where('email', $user->email)->first();
+        if ($authUser) {
+        	if ( ($provider == 'facebook') && ($authUser->facebook_id == null) )
+        		$authUser->update(["facebook_id" => $user->id]);
+        	elseif ( ($provider == 'twitter') && ($authUser->twitter_id == null) )
+        		$authUser->update(["twitter_id" => $user->id]);
+        	if ($authUser->name == null)
+        		$authUser->update(["name" => $user->name]);
+            return $authUser;
+        }
+        return User::create([
+            'name' => $user->name,
+            'email' => $user->email,
+            $provider.'_id' => $user->id
+        ]);
+    }    
 }

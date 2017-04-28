@@ -20,42 +20,6 @@ class UserController extends Controller
 		return view('pages.user.index', $view_data);
 	}
 	/*
-	 * Create new uswer account page. Viewable to only admins.
-	 * Different than the registration page.
-	*/
-	public function create()
-	{
-		$user = new User();
-		$this->authorize('create', $user);
-		return view('pages.user.create');
-	}
-	/*
-	 * Save newly created user by admin.
-	*/
-	public function store(Request $request)
-	{
-		$user = new User();
-		$this->authorize('store', $user);
-		if(\Auth::user()->type != User::TYPE_ADMIN){
-			$this->validate($request, [
-				'type' => 'in:'.$user->type
-			]);
-		}
-		$this->validate($request, [
-			'name' => 'required|string|min:4|max:255|unique:users,name',
-			'email' => 'required|email|max:255|unique:users,email',
-			'type' => 'exists:users,type',
-			'password' => 'min:6|confirmed'
-		]);
-		if ($request->email != $user->email){
-			$this->validate($request, [
-				'email' => 'required|email|max:255|unique:users,email',
-			]);
-		}
-		$user = User::create($request->all());
-		return redirect('user/'.$user->id);
-	}
-	/*
 	 * Show a single user account.  Displays their basic information and
 	 * the posts and comments then created.
 	*/
@@ -89,18 +53,10 @@ class UserController extends Controller
 				'type' => 'in:'.$user->type
 			]);
 		}
-		if ( $request->password == null ){ $request->offsetUnset('password'); }
 		$this->validate($request, [
 			'name' => 'required|string|min:4|max:255',
-			'email' => 'required|email|max:255',
 			'type' => 'exists:users,type',
-			'password' => 'nullable|min:6|confirmed'
 		]);
-		if ($request->email != $user->email){
-			$this->validate($request, [
-				'email' => 'required|email|max:255|unique:users,email',
-			]);
-		}
 		if ($request->name != $user->name){
 			$this->validate($request, [
 				'name' => 'required|string|min:4|max:255|unique:users,name',

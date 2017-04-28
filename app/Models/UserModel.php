@@ -14,7 +14,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 {
 	use Authenticatable, CanResetPassword;
 	use SoftDeletes;
-	protected $fillable = ['name', 'email', 'type', 'password', 'provider', 'provider_id'];
+	protected $fillable = ['name', 'email', 'type', 'twitter_id', 'facebook_id'];
 	/*
 	 * Static variables for user types. 
 	*/
