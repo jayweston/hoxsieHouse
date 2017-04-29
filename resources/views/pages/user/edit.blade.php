@@ -20,24 +20,12 @@
 			{!! Form::label('name','Name') !!}
 			{!! Form::text('name', null, ['class' =>'form-control']) !!}
 		</div>
-		<div class="form-group">
-			{!! Form::label('email','Email') !!}
-			{!! Form::text('email', null, ['class' =>'form-control']) !!}
-		</div>
 		@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\User::TYPE_ADMIN))
 		<div class="form-group">
 			{!! Form::label('type','User Type') !!}
 			{!! Form::select('type', $user->getUserTypesDropdown(), $user->type,['class' =>'form-control']) !!}
 		</div>
 		@endif @endif
-		<div class="form-group">
-			{!! Form::label('password','Password') !!}
-			{!! Form::password('password', ['class' =>'form-control']) !!}
-		</div>
-		<div class="form-group">
-			{!! Form::label('password_confirmation','Conformation') !!}
-			{!! Form::password('password_confirmation', ['class' =>'form-control']) !!}
-		</div>
 		<div class="form-group">
 			{!! Form::submit('Save', ['class' =>'btn btn-primary form-control']) !!}
 		</div>

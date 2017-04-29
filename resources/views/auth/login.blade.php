@@ -3,64 +3,22 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
-                <div class="panel-body">
-                    <form class="form-horizontal" role="form" method="POST" action="{{ route('login') }}">
-                        {{ csrf_field() }}
-
-                        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
-                            <label for="email" class="col-md-4 control-label">E-Mail Address</label>
-
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required autofocus>
-
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
-                            <label for="password" class="col-md-4 control-label">Password</label>
-
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control" name="password" required>
-
-                                @if ($errors->has('password'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('password') }}</strong>
-                                    </span>
-                                @endif
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-6 col-md-offset-4">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}> Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="form-group">
-                            <div class="col-md-8 col-md-offset-4">
-                                <button type="submit" class="btn btn-primary">
-                                    Login
-                                </button>
-
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    Forgot Your Password?
-                                </a>
-                            </div>
-                        </div>
-                    </form>
+                <div class="panel-body at-follow-tbx-element">
+				    <div class="form-group col-centered">
+                        <a href="{{ url('/auth/google') }}" class="login_icon img at300b" title="Login via Google"><img src="/images/icon/mail/gmail.png" /></a>
+                        <a href="{{ url('/auth/twitter') }}" class="login_icon img at300b" title="Login via Twitter"><img src="/images/icon/social/twitter.png" /></a>
+                        <a href="{{ url('/auth/facebook') }}" class="login_icon img at300b" title="Login via Facebook"><img src="/images/icon/social/facebook.png" /></a>
+                        <a href="{{ url('/auth/instagram') }}" class="login_icon img at300b" title="Login via Instagram"><img src="/images/icon/social/instagram.png" /></a>
+                        <a href="{{ url('/auth/pinterest') }}" class="login_icon img at300b" title="Login via Pinterest"><img src="/images/icon/social/pinterest.png" /></a>
+                        <a href="{{ url('/auth/live') }}" class="login_icon img at300b" title="Login via Microsoft"><img src="/images/icon/mail/hotmail.png" /></a>
+                        <a href="{{ url('/auth/yahoo') }}" class="login_icon img at300b" title="Login via Yahoo"><img src="/images/icon/mail/yahoo.png" /></a>
+                        <div class="atclear"></div>
+				    </div>
                 </div>
+                 <div class="panel-footer login-footer">Note: All login methods are linked together by the email address associated with the service provider except for Instagram (which does not provide an email address).  If you would like your instagram login linked to another account, please email stacie@hoxsiehouse.com.</div>
             </div>
         </div>
     </div>

@@ -52,8 +52,8 @@
 
 @section('scripts')
 	@parent
-	<script src="/js/tinymce/tinymce.min.js"></script>
-	<script src="/js/moment.min.js"></script>
+	<script type="text/javascript" src="/js/tinymce/tinymce.min.js"></script>
+	<script type="text/javascript" src="/js/moment.min.js"></script>
 	<script type="text/javascript" src="/js/bootstrap/transition.js"></script>
 	<script type="text/javascript" src="/js/bootstrap/collapse.js"></script>
 	<script type="text/javascript" src="/js/bootstrap/bootstrap-datetimepicker.min.js"></script>

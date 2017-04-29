@@ -10,15 +10,19 @@ class CreateUsersTable extends Migration
 		Schema::create('users', function (Blueprint $table) {
 			$table->increments('id');
 			$table->string('name');
-			$table->string('email')->nullable();
+			$table->string('email')->nullable()->unique();
 			$table->enum('type', [
 				'admin',
 				'writer',
 				'viewer'
 			])->default('viewer');
-			$table->string('password')->nullable();
-			$table->string('provider')->default('HoxsieHouse');
-			$table->string('provider_id')->nullable()->unique();
+			$table->string('google_id')->nullable()->unique();
+			$table->string('twitter_id')->nullable()->unique();
+			$table->string('facebook_id')->nullable()->unique();
+			$table->string('instagram_id')->nullable()->unique();
+			$table->string('pinterest_id')->nullable()->unique();
+			$table->string('live_id')->nullable()->unique();
+			$table->string('yahoo_id')->nullable()->unique();
 			$table->rememberToken();
 			$table->timestamps();
 			$table->softDeletes();

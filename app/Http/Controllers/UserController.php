@@ -9,19 +9,7 @@ use App\Models\User;
 class UserController extends Controller
 {
 	/*
-	 * List all current users.  Avialable to all logged in users.
-	*/
-	public function index()
-	{
-		$user = new User();
-		$this->authorize('index', $user);
-		$users = User::paginate(10);
-		$view_data['users'] = $users;
-		return view('pages.user.index', $view_data);
-	}
-	/*
-	 * Create new uswer account page. Viewable to only admins.
-	 * Different than the registration page.
+	 * Allow admins to view create user page.
 	*/
 	public function create()
 	{
@@ -30,7 +18,7 @@ class UserController extends Controller
 		return view('pages.user.create');
 	}
 	/*
-	 * Save newly created user by admin.
+	 * Allows admins to create users.
 	*/
 	public function store(Request $request)
 	{
@@ -45,15 +33,20 @@ class UserController extends Controller
 			'name' => 'required|string|min:4|max:255|unique:users,name',
 			'email' => 'required|email|max:255|unique:users,email',
 			'type' => 'exists:users,type',
-			'password' => 'min:6|confirmed'
 		]);
-		if ($request->email != $user->email){
-			$this->validate($request, [
-				'email' => 'required|email|max:255|unique:users,email',
-			]);
-		}
 		$user = User::create($request->all());
 		return redirect('user/'.$user->id);
+	}
+	/*
+	 * List all current users.  Avialable to all logged in users.
+	*/
+	public function index()
+	{
+		$user = new User();
+		$this->authorize('index', $user);
+		$users = User::paginate(10);
+		$view_data['users'] = $users;
+		return view('pages.user.index', $view_data);
 	}
 	/*
 	 * Show a single user account.  Displays their basic information and
@@ -89,18 +82,10 @@ class UserController extends Controller
 				'type' => 'in:'.$user->type
 			]);
 		}
-		if ( $request->password == null ){ $request->offsetUnset('password'); }
 		$this->validate($request, [
 			'name' => 'required|string|min:4|max:255',
-			'email' => 'required|email|max:255',
 			'type' => 'exists:users,type',
-			'password' => 'nullable|min:6|confirmed'
 		]);
-		if ($request->email != $user->email){
-			$this->validate($request, [
-				'email' => 'required|email|max:255|unique:users,email',
-			]);
-		}
 		if ($request->name != $user->name){
 			$this->validate($request, [
 				'name' => 'required|string|min:4|max:255|unique:users,name',
