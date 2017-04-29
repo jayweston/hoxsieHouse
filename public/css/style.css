@@ -233,10 +233,25 @@ display: table;
 	text-align: center;
 }
 
-.mail_icon img, .social_icon img{
-	height: 24px;
-	width: 24px;
+.mail_icon img, .social_icon img, .login_icon img{
+	height: 32px;
+	width: 32px;
 
+}
+.login_icon img{
+	margin-right: 3px;
+	margin-left: 3px;
+	margin-top: 8px;
+	margin-bottom: 8px;
+}
+
+.login-footer{
+	font-size:x-small;
+}
+
+.col-centered{
+	text-align: center;
+	font-size: 0;
 }
 
 .contact_us_links, .social_links, .nav_sites, .sister_sites{

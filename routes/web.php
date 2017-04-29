@@ -12,7 +12,12 @@ use Illuminate\Http\Request;
 */
 
 Route::auth();
-Route::get('/', 'DashboardController@index');
+Route::get('/', 'SinglePageController@dashboard');
+Route::get('/latest', 'SinglePageController@latest');
+Route::get('/unread', 'SinglePageController@unread');
+Route::get('/rss', 'SinglePageController@rss');
+Route::get('/tos', 'SinglePageController@tos');
+Route::get('/privacy', 'SinglePageController@privacy');
 Route::resource('/post', 'PostController');
 Route::resource('/user', 'UserController');
 Route::resource('/tag', 'TagController', ['only' => ['index','show','update','destroy']]);

@@ -3,20 +3,22 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-10">
             <div class="panel panel-default">
                 <div class="panel-heading">Login</div>
-                <div class="panel-body">
-				    <div class="form-group">
-				        <div class="col-md-6 col-md-offset-4">
-                            <a href="{{ url('/auth/google') }}" class="btn btn-google"><i class="fa fa-google"></i>Google</a>
-				            <a href="{{ url('/auth/twitter') }}" class="btn btn-twitter"><i class="fa fa-twitter"></i>Twitter</a>
-				            <a href="{{ url('/auth/facebook') }}" class="btn btn-facebook"><i class="fa fa-facebook"></i>Facebook</a>
-				            <a href="{{ url('/auth/instagram') }}" class="btn btn-instagram"><i class="fa fa-instagram"></i>Instagram</a>
-                            <a href="{{ url('/auth/pinterest') }}" class="btn btn-pinterest"><i class="fa fa-pinterest"></i>Pinterest</a>
-                        </div>
+                <div class="panel-body at-follow-tbx-element">
+				    <div class="form-group col-centered">
+                        <a href="{{ url('/auth/google') }}" class="login_icon img at300b" title="Login via Google"><img src="/images/icon/mail/gmail.png" /></a>
+                        <a href="{{ url('/auth/twitter') }}" class="login_icon img at300b" title="Login via Twitter"><img src="/images/icon/social/twitter.png" /></a>
+                        <a href="{{ url('/auth/facebook') }}" class="login_icon img at300b" title="Login via Facebook"><img src="/images/icon/social/facebook.png" /></a>
+                        <a href="{{ url('/auth/instagram') }}" class="login_icon img at300b" title="Login via Instagram"><img src="/images/icon/social/instagram.png" /></a>
+                        <a href="{{ url('/auth/pinterest') }}" class="login_icon img at300b" title="Login via Pinterest"><img src="/images/icon/social/pinterest.png" /></a>
+                        <a href="{{ url('/auth/live') }}" class="login_icon img at300b" title="Login via Microsoft"><img src="/images/icon/mail/hotmail.png" /></a>
+                        <a href="{{ url('/auth/yahoo') }}" class="login_icon img at300b" title="Login via Yahoo"><img src="/images/icon/mail/yahoo.png" /></a>
+                        <div class="atclear"></div>
 				    </div>
                 </div>
+                 <div class="panel-footer login-footer">Note: All login methods are linked together by the email address associated with the service provider except for Instagram (which does not provide an email address).  If you would like your instagram login linked to another account, please email stacie@hoxsiehouse.com.</div>
             </div>
         </div>
     </div>

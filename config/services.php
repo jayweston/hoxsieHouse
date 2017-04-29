@@ -14,49 +14,59 @@ return [
     |
     */
 
-    'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
-    ],
+	'mailgun' => [
+	    'domain' => env('MAILGUN_DOMAIN'),
+	    'secret' => env('MAILGUN_SECRET'),
+	],
 
-    'ses' => [
-        'key' => env('SES_KEY'),
-        'secret' => env('SES_SECRET'),
-        'region' => 'us-east-1',
-    ],
+	'ses' => [
+	    'key' => env('SES_KEY'),
+	    'secret' => env('SES_SECRET'),
+	    'region' => 'us-east-1',
+	],
 
-    'sparkpost' => [
-        'secret' => env('SPARKPOST_SECRET'),
-    ],
+	'sparkpost' => [
+	    'secret' => env('SPARKPOST_SECRET'),
+	],
 
-    'stripe' => [
-        'model' => App\User::class,
-        'key' => env('STRIPE_KEY'),
-        'secret' => env('STRIPE_SECRET'),
-    ],
+	'stripe' => [
+	    'model' => App\User::class,
+	    'key' => env('STRIPE_KEY'),
+	    'secret' => env('STRIPE_SECRET'),
+	],
 	'twitter' => [
-        'client_id'     => env('TWITTER_ID'),
-        'client_secret' => env('TWITTER_SECRET'),
-        'redirect'      => env('TWITTER_URL'),
-    ],
+	    'client_id'     => env('TWITTER_ID'),
+	    'client_secret' => env('TWITTER_SECRET'),
+	    'redirect'      => env('TWITTER_URL'),
+	],
 	'facebook' => [
-        'client_id'     => env('FACEBOOK_ID'),
-        'client_secret' => env('FACEBOOK_SECRET'),
-        'redirect'      => env('FACEBOOK_URL'),
-    ],
+	    'client_id'     => env('FACEBOOK_ID'),
+	    'client_secret' => env('FACEBOOK_SECRET'),
+	    'redirect'      => env('FACEBOOK_URL'),
+	],
 	'google' => [
-        'client_id'     => env('GOOGLE_ID'),
-        'client_secret' => env('GOOGLE_SECRET'),
-        'redirect'      => env('GOOGLE_URL'),
-    ],
+	    'client_id'     => env('GOOGLE_ID'),
+	    'client_secret' => env('GOOGLE_SECRET'),
+	    'redirect'      => env('GOOGLE_URL'),
+	],
 	'instagram' => [
-        'client_id'     => env('INSTAGRAM_ID'),
-        'client_secret' => env('INSTAGRAM_SECRET'),
-        'redirect'      => env('INSTAGRAM_URL'),
-    ],
+	    'client_id'     => env('INSTAGRAM_ID'),
+	    'client_secret' => env('INSTAGRAM_SECRET'),
+	    'redirect'      => env('INSTAGRAM_URL'),
+	],
 	'pinterest' => [
-        'client_id'     => env('PINTEREST_ID'),
-        'client_secret' => env('PINTEREST_SECRET'),
-        'redirect'      => env('PINTEREST_URL'),
-    ],
+	    'client_id'     => env('PINTEREST_ID'),
+	    'client_secret' => env('PINTEREST_SECRET'),
+	    'redirect'      => env('PINTEREST_URL'),
+	],
+	'yahoo' => [
+	    'client_id'     => env('YAHOO_ID'),
+	    'client_secret' => env('YAHOO_SECRET'),
+	    'redirect'      => env('YAHOO_URL'),
+	],
+	'live' => [
+	    'client_id'     => env('LIVE_ID'),
+	    'client_secret' => env('LIVE_SECRET'),
+	    'redirect'      => env('LIVE_URL'),
+	],
 ];

@@ -56,7 +56,12 @@
 			<a href="/post/{{ $post->id }}/edit" class="btn btn-primary pull-left">Edit</a>
 			{!! Form::open(['action' => ['PostController@destroy', $post->id], 'method' => 'delete']) !!}	{!! Form::submit('Delete', ['class' =>'btn btn-danger pull-right confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) !!}	{!! Form::close() !!}<br/>
 		</div>
+		<hr/>
 	@endif @endif
+
+	{{-- Share Posts --}}
+	<div class="addthis_inline_share_toolbox"></div>
+	<hr/>
 
 	{{-- Post Title --}}
 	<div class="post-title">{{ $post->title }}</div>
@@ -80,6 +85,10 @@
 
 	{{-- Post content --}}
 	<div class="post-content">{!! $post->content !!}</div>
+
+	{{-- Related Posts --}}
+	<hr/>
+	<div class="addthis_relatedposts_inline"></div> promote posts
 
 	{{-- Show post comment --}}
 	<hr/>
@@ -211,4 +220,5 @@
 			return !!confirm($(this).data('confirm'));
 		});
 	</script>
+	<style type="text/css">.atm-f{display: none;}</style>
 @stop

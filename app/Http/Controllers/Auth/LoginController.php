@@ -75,7 +75,9 @@ class LoginController extends Controller
 
     public function findOrCreateUser($user, $provider)
     {
+
         $authUser = User::where('email', $user->email)->first();
+
         if ($provider == 'instagram'){
             $authUser = User::where('instagram_id', $user->id)->first();
             if ($authUser){
@@ -93,8 +95,12 @@ class LoginController extends Controller
         		$authUser->update(["twitter_id" => $user->id]);
             elseif ( ($provider == 'google') && ($authUser->google_id == null) )
                 $authUser->update(["google_id" => $user->id]);
-            elseif ( ($provider == 'pinterest') && ($authUser->pinterest_id == null) )
-                $authUser->update(["pinterest_id" => $user->id]);
+			elseif ( ($provider == 'pinterest') && ($authUser->pinterest_id == null) )
+				$authUser->update(["pinterest_id" => $user->id]);
+			elseif ( ($provider == 'yahoo') && ($authUser->yahoo_id == null) )
+				$authUser->update(["yahoo_id" => $user->id]);
+			elseif ( ($provider == 'live') && ($authUser->live_id == null) )
+				$authUser->update(["live_id" => $user->id]);
 
         	if ($authUser->name == null)
         		$authUser->update(["name" => $user->name]);
