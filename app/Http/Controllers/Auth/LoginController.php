@@ -78,7 +78,22 @@ class LoginController extends Controller
 
         $authUser = User::where('email', $user->email)->first();
 
-        if ($provider == 'instagram'){
+        if ($authUser) {
+        	if ( ($provider == 'facebook') && ($authUser->facebook_id == null) )
+        		$authUser->update(["facebook_id" => $user->id]);
+        	elseif ( ($provider == 'twitter') && ($authUser->twitter_id == null) )
+        		$authUser->update(["twitter_id" => $user->id]);
+            elseif ( ($provider == 'google') && ($authUser->google_id == null) )
+                $authUser->update(["google_id" => $user->id]);
+			elseif ( ($provider == 'yahoo') && ($authUser->yahoo_id == null) )
+				$authUser->update(["yahoo_id" => $user->id]);
+			elseif ( ($provider == 'live') && ($authUser->live_id == null) )
+				$authUser->update(["live_id" => $user->id]);
+
+        	if ($authUser->name == null)
+        		$authUser->update(["name" => $user->name]);
+            return $authUser;
+        }elseif ($provider == 'instagram'){
             $authUser = User::where('instagram_id', $user->id)->first();
             if ($authUser){
                 return $authUser;
@@ -88,23 +103,16 @@ class LoginController extends Controller
                     $provider.'_id' => $user->id
                 ]);                
             }
-        }elseif ($authUser) {
-        	if ( ($provider == 'facebook') && ($authUser->facebook_id == null) )
-        		$authUser->update(["facebook_id" => $user->id]);
-        	elseif ( ($provider == 'twitter') && ($authUser->twitter_id == null) )
-        		$authUser->update(["twitter_id" => $user->id]);
-            elseif ( ($provider == 'google') && ($authUser->google_id == null) )
-                $authUser->update(["google_id" => $user->id]);
-			elseif ( ($provider == 'pinterest') && ($authUser->pinterest_id == null) )
-				$authUser->update(["pinterest_id" => $user->id]);
-			elseif ( ($provider == 'yahoo') && ($authUser->yahoo_id == null) )
-				$authUser->update(["yahoo_id" => $user->id]);
-			elseif ( ($provider == 'live') && ($authUser->live_id == null) )
-				$authUser->update(["live_id" => $user->id]);
-
-        	if ($authUser->name == null)
-        		$authUser->update(["name" => $user->name]);
-            return $authUser;
+        }elseif ($provider == 'pinterest'){
+            $authUser = User::where('pinterest_id', $user->id)->first();
+            if ($authUser){
+                return $authUser;
+            }else{
+                return User::create([
+                    'name' => $user->name,
+                    $provider.'_id' => $user->id
+                ]);                
+            }
         }else{    
             return User::create([
                 'name' => $user->name,

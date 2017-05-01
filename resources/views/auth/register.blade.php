@@ -18,7 +18,9 @@
                         <div class="atclear"></div>
                     </div>
                 </div>
-                 <div class="panel-footer login-footer">Note: All login methods are linked together by the email address associated with the service provider except for Instagram (which does not provide an email address).  If you would like your instagram login linked to another account, please email stacie@hoxsiehouse.com.</div>
+                 <div class="panel-footer login-footer">
+                 	Note: All login methods are linked together by the email address associated with the service provider except for Instagram and Pinterest (which do not provide email addresses).  If you would like your Instagram or Pinterest login linked to another account, please email stacie@hoxsiehouse.com.
+                 </div>
             </div>
         </div>
     </div>
