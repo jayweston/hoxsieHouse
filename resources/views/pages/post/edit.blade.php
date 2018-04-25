@@ -117,7 +117,7 @@
 		@if ( !empty($post->meta()->id) )
 			<div class="form-group">
 				{{ Form::open(['action' => ['PostMetaController@destroy',$post->meta()->id], 'method' => 'DELETE']) }}
-				{{ Form::submit('Delete', ['class' => 'btn btn-danger form-control confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) }}
+				{{ Form::submit('Delete', ['class' => 'btn btn-primary form-control confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) }}
 				{{ Form::close() }}
 			</div>
 		@endif
@@ -146,27 +146,27 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="hidden-xs hidden-sm col-md-3 col-lg-3">Post</th>
-						<th class="hidden-xs col-sm-1 col-md-1 col-lg-1">order</th>
-						<th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Image</th>
-						<th class="col-xs-9 col-sm-8 col-md-5 col-lg-5">Label</th>
+						<th class="hidden-xs col-sm-1 col-md-1 col-lg-1">Thumbnail</th>
+						<th class="hidden-xs col-sm-1 col-md-2 col-lg-2">Location</th>
+						<th class="col-xs-2 col-sm-2 col-md-3 col-lg-3">Image</th>
+						<th class="col-xs-9 col-sm-7 col-md-5 col-lg-5">Label</th>
 						<th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Delete</th>
 					</tr>
 				</thead>
 				<tbody>
-					@foreach ($post->images as $image)
-						<tr>
-							<td class="hidden-xs hidden-sm col-md-3 col-lg-3">{!! Form::select('post_id',App\Models\Post::getPostTitleDropdown() ,$image->post_id, ['class' =>'form-control ajax_submit', 'data-id'=>$image->id]) !!}</td>
-							<td class="hidden-xs col-sm-1 col-md-1 col-lg-1">{!! Form::select('order', $image->getOrderDropdown(), $image->order, ['class' =>'form-control  ajax_submit', 'data-id'=>$image->id]) !!}</td>
-							<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2"><img class="@if($image->thumbnailable() == 'true') thumbnailable @endif" src="/images/blog/{{ $post->id }}/{{ $image->name }}" style="max-height:90%; max-width:90%" /></td>
-							<td class="col-xs-9 col-sm-8 col-md-5 col-lg-5">{!! Form::textarea('label', $image->label, ['class' =>'form-control  ajax_submit', 'data-id'=>$image->id]) !!}</td>
-							<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
-								{{ Form::open(['action' => ['PostImageController@destroy',$image->id], 'method' => 'DELETE']) }}
-								{{ Form::submit('Delete', ['class' => 'btn btn-danger confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) }}
-								{{ Form::close() }}
-							</td>
-						</tr>
-					@endforeach
+					{{ Form::open(['action' => ['PostImageController@update',$post->id], 'method' => 'PATCH']) }}
+						@foreach ($post->images as $image)
+							<tr>
+								<td class="hidden-xs col-sm-1 col-md-1 col-lg-1">{{ Form::radio('Thumbnail', $image->id, $image->thumbnail, []) }}</td>
+								<td class="hidden-xs col-sm-1 col-md-2 col-lg-2">/images/blog/{{ $post->id }}/{{ $image->name }}</td>
+								<td class="col-xs-2 col-sm-2 col-md-3 col-lg-3"><img src="/images/blog/{{ $post->id }}/{{ $image->name }}" style="max-height:90%; max-width:90%" /></td>
+								<td class="col-xs-9 col-sm-8 col-md-5 col-lg-5">{!! Form::text($image->id."_label", $image->label, []) !!}</td>
+								<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">{{ Form::checkbox($image->id."_delete", $image->id, '0', []) }}
+								</td>
+							</tr>
+						@endforeach
+						{{ Form::submit('Update', ['class' => 'btn btn-primary form-control']) }}
+					{{ Form::close() }}
 				</tbody>
 			</table>
 		</div>
@@ -208,7 +208,7 @@
 
 	{{-- Spinner --}}
 	<div id="spinner" class="text-center">
-		<img src="/images/spinner.gif" />
+		<i class="fas fa-spinner fa-pulse fa-3x"></i>
 	</div>
 @endsection
 
@@ -219,18 +219,23 @@
 	<script type="text/javascript" src="/js/bootstrap/collapse.js"></script>
 	<script type="text/javascript" src="/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript"> $(function () { $('#datetimepicker').datetimepicker({format: 'YYYY-MM-DD HH:mm:ss'}); }); </script>
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('li').removeClass('active');
-			$('#nav_post_{{ $post->type }}').addClass('active');
-			$('#nav_post_dropdown').addClass('active');
-		});	
-	</script>
 	<script src="/js/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript">
 		tinymce.init({
 			selector: '#mytextarea',
-			toolbar: 'undo redo removeformat | cut copy paste | bold italic underline | alignleft aligncenter alignright | bullist numlist | outdent indent blockquote',
+			height: 500,
+			theme: 'modern',
+			plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+			toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+			image_advtab: true,
+			templates: [
+				{ title: 'Test template 1', content: 'Test 1' },
+				{ title: 'Test template 2', content: 'Test 2' }
+			],
+			content_css: [
+				'//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+				'//www.tinymce.com/css/codepen.min.css'
+			]
 		});
 	</script>
 	<script type="text/javascript">
@@ -287,38 +292,6 @@
 			$("#spinner").show();
 			$("#post_meta").hide();
 			$("#edit_tags").hide();
-		});
-	</script>
-	<script type="text/javascript">
-		$('.ajax_submit').on('change', function()  {
-			var data = {
-				_method: 'PUT',
-				_token: $("input[name=_token]").val(),
-			};
-			data[$(this).attr('name')] = $(this).val();
-			$.post('/postimage/'+$(this).data('id'), data, function(result){
-				if(result.success){
-					$('.notification_message').html('');
-					$('#notification_error').addClass('hidden');
-				} else if(result.messages)  {
-					var txt = '';
-					$.each(result.messages, function(index, val)  {
-						if(val)
-							txt = txt + val + '<br>';
-					});
-					if(!txt)
-						txt = 'There was a problem saving your response.  Please try again.';
-					$('.notification_message').html('');
-					$('.notification_message').html(txt);
-					$('#notification_error').removeClass('hidden');
-				}
-			})
-			.error(function(){
-				var txt = 'There was a problem saving your response.  Please try again.';
-				$('.notification_message').html('');
-				$('.notification_message').html(txt);
-				$('#notification_error').removeClass('hidden');
-			});
 		});
 	</script>
 	<script type="text/javascript">

@@ -16,7 +16,7 @@
 @section('content')
 
 	@if (!Auth::guest()) @if (Auth::user()->type == App\Models\User::TYPE_ADMIN)
-	<a href="/user/create" class="btn btn-success">Add User</a>
+	<a href="/user/create" class="btn btn-primary">Add User</a>
 	@endif @endif
 	<div class="table-responsive">
 		<table class="table table-bordered table-striped">
@@ -49,12 +49,12 @@
 						@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\User::TYPE_ADMIN))
 						<td>{{ $user->type }}</td>
 						@endif @endif
-						<td><a href="/user/{{ $user->id }}/" class="btn btn-info">View</a></td>
+						<td><a href="/user/{{ $user->id }}/" class="btn btn-primary">View</a></td>
 						@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\User::TYPE_ADMIN))
-						<td><a href="/user/{{ $user->id }}/edit" class="btn btn-info">Edit</a></td>
+						<td><a href="/user/{{ $user->id }}/edit" class="btn btn-primary">Edit</a></td>
 						<td>
 							{{ Form::open(['action' => ['UserController@destroy', $user->id], 'method' => 'DELETE']) }}
-							{{ Form::submit('Delete', ['class' => 'btn btn-danger confirm', 'data-confirm' => 'Are you sure you want to delete this account?']) }}
+							{{ Form::submit('Delete', ['class' => 'btn btn-primary confirm', 'data-confirm' => 'Are you sure you want to delete this account?']) }}
 							{{ Form::close() }}
 						</td>
 						@endif @endif
@@ -67,13 +67,6 @@
 @endsection
 @section('scripts')
 	@parent
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('li').removeClass('active');
-			$('#nav_account_list').addClass('active');
-			$('#nav_account_dropdown').addClass('active');
-		});	
-	</script>
 	<script type="text/javascript">
 		$('.confirm').on('click', function (e) {
 			return !!confirm($(this).data('confirm'));

@@ -33,20 +33,13 @@
 
 	<div class="form-group">
 		{!! Form::open(['action' => ['UserController@destroy',$user->id], 'method' => 'DELETE']) !!}
-			{!! Form::submit('Delete', ['class' => 'btn btn-danger form-control confirm', 'data-confirm' => 'Are you sure you want to delete this account?']) !!}
+			{!! Form::submit('Delete', ['class' => 'btn btn-primary form-control confirm', 'data-confirm' => 'Are you sure you want to delete this account?']) !!}
 		{!! Form::close() !!}
 	</div>
 @endsection
 
 @section('scripts')
 	@parent
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('li').removeClass('active');
-			$('#nav_account_edit').addClass('active');
-			$('#nav_account_dropdown').addClass('active');
-		});	
-	</script>
 	<script type="text/javascript">
 		$('.confirm').on('click', function (e) {
 			return !!confirm($(this).data('confirm'));

@@ -15,7 +15,7 @@ class PostController extends Controller
 	*/
 	public function index()
 	{
-		//URL param of wanted post type.
+/*		//URL param of wanted post type.
 		$type = strtolower( \Request::input('type') );
 		// Non logged in users and viewers do not see deaft and unpublished posts
 		if (\Auth::guest() || \Auth::user()->type == User::TYPE_VIEWER)
@@ -40,7 +40,33 @@ class PostController extends Controller
 		}
 		$view_data['posts'] = $posts;
 		$view_data['post_type'] = $type;
-		return view('pages.post.index', $view_data);
+		return view('pages.post.index', $view_data);*/
+		//URL param of wanted post type.
+		$type = strtolower( \Request::input('type') );
+		// Non logged in users and viewers do not see deaft and unpublished posts
+		if (\Auth::guest() || \Auth::user()->type == User::TYPE_VIEWER)
+			// If the URL param is a valid post type (foodie, review, travel...) add it to sql query.
+			if (Post::isValidPostType($type)){
+				$posts = Post::where('type', $type)->where('draft', false)->where('avialable_at','<' ,\Carbon\Carbon::now())->paginate(12);
+			}
+			// if not valif post type then send all posts.
+			else{
+				$type="all";
+				$posts = Post::where('avialable_at','<' ,\Carbon\Carbon::now())->where('draft', false)->paginate(12);
+			}
+		else{
+			// Same logic from above but with admins/writers.  Also they can see draft and future posts.
+			if (Post::isValidPostType($type)){
+				$posts = Post::where('type', $type)->orderBy('avialable_at', 'desc')->paginate(12);
+			}
+			else{
+				$type="all";
+				$posts = Post::where('id', '>', 0)->orderBy('avialable_at', 'desc')->paginate(12);
+			}
+		}
+		$view_data['posts'] = $posts;
+		$view_data['post_type'] = $type;
+		return view('pages.single.dashboard', $view_data);
 	}
 	/*
 	 * Allow admins and writers to view create post page.
@@ -58,6 +84,7 @@ class PostController extends Controller
 	{
 		$post = new Post();
 		$this->authorize('store', $post);
+
 		$this->validate($request, [
 			'title' => 'required|string|min:4|max:255|unique:posts,title',
 			'summary' => 'required|string|min:4|max:255',
@@ -66,6 +93,7 @@ class PostController extends Controller
 			'avialable_at' => 'required|date',
 			'draft' => 'required|boolean',
 		]);
+
 		$request->request->add(['user_id' => \Auth::user()->id]);
 		$post = Post::create($request->all());
 		return redirect('post/'.$post->id);
@@ -84,6 +112,11 @@ class PostController extends Controller
 		if( ($post->draft == true) && (\Auth::guest() || \Auth::user()->type == User::TYPE_VIEWER) ){
 			abort("404");
 		}
+		// get previous post id
+		$view_data['previous_post'] = Post::where('id', '<', $post->id)->max('id');
+		// get next post id
+		$view_data['next_post'] = Post::where('id', '>', $post->id)->min('id');
+
 		$view_data['post'] = $post;
 		return view('pages.post.show', $view_data);
 	}
@@ -128,6 +161,6 @@ class PostController extends Controller
 		$post = Post::findOrFail($id);
 		$this->authorize('destroy', $post);
 		$post->delete();
-		return redirect('post/');
+		return redirect('/');
 	}
 }

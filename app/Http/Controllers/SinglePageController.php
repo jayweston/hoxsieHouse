@@ -28,11 +28,11 @@ class SinglePageController extends Controller
 		else{
 			// Same logic from above but with admins/writers.  Also they can see draft and future posts.
 			if (Post::isValidPostType($type)){
-				$posts = Post::where('type', $type)->paginate(12);
+				$posts = Post::where('type', $type)->orderBy('avialable_at', 'desc')->paginate(12);
 			}
 			else{
 				$type="all";
-				$posts = Post::paginate(12);
+				$posts = Post::where('id', '>', 1)->orderBy('avialable_at', 'desc')->paginate(12);
 			}
 		}
 		$view_data['posts'] = $posts;
@@ -62,5 +62,8 @@ class SinglePageController extends Controller
 	{
 		return view('pages.single.privacy');
 	}
-
+	public function about()
+	{
+		return view('pages.single.about');
+	}
 }

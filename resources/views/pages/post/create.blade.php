@@ -17,15 +17,15 @@
 	{!! Form::open(['action' => ['PostController@store']]) !!}
 		<div class="form-group">
 			{!! Form::label('title','Title') !!}
-			{!! Form::text('title', null, ['class' =>'form-control']) !!}
+			{!! Form::text('title', null, ['class' =>'form-control', 'maxlength' => '255', 'minlength' => '4']) !!}
 		</div>
 		<div class="form-group">
 			{!! Form::label('type','Type') !!}
-			{!! Form::select('type',App\Models\Post::getPostTypesDropdown() ,null, ['class' =>'form-control','placeholder' => '...']) !!}
+			{!! Form::select('type',App\Models\Post::getPostTypesDropdown() ,'travel', ['class' =>'form-control','placeholder' => '...']) !!}
 		</div>
 		<div class="form-group">
 			{!! Form::label('summary','Summary') !!}
-			{!! Form::text('summary', null, ['class' =>'form-control']) !!}
+			{!! Form::text('summary', null, ['class' =>'form-control', 'maxlength' => '255', 'minlength' => '4']) !!}
 		</div>
 		<div class="form-group">
 			{!! Form::label('content','Content') !!}
@@ -57,19 +57,23 @@
 	<script type="text/javascript" src="/js/bootstrap/transition.js"></script>
 	<script type="text/javascript" src="/js/bootstrap/collapse.js"></script>
 	<script type="text/javascript" src="/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
-	<script type="text/javascript"> $(function () { $('#datetimepicker').datetimepicker({format: 'YYYY-MM-DD HH:mm:ss'}); }); </script>
+	<script type="text/javascript"> $(function () { $('#datetimepicker').datetimepicker({format: 'YYYY-MM-DD HH:mm:ss', defaultDate: new Date()}); }); </script>
 	<script type="text/javascript">
-		$(document).ready(function(){
-			$('li').removeClass('active');
-			$('#nav_post_create').addClass('active');
-			$('#nav_admin_dropdown').addClass('active');
-		});	
-	</script>
-
-	<script>
 		tinymce.init({
 			selector: '#mytextarea',
-			toolbar: 'undo redo removeformat | cut copy paste | bold italic underline | alignleft aligncenter alignright | bullist numlist | outdent indent blockquote',
+			height: 500,
+			theme: 'modern',
+			plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
+			toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
+			image_advtab: true,
+			templates: [
+				{ title: 'Test template 1', content: 'Test 1' },
+				{ title: 'Test template 2', content: 'Test 2' }
+			],
+			content_css: [
+				'//fonts.googleapis.com/css?family=Lato:300,300i,400,400i',
+				'//www.tinymce.com/css/codepen.min.css'
+			]
 		});
 	</script>
 @stop

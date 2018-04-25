@@ -8,6 +8,7 @@ class CreatePostsTable extends Migration
 	public function up()
 	{
 		Schema::create('posts', function (Blueprint $table) {
+			$table->engine = 'InnoDB';
 			/* Columns */
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();

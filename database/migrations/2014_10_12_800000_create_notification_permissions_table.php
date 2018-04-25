@@ -8,6 +8,7 @@ class CreateNotificationPermissionsTable extends Migration
 	public function up()
 	{
 		Schema::create('notification_permissions', function (Blueprint $table) {
+			$table->engine = 'InnoDB';
 			/* Columns */
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();

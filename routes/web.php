@@ -18,6 +18,7 @@ Route::group(['middleware' => 'impersonate'], function () {
 	Route::get('/rss', 'SinglePageController@rss');
 	Route::get('/tos', 'SinglePageController@tos');
 	Route::get('/privacy', 'SinglePageController@privacy');
+	Route::get('/about', 'SinglePageController@about');
 	Route::resource('/post', 'PostController');
 	Route::resource('/user', 'UserController');
 	Route::resource('/tag', 'TagController', ['only' => ['index','show','update','destroy']]);
