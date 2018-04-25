@@ -8,6 +8,7 @@ class CreatePostExtrasTable extends Migration
 	public function up()
 	{
 		Schema::create('post_extras', function (Blueprint $table) {
+			$table->engine = 'InnoDB';
 			/* Columns */
 			$table->increments('id');
 			$table->integer('post_id')->unsigned()->unique();

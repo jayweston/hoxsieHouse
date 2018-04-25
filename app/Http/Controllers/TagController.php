@@ -13,8 +13,7 @@ class TagController extends Controller
 	*/
 	public function index()
 	{
-		$tag = new Tag();
-		$tags = Tag::paginate(50);
+		$tags = \DB::select(\DB::raw('SELECT t.id, t.name, t2.cnt FROM tags t JOIN (SELECT tag_id, COUNT(*) AS cnt FROM post_tags GROUP BY tag_id) t2 ON (t2.tag_id = t.id) ORDER BY t2.cnt DESC'));
 		$view_data['tags'] = $tags;
 		return view('pages.tag.index', $view_data);
 	}

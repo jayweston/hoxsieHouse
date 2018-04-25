@@ -34,7 +34,7 @@ class PostImageController extends Controller
 					// Save image and move it to proper directory.
 					Storage::put($file->getClientOriginalName(),file_get_contents($file));
 					$image = new PostImage();
-					$image->order = 0;
+					$image->thumbnail = 0;
 					$image->name = $file->getClientOriginalName();
 					$image->post_id = $request['post'];
 					$image->old_post_id = $request['post'];
@@ -50,33 +50,26 @@ class PostImageController extends Controller
 	*/
 	public function update(Request $request, $id)
 	{
-		$retval = [
-			'success' => false,
-			'messages' => [''],
-		];
-		$post_image = PostImage::findOrFail($id);
-		$this->authorize('update', $post_image);
-		//If changing the post that this image belongs to then set the post order back to 0.
-		if( !empty($request['post_id']) ){
-			$request->request->add(['order' => '0']);
+		$post = Post::findOrFail($id);
+		$this->authorize('update', $post);
+		foreach ($request->all() as $key => $value) {
+			if ($key=='_method' || $key=='_token'){
+			}elseif(substr_compare($key, "_label", strlen($key)-strlen("_label"), strlen("_label")) === 0){
+				$key = substr($key, 0, -6);
+				$post_image = PostImage::findOrFail($key);
+				$post_image->label = $value;
+				$post_image->save();
+			}elseif(substr_compare($key, "_delete", strlen($key)-strlen("_delete"), strlen("_delete")) === 0){
+				$key = substr($key, 0, -6);
+				$post_image = PostImage::findOrFail($key);
+				$this->destroy($key);
+			}elseif($key=='Thumbnail'){
+				$post_image = PostImage::findOrFail($value);
+				$post_image->thumbnail = '1';
+				$post_image->save();
+			}else{dd($key);}
 		}
-		//If changing post to thumbnail then add some extra checks
-		if ($request['order'] == '-1'){
-			//Make sure image is a png and 250x250
-			$results = $post_image->thumbnailable();
-			if ($results == 'true'){
-				$post_image->update($request->all());
-				$retval['success'] = true;
-				return Response::json($retval);
-			}else{
-				$retval['messages'] = [$results];
-				return Response::json($retval);
-			}
-		}else{
-			$post_image->update($request->all());
-			$retval['success'] = true;
-			return Response::json($retval);
-		}
+		return redirect('post/'.$id);
 	}
 	/*
 	 * Alow admins and post creaters to delete current post.

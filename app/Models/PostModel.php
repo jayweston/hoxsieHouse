@@ -18,22 +18,14 @@ class Post extends Model
 	*/
 	public function images()
 	{
-		return $this->hasMany('App\Models\PostImage')->orderBy('order', 'ASC');
-	}
-	/*
-	 * Returns an array of image models that are associated with this post. Images has to 
-	 * have an order greater than 0 (-1 = thumbnail 0 = hidden from carousel).
-	*/
-	public function carouselImages()
-	{
-		return $this->hasMany('App\Models\PostImage')->where('order', '>','0')->orderBy('order', 'ASC');
+		return $this->hasMany('App\Models\PostImage');
 	}
 	/*
 	 * Return a image model of the image in the post that is set to be the post thumbnail.
 	*/
 	public function thumbnail()
 	{
-		return PostImage::where('post_id',$this->id)->where('order', -1)->first();
+		return PostImage::where('post_id',$this->id)->where('thumbnail', 1)->first();
 	}
 	/*
 	 * If a thumbnail excists for the current post it will return a path to it. If
@@ -41,7 +33,7 @@ class Post extends Model
 	*/
 	public function thumbnailPath()
 	{
-		$image = PostImage::where('post_id',$this->id)->where('order', -1)->first();
+		$image = PostImage::where('post_id',$this->id)->where('thumbnail', 1)->first();
 		if ( !empty($image->id) ){
 			return \URL::to('/images/blog/'.$image->post_id.'/'.$image->name); 
 		}else{
@@ -134,5 +126,41 @@ class Post extends Model
 	public function isAvailable()
 	{
 		return $this->avialable_at < \Carbon\Carbon::now();
+	}
+	/*
+	 * Download pictures locally.
+	*/
+	public function downloadImages()
+	{
+		$content = $this->content;
+		preg_match_all('/<img[^>]+>/i',$content, $results);
+		$urls = [];
+		\File::makeDirectory(public_path().'/images/blog/'.$this->id.'/');
+		foreach ($results as $result){
+			$result = str_replace('<img style="border-width: initial; border-style: none; position: relative;" src="','',$result);
+			foreach ($result as $string){
+				$parts = explode('"',$string); 
+				$test = $parts['0'];
+				array_push($urls,$test);
+			}
+		}
+		foreach ($urls as $url){
+			$filename = preg_replace('/^.*\/\s*/', '', $url);
+			copy($url, public_path().'/images/blog/'.$this->id.'/'.$filename);
+			$image = new PostImage();
+			$image->thumbnail = 0;
+			$image->name = $filename;
+			$image->post_id = $this->id;
+			$image->old_post_id = $this->id;
+			$image->save();
+		}
+		foreach ($urls as $url){
+			$filename = preg_replace('/^.*\/\s*/', '', $url);
+			$content = str_replace($url,'/images/blog/'.$this->id.'/'.$filename,$content);
+		}
+		$content = preg_replace('#href="https://\d\.bp\.blogspot\.com.{60,150}>#', '>', $content);
+		$this->content = $content;
+		$this->save();
+		return true;
 	}
 }

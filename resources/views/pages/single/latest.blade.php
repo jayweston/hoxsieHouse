@@ -2,9 +2,6 @@
 
 @section('content')
 
-	<div class="addthis_inline_share_toolbox"></div>
-	<hr/>
-
 	<div class="row text-center blog_container">
 		<h3>Crafts, Reviews, and Giveaways</h3>
 		<div class="blog_container_image"><a href="http://Crafts.HoxsieHouse.com"><img src="/images/banner/nite_owl.png" /></a></div>

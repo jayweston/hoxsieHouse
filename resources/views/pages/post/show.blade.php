@@ -49,50 +49,58 @@
 @endif
 
 @section('content')
-
+	{{-- {{ $post->downloadImages() }} --}}
 	{{-- Admin controls --}}
 	@if(!Auth::guest()) @if( (Auth::user()->type == App\Models\User::TYPE_ADMIN) || (App\Models\User::isPostMine($post->id)) )
 		<div class="form-group">
 			<a href="/post/{{ $post->id }}/edit" class="btn btn-primary pull-left">Edit</a>
-			{!! Form::open(['action' => ['PostController@destroy', $post->id], 'method' => 'delete']) !!}	{!! Form::submit('Delete', ['class' =>'btn btn-danger pull-right confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) !!}	{!! Form::close() !!}<br/>
+			{!! Form::open(['action' => ['PostController@destroy', $post->id], 'method' => 'delete']) !!}	{!! Form::submit('Delete', ['class' =>'btn btn-primary pull-right confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) !!}	{!! Form::close() !!}<br/>
 		</div>
 		<hr/>
 	@endif @endif
 
-	{{-- Share Posts --}}
-	<div class="addthis_inline_share_toolbox"></div>
-	<hr/>
+	{{-- Post Banner --}}
+	<div class="blog_container col-sm-12">
+		<div class="blog_container_image"><a href="http://Travel.HoxsieHouse.com"><img src="/images/banner/travel.png" class="center-block img-responsive" /></a></div>
+	</div>
 
 	{{-- Post Title --}}
 	<div class="post-title">{{ $post->title }}</div>
 
-	{{-- Image Carousel --}}
-	<div class="post-images owl-carousel">
-		@foreach ($post->carouselImages as $image)
-			<div class="item owl-section">
-				<div class="owl-label">{{ $image->label }}</div>
-				<img src="/images/blog/{{ $post->id }}/{{ $image->name }}" height="300px" class="owl-image" />
-			</div>
-		@endforeach
-	</div>
-
-	{{-- Post Tags --}}
-	<div class="post-tags">
-		@foreach ($post->tags() as $tag)
-			<li><a href="/tag/{{ $tag->id }}">{{ $tag->name }}</li></a>
-		@endforeach
-	</div>
+	{{-- Publish Date --}}
+	<div class="post-date">Posted on {{ $post->avialable_at }}</div>
 
 	{{-- Post content --}}
 	<div class="post-content">{!! $post->content !!}</div>
 
-	{{-- Related Posts --}}
-	<hr/>
-	<div class="addthis_relatedposts_inline"></div> promote posts
+	{{-- Next/last Post --}}
+	<div class="post-pagination">
+		@if ($previous_post != NULL)<a href="{{ URL::to( 'post/' . $previous_post ) }}" class="previous_post"><i class="fas fa-chevron-left"></i><i class="fas fa-chevron-left"></i> Previous Post</a>@endif
+		@if ($next_post != NULL)<a href="{{ URL::to( 'post/' . $next_post ) }}" class="next_post">Next Post <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></a>@endif
+	</div>
+
+	{{-- Post Tags --}}
+
+	@if (count($post->tags()) > 0)
+		<div class="post-box"><h4 class="post-box-title"><span>Tags</span></h4></div>
+		<div class="post-tags">
+			@foreach ($post->tags() as $tag)
+				<li><a href="/tag/{{ $tag->id }}"><span class="post-tag">{{ $tag->name }}</span></li></a>
+			@endforeach
+		</div>
+	@endif
+
+	{{-- Share Post --}}
+	<div class="post-box"><h4 class="post-box-title"><span>Share Post</span></h4></div>
+	<div class="post-shares">
+			<li class="" id=""><a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::to( 'post/' . $post->id ) }}" target="_blank" ><i class="fab fa-facebook fa-3x post-share"></i></a></li>
+			<li class="" id=""><a href="https://twitter.com/home?status={{ URL::to( 'post/' . $post->id ) }}" target="_blank"><i class="fab fa-twitter fa-3x post-share"></i></a></li>
+			<li class="" id=""><a href="https://pinterest.com/pin/create/button/?url={{ URL::to( 'post/' . $post->id ) }}&media={{ $post->thumbnailPath() }}&description="><i class="fab fa-pinterest fa-3x post-share"></i></a></li>
+			Google+, linkedIn, Email, Tumblr
+	</div>
 
 	{{-- Show post comment --}}
-	<hr/>
-	<h3>Comments</h3>
+	<div class="post-box"><h4 class="post-box-title"><span>Comments</span></h4></div>
 	@if ( empty(App\Models\Comment::comments($post->id)[0]) )
 		<div class="post_comment">
 			There are no comments to display.
@@ -114,13 +122,13 @@
 						<ul class="list-inline">
 							<li>
 								@if( App\Models\Comment::canComment($comment->level) )
-									<a href="javascript:void(0)" class="ajax-show-reply">reply</a>
+									<a href="javascript:void(0)" class="ajax-show-reply btn btn-primary">reply</a>
 								@endif
 							</li>
 							<li>
 								@if ( !Auth::guest() ) @if ( Auth::user()->type == App\Models\User::TYPE_ADMIN )
 									{{ Form::open(['action' => ['CommentController@destroy',$comment->id], 'method' => 'DELETE']) }}
-									{!! Form::button('delete', ['type'=>'submit', 'class' => 'btn btn-link confirm', 'data-confirm' => 'Are you sure you want to delete this comment?']) !!}</span>
+									{!! Form::button('delete', ['type'=>'submit', 'class' => 'btn btn-primary confirm', 'data-confirm' => 'Are you sure you want to delete this comment?']) !!}</span>
 									{{ Form::close() }}
 								@endif @endif
 							</li>
@@ -140,14 +148,15 @@
 								{!! Form::submit('111', ['type'=>'submit', 'class' =>'comment-submit-action hidden']) !!}
 							{!! Form::close() !!}
 						</div>
-						<div class="panel-footer"><a href="javascript:void(0)" class="comment-submit-link">save</a></div>
+						<div class="panel-footer"><a href="javascript:void(0)" class="comment-submit-link btn btn-primary">save</a></div>
 					</div>
 				</div>
 			@endif
 		@endforeach
 	@endif
 	@if ( !Auth::guest() )
-		<hr/>
+	{{-- Show post comment --}}
+	<div class="post-box"><h4 class="post-box-title"><span>New Comment</span></h4></div>
 		<div class="comment comment_reply level_1">
 			<div class="panel panel-default">
 				<div class="panel-heading">Make a comment on the post</div>
@@ -158,53 +167,15 @@
 						{!! Form::submit('111', ['type'=>'submit', 'class' =>'comment-submit-action hidden']) !!}
 					{!! Form::close() !!}
 				</div>
-				<div class="panel-footer"><a href="javascript:void(0)" class="comment-submit-link">save</a></div>
+				<div class="panel-footer"><a href="javascript:void(0)" class="comment-submit-link btn btn-primary">save</a></div>
 			</div>
 		</div>
 	@endif
 @endsection
 
-@section('css')
-	@parent
-	<link href="/css/owl.carousel.css" rel="stylesheet">
-@stop
-
 @section('scripts')
 	@parent
 	{{-- set the active navbar --}}
-	<script type="text/javascript">
-		$(document).ready(function(){
-			$('li').removeClass('active');
-			$('#nav_post_{{ $post->type }}').addClass('active');
-			$('#nav_post_dropdown').addClass('active');
-		});	
-	</script>
-	{{-- Owl carousel --}}
-	<script src="/js/owl.carousel.min.js"></script>
-	<script>
-		var owl = $('.owl-carousel');
-		owl.owlCarousel({
-			items:4,
-			loop:true,
-			margin:30,
-			nav:true,
-			lazyLoad:true,
-			autoWidth:true,
-			autoplay:true,
-			autoplayTimeout:5000,
-			autoplayHoverPause:true
-		});
-
-		$('.play').on('click',function(){
-			owl.trigger('autoplay.play.owl',[1000])
-		})
-
-		$('.stop').on('click',function(){
-			owl.tri4gger('autoplay.stop.owl')
-		})
-		$( "p" ).prev( ".owl-image" ).css( "width", "yellow" );
-		$( "p" ).width()
-	</script>
 	<script>
 		$(function () {
 			$('.ajax-show-reply').on('click', function () {
