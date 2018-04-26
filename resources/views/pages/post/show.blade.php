@@ -93,10 +93,11 @@
 	{{-- Share Post --}}
 	<div class="post-box"><h4 class="post-box-title"><span>Share Post</span></h4></div>
 	<div class="post-shares">
-			<li class="" id=""><a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::to( 'post/' . $post->id ) }}" target="_blank" ><i class="fab fa-facebook fa-3x post-share"></i></a></li>
-			<li class="" id=""><a href="https://twitter.com/home?status={{ URL::to( 'post/' . $post->id ) }}" target="_blank"><i class="fab fa-twitter fa-3x post-share"></i></a></li>
-			<li class="" id=""><a href="https://pinterest.com/pin/create/button/?url={{ URL::to( 'post/' . $post->id ) }}&media={{ $post->thumbnailPath() }}&description="><i class="fab fa-pinterest fa-3x post-share"></i></a></li>
-			Google+, linkedIn, Email, Tumblr
+			<li class="" id=""><a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::to( 'post/' . $post->id ) }}" target="_blank" ><i class="fab fa-facebook fa-2x post-share"></i></a></li>
+			<li class="" id=""><a href="https://twitter.com/home?status={{ URL::to( 'post/' . $post->id ) }}" target="_blank"><i class="fab fa-twitter fa-2x post-share"></i></a></li>
+			<li class="" id=""><a href="https://pinterest.com/pin/create/button/?url={{ URL::to( 'post/' . $post->id ) }}&media={{ $post->thumbnailPath() }}&description=" target="_blank" ><i class="fab fa-pinterest fa-2x post-share"></i></a></li>
+			<li class="" id=""><a href="https://plus.google.com/share?url={{ URL::to( 'post/' . $post->id ) }}" target="_blank" ><i class="fab fa-google-plus-square fa-2x post-share"></i></i></a></li>
+			<li class="" id=""><a href="mailto:to?&subject=subject&body=body" target="_blank"><i class="fas fa-envelope fa-2x post-share"></i></a></li>
 	</div>
 
 	{{-- Show post comment --}}
