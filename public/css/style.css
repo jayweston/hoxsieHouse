@@ -115,6 +115,16 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 	position: relative;
 	z-index: 5;
 }
+.post-show-emailshare {
+	padding-left:10px;
+}
+.post-show-emailshare>img {
+	height: 15px;
+	width: 15px;
+}
+.post-show-dropdown{
+	min-width:350px;
+}
 /*
  * Post Paginations
 */

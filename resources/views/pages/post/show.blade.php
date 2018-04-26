@@ -93,11 +93,20 @@
 	{{-- Share Post --}}
 	<div class="post-box"><h4 class="post-box-title"><span>Share Post</span></h4></div>
 	<div class="post-shares">
-			<li class="" id=""><a href="https://www.facebook.com/sharer/sharer.php?u={{ URL::to( 'post/' . $post->id ) }}" target="_blank" ><i class="fab fa-facebook fa-2x post-share"></i></a></li>
-			<li class="" id=""><a href="https://twitter.com/home?status={{ URL::to( 'post/' . $post->id ) }}" target="_blank"><i class="fab fa-twitter fa-2x post-share"></i></a></li>
-			<li class="" id=""><a href="https://pinterest.com/pin/create/button/?url={{ URL::to( 'post/' . $post->id ) }}&media={{ $post->thumbnailPath() }}&description=" target="_blank" ><i class="fab fa-pinterest fa-2x post-share"></i></a></li>
-			<li class="" id=""><a href="https://plus.google.com/share?url={{ URL::to( 'post/' . $post->id ) }}" target="_blank" ><i class="fab fa-google-plus-square fa-2x post-share"></i></i></a></li>
-			<li class="" id=""><a href="mailto:to?&subject=subject&body=body" target="_blank"><i class="fas fa-envelope fa-2x post-share"></i></a></li>
+		<li  ><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ URL::to( 'post/' . $post->id ) }}" title="Share on Facebook" ><i class="fab fa-facebook fa-2x post-share"></i></a></li>
+		<li  ><a target="_blank" href="https://twitter.com/home?status={{ URL::to( 'post/' . $post->id ) }}" target="_blank" title="Share on Twitter" ><i class="fab fa-twitter fa-2x post-share"></i></a></li>
+		<li  ><a target="_blank" href="https://pinterest.com/pin/create/button/?url={{ URL::to( 'post/' . $post->id ) }}&media={{ $post->thumbnailPath() }}&description=" target="_blank" title="Share on Pinterest" ><i class="fab fa-pinterest fa-2x post-share"></i></a></li>
+		<li  ><a target="_blank" href="https://plus.google.com/share?url={{ URL::to( 'post/' . $post->id ) }}" target="_blank" title="Share on Google+" ><i class="fab fa-google-plus-square fa-2x post-share"></i></i></a></li>
+		<li class="dropdown">
+			<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Share via Email" ><i class="fas fa-envelope fa-2x post-share"></i></a>
+			<div class="dropdown-menu post-show-dropdown" aria-labelledby="dropdownMenuLink">
+				<a target="_blank" class="post-show-emailshare" href="https://mail.google.com/mail/?view=cm&fs=1&su=Check out this blogpost!&body=I thought you would like to read this post: {{ URL::to( 'post/' . $post->id ) }}"   title="Share via Gmail"><img src="/images/icon/mail/gmail.png" /> Gmail</a>
+				<a target="_blank" class="post-show-emailshare" href="https://outlook.live.com/default.aspx?rru=compose&subject=Check out this blogpost!&body=I thought you would like to read this post: {{ URL::to( 'post/' . $post->id ) }}"   title="Share via Hotmail"><img src="/images/icon/mail/hotmail.png" /> Hotmail</a>
+				<a target="_blank" class="post-show-emailshare" href="http://compose.mail.yahoo.com/?subj=Check out this blogpost!&body=I thought you would like to read this post: {{ URL::to( 'post/' . $post->id ) }}"   title="Share via Yahoo"><img src="/images/icon/mail/yahoo.png" /> Yahoo</a>
+				<a target="_blank" class="post-show-emailshare" href="http://mail.aol.com/mail/compose-message.aspx?subject=Check out this blogpost!&body=I thought you would like to read this post: {{ URL::to( 'post/' . $post->id ) }}"   title="Share via AOL"><img src="/images/icon/mail/aol.png" /> AOL</a>
+				<a target="_blank" class="post-show-emailshare" href="mailto:?subject=Check out this blogpost!&body=I thought you would like to read this post: {{ URL::to( 'post/' . $post->id ) }}"  title="Share via mail"><img src="/images/icon/mail/general.png" /> Other</a>
+			</div>
+		</li>
 	</div>
 
 	{{-- Show post comment --}}
