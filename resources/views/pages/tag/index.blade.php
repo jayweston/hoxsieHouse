@@ -15,7 +15,7 @@
 
 @section('content')
 	<div class="row text-center blog_container">
-		<div class="blog_container_image"><a href="http://Travel.HoxsieHouse.com"><img src="/images/banner/travel.png" class="center-block img-responsive" /></a></div>
+		<div class="blog_container_image"><a href="https://HoxsieHouse.com"><img src="/images/banner/travel.png" class="center-block img-responsive" /></a></div>
 	</div>
 	<div class="post-box"><h4 class="post-box-title"><span>Tags</span></h4></div>
 	<div class="table-responsive">

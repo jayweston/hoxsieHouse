@@ -7,6 +7,9 @@ rgba(76, 175, 80, 0.3)
 /*
  * Sitewide
 */
+body {
+	-webkit-print-color-adjust: exact !important;
+}
 hr {
 	height: 1px;
 	color: #83D2B0;
@@ -364,8 +367,10 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 	color: #83D2B0;
 	font-weight:bold;
 }
-
 .dashboard-side-connected{
+	color: #428958;
+}
+.dashboard-side-connected:hover{
 	color: #004000;
 }
 .blog_container_image{

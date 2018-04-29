@@ -51,39 +51,45 @@
 			</tbody>
 		</table>
 	</div>
-	<div class="post-box"><h4 class="post-box-title"><span>Posts</span></h4></div>
-	@if ( !empty( App\Models\User::getUserPosts($user->id)[0] ) )
+	@if ( App\Models\User::user()->type == App\Models\User::TYPE_ADMIN || App\Models\User::user()->type == App\Models\User::TYPE_VIEWER )
 
-		<div class="col-md-12 col-sm-12 col-xs-12" id="post-paginate">
-			@foreach (App\Models\User::getUserPosts($user->id) as $post)
-			<ol>
-				<div class="row @if($post->draft == true) post_draft @endif @if(!$post->isAvailable()) post_unAvailable @endif">
-					<div class="col-md-5 col-sm-5 col-xs-12"><a href="/post/{{ $post->id }}"><img src="{{ $post->thumbnailPath() }}" class="img-responsive" /></a></div>
-					<div class="col-md-7 col-sm-7 col-xs-12">
-						<div class="dashboard-post-title"><a href="/post/{{ $post->id }}"><h3>{{ $post->title }}</h3></a></div>
-						<div class="dashboard-post-description">{{ $post->description() }}</div>
-						<div class="dashboard-post-date">{!! date_format(date_create($post->avialable_at),"j-F-Y") !!}</div>
-					</div>
-				</div>
-				<hr/>
-			</ol>
-			@endforeach
-		</div>
+		<div class="post-box"><h4 class="post-box-title"><span>Posts</span></h4></div>
+		@if ( !empty( App\Models\User::getUserPosts($user->id)[0] ) )
+			<div class="col-md-12 col-sm-12 col-xs-12 row" id="">
+				@foreach (App\Models\User::getUserPosts($user->id) as $key => $post)
+					@if($key != 0)
+						<hr/>
+					@endif			
+					<ol>
+						<div class="row @if($post->draft == true) post_draft @endif @if(!$post->isAvailable()) post_unAvailable @endif">
+							<div class="col-md-5 col-sm-5 col-xs-12"><a href="/post/{{ $post->id }}"><img src="{{ $post->thumbnailPath() }}" class="img-responsive" /></a></div>
+							<div class="col-md-7 col-sm-7 col-xs-12">
+								<div class="dashboard-post-title"><a href="/post/{{ $post->id }}"><h3>{{ $post->title }}</h3></a></div>
+								<div class="dashboard-post-description">{{ $post->description() }}</div>
+							</div>
+						</div>
 
-	@else
-		N/A
+					</ol>
+				@endforeach
+			</div>
+		@else
+			N/A
+		@endif
+		<div class="clearfix"></div>
 	@endif
 	<div class="post-box"><h4 class="post-box-title"><span>Comments</span></h4></div>
 	@if ( !empty( App\Models\User::getUserComments($user->id)[0] ) )
 		
-			@foreach (App\Models\User::getUserComments($user->id) as $comment)
+			@foreach (App\Models\User::getUserComments($user->id) as $key => $comment)
+				@if($key != 0)
+					<hr/>
+				@endif			
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="col-md-6 col-sm-8 col-xs-7 @if($post->draft == true) post_draft @endif @if(!$post->isAvailable()) post_unAvailable @endif">
 						<div class="col-md-5 col-sm-5 hidden-xs"><a href="/post/{{ $comment->post()->id }}"><img src="{{ $comment->post()->thumbnailPath() }}" class="img-responsive" /></a></div>
 						<div class="col-md-7 col-sm-7 col-xs-12 user-show-comments">
 							<div class="dashboard-post-title"><a href="/post/{{ $comment->post()->id }}"><h3>{{ $comment->post()->title }}</h3></a></div>
 							<div class="dashboard-post-description">{{ $comment->post()->description() }}</div>
-							<div class="dashboard-post-date">{!! date_format(date_create($comment->post()->avialable_at),"j-F-Y") !!}</div>
 						</div>
 					</div>
 					<div class="col-md-6 col-sm-4 col-xs-5">
@@ -91,7 +97,6 @@
 					</div>
 				</div>
 				<div class="clearfix"></div>
-				<hr/>
 			@endforeach
 		
 	@else

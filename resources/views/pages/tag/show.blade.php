@@ -15,7 +15,7 @@
 
 @section('content')
 	<div class="row text-center blog_container">
-		<div class="blog_container_image"><a href="http://Travel.HoxsieHouse.com"><img src="/images/banner/travel.png" class="center-block img-responsive" /></a></div>
+		<div class="blog_container_image"><a href="https://HoxsieHouse.com"><img src="/images/banner/travel.png" class="center-block img-responsive" /></a></div>
 	</div>
 	@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\User::TYPE_ADMIN) || (Auth::user()->type == App\Models\User::TYPE_WRITER))
 		<h3>Change Tag</h3>

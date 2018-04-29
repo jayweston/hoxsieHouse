@@ -37,7 +37,7 @@ class Post extends Model
 		if ( !empty($image->id) ){
 			return \URL::to('/images/blog/'.$image->post_id.'/'.$image->name); 
 		}else{
-			return \URL::to('/images/blog/thumbnail.png');
+			return \URL::to('/images/static/thumbnail.png');
 		}
 	}
 	/*

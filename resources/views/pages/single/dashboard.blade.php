@@ -2,7 +2,7 @@
 
 @section('content')
 	<div class="row text-center blog_container">
-		<div class="blog_container_image"><a href="http://Travel.HoxsieHouse.com"><img src="/images/banner/travel.png" class="center-block img-responsive" /></a></div>
+		<div class="blog_container_image"><a href="https://HoxsieHouse.com"><img src="/images/banner/travel.png" class="center-block img-responsive" /></a></div>
 	</div>
 	<hr/>
 	<div class="row">
@@ -13,7 +13,6 @@
 					<div class="col-md-7 col-sm-7 col-xs-12">
 						<div class="dashboard-post-title"><a href="/post/{{ $post->id }}"><h3>{{ $post->title }}</h3></a></div>
 						<div class="dashboard-post-description">{{ $post->description() }}</div>
-						<div class="dashboard-post-date">{!! date_format(date_create($post->avialable_at),"j-F-Y") !!}</div>
 					</div>
 				</div>
 				<hr/>

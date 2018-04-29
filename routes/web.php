@@ -10,7 +10,7 @@ use Illuminate\Http\Request;
 | contains the "web" middleware group. Now create something great!
 |
 */
-//Route::group(['middleware' => 'impersonate'], function () {
+Route::group(['middleware' => 'impersonate'], function () {
 	Route::auth();
 	Route::get('/', 'SinglePageController@dashboard');
 	Route::get('/latest', 'SinglePageController@latest');
@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 	Route::get('/tos', 'SinglePageController@tos');
 	Route::get('/privacy', 'SinglePageController@privacy');
 	Route::get('/about', 'SinglePageController@about');
+	Route::get('/post/{id}/print', 'PostController@printfriendly');
 	Route::resource('/post', 'PostController');
 	Route::resource('/user', 'UserController');
 	Route::resource('/tag', 'TagController', ['only' => ['index','show','update','destroy']]);
@@ -28,7 +29,7 @@ use Illuminate\Http\Request;
 	Route::resource('/comment', 'CommentController', ['only' => ['store','destroy']]);
 	Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 	Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
-//});
+});
 Route::get('/test', function () { 
 	$test='http://localhost:8000/post/1#_=_';
 	dd(trim($test, "#_=_"));

@@ -60,7 +60,7 @@
 	</div>
 	<div class="row text-center blog_container">
 		<h3>Our Travels</h3>
-		<div class="blog_container_image"><a href="http://Travel.HoxsieHouse.com"><img src="/images/banner/travel.png" /></a></div>
+		<div class="blog_container_image"><a href="https://HoxsieHouse.com"><img src="/images/banner/travel.png" /></a></div>
 		<div class="dashboard_post">
 			<div class="dashboard_post_date pull-right">
 				15 May 2016

@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
 				'travel'
 			]);
 			$table->boolean('draft')->default(false);
-			$table->string('title');
+			$table->string('title')->unique();
 			$table->longText('content');
 			$table->string('summary')->nullable();
 			$table->dateTime('avialable_at');

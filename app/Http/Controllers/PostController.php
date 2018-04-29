@@ -7,6 +7,7 @@ use App\Http\Requests;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\PostImage;
+use App\Models\UserPost;
 
 class PostController extends Controller
 {
@@ -112,6 +113,20 @@ class PostController extends Controller
 		if( ($post->draft == true) && (\Auth::guest() || \Auth::user()->type == User::TYPE_VIEWER) ){
 			abort("404");
 		}
+
+		//Save that user has visited the website
+		if( !(\Auth::guest()) && !(\Auth::user()->type == User::TYPE_ADMIN) ){
+			$userpost = new UserPost();
+			$userpost->user_id = \Auth::user()->id;
+			$userpost->post_id = $post->id;
+			$userpost->created_at = \Carbon\Carbon::now();
+			
+			try {
+				$userpost->save();
+			} catch(\Illuminate\Database\QueryException $e){
+
+			}
+		}
 		// get previous post id
 		$view_data['previous_post'] = Post::where('id', '<', $post->id)->max('id');
 		// get next post id
@@ -162,5 +177,23 @@ class PostController extends Controller
 		$this->authorize('destroy', $post);
 		$post->delete();
 		return redirect('/');
+	}
+	/*
+	 * Display a print friendly version of a post
+	*/
+	public function printfriendly($id)
+	{
+		$post = Post::findOrFail($id);
+		//Only allow admins and writers to see posts that are scheduled for future dates.
+		if( ($post->avialable_at > \Carbon\Carbon::now()) && (\Auth::guest() || \Auth::user()->type == User::TYPE_VIEWER) ){
+			abort("404");
+		}
+		//Only allow admins and writers to see posts that are in draft mode.
+		if( ($post->draft == true) && (\Auth::guest() || \Auth::user()->type == User::TYPE_VIEWER) ){
+			abort("404");
+		}
+
+		$view_data['post'] = $post;
+		return view('pages.post.printfriendly', $view_data);
 	}
 }
