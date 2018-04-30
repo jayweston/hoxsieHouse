@@ -163,4 +163,16 @@ class Post extends Model
 		$this->save();
 		return true;
 	}
+	/*
+	 * Return slug for SEO URLs.
+	*/
+	public function getSlugAttribute()
+	{
+		return str_slug($this->title);
+	}
+
+	public function getUrlAttribute()
+	{
+		return action('PostController@show', [$this->type, $this->id, $this->slug]);
+	}
 }

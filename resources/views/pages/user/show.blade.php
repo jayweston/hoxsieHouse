@@ -51,7 +51,26 @@
 			</tbody>
 		</table>
 	</div>
-	@if ( App\Models\User::user()->type == App\Models\User::TYPE_ADMIN || App\Models\User::user()->type == App\Models\User::TYPE_VIEWER )
+	<div class="post-box"><h4 class="post-box-title"><span>Notifications</span></h4></div>
+		@foreach (App\Models\User::getUserComments($user->id) as $key => $comment)
+			@if($key != 0)
+				<hr/>
+			@endif			
+			<div class="col-md-12 col-sm-12 col-xs-12">
+				<div class="col-md-6 col-sm-8 col-xs-7 @if($post->draft == true) post_draft @endif @if(!$post->isAvailable()) post_unAvailable @endif">
+					<div class="col-md-5 col-sm-5 hidden-xs"><a href="/post/{{ $comment->post()->id }}"><img src="{{ $comment->post()->thumbnailPath() }}" class="img-responsive" /></a></div>
+					<div class="col-md-7 col-sm-7 col-xs-12 user-show-comments">
+						<div class="dashboard-post-title"><a href="/post/{{ $comment->post()->id }}"><h3>{{ $comment->post()->title }}</h3></a></div>
+						<div class="dashboard-post-description">{{ $comment->post()->description() }}</div>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-4 col-xs-5">
+					{{ $comment->comment }}
+				</div>
+			</div>
+			<div class="clearfix"></div>
+		@endforeach
+	@if ( Auth::user()->type == App\Models\User::TYPE_ADMIN || Auth::user()->type == App\Models\User::TYPE_VIEWER )
 
 		<div class="post-box"><h4 class="post-box-title"><span>Posts</span></h4></div>
 		@if ( !empty( App\Models\User::getUserPosts($user->id)[0] ) )
@@ -62,9 +81,9 @@
 					@endif			
 					<ol>
 						<div class="row @if($post->draft == true) post_draft @endif @if(!$post->isAvailable()) post_unAvailable @endif">
-							<div class="col-md-5 col-sm-5 col-xs-12"><a href="/post/{{ $post->id }}"><img src="{{ $post->thumbnailPath() }}" class="img-responsive" /></a></div>
+							<div class="col-md-5 col-sm-5 col-xs-12"><a href="{{ $post->url }}"><img src="{{ $post->thumbnailPath() }}" class="img-responsive" /></a></div>
 							<div class="col-md-7 col-sm-7 col-xs-12">
-								<div class="dashboard-post-title"><a href="/post/{{ $post->id }}"><h3>{{ $post->title }}</h3></a></div>
+								<div class="dashboard-post-title"><a href="{{ $post->url }}"><h3>{{ $post->title }}</h3></a></div>
 								<div class="dashboard-post-description">{{ $post->description() }}</div>
 							</div>
 						</div>
@@ -102,6 +121,7 @@
 	@else
 		N/A
 	@endif
+
 @endsection
 @section('scripts')
 	@parent

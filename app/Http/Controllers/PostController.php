@@ -97,14 +97,23 @@ class PostController extends Controller
 
 		$request->request->add(['user_id' => \Auth::user()->id]);
 		$post = Post::create($request->all());
-		return redirect('post/'.$post->id);
+		return redirect($post->url);
 	}
 	/*
 	 * Allow anyone to view posts that are not in draft mode or not published yet.
 	*/
-	public function show($id)
+	public function show($type, $id, $slug)
 	{
 		$post = Post::findOrFail($id);
+
+		if ($slug !== $post->slug) {
+			return redirect()->to($post->url);
+		}
+
+		if ($type !== $post->type) {
+			return redirect()->to($post->url);
+		}
+
 		//Only allow admins and writers to see posts that are scheduled for future dates.
 		if( ($post->avialable_at > \Carbon\Carbon::now()) && (\Auth::guest() || \Auth::user()->type == User::TYPE_VIEWER) ){
 			abort("404");

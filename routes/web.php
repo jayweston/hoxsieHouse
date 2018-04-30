@@ -20,7 +20,7 @@ Route::group(['middleware' => 'impersonate'], function () {
 	Route::get('/privacy', 'SinglePageController@privacy');
 	Route::get('/about', 'SinglePageController@about');
 	Route::get('/post/{id}/print', 'PostController@printfriendly');
-	Route::resource('/post', 'PostController');
+	Route::resource('/post', 'PostController',['except' => ['show']]);
 	Route::resource('/user', 'UserController');
 	Route::resource('/tag', 'TagController', ['only' => ['index','show','update','destroy']]);
 	Route::resource('/postimage', 'PostImageController', ['only' => ['store','update','destroy']]);
@@ -29,9 +29,9 @@ Route::group(['middleware' => 'impersonate'], function () {
 	Route::resource('/comment', 'CommentController', ['only' => ['store','destroy']]);
 	Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 	Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
+	Route::get('/post/{type}/{id}/{slug}', 'PostController@show');
 });
 Route::get('/test', function () { 
 	$test='http://localhost:8000/post/1#_=_';
 	dd(trim($test, "#_=_"));
-
 });
