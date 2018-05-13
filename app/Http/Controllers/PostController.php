@@ -175,7 +175,7 @@ class PostController extends Controller
 			]);
 		}
 		$post->update($request->all());
-		return redirect('post/'.$id);
+		return redirect($post->url);
 	}
 	/*
 	 * Allow admins and writers to dete post.

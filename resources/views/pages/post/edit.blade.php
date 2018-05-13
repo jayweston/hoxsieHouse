@@ -23,11 +23,11 @@
 
 	{{-- Buttons for what to desplay--}}
 	<div class="row">
-		<button onclick="selectEditImages()" class="btn btn-default pull-right post_button">Edit Images</button>
-		<button onclick="selectUpoadImages()" class="btn btn-default pull-right post_button">Upload Images</button>
-		<button onclick="selectMeta()" class="btn btn-default pull-right post_button">Meta</button>
-		<button onclick="selectTags()" class="btn btn-default pull-right post_button">Tags</button>
-		<button onclick="selectContent()" class="btn btn-default pull-right post_button">Content</button>
+		<button onclick="selectEditImages()" class="btn btn-primary pull-right post_button">Edit Images</button>
+		<button onclick="selectUpoadImages()" class="btn btn-primary pull-right post_button">Upload Images</button>
+		<button onclick="selectMeta()" class="btn btn-primary pull-right post_button">Meta</button>
+		<button onclick="selectTags()" class="btn btn-primary pull-right post_button">Tags</button>
+		<button onclick="selectContent()" class="btn btn-primary pull-right post_button">Content</button>
 	</div>
 
 	{{-- Edit post content --}}
