@@ -75,7 +75,6 @@ class LoginController extends Controller
 
     public function findOrCreateUser($user, $provider)
     {
-
         $authUser = User::where('email', $user->email)->first();
 
         if ($authUser) {
@@ -101,7 +100,7 @@ class LoginController extends Controller
                 return User::create([
                     'name' => $user->name,
                     $provider.'_id' => $user->id
-                ]);                
+                ]);
             }
         }elseif ($provider == 'pinterest'){
             $authUser = User::where('pinterest_id', $user->id)->first();
@@ -111,14 +110,14 @@ class LoginController extends Controller
                 return User::create([
                     'name' => $user->name,
                     $provider.'_id' => $user->id
-                ]);                
+                ]);
             }
-        }else{    
+        }else{
             return User::create([
                 'name' => $user->name,
                 'email' => $user->email,
                 $provider.'_id' => $user->id
             ]);
         }
-    }    
+    }
 }
