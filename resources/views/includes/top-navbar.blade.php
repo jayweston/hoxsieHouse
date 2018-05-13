@@ -29,20 +29,21 @@
 				<li class="dropdown" id="nav_account_dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li  id="nav_account_show"><a href="{{ url('/user/'.Auth::user()->id) }}">Details</a></li>
-						<li  id="nav_account_edit"><a href="{{ url('/user/'.Auth::user()->id.'/edit') }}">Edit</a></li>
-						<li  id="nav_account_list"><a href="{{ url('/user/') }}">Other Users</a></li>
+						<li  id="nav_account_list"><a href="{{ url('/unread/') }}">Unread Posts</a></li>
+						<li  id="nav_account_list"><a href="{{ url('/user/') }}">View Users</a></li>
+						<li  id="nav_account_show"><a href="{{ url('/user/'.Auth::user()->id) }}">Account Settings</a></li>
 						<li role="separator" class="divider"></li>
-						<li  id="nav_logout"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
 						@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\User::TYPE_ADMIN) || (Auth::user()->type == App\Models\User::TYPE_WRITER))
-							@if (Auth::user()->type == App\Models\User::TYPE_ADMIN)
-							<li  id="nav_account_create"><a href="{{ url('/user/create') }}">Create User</a></li>
-							@endif
 							<li  id="nav_post_create"><a href="{{ url('/post/create') }}">Create Post</a></li>
 							@if (Auth::user()->type == App\Models\User::TYPE_ADMIN)
 							<li  id="nav_tag_list"><a href="{{ url('/tag/') }}">Edit Tags</a></li>
 							@endif
+							@if (Auth::user()->type == App\Models\User::TYPE_ADMIN)
+							<li  id="nav_account_create"><a href="{{ url('/user/create') }}">Create User</a></li>
+							@endif
 						@endif @endif
+						<li role="separator" class="divider"></li>
+						<li  id="nav_logout"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
 					</ul>
 				</li>
 			@endif

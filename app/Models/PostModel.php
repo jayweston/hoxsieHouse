@@ -37,7 +37,7 @@ class Post extends Model
 		if ( !empty($image->id) ){
 			return \URL::to('/images/blog/'.$image->post_id.'/'.$image->name); 
 		}else{
-			return \URL::to('/images/blog/thumbnail.png');
+			return \URL::to('/images/static/thumbnail.png');
 		}
 	}
 	/*
@@ -162,5 +162,17 @@ class Post extends Model
 		$this->content = $content;
 		$this->save();
 		return true;
+	}
+	/*
+	 * Return slug for SEO URLs.
+	*/
+	public function getSlugAttribute()
+	{
+		return str_slug($this->title);
+	}
+
+	public function getUrlAttribute()
+	{
+		return action('PostController@show', [$this->type, $this->id, $this->slug]);
 	}
 }

@@ -4,7 +4,7 @@
 	<div class="row">
 	@foreach($posts as $key => $post)
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
-			<a href="/post/{{ $post->id }}">
+			<a href="{{ $post->url }}">
 				@if($key == 0)
 					<img src="/images/swipe_icon.png" class="swipe_image hidden" />
 				@endif

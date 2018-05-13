@@ -6,8 +6,8 @@
 @foreach($posts as $post)
 <item>
 <title>{{ $post->title }}</title>
-<link>{{ URL::to( '/post/'.$post->id ) }}</link>
-<guid>{{ URL::to( '/post/'.$post->id ) }}</guid>
+<link>{{ $post->url }}</link>
+<guid>{{ $post->url }}</guid>
 <pubDate>{{ date_format(date_create($post->avialable_at),"D, d M Y H:i:s T") }}</pubDate>
 <description>{{ $post->summary }}</description>
 </item>
