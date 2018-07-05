@@ -2,6 +2,8 @@
 
 @if(!empty($post->meta()->title))
 	@section('title',$post->meta()->title)
+@else
+	@section('title',$post->title)
 @endif
 
 @if(!empty($post->meta()->description))

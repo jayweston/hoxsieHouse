@@ -1,7 +1,7 @@
 /* 
-Main		#83D2B0		rgb(131,210,176)
-Contrast	#004000		rgb(0,64,0)
-Alt		#428958		rgb(66,137,88)
+Main		#83D2B0		rgb(131,210,176) 	light
+Contrast	#004000		rgb(0,64,0) 		dark
+Alt		#428958		rgb(66,137,88) 		medium
 rgba(76, 175, 80, 0.3)
 */
 /*
@@ -526,3 +526,4 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 		display:inline-block;
 	}
 }
+

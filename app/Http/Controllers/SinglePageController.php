@@ -61,6 +61,12 @@ class SinglePageController extends Controller
 		$view_data['posts'] = $posts;
 		return view('pages.single.rss', $view_data);
 	}
+	public function events(Request $request)
+	{
+		$posts = Post::where('draft', false)->where('avialable_at','>' ,$request->input('start'))->where('avialable_at','<' ,$request->input('end'))->where('avialable_at','<' ,\Carbon\Carbon::now())->get();
+		$view_data['posts'] = $posts;
+		return view('pages.single.events', $view_data);
+	}
 	public function tos()
 	{
 		return view('pages.single.tos');
@@ -72,5 +78,9 @@ class SinglePageController extends Controller
 	public function about()
 	{
 		return view('pages.single.about');
+	}
+	public function calendar()
+	{
+		return view('pages.single.calendar');
 	}
 }

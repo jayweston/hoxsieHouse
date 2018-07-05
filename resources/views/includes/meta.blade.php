@@ -34,7 +34,7 @@
 	<meta name="twitter:title" content="@yield('title','Hoxsie House Blog')">
 	<meta name="twitter:description" content="@yield('description','A blog detailing the life of the Hoxsie\'s. Including our travels, eatin\'s and purchases.')"/>
 	<meta name="twitter:creator" content="Stacies_Place"/>
-	<meta name="twitter:image:src" content=" yield('image', \URL::to('/images/blog/thumbnail.png') )"/>
+	<meta name="twitter:image:src" content="@yield('image', \URL::to('/images/blog/thumbnail.png') )"/>
 	<meta name="twitter:domain" content="{{ URL::full() }}"/>
 @show
 
