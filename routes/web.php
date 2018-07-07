@@ -16,9 +16,11 @@ Route::group(['middleware' => 'impersonate'], function () {
 	Route::get('/latest', 'SinglePageController@latest');
 	Route::get('/unread', 'SinglePageController@unread');
 	Route::get('/rss', 'SinglePageController@rss');
+	Route::get('/events', 'SinglePageController@events');
 	Route::get('/tos', 'SinglePageController@tos');
 	Route::get('/privacy', 'SinglePageController@privacy');
 	Route::get('/about', 'SinglePageController@about');
+	Route::get('/calendars', 'SinglePageController@calendar');
 	Route::get('/post/{id}/print', 'PostController@printfriendly');
 	Route::resource('/post', 'PostController',['except' => ['show']]);
 	Route::resource('/user', 'UserController');

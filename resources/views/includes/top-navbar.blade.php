@@ -5,18 +5,19 @@
 		--}}
 		<ul class="nav navbar-nav">
 			<li class="nav_default_text"><a href="/">Home</a></li>
-			<li class="nav_default_text"><a href="/about">About</a></li>
 			<li class="nav_default_text"><a href="/post">Travel</a></li>
+			<li class="nav_default_text"><a href="/about">About</a></li>
+			<li class="nav_default_text"><a href="/calendars">Calendar</a></li>
 		</ul>
 		{{--
 			Right side dropdown for users
 		--}}
 		<ul class="nav navbar-nav navbar-right">
-			<li class=" hidden-xs"><a  data-svc="facebook" data-svc-id="TheStaciesPlace" title="Follow on Facebook" href="http://www.facebook.com/TheStaciesPlace" target="_blank"><i class="fab fa-facebook"></i></a></li>
-			<li class=" hidden-xs"><a  data-svc="instagram" data-svc-id="StaciesPlace" title="Follow on Instagram" href="http://instagram.com/StaciesPlace" target="_blank"><i class="fab fa-instagram"></i></a></li>
-			<li class=" hidden-xs"><a  data-svc="twitter" data-svc-id="Stacies_Place" title="Follow on Twitter" href="http://twitter.com/intent/follow?source=followbutton&amp;variant=1.0&amp;screen_name=Stacies_Place" target="_blank"><i class="fab fa-twitter"></i></a></li>
-			<li class=" hidden-xs"><a  data-svc="pinterest" data-svc-id="Stacies_Place" title="Follow on Pinterest" href="http://www.pinterest.com/Stacies_Place" target="_blank"><i class="fab fa-pinterest"></i></a></li>
-			<li class=" hidden-xs"><a  data-svc="snapchat" data-svc-id="staciesplace" title="Follow on Snapchat" href="https://www.snapchat.com/add/staciesplace" target="_blank"><i class="fab fa-snapchat"></i></a></li>
+			<li class=" hidden-xs"><a  data-svc="facebook" data-svc-id="TheStaciesPlace" title="Follow on Facebook" href="http://www.facebook.com/TheStaciesPlace" target="_blank"><i class="fab fa-lg fa-facebook"></i></a></li>
+			<li class=" hidden-xs"><a  data-svc="instagram" data-svc-id="StaciesPlace" title="Follow on Instagram" href="http://instagram.com/StaciesPlace" target="_blank"><i class="fab fa-lg fa-instagram"></i></a></li>
+			<li class=" hidden-xs"><a  data-svc="twitter" data-svc-id="Stacies_Place" title="Follow on Twitter" href="http://twitter.com/intent/follow?source=followbutton&amp;variant=1.0&amp;screen_name=Stacies_Place" target="_blank"><i class="fab fa-lg fa-twitter"></i></a></li>
+			<li class=" hidden-xs"><a  data-svc="pinterest" data-svc-id="Stacies_Place" title="Follow on Pinterest" href="http://www.pinterest.com/Stacies_Place" target="_blank"><i class="fab fa-lg fa-pinterest"></i></a></li>
+			<li class=" hidden-xs"><a  data-svc="snapchat" data-svc-id="staciesplace" title="Follow on Snapchat" href="https://www.snapchat.com/add/staciesplace" target="_blank"><i class="fab fa-lg fa-snapchat"></i></a></li>
 			@if (Auth::guest())
 				<li class="dropdown" id="nav_account_dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Guest<span class="caret"></span></a>

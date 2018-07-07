@@ -19,24 +19,9 @@
 			@endforeach
 		</div></div>
 		<div class="col-md-4 col-sm-5 hidden-xs"><div class="col-md-12 col-sm-12">
-			<div class="row dashboard_post dashboard-side-aboutus">
-				<h4 class="text-center dashboard-side-title">About Us</h4>
-				<div class="text-center"><img src="/images/static/dashboard-about-us.jpg" class="row" /></div>
-				<div>We are west coast travelers wanting to document our fun times.</div>
-			</div>
-			<hr/>
 			<div class="row dashboard_post">
 				<h4 class="text-center dashboard-side-title">Our Story</h4>
 				This is how we meet.
-			</div>
-			<hr/>
-			<div class="row dashboard_post">
-				<h4 class="text-center dashboard-side-title ">Stay Connected</h4>
-				<a class="col-md-2 col-md-offset-1 dashboard-side-connected" data-svc="facebook" data-svc-id="TheStaciesPlace" title="Follow on Facebook" href="http://www.facebook.com/TheStaciesPlace" target="_blank"><i class="fab fa-facebook fa-2x"></i></a>
-				<a class="col-md-2 dashboard-side-connected" data-svc="instagram" data-svc-id="StaciesPlace" title="Follow on Instagram" href="http://instagram.com/StaciesPlace" target="_blank"><i class="fab fa-instagram fa-2x"></i></a>
-				<a class="col-md-2 dashboard-side-connected" data-svc="twitter" data-svc-id="Stacies_Place" title="Follow on Twitter" href="http://twitter.com/intent/follow?source=followbutton&amp;variant=1.0&amp;screen_name=Stacies_Place" target="_blank"><i class="fab fa-twitter fa-2x"></i></a>
-				<a class="col-md-2 dashboard-side-connected" data-svc="pinterest" data-svc-id="Stacies_Place" title="Follow on Pinterest" href="http://www.pinterest.com/Stacies_Place" target="_blank"><i class="fab fa-pinterest fa-2x"></i></a>
-				<a class="col-md-2 dashboard-side-connected" data-svc="snapchat" data-svc-id="staciesplace" title="Follow on Snapchat" href="https://www.snapchat.com/add/staciesplace" target="_blank"><i class="fab fa-snapchat fa-2x"></i></a>
 			</div>
 			<hr/>
 			<div class="row dashboard_post">
