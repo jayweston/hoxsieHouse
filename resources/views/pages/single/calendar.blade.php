@@ -19,12 +19,13 @@
 	<script>
 		$(document).ready(function() {
 			$('#calendar').fullCalendar({
+				displayEventTime: false,
+				googleCalendarApiKey: 'AIzaSyDhkvojubGTn28f5S8Pf-THMulUNTcY_Xw',
 				header: {
 					left: 'prev,next today',
 					center: 'title',
 					right: 'month,listYear'
 				},
-				displayEventTime: false,
 				eventSources: [
 					{
 					url:'/events',
@@ -32,7 +33,7 @@
 			      		textColor:'#004000'
 					},
 					{
-					url:'/events',
+					googleCalendarId: 'npheilr69jhcge018ar6pi22ko@group.calendar.google.com',
 			      		color:'#004000',
 			      		textColor:'#83D2B0'
 					}

@@ -69,7 +69,7 @@ class PostImageController extends Controller
 				$post_image->save();
 			}else{dd($key);}
 		}
-		return redirect('post/'.$id);
+		return redirect($post->url);
 	}
 	/*
 	 * Alow admins and post creaters to delete current post.

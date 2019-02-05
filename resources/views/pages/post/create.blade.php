@@ -14,6 +14,16 @@
 @section('meta-pintrest') @stop
 
 @section('content')
+	{!! Form::open(['action' => ['PostController@copy']]) !!}
+		<div class="form-group">
+			{!! Form::label('website','Website') !!}
+			{!! Form::text('website', 'http://tonystacietravelblog.blogspot.com', ['class' =>'form-control', 'maxlength' => '1000', 'minlength' => '4']) !!}
+		</div>
+		<div class="form-group">
+			{!! Form::submit('Copy Article', ['class' =>'btn btn-primary form-control']) !!}
+		</div>
+	{!! Form::close() !!}
+
 	{!! Form::open(['action' => ['PostController@store']]) !!}
 		<div class="form-group">
 			{!! Form::label('title','Title') !!}

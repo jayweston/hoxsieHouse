@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Models\Post;
 use App\Models\User;
+use App\Models\Tag;
+use App\Models\PostTag;
 use App\Models\PostImage;
 use App\Models\UserPost;
 
@@ -98,6 +100,94 @@ class PostController extends Controller
 		$request->request->add(['user_id' => \Auth::user()->id]);
 		$post = Post::create($request->all());
 		return redirect($post->url);
+	}
+	/*
+	 * Allow admins and writers to copy a post from bloggspot.
+	*/
+	public function copy(Request $request)
+	{
+		$post = new Post();
+		$this->authorize('store', $post);
+
+		$this->validate($request, [
+			'website' => 'required|string',
+		]);
+
+		$website = $request->website;
+		$website_content = file_get_contents($website);
+	 
+		preg_match("/date-header'><span>(.*?)<\\/span>/si", $website_content, $match);
+		$post_date = $match[1];
+		$post_datetime = \DateTime::createFromFormat('M d, Y', $post_date);
+
+		preg_match('!post-labels["\']>(.*)</span>!is', $website_content, $match);
+		$post_labels = strstr($match[1], '</span>', true);
+		$post_labels = preg_match_all('!<a.+>(.+)</a>!',$post_labels,$labels);
+
+		preg_match("/post-title entry-title' itemprop='name'>(.*?)<\\/h3>/si", $website_content, $match);
+		$post_title = str_replace("\n","",$match[1]);
+
+		preg_match("/post-body entry-content(.*?)<div class='post-footer'>/si", $website_content, $match);
+		$post_content = strstr($match[1], '<');
+		$post_content = str_replace("\n",'',$post_content);
+		$post_content = preg_replace('/ (class|style|imageanchor|border|data-original-width|data-original-width|data-original-height|height|width)="[^"]+"/', '', $post_content);
+		$post_content = preg_replace("/ (class|style|imageanchor|border|data-original-width|data-original-width|data-original-height|height|width)='[^']+'/", "", $post_content);
+		$post_content = preg_replace("!</div></div>$!", "</div>", $post_content);
+		$post_content = str_replace("<a name='more'></a>","",$post_content);
+		$post_content = str_replace("<div><span><br /></span></div>","",$post_content);
+		$post_content = str_replace("<span><br /></span>","",$post_content);
+		$post_content = str_replace("<br />","",$post_content);
+		$post_content = str_replace("<div></div>","",$post_content);
+		$post_content = str_replace('  />'," />",$post_content);
+		$post_content = str_replace('  >',">",$post_content);
+		$post_content = str_replace(' >',">",$post_content);
+		$post_content = str_replace('<span>', '', $post_content);
+		$post_content = str_replace('</span>', '', $post_content);
+		$post_content = str_replace('>&nbsp;<', '><', $post_content);
+		$post_content = str_replace('</a></div><div><a', '</a><a', $post_content);
+		$post_content = str_replace('<div><a', '<div class="post-content-pictures"><a', $post_content);
+		$post_content = str_replace('<div>', '<div class="post-content-paragraph">', $post_content);
+
+		$post_summary = html_entity_decode(strip_tags($post_content));
+		$post_summary = substr($post_summary, 0, 100);
+		$post_summary = $post_summary."...";
+
+		while (preg_match('!<a href="([^"]+)"><img src="([^"]+)" /></a>!', $post_content, $image)) { 
+	   		preg_match('!<a href="([^"]+)"><img src="([^"]+)" /></a>!', $post_content, $image);
+			$search_string='!<a href="'.$image[1].'"><img src="([^"]+)" /></a>!';
+			$post_content = preg_replace($search_string,'<img src="'.$image[2].'" />',$post_content);
+		}
+
+		$post = array(
+			'title' => $post_title,
+			'summary' => $post_summary,
+			'type' => 'travel',
+			'content' => $post_content,
+			'avialable_at' => $post_datetime,
+			'draft' => FALSE,
+			'user_id' => \Auth::user()->id);
+
+		$new_post = Post::create($post);
+		$new_post->downloadImages();
+
+		foreach($labels[1] as $key=>$label){
+			$tag = Tag::where('name',$label)->first();
+			$id = 0;
+			if (!empty($tag->id)){
+				$id = $tag->id;
+			}else{
+				$tag = new Tag();
+				$tag->name = $label;
+				$tag->save();	
+			}
+			$postTag = new PostTag();
+			$postTag->post_id = $new_post->id;
+			$postTag->tag_id = $tag->id;
+			$postTag->order = $key+1;
+			$postTag->save();
+		}
+
+		return redirect($new_post->url);
 	}
 	/*
 	 * Allow anyone to view posts that are not in draft mode or not published yet.
