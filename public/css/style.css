@@ -50,6 +50,20 @@ a:focus, a:hover{
 table.table-bordered, table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
 	border:1px solid #83D2B0;
 }
+.nav_default_text{
+	font-size:125%;
+	font-family: "Myriad pro Semibold";
+}
+#nav_account_dropdown{
+	font-size:125%;
+	font-family: "Myriad pro Semibold";
+}
+.navbar-default{
+	padding-top: 5px;
+}
+.navbar-icons{
+	    margin-top: -5px;
+}
 /*
  * Edit post
 */
@@ -137,6 +151,20 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 }
 .post-show-dropdown{
 	min-width:350px;
+}
+.post-content-pictures{
+	text-align: center;
+}
+.post-content-pictures img{
+	max-width: 300px;
+	padding-top:10px;
+	padding-bottom:10px;
+	padding-right:10px;
+	padding-left:10px;
+}
+.post-content-paragraph{
+	padding-top:10px;
+	padding-bottom:10px;
 }
 /*
  * Post Paginations

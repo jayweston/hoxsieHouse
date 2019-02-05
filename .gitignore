@@ -1,6 +1,7 @@
 /storage/*.key
 /.idea
 /.vagrant
+/public/images/blog
 Homestead.json
 Homestead.yaml
 npm-debug.log

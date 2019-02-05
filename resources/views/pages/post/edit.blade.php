@@ -165,7 +165,7 @@
 								</td>
 							</tr>
 						@endforeach
-						{{ Form::submit('Update', ['class' => 'btn btn-primary form-control']) }}
+						{!! Form::submit('Update', ['class' => 'btn btn-primary form-control']) !!}
 					{{ Form::close() }}
 				</tbody>
 			</table>

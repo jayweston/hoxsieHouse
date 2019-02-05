@@ -137,18 +137,21 @@ class Post extends Model
 		$urls = [];
 		\File::makeDirectory(public_path().'/images/blog/'.$this->id.'/');
 		foreach ($results as $result){
-			$result = str_replace('<img style="border-width: initial; border-style: none; position: relative;" src="','',$result);
+			$result = str_replace('<img src="','',$result);
 			foreach ($result as $string){
 				$parts = explode('"',$string); 
 				$test = $parts['0'];
 				array_push($urls,$test);
 			}
 		}
-		foreach ($urls as $url){
+		foreach ($urls as $i=>$url){
 			$filename = preg_replace('/^.*\/\s*/', '', $url);
+			$filename = str_replace(' ', '', $filename);
+			$filename = str_replace('%', '', $filename);
 			copy($url, public_path().'/images/blog/'.$this->id.'/'.$filename);
 			$image = new PostImage();
 			$image->thumbnail = 0;
+			if($i == 0){$image->thumbnail = 1;}
 			$image->name = $filename;
 			$image->post_id = $this->id;
 			$image->old_post_id = $this->id;
@@ -158,9 +161,6 @@ class Post extends Model
 			$filename = preg_replace('/^.*\/\s*/', '', $url);
 			$content = str_replace($url,'/images/blog/'.$this->id.'/'.$filename,$content);
 		}
-		$content = preg_replace('#href="https://\d\.bp\.blogspot\.com.{60,150}>#', '>', $content);
-		$this->content = $content;
-		$this->save();
 		return true;
 	}
 	/*
