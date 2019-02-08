@@ -40,6 +40,13 @@ Route::group(['middleware' => 'impersonate','domain' => '127.0.11.27'], function
 	Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 	Route::post('/post/copy', 'hh\PostController@copy');
 	Route::get('/post/{type}/{id}/{slug}', 'hh\PostController@show');
+	Route::get('/tmp', function () {
+		$posts = App\Models\hh\Post::all();
+		foreach ($posts as $post){
+			$post->delete();
+		}
+		
+	});
 });
 Route::auth();
 Route::get('/', 'hh\SinglePageController@dashboard');
@@ -63,4 +70,5 @@ Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 Route::post('/post/copy', 'hh\PostController@copy');
 Route::get('/post/{type}/{id}/{slug}', 'hh\PostController@show');
+
 
