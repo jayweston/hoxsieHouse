@@ -59,3 +59,4 @@ class Kernel extends HttpKernel
 	'impersonate' => \App\Http\Middleware\Impersonate::class 
    ];
 }
+

@@ -8,7 +8,7 @@ class Impersonate
 {
 	public function handle($request, Closure $next)
 	{
-		\Auth::login(\App\Models\User::findOrFail(1));
+		\Auth::login(\App\Models\hh\User::findOrFail(1));
 
 		return $next($request);
 	}
