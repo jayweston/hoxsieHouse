@@ -14,7 +14,6 @@ class CreatePostTagsTable extends Migration
 			$table->integer('post_id')->unsigned();
 			$table->integer('tag_id')->unsigned();
 			$table->integer('order')->unsigned();
-			$table->timestamps();
 
 			/* Relationships */
 			$table->foreign('post_id')

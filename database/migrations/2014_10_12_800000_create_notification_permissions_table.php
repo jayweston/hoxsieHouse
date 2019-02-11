@@ -13,11 +13,8 @@ class CreateNotificationPermissionsTable extends Migration
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
 			$table->boolean('email')->default(true);
-			$table->boolean('google')->default(true);
 			$table->boolean('twitter')->default(true);
 			$table->boolean('facebook')->default(true);
-			$table->boolean('instagram')->default(true);
-			$table->boolean('pinterest')->default(true);
 			$table->timestamps();
 
 			/* Relationships */

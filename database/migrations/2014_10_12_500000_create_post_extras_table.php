@@ -16,9 +16,6 @@ class CreatePostExtrasTable extends Migration
 			$table->string('city');
 			$table->string('state');
 			$table->integer('zip')->unsigned();
-			$table->dateTime('avialable_at');
-			$table->timestamps();
-			$table->softDeletes();
 
 			/* Relationships */
 			$table->foreign('post_id')
