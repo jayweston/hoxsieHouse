@@ -56,7 +56,7 @@
 	@if(!Auth::guest()) @if( (Auth::user()->type == App\Models\hh\User::TYPE_ADMIN) || (App\Models\hh\User::isPostMine($post->id)) )
 		<div class="form-group">
 			<a href="/post/{{ $post->id }}/edit" class="btn btn-primary pull-left">Edit</a>
-			{!! Form::open(['action' => ['hh\PostController@destroy', $post->id], 'method' => 'delete']) !!}	{!! Form::submit('Delete', ['class' =>'btn btn-primary pull-right confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) !!}	{!! Form::close() !!}<br/>
+			{!! Form::open(['url' => 'post'.$post->id, 'method' => 'delete']) !!}	{!! Form::submit('Delete', ['class' =>'btn btn-primary pull-right confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) !!}	{!! Form::close() !!}<br/>
 		</div>
 		<hr/>
 	@endif @endif
@@ -139,7 +139,7 @@
 							</li>
 							<li>
 								@if ( !Auth::guest() ) @if ( Auth::user()->type == App\Models\hh\User::TYPE_ADMIN )
-									{{ Form::open(['action' => ['hh\CommentController@destroy',$comment->id], 'method' => 'DELETE']) }}
+									{{ Form::open(['url' => 'comment/'.$comment->id, 'method' => 'delete']) }}
 									{!! Form::button('delete', ['type'=>'submit', 'class' => 'btn btn-primary confirm', 'data-confirm' => 'Are you sure you want to delete this comment?']) !!}</span>
 									{{ Form::close() }}
 								@endif @endif
@@ -153,7 +153,7 @@
 					<div class="panel panel-default">
 						<div class="panel-heading">Reply to {{ $comment->user()->name }}'s comment</div>
 						<div class="panel-body">
-							{!! Form::open(['action' => ['hh\CommentController@store']]) !!}
+							{!! Form::open(['url' => 'comment/', 'method' => 'post']) !!}
 								{!! Form::hidden('post_id',$post->id) !!}
 								{!! Form::hidden('parent_id',$comment->id) !!}
 								{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
@@ -173,7 +173,7 @@
 			<div class="panel panel-default">
 				<div class="panel-heading">Make a comment on the post</div>
 				<div class="panel-body">
-					{!! Form::open(['action' => ['hh\CommentController@store']]) !!}
+					{!! Form::open(['url' => 'comment/', 'method' => 'post']) !!}
 						{!! Form::hidden('post_id',$post->id) !!}
 						{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
 						{!! Form::submit('111', ['type'=>'submit', 'class' =>'comment-submit-action hidden']) !!}

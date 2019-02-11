@@ -42,7 +42,7 @@
 					<td>{{ $user->type }}</td>
 					<td><a href="/user/{{ $user->id }}/edit" class="btn btn-primary">Edit</a></td>
 					<td>
-						{{ Form::open(['action' => ['hh\UserController@destroy',$user->id], 'method' => 'DELETE']) }}
+						{{ Form::open(['url' => 'user/'.$user->id, 'method' => 'delete']) }}
 						{{ Form::submit('Delete', ['class' => 'btn btn-primary confirm', 'data-confirm' => 'Are you sure you want to delete this account?']) }}
 						{{ Form::close() }}
 					</td>

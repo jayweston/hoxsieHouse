@@ -33,7 +33,7 @@
 	{{-- Edit post content --}}
 	<div id="post_content">
 		<h2>Post Content</h2>
-		{!! Form::model($post, ['action' => ['hh\PostController@update',$post->id], 'method'=>'PATCH']) !!}
+		{!! Form::model($post, ['url' => 'post/'.$post->id, 'method' => 'patch']) !!}
 			<div class="form-group">
 				{!! Form::label('title','Title') !!}
 				{!! Form::text('title', null, ['class' =>'form-control']) !!}
@@ -72,10 +72,10 @@
 	{{-- Edit post meta --}}
 	<div id="post_meta">
 		<h2>Post Meta</h2>
-			@if ( !empty($post->meta()->id) )
-				{!! Form::model($post->meta(), ['action' => ['hh\PostMetaController@update',$post->meta()->id], 'method'=>'PATCH']) !!}
+			@if ( !empty($post->meta()->id) )			
+				{!! Form::model($post->meta(), ['url' => 'postmeta/'.$post->meta()->id, 'method' => 'patch']) !!}
 			@else
-				{!! Form::open(['action' => ['hh\PostMetaController@store']]) !!}
+				{!! Form::open(['url' => 'postmeta/', 'method' => 'post']) !!}
 			@endif
 				{{ Form::hidden('post_id',$post->id) }}
 			<div class="form-group">
@@ -116,7 +116,7 @@
 		{!! Form::close() !!}
 		@if ( !empty($post->meta()->id) )
 			<div class="form-group">
-				{{ Form::open(['action' => ['hh\PostMetaController@destroy',$post->meta()->id], 'method' => 'DELETE']) }}
+				{{ Form::open(['url' => 'postmeta/'.$post->meta()->id, 'method' => 'delete']) }}
 				{{ Form::submit('Delete', ['class' => 'btn btn-primary form-control confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) }}
 				{{ Form::close() }}
 			</div>
@@ -126,7 +126,7 @@
 	{{-- Upload images to post --}}
 	<div id="upload_images">
 		<h2>Upload Images</h2>
-		{!! Form::open(['action' => ['hh\PostImageController@store'], 'files'=>true]) !!}
+		{!! Form::open(['url' => 'postimage/', 'method' => 'post'], 'files'=>true]) !!}
 			<div class="form-group">
 				{!! Form::label('images','Images') !!}
 				{{ Form::hidden('post',$post->id) }}
@@ -154,7 +154,7 @@
 					</tr>
 				</thead>
 				<tbody>
-					{{ Form::open(['action' => ['hh\PostImageController@update',$post->id], 'method' => 'PATCH']) }}
+					{{ Form::open(['url' => 'postimage/'.$post->id, 'method' => 'patch']) }}
 						@foreach ($post->images as $image)
 							<tr>
 								<td class="hidden-xs col-sm-1 col-md-1 col-lg-1">{{ Form::radio('Thumbnail', $image->id, $image->thumbnail, []) }}</td>
@@ -175,7 +175,7 @@
 	{{-- Edit post tags --}}
 	<div id="edit_tags">
 		<h2>Edit Tags</h2>
-		{!! Form::open(['action' => ['hh\PostTagController@update',$post->id], 'method'=>'PATCH']) !!}
+		{!! Form::open(['url' => 'posttag/'.$post->id, 'method' => 'patch']) !!}
 			<div class="table-responsive">
 				<table class="table table-bordered table-striped">
 					<thead>

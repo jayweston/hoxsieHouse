@@ -20,7 +20,7 @@
 	@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\hh\User::TYPE_ADMIN) || (Auth::user()->type == App\Models\hh\User::TYPE_WRITER))
 		<h3>Change Tag</h3>
 		<div class="tag-edit">
-			{!! Form::model($tag, ['action' => ['hh\TagController@update',$tag->id], 'method'=>'PATCH']) !!}
+			{!! Form::model($tag, ['url' => 'tag/'.$tag->id, 'method' => 'patch']) !!}
 				<div class="form-group">
 					{!! Form::label('name','Name') !!}
 					{!! Form::text('name', null, ['class' =>'form-control']) !!}
@@ -32,7 +32,7 @@
 		</div>
 
 		<div class="tag-delete">
-			{{ Form::open(['action' => ['hh\TagController@destroy', $tag->id], 'method' => 'DELETE']) }}
+			{{ Form::open(['action' => ['url' => 'tag/'.$tag->id, 'method' => 'delete']) }}
 			{{ Form::submit('Delete', ['class' => 'btn btn-primary form-control confirm', 'data-confirm' => 'Are you sure you want to delete this tag?']) }}
 			{{ Form::close() }}
 		</div>

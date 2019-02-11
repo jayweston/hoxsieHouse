@@ -39,7 +39,7 @@
 						@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\hh\User::TYPE_ADMIN) || (Auth::user()->type == App\Models\hh\User::TYPE_WRITER))
 							<td><a href="/tag/{{ $tag->id }}" class="btn btn-primary">Edit</a></td>
 							<td>
-								{{ Form::open(['action' => ['hh\TagController@destroy', $tag->id], 'method' => 'DELETE']) }}
+								{{ Form::open(['url' => 'tag/'.$tag->id, 'method' => 'delete']) }}
 								{{ Form::submit('Delete', ['class' => 'btn btn-primary confirm', 'data-confirm' => 'Are you sure you want to delete this tag?']) }}
 								{{ Form::close() }}
 							</td>

@@ -14,7 +14,7 @@
 @section('meta-pintrest') @stop
 
 @section('content')
-	{!! Form::open(['action' => ['hh\UserController@store']]) !!}
+	{!! Form::open(['url' => 'user', 'method' => 'post']) !!}
 		<div class="form-group">
 			{!! Form::label('name','Name') !!}
 			{!! Form::text('name', null, ['class' =>'form-control']) !!}

@@ -21,8 +21,8 @@
 				<li class="dropdown" id="nav_account_dropdown">
 					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Guest<span class="caret"></span></a>
 					<ul class="dropdown-menu">
-						<li  id="nav_login"><a href="{{ route('login').'?redirect='.Request::path() }}">Login</a></li>
-						<li  id="nav_register"><a href="{{ route('register').'?redirect='.Request::path() }}">Register</a></li>
+						<li  id="nav_login"><a href="{{ '/login?redirect='.Request::path() }}">Login</a></li>
+						<li  id="nav_register"><a href="{{ '/register?redirect='.Request::path() }}">Register</a></li>
 					</ul>
 				</li>
 			@else
@@ -43,12 +43,12 @@
 							@endif
 						@endif @endif
 						<li role="separator" class="divider"></li>
-						<li  id="nav_logout"><a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+						<li  id="nav_logout"><a href="/logout" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
 					</ul>
 				</li>
 			@endif
 		</ul>
 	</div></div></div></div>
 </nav>
-<form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">{{ csrf_field() }}</form>
+<form id="logout-form" action="/logout" method="POST" style="display: none;">{{ csrf_field() }}</form>
 

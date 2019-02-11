@@ -14,7 +14,7 @@
 @section('meta-pintrest') @stop
 
 @section('content')
-	{!! Form::open(['action' => ['hh\PostController@copy']]) !!}
+	{!! 	Form::open(['url' => 'post/copy', 'method' => 'post']) !!}
 		<div class="form-group">
 			{!! Form::label('website','Website') !!}
 			{!! Form::text('website', 'http://tonystacietravelblog.blogspot.com', ['class' =>'form-control', 'maxlength' => '1000', 'minlength' => '4']) !!}
@@ -24,7 +24,7 @@
 		</div>
 	{!! Form::close() !!}
 
-	{!! Form::open(['action' => ['hh\PostController@store']]) !!}
+	{!! Form::open(['url' => 'post', 'method' => 'post']) !!}
 		<div class="form-group">
 			{!! Form::label('title','Title') !!}
 			{!! Form::text('title', null, ['class' =>'form-control', 'maxlength' => '255', 'minlength' => '4']) !!}
