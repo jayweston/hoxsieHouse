@@ -2,7 +2,6 @@
 use Illuminate\Http\Request;
 
 $hhRoutes = function() {
-	Route::auth();
 	Route::get('/', 'hh\SinglePageController@dashboard');
 	Route::get('/latest', 'hh\SinglePageController@latest');
 	Route::get('/unread', 'hh\SinglePageController@unread');
@@ -20,10 +19,15 @@ $hhRoutes = function() {
 	Route::resource('/postmeta', 'hh\PostMetaController', ['only' => ['store','update','destroy']]);
 	Route::resource('/posttag', 'hh\PostTagController', ['only' => ['update']]);
 	Route::resource('/comment', 'hh\CommentController', ['only' => ['store','destroy']]);
+	Route::get('login', 'Auth\LoginController@showLoginForm');
+	Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 	Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 	Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
-	Route::post('/post/copy', 'hh\PostController@copy');
 	Route::get('/post/{type}/{id}/{slug}', 'hh\PostController@show');
+	Route::post('/post/copy', 'hh\PostController@copy');
+	Route::post('login', 'Auth\LoginController@login');
+	Route::post('register', 'Auth\LoginController@logout');
+	Route::post('logout', 'Auth\RegisterController@register');
 };
 Route::group(['domain' => 'HoxsieHouse.com'], $hhRoutes);
 Route::group(['domain' => '127.0.11.27'], $hhRoutes);

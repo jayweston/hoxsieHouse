@@ -15,7 +15,7 @@
 
 
 @section('content')
-	{!! Form::model($user, ['action' => ['hh\UserController@update',$user->id], 'method'=>'PATCH']) !!}
+	{!! Form::model($user, ['url' => 'user/'.$user->id, 'method' => 'patch']) !!}
 		<div class="form-group">
 			{!! Form::label('name','Name') !!}
 			{!! Form::text('name', null, ['class' =>'form-control']) !!}
@@ -32,7 +32,7 @@
 	{!! Form::close() !!}
 
 	<div class="form-group">
-		{!! Form::open(['action' => ['hh\UserController@destroy',$user->id], 'method' => 'DELETE']) !!}
+		{!! Form::open(['action' => ['url' => 'user/'.$user->id, 'method' => 'delete']) !!}
 			{!! Form::submit('Delete', ['class' => 'btn btn-primary form-control confirm', 'data-confirm' => 'Are you sure you want to delete this account?']) !!}
 		{!! Form::close() !!}
 	</div>
