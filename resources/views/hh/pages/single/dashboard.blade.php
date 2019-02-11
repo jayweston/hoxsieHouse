@@ -20,32 +20,22 @@
 		</div></div>
 		<div class="col-md-4 col-sm-5 hidden-xs"><div class="col-md-12 col-sm-12">
 			<div class="row dashboard_post">
-				<h4 class="text-center dashboard-side-title">Our Story</h4>
-				This is how we meet.
-			</div>
-			<hr/>
-			<div class="row dashboard_post">
 				<h4 class="text-center dashboard-side-title">Our Other Blogs</h4>
 				<div class="blog_container_image">
 					<a href="http://Crafts.HoxsieHouse.com"><img src="/hh/images/banner/nite_owl.png" class="img-responsive" /></a>
-					<span>Discription of blog</span>
 				</div>
 				<div class="blog_container_image">
 					<a href="http://StaciesPlace.HoxsieHouse.com"><img src="/hh/images/banner/stacies_place.png" class="img-responsive" /></a>
-					<span>Discription of blog</span>
 				</div>
 				<div class="blog_container_image">
 					<a href="http://Stacie.HoxsieHouse.com"><img src="/hh/images/banner/stacies_place_original.png" class="img-responsive" /></a>
-					<span>Discription of blog</span>
 				</div>
 				<div class="blog_container_image">
 					<a href="http://Wedding.HoxsieHouse.com"><img src="/hh/images/banner/wedding.png" class="img-responsive" /></a>
-					<span>Discription of blog</span>
 				</div>
 				@if (!Auth::guest()) @if (Auth::user()->type == App\Models\hh\User::TYPE_ADMIN)
 					<div class="blog_container_image">
 						<a href="http://Private.HoxsieHouse.com">Secret</a>
-						<span>Discription of blog</span>
 					</div>
 				@endif @endif
 			</div>

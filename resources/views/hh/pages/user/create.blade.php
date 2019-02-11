@@ -3,7 +3,7 @@
 @section('meta-general')
 	@parent
 	<meta name="robots" content="noindex,nofollow" />
-	@section('title','Create account')
+	@section('title','HoxsieHouse - Create account')
 	@section('description','Site admins can use this page to create a new account.')
 @stop
 

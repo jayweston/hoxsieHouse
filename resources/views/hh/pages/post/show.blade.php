@@ -1,9 +1,9 @@
-@extends('hh.layouts.app')
+@extends('hh.layouts.boarder')
 
 @if(!empty($post->meta()->title))
-	@section('title',$post->meta()->title)
+	@section('title','HoxsieHouse - '.$post->meta()->title)
 @else
-	@section('title',$post->title)
+	@section('title','HoxsieHouse - '.$post->title)
 @endif
 
 @if(!empty($post->meta()->description))
@@ -77,8 +77,8 @@
 
 	{{-- Next/last Post --}}
 	<div class="post-pagination">
-		@if ($previous_post != NULL)<a href="{{ URL::to( 'post/' . $previous_post ) }}" class="previous_post"><i class="fas fa-chevron-left"></i><i class="fas fa-chevron-left"></i> Previous Post</a>@endif
-		@if ($next_post != NULL)<a href="{{ URL::to( 'post/' . $next_post ) }}" class="next_post">Next Post <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></a>@endif
+		@if ($previous_post != NULL)<a href="{{ $previous_post->url }}" class="previous_post"><i class="fas fa-chevron-left"></i><i class="fas fa-chevron-left"></i> Previous Post</a>@endif
+		@if ($next_post != NULL)<a href="{{ $next_post->url }}" class="next_post">Next Post <i class="fas fa-chevron-right"></i><i class="fas fa-chevron-right"></i></a>@endif
 	</div>
 
 	{{-- Post Tags --}}

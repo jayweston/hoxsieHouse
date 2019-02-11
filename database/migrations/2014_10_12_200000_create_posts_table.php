@@ -23,7 +23,6 @@ class CreatePostsTable extends Migration
 			$table->string('summary')->nullable();
 			$table->dateTime('avialable_at');
 			$table->timestamps();
-			$table->softDeletes();
 
 			/* Relationships */
 			$table->foreign('user_id')

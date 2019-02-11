@@ -1,4 +1,4 @@
-@extends('hh.layouts.app')
+@extends('hh.layouts.boarder')
 
 @section('content')
 	<div class="row">

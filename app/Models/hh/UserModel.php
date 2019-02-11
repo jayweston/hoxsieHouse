@@ -7,14 +7,12 @@ use Illuminate\Auth\Authenticatable;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
-use Illuminate\Database\Eloquent\SoftDeletes;
 use Auth;
 
 class User extends Model implements AuthenticatableContract, CanResetPasswordContract
 {
 	use Authenticatable, CanResetPassword;
-	use SoftDeletes;
-	protected $fillable = ['name', 'email', 'type', 'twitter_id', 'facebook_id', 'google_id', 'instagram_id', 'pinterest_id', 'live_id', 'yahoo_id'];
+	protected $fillable = ['name', 'email', 'type', 'twitter_id', 'facebook_id', 'google_id', 'live_id'];
 	/*
 	 * Static variables for user types. 
 	*/

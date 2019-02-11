@@ -1,9 +1,9 @@
-@extends('hh.layouts.app')
+@extends('hh.layouts.boarder')
 
 @section('meta-general')
 	@parent
 	<meta name="robots" content="noindex,nofollow" />
-	@section('title', 'Create post' )
+	@section('title', 'HoxsieHouse - Create post' )
 	@section('description','Create new post for HoxsieHouse Blog.')
 @stop
 

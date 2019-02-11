@@ -228,9 +228,9 @@ class PostController extends Controller
 			}
 		}
 		// get previous post id
-		$view_data['previous_post'] = Post::where('id', '<', $post->id)->max('id');
+		$view_data['previous_post'] = Post::where('draft', '=', FALSE)->where('type', '=', $post->type)->where('avialable_at', '<', $post->avialable_at)->where('avialable_at', '<', \Carbon\Carbon::now())->orderBy('avialable_at', 'desc')->first();
 		// get next post id
-		$view_data['next_post'] = Post::where('id', '>', $post->id)->min('id');
+		$view_data['next_post'] = Post::where('draft', '=', FALSE)->where('type', '=', $post->type)->where('avialable_at', '>', $post->avialable_at)->where('avialable_at', '<', \Carbon\Carbon::now())->orderBy('avialable_at', 'asc')->first();
 
 		$view_data['post'] = $post;
 		return view('hh.pages.post.show', $view_data);

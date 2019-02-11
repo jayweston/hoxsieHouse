@@ -3,11 +3,10 @@
 namespace App\Models\hh;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\Storage;
 
 class Post extends Model
 {
-	use SoftDeletes;
 	protected $fillable = ['user_id', 'type', 'draft', 'title', 'content', 'summary', 'avialable_at'];
 	/*
 	 * Static array linking post type to blog name.
@@ -175,4 +174,15 @@ class Post extends Model
 	{
 		return action('hh\PostController@show', [$this->type, $this->id, $this->slug]);
 	}
+	/*
+	 * Add the following functionality to the built in delete funcyion:
+	 * 1) Delete the images associated witht the psot.
+	*/
+	public function delete(array $options = [])
+	{
+		
+		Storage::deleteDirectory(public_path().'/hh/images/blog/'.$this->id.'/');
+		parent::delete($options);
+	}
 }
+

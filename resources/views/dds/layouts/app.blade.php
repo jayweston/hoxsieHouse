@@ -1,8 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+	@include('dds.includes.meta')
+
 	@section('css')
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/dds/css/style.css" rel="stylesheet">
 	@show
 </head>
 <body id="app-layout">

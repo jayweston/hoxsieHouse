@@ -1,9 +1,9 @@
-@extends('hh.layouts.app')
+@extends('hh.layouts.boarder')
 
 @section('meta-general')
 	@parent
 	<meta name="robots" content="noindex,nofollow" />
-	@section('title', 'Edit: '.$post->title)
+	@section('title', 'HoxsieHouse - Edit: '.$post->title)
 	@section('description','Edit post content, meta, and images.')
 @stop
 
@@ -219,7 +219,7 @@
 	<script type="text/javascript" src="/js/bootstrap/collapse.js"></script>
 	<script type="text/javascript" src="/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
 	<script type="text/javascript"> $(function () { $('#datetimepicker').datetimepicker({format: 'YYYY-MM-DD HH:mm:ss'}); }); </script>
-	<script src="/js/tinymce/tinymce.min.js"></script>
+	<script src="/hh/js/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript">
 		tinymce.init({
 			selector: '#mytextarea',

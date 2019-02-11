@@ -1,9 +1,9 @@
-@extends('hh.layouts.app')
+@extends('hh.layouts.boarder')
 
 @section('meta-general')
 	@parent
 	<meta name="robots" content="noindex,nofollow" />
-	@section('title','Edit account')
+	@section('title','HoxsieHouse - Edit account')
 	@section('description','Site admins can use this page to edit an existing account.')
 @stop
 

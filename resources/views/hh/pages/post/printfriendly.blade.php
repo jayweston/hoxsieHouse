@@ -1,7 +1,7 @@
 @extends('hh.layouts.blank')
 
 @if(!empty($post->meta()->title))
-	@section('title',$post->meta()->title)
+	@section('title','HoxsieHouse - '.$post->meta()->title)
 @endif
 
 @if(!empty($post->meta()->description))

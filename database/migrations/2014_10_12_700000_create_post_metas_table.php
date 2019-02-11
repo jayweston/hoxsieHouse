@@ -20,7 +20,6 @@ class CreatePostMetasTable extends Migration
 			$table->string('city');
 			$table->integer('zip');
 			$table->string('country');
-			$table->timestamps();
 
 			/* Relationships */
 			$table->foreign('post_id')

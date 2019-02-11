@@ -29,7 +29,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/1';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -45,7 +45,7 @@ class LoginController extends Controller
     {
     	$redirectPath=session()->get('httpReferer');
     	session()->forget('httpReferer');
-		return '/'.$redirectPath;
+	return '/'.$redirectPath;
     }
 
     public function logout(Request $request)
@@ -58,11 +58,11 @@ class LoginController extends Controller
 
     public function redirectToProvider($provider)
     {
-		$fullURL = \Request::server('HTTP_REFERER');
-		$reference = "?redirect=";
-		$pos = strpos($fullURL, $reference);
-		session(['httpReferer' => substr($fullURL, $pos+strlen($reference))]);
-		return Socialite::driver($provider)->redirect();
+	$fullURL = \Request::server('HTTP_REFERER');
+	$reference = "?redirect=";
+	$pos = strpos($fullURL, $reference);
+	session(['httpReferer' => substr($fullURL, $pos+strlen($reference))]);
+	return Socialite::driver($provider)->redirect();
     }
 
     public function handleProviderCallback($provider)
@@ -82,42 +82,19 @@ class LoginController extends Controller
         		$authUser->update(["facebook_id" => $user->id]);
         	elseif ( ($provider == 'twitter') && ($authUser->twitter_id == null) )
         		$authUser->update(["twitter_id" => $user->id]);
-            elseif ( ($provider == 'google') && ($authUser->google_id == null) )
-                $authUser->update(["google_id" => $user->id]);
-			elseif ( ($provider == 'yahoo') && ($authUser->yahoo_id == null) )
-				$authUser->update(["yahoo_id" => $user->id]);
-			elseif ( ($provider == 'live') && ($authUser->live_id == null) )
-				$authUser->update(["live_id" => $user->id]);
-
+        	elseif ( ($provider == 'google') && ($authUser->google_id == null) )
+        	        $authUser->update(["google_id" => $user->id]);
+		elseif ( ($provider == 'live') && ($authUser->live_id == null) )
+			$authUser->update(["live_id" => $user->id]);
         	if ($authUser->name == null)
         		$authUser->update(["name" => $user->name]);
-            return $authUser;
-        }elseif ($provider == 'instagram'){
-            $authUser = User::where('instagram_id', $user->id)->first();
-            if ($authUser){
-                return $authUser;
-            }else{
-                return User::create([
-                    'name' => $user->name,
-                    $provider.'_id' => $user->id
-                ]);
-            }
-        }elseif ($provider == 'pinterest'){
-            $authUser = User::where('pinterest_id', $user->id)->first();
-            if ($authUser){
-                return $authUser;
-            }else{
-                return User::create([
-                    'name' => $user->name,
-                    $provider.'_id' => $user->id
-                ]);
-            }
-        }else{
-            return User::create([
-                'name' => $user->name,
-                'email' => $user->email,
-                $provider.'_id' => $user->id
-            ]);
-        }
+		return $authUser;
+	}else{
+		return User::create([
+			'name' => $user->name,
+			'email' => $user->email,
+			$provider.'_id' => $user->id
+		]);
+	}
     }
 }

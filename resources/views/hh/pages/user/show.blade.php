@@ -3,7 +3,7 @@
 @section('meta-general')
 	@parent
 	<meta name="robots" content="noindex,nofollow" />
-	@section('title', $user->name )
+	@section('title', 'HoxsieHouse - '.$user->name )
 	@section('description','View a users info including their posts and comments made.')
 @stop
 

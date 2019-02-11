@@ -13,4 +13,9 @@ class SinglePageController extends Controller
 		$view_data['posts'] = '';
 		return view('dds.pages.single.dashboard', $view_data);
 	}
+	public function about()
+	{
+		$view_data['posts'] = '';
+		return view('dds.pages.single.about', $view_data);
+	}
 }

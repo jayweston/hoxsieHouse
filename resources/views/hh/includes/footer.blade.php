@@ -16,7 +16,7 @@
 		@if (!Auth::guest()) @if (Auth::user()->type == App\Models\hh\User::TYPE_ADMIN)<li><a target="_blank" href="http://www.azhottness.blogspot.com/" title="Personal Blog">Private</a></li> @endif @endif
 	</ul>
 	@section('scripts')
-		<script type="text/javascript" src="hh/js/google.analytics.min.js"></script>
+		<script type="text/javascript" src="/hh/js/google.analytics.min.js"></script>
 		<script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
 		<script type="text/javascript" src="/js/bootstrap.min.js"></script>
 	@show

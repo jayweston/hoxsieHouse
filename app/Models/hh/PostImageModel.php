@@ -3,7 +3,6 @@
 namespace App\Models\hh;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletes;
 
 class PostImage extends Model
 {
@@ -43,3 +42,4 @@ class PostImage extends Model
 		parent::save($options);
 	}
 }
+
