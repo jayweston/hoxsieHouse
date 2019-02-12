@@ -17,7 +17,7 @@
 	{!! 	Form::open(['url' => 'post/copy', 'method' => 'post']) !!}
 		<div class="form-group">
 			{!! Form::label('website','Website') !!}
-			{!! Form::text('website', 'http://tonystacietravelblog.blogspot.com', ['class' =>'form-control', 'maxlength' => '1000', 'minlength' => '4']) !!}
+			{!! Form::text('website',null, ['placeholder' => 'http://tonystacietravelblog.blogspot.com', 'class' =>'form-control', 'maxlength' => '1000', 'minlength' => '4']) !!}
 		</div>
 		<div class="form-group">
 			{!! Form::submit('Copy Article', ['class' =>'btn btn-primary form-control']) !!}

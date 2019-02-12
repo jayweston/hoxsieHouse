@@ -131,9 +131,10 @@ class PostController extends Controller
 		preg_match("/post-body entry-content(.*?)<div class='post-footer'>/si", $website_content, $match);
 		$post_content = strstr($match[1], '<');
 		$post_content = str_replace("\n",'',$post_content);
-		$post_content = preg_replace('/ (class|style|imageanchor|border|data-original-width|data-original-width|data-original-height|height|width)="[^"]+"/', '', $post_content);
-		$post_content = preg_replace("/ (class|style|imageanchor|border|data-original-width|data-original-width|data-original-height|height|width)='[^']+'/", "", $post_content);
+		$post_content = preg_replace('/ (alt|id|onblur|class|style|imageanchor|border|data-original-width|data-original-width|data-original-height|height|width)="[^"]+"/', '', $post_content);
+		$post_content = preg_replace("/ (alt|id|onblur|class|style|imageanchor|border|data-original-width|data-original-width|data-original-height|height|width)='[^']+'/", "", $post_content);
 		$post_content = preg_replace("!</div></div>$!", "</div>", $post_content);
+		$post_content = str_replace(' alt=""',"",$post_content);
 		$post_content = str_replace("<a name='more'></a>","",$post_content);
 		$post_content = str_replace("<div><span><br /></span></div>","",$post_content);
 		$post_content = str_replace("<span><br /></span>","",$post_content);
