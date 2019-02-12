@@ -170,6 +170,7 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 	padding-left:10px;
 }
 .post-content-paragraph{
+	font-size:1.12em;
 	padding-top:10px;
 	padding-bottom:10px;
 	text-align: center;
@@ -419,8 +420,11 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 .dashboard-side-connected:hover{
 	color: #00B3B3;
 }
-.blog_container_image{
-	margin-bottom: 20px;
+.blog_container_image img{
+	margin-bottom:20px;
+}
+.blog_banner_image img{
+	width: 75%;
 }
 .dashboard-side-aboutus img{
 	width:75%;

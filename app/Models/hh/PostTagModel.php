@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class PostTag extends Model
 {
 	protected $fillable = ['post_id', 'tag_id', 'order'];
+	public $timestamps = false;
 	/*
 	 * Return a post model for the post assocaited with this post_tag.
 	*/

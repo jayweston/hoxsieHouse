@@ -56,14 +56,14 @@
 	@if(!Auth::guest()) @if( (Auth::user()->type == App\Models\hh\User::TYPE_ADMIN) || (App\Models\hh\User::isPostMine($post->id)) )
 		<div class="form-group">
 			<a href="/post/{{ $post->id }}/edit" class="btn btn-primary pull-left">Edit</a>
-			{!! Form::open(['url' => 'post'.$post->id, 'method' => 'delete']) !!}	{!! Form::submit('Delete', ['class' =>'btn btn-primary pull-right confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) !!}	{!! Form::close() !!}<br/>
+			{!! Form::open(['url' => 'post/'.$post->id, 'method' => 'delete']) !!}	{!! Form::submit('Delete', ['class' =>'btn btn-primary pull-right confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) !!}	{!! Form::close() !!}<br/>
 		</div>
 		<hr/>
 	@endif @endif
 
 	{{-- Post Banner --}}
 	<div class="blog_container col-sm-12">
-		<div class="blog_container_image"><a href="https://HoxsieHouse.com"><img src="/hh/images/banner/travel.png" class="center-block img-responsive" /></a></div>
+		<div class="blog_banner_image"><a href="https://HoxsieHouse.com"><img src="/hh/images/banner/travel.png" class="center-block img-responsive" /></a></div>
 	</div>
 
 	{{-- Post Title --}}

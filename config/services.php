@@ -49,21 +49,6 @@ return [
 	    'client_secret' => env('GOOGLE_SECRET'),
 	    'redirect'      => env('GOOGLE_URL'),
 	],
-	'instagram' => [
-	    'client_id'     => env('INSTAGRAM_ID'),
-	    'client_secret' => env('INSTAGRAM_SECRET'),
-	    'redirect'      => env('INSTAGRAM_URL'),
-	],
-	'pinterest' => [
-	    'client_id'     => env('PINTEREST_ID'),
-	    'client_secret' => env('PINTEREST_SECRET'),
-	    'redirect'      => env('PINTEREST_URL'),
-	],
-	'yahoo' => [
-	    'client_id'     => env('YAHOO_ID'),
-	    'client_secret' => env('YAHOO_SECRET'),
-	    'redirect'      => env('YAHOO_URL'),
-	],
 	'live' => [
 	    'client_id'     => env('LIVE_ID'),
 	    'client_secret' => env('LIVE_SECRET'),
