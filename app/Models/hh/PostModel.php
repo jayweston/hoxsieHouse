@@ -4,6 +4,7 @@ namespace App\Models\hh;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Filesystem\Filesystem;
 
 class Post extends Model
 {
@@ -45,7 +46,7 @@ class Post extends Model
 	 * <> symbols).
 	*/
 	public function description()
-	{	
+	{
 		if ( empty($this->summary) ){
 			// Remove anything between <>.  AKA remove html tags like <div> <a href=...>
 			$content = preg_replace("/\<[^)]+\>/","",$this->content);
@@ -105,7 +106,7 @@ class Post extends Model
 		foreach($values as $value){
 			$dropdown_list[$value] = ucfirst($value);
 		}
-		return $dropdown_list;		
+		return $dropdown_list;
 	}
 	/*
 	 * Static function that returns all of the available post titles in dropdown
@@ -138,7 +139,7 @@ class Post extends Model
 		foreach ($results as $result){
 			$result = str_replace('<img src="','',$result);
 			foreach ($result as $string){
-				$parts = explode('"',$string); 
+				$parts = explode('"',$string);
 				$test = $parts['0'];
 				array_push($urls,$test);
 			}
@@ -172,7 +173,7 @@ class Post extends Model
 
 	public function getUrlAttribute()
 	{
-		return action('hh\PostController@show', [$this->type, $this->id, $this->slug]);
+		return 'post/'.$this->type.'/'.$this->id.'/'.$this->slug;
 	}
 	/*
 	 * Add the following functionality to the built in delete funcyion:
@@ -180,8 +181,7 @@ class Post extends Model
 	*/
 	public function delete(array $options = [])
 	{
-		
-		Storage::deleteDirectory(public_path().'/hh/images/blog/'.$this->id.'/');
+		\File::deleteDirectory(public_path().'/hh/images/blog/'.$this->id.'/');
 		parent::delete($options);
 	}
 }

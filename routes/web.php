@@ -26,8 +26,8 @@ $hhRoutes = function() {
 	Route::get('/post/{type}/{id}/{slug}', 'hh\PostController@show');
 	Route::post('/post/copy', 'hh\PostController@copy');
 	Route::post('login', 'Auth\LoginController@login');
-	Route::post('register', 'Auth\LoginController@logout');
-	Route::post('logout', 'Auth\RegisterController@register');
+	Route::post('register', 'Auth\RegisterController@register');
+	Route::post('logout', 'Auth\LoginController@logout');
 };
 Route::group(['domain' => 'HoxsieHouse.com'], $hhRoutes);
 Route::group(['domain' => '127.0.11.27'], $hhRoutes);

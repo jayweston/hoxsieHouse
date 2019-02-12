@@ -45,6 +45,8 @@ class LoginController extends Controller
     {
     	$redirectPath=session()->get('httpReferer');
     	session()->forget('httpReferer');
+	if ($redirectPath == '/')
+		return '/';
 	return '/'.$redirectPath;
     }
 
@@ -53,14 +55,25 @@ class LoginController extends Controller
         $this->guard()->logout();
         $request->session()->flush();
         $request->session()->regenerate();
-        return \Redirect::back();
+	$reference = $_SERVER['HTTP_HOST'].'/';
+	$pos = strpos($_SERVER['HTTP_REFERER'],$reference);
+	$uri = substr($_SERVER['HTTP_REFERER'], $pos+strlen($reference));
+	$restricted = [
+		'user',
+		'post/create'
+	];
+	if (in_array($uri, $restricted)){
+		return redirect('/');
+	}else{
+		return  \Redirect::back();
+	}
     }
 
     public function redirectToProvider($provider)
     {
 	$fullURL = \Request::server('HTTP_REFERER');
 	$reference = "?redirect=";
-	$pos = strpos($fullURL, $reference);
+	$pos = strpos($fullURL,$reference);
 	session(['httpReferer' => substr($fullURL, $pos+strlen($reference))]);
 	return Socialite::driver($provider)->redirect();
     }
@@ -70,7 +83,7 @@ class LoginController extends Controller
         $user = Socialite::driver($provider)->user();
         $authUser = $this->findOrCreateUser($user, $provider);
         Auth::login($authUser, true);
-        return redirect($this->redirectTo().'/');
+        return redirect($this->redirectTo());
     }
 
     public function findOrCreateUser($user, $provider)

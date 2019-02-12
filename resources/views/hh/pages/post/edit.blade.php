@@ -33,7 +33,7 @@
 	{{-- Edit post content --}}
 	<div id="post_content">
 		<h2>Post Content</h2>
-		{!! Form::model($post, ['url' => 'post/'.$post->id, 'method' => 'patch']) !!}
+		{!! Form::model(['url' => 'post/'.$post->id, 'method' => 'patch']) !!}
 			<div class="form-group">
 				{!! Form::label('title','Title') !!}
 				{!! Form::text('title', null, ['class' =>'form-control']) !!}
@@ -72,8 +72,8 @@
 	{{-- Edit post meta --}}
 	<div id="post_meta">
 		<h2>Post Meta</h2>
-			@if ( !empty($post->meta()->id) )			
-				{!! Form::model($post->meta(), ['url' => 'postmeta/'.$post->meta()->id, 'method' => 'patch']) !!}
+			@if (!empty($post->meta()->id))
+				{!! Form::model(['url' => 'postmeta/'.$post->meta()->id, 'method' => 'patch']) !!}
 			@else
 				{!! Form::open(['url' => 'postmeta/', 'method' => 'post']) !!}
 			@endif
@@ -126,12 +126,11 @@
 	{{-- Upload images to post --}}
 	<div id="upload_images">
 		<h2>Upload Images</h2>
-		{!! Form::open(['url' => 'postimage/', 'method' => 'post'], 'files'=>true]) !!}
+		{!! Form::open(['url' => 'postimage/', 'method' => 'post','files'=>true]) !!}
 			<div class="form-group">
 				{!! Form::label('images','Images') !!}
 				{{ Form::hidden('post',$post->id) }}
 				{!! Form::file('images[]', ['multiple'=>true]) !!}
-				
 			</div>
 			<div class="form-group">
 				{!! Form::submit('Upload', ['class' =>'btn btn-primary form-control upload_images']) !!}
@@ -161,8 +160,7 @@
 								<td class="hidden-xs col-sm-1 col-md-2 col-lg-2">/hh/images/blog/{{ $post->id }}/{{ $image->name }}</td>
 								<td class="col-xs-2 col-sm-2 col-md-3 col-lg-3"><img src="/hh/images/blog/{{ $post->id }}/{{ $image->name }}" style="max-height:90%; max-width:90%" /></td>
 								<td class="col-xs-9 col-sm-8 col-md-5 col-lg-5">{!! Form::text($image->id."_label", $image->label, []) !!}</td>
-								<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">{{ Form::checkbox($image->id."_delete", $image->id, '0', []) }}
-								</td>
+								<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">{{ Form::checkbox($image->id."_delete", $image->id, '0', []) }}</td>
 							</tr>
 						@endforeach
 						{{ Form::submit('Update', ['class' => 'btn btn-primary form-control']) }}

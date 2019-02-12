@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
 	protected $fillable = ['name'];
-
+	public $timestamps = false;
 	/*
 	 * Static function that returns a dropdown list of all of the tags in the database.
 	*/

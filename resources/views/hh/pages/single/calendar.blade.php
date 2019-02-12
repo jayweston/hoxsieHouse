@@ -2,11 +2,11 @@
 
 @section('content')
 	<div class="row text-center blog_container">
-		<div class="blog_container_image"><a href="https://HoxsieHouse.com"><img src="/hh/images/banner/travel.png" class="center-block img-responsive" /></a></div>
+		<div class="blog_banner_image"><a href="https://HoxsieHouse.com"><img src="/hh/images/banner/travel.png" class="center-block img-responsive" /></a></div>
 	</div>
 	<hr/>
 	<div id='calendar'></div>
-	
+
 @endsection
 @section('scripts')
 	@parent
