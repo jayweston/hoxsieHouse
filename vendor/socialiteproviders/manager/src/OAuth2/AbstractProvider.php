@@ -3,11 +3,11 @@
 namespace SocialiteProviders\Manager\OAuth2;
 
 use Illuminate\Support\Arr;
+use Laravel\Socialite\Two\AbstractProvider as BaseProvider;
 use Laravel\Socialite\Two\InvalidStateException;
+use SocialiteProviders\Manager\ConfigTrait;
 use SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface;
 use SocialiteProviders\Manager\SocialiteWasCalled;
-use SocialiteProviders\Manager\ConfigTrait;
-use Laravel\Socialite\Two\AbstractProvider as BaseProvider;
 
 abstract class AbstractProvider extends BaseProvider implements ProviderInterface
 {
@@ -18,6 +18,11 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      */
     protected $credentialsResponseBody;
 
+    /**
+     * @param string $providerName
+     *
+     * @return string
+     */
     public static function serviceContainerKey($providerName)
     {
         return SocialiteWasCalled::SERVICE_CONTAINER_PREFIX.$providerName;

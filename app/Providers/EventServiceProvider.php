@@ -17,10 +17,7 @@ class EventServiceProvider extends ServiceProvider
             'App\Listeners\EventListener',
         ],
         \SocialiteProviders\Manager\SocialiteWasCalled::class => [
-            'SocialiteProviders\Instagram\InstagramExtendSocialite@handle',
-            'SocialiteProviders\Pinterest\PinterestExtendSocialite@handle',
-            'SocialiteProviders\Live\LiveExtendSocialite@handle',
-            'SocialiteProviders\Yahoo\YahooExtendSocialite@handle',
+            'SocialiteProviders\Live\LiveExtendSocialite@handle'
         ],
     ];
 

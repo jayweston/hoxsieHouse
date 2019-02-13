@@ -6,8 +6,14 @@ use SocialiteProviders\Manager\Contracts\ConfigInterface;
 
 trait ConfigTrait
 {
+    /**
+     * @var \SocialiteProviders\Manager\Contracts\OAuth1\ProviderInterface|\SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface
+     */
     protected $config;
 
+    /**
+     * @param \SocialiteProviders\Manager\Contracts\OAuth1\ProviderInterface|\SocialiteProviders\Manager\Contracts\OAuth2\ProviderInterface $config
+     */
     public function setConfig(ConfigInterface $config)
     {
         $config = $config->get();
@@ -20,6 +26,20 @@ trait ConfigTrait
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public static function additionalConfigKeys()
+    {
+        return [];
+    }
+
+    /**
+     * @param string $key
+     * @param mixed  $default
+     *
+     * @return mixed|array
+     */
     protected function getConfig($key = null, $default = null)
     {
         // check manually if a key is given and if it exists in the config
@@ -29,10 +49,5 @@ trait ConfigTrait
         }
 
         return $key ? array_get($this->config, $key, $default) : $this->config;
-    }
-
-    public static function additionalConfigKeys()
-    {
-        return [];
     }
 }
