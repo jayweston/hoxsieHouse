@@ -3,6 +3,7 @@
 namespace Laravel\Socialite\Two;
 
 use Exception;
+use Illuminate\Support\Arr;
 use GuzzleHttp\ClientInterface;
 
 class BitbucketProvider extends AbstractProvider implements ProviderInterface
@@ -13,6 +14,13 @@ class BitbucketProvider extends AbstractProvider implements ProviderInterface
      * @var array
      */
     protected $scopes = ['email'];
+
+    /**
+     * The separating character for the requested scopes.
+     *
+     * @var string
+     */
+    protected $scopeSeparator = ' ';
 
     /**
      * {@inheritdoc}
@@ -80,8 +88,8 @@ class BitbucketProvider extends AbstractProvider implements ProviderInterface
     {
         return (new User)->setRaw($user)->map([
             'id' => $user['uuid'], 'nickname' => $user['username'],
-            'name' => array_get($user, 'display_name'), 'email' => array_get($user, 'email'),
-            'avatar' => array_get($user, 'links.avatar.href'),
+            'name' => Arr::get($user, 'display_name'), 'email' => Arr::get($user, 'email'),
+            'avatar' => Arr::get($user, 'links.avatar.href'),
         ]);
     }
 

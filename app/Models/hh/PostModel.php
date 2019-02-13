@@ -61,7 +61,6 @@ class Post extends Model
 	public function meta()
 	{
 		$meta = PostMeta::where('post_id',$this->id)->first();
-		if (empty($meta->id))
 			return new PostMeta();
 		return $meta;
 	}
@@ -144,11 +143,14 @@ class Post extends Model
 				array_push($urls,$test);
 			}
 		}
+		\Tinify\setKey(env('TINIFY_APIKEY'));
 		foreach ($urls as $i=>$url){
 			$filename = preg_replace('/^.*\/\s*/', '', $url);
 			$filename = str_replace(' ', '', $filename);
 			$filename = str_replace('%', '', $filename);
-			copy($url, public_path().'/hh/images/blog/'.$this->id.'/'.$filename);
+			$image = \Tinify\fromUrl($url);
+			$resized = $image->resize(["method" => "scale","height" => 300]);
+			$resized->toFile('hh/images/blog/'.$this->id.'/'.$filename);
 			$image = new PostImage();
 			$image->thumbnail = 0;
 			if($i == 0){$image->thumbnail = 1;}

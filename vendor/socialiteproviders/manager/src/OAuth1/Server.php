@@ -5,8 +5,8 @@ namespace SocialiteProviders\Manager\OAuth1;
 use GuzzleHttp\Exception\BadResponseException;
 use League\OAuth1\Client\Credentials\TemporaryCredentials;
 use League\OAuth1\Client\Credentials\TokenCredentials;
-use SocialiteProviders\Manager\ConfigTrait;
 use League\OAuth1\Client\Server\Server as BaseServer;
+use SocialiteProviders\Manager\ConfigTrait;
 
 abstract class Server extends BaseServer
 {
@@ -38,11 +38,11 @@ abstract class Server extends BaseServer
      * the temporary credentials identifier as passed back by the server
      * and finally the verifier code.
      *
-     * @param TemporaryCredentials $temporaryCredentials
-     * @param string               $temporaryIdentifier
-     * @param string               $verifier
+     * @param \League\OAuth1\Client\Credentials\TemporaryCredentials $temporaryCredentials
+     * @param string                                                 $temporaryIdentifier
+     * @param string                                                 $verifier
      *
-     * @return TokenCredentials
+     * @return \League\OAuth1\Client\Credentials\TokenCredentials
      */
     public function getTokenCredentials(TemporaryCredentials $temporaryCredentials, $temporaryIdentifier, $verifier)
     {
@@ -61,9 +61,9 @@ abstract class Server extends BaseServer
         $headers = $this->getHeaders($temporaryCredentials, 'POST', $uri, $bodyParameters);
 
         try {
-            if (get_class($client) == 'GuzzleHttp\\Client') {
+            if ('GuzzleHttp\\Client' === get_class($client)) {
                 $response = $client->post($uri, [
-                    'headers' => $headers,
+                    'headers'     => $headers,
                     'form_params' => $bodyParameters,
                 ]);
             } else {
@@ -74,7 +74,7 @@ abstract class Server extends BaseServer
         }
 
         return [
-            'tokenCredentials' => $this->createTokenCredentials($response->getBody()),
+            'tokenCredentials'        => $this->createTokenCredentials($response->getBody()),
             'credentialsResponseBody' => $response->getBody(),
         ];
     }

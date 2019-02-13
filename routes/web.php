@@ -28,6 +28,23 @@ $hhRoutes = function() {
 	Route::post('login', 'Auth\LoginController@login');
 	Route::post('register', 'Auth\RegisterController@register');
 	Route::post('logout', 'Auth\LoginController@logout');
+	Route::get('tmp/{id}', function ($id) {
+		\Tinify\setKey(env('TINIFY_APIKEY'));
+		$post = App\Models\hh\Post::findOrFail($id);
+		dd($post->content);
+		$dir = 'hh/images/blog/'.$post->id.'/';
+		$files = scandir($dir);
+		unset($files[0]);
+		unset($files[1]);
+		foreach ($files as $file){
+			$image = \Tinify\fromFile($dir.$file);
+			\File::delete(public_path().$dir.$file);
+			$resized = $image->resize(["method" => "scale","height" => 300]);
+			$resized->toFile($dir.$file);
+		}
+		$compressionsThisMonth = \Tinify\compressionCount();
+		dd($post->content);
+	});
 };
 Route::group(['domain' => 'HoxsieHouse.com'], $hhRoutes);
 Route::group(['domain' => '127.0.11.27'], $hhRoutes);
