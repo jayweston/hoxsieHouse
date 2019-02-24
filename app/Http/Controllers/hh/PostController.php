@@ -88,7 +88,6 @@ class PostController extends Controller
 	{
 		$post = new Post();
 		$this->authorize('store', $post);
-
 		$this->validate($request, [
 			'title' => 'required|string|min:4|max:255|unique:posts,title',
 			'summary' => 'required|string|min:4|max:255',
@@ -160,15 +159,24 @@ class PostController extends Controller
 			$post_content = preg_replace($search_string,'<img src="'.$image[2].'" />',$post_content);
 		}
 
-		$post = array(
-			'title' => $post_title,
+		$post = ['title' => $post_title,
 			'summary' => $post_summary,
 			'type' => 'travel',
 			'content' => $post_content,
 			'avialable_at' => $post_datetime,
 			'draft' => FALSE,
-			'user_id' => \Auth::user()->id);
+			'user_id' => \Auth::user()->id];
 
+		$post_validation = new Request($post);
+
+		$this->validate($post_validation, [
+			'title' => 'required|string|min:4|max:255|unique:posts,title',
+			'summary' => 'required|string|min:4|max:255',
+			'type' => 'required|in:foodie,review,travel',
+			'content' => 'required|string',
+			'avialable_at' => 'required|date',
+			'draft' => 'required|boolean',
+		]);
 		$new_post = Post::create($post);
 		$new_post->downloadImages();
 
@@ -216,12 +224,11 @@ class PostController extends Controller
 		}
 
 		//Save that user has visited the website
-		if( !(\Auth::guest()) && !(\Auth::user()->type == User::TYPE_ADMIN) ){
+		if( !(\Auth::guest()) ){
 			$userpost = new UserPost();
 			$userpost->user_id = \Auth::user()->id;
 			$userpost->post_id = $post->id;
 			$userpost->created_at = \Carbon\Carbon::now();
-			
 			try {
 				$userpost->save();
 			} catch(\Illuminate\Database\QueryException $e){

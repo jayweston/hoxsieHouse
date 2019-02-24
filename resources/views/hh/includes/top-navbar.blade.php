@@ -1,12 +1,13 @@
 <nav role="navigation" class="navbar navbar-default">
-	<div id="navbarCollapse" class="collapse navbar-collapse"><div class="container"><div class="row"><div class="col-md-10 col-md-offset-1">
+	<div id="navbarCollapse" class="collapse navbar-collapse"><div class="container"><div class="row"><div class="col-md-12">
 		{{--
 			Left side dropdown for posts
 		--}}
 		<ul class="nav navbar-nav">
 			<li class="nav_default_text"><a href="/">Home</a></li>
-			<li class="nav_default_text"><a href="/about">About</a></li>
+			<li class="nav_default_text"><a href="/tag/Teardrop">Teardrop</a></li>
 			<li class="nav_default_text"><a href="/calendars">Calendar</a></li>
+			<li class="nav_default_text"><a href="/about">About</a></li>
 		</ul>
 		{{--
 			Right side dropdown for users
@@ -27,7 +28,7 @@
 				</li>
 			@else
 				<li class="dropdown" id="nav_account_dropdown">
-					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Account<span class="caret"></span></a>
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->name }}<span class="caret"></span></a>
 					<ul class="dropdown-menu">
 						<li  id="nav_account_list"><a href="{{ url('/unread/') }}">Unread Posts</a></li>
 						<li  id="nav_account_list"><a href="{{ url('/user/') }}">View Users</a></li>

@@ -62,9 +62,7 @@
 	@endif @endif
 
 	{{-- Post Banner --}}
-	<div class="blog_container col-sm-12">
-		<div class="blog_banner_image"><a href="https://HoxsieHouse.com"><img src="/hh/images/banner/travel.png" class="center-block img-responsive" /></a></div>
-	</div>
+	@include('hh.includes.banner')
 
 	{{-- Post Title --}}
 	<div class="post-title">{{ $post->title }}</div>
@@ -82,31 +80,48 @@
 	</div>
 
 	{{-- Post Tags --}}
-
 	@if (count($post->tags()) > 0)
 		<div class="post-box"><h4 class="post-box-title"><span>Tags</span></h4></div>
 		<div class="post-tags">
 			@foreach ($post->tags() as $tag)
-				<li><a href="/tag/{{ $tag->id }}"><span class="post-tag">{{ $tag->name }}</span></li></a>
+				<li><a href="/tag/{{ $tag->name }}"><span class="post-tag">{{ $tag->name }}</span></li></a>
 			@endforeach
+		</div>
+	@endif
+
+	{{-- Post Meta --}}
+	@if(!empty($post->meta()->id))
+		<div class="post-box"><h4 class="post-box-title"><span>Location</span></h4></div>
+		<div class="post-meta">
+		@if(!empty($post->meta()->city))
+			<li><a href="/location/{{ $post->meta()->city }}"><span class="post-tag">{{ $post->meta()->city }}</span></li></a>
+		@endif
+		@if(!empty($post->meta()->state))
+			<li><a href="/location/{{ $post->meta()->state }}"><span class="post-tag">{{ $post->meta()->state }}</span></li></a>
+		@endif
+		@if(!empty($post->meta()->zip))
+			<li><a href="/location/{{ $post->meta()->zip }}"><span class="post-tag">{{ $post->meta()->zip }}</span></li></a>
+		@endif
+		@if(!empty($post->meta()->country))
+			<li><a href="/location/{{ $post->meta()->country }}"><span class="post-tag">{{ $post->meta()->country }}</span></li></a>
+		@endif
 		</div>
 	@endif
 
 	{{-- Share Post --}}
 	<div class="post-box"><h4 class="post-box-title"><span>Share Post</span></h4></div>
 	<div class="post-shares">
-		<li  ><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ $post->url }}" title="Share on Facebook" ><i class="fab fa-facebook fa-2x post-share"></i></a></li>
-		<li  ><a target="_blank" href="https://twitter.com/home?status={{ $post->url }}" target="_blank" title="Share on Twitter" ><i class="fab fa-twitter fa-2x post-share"></i></a></li>
-		<li  ><a target="_blank" href="https://pinterest.com/pin/create/button/?url={{ $post->url }}&media={{ $post->thumbnailPath() }}&description=" target="_blank" title="Share on Pinterest" ><i class="fab fa-pinterest fa-2x post-share"></i></a></li>
-		<li  ><a target="_blank" href="https://plus.google.com/share?url={{ $post->url }}" target="_blank" title="Share on Google+" ><i class="fab fa-google-plus-square fa-2x post-share"></i></i></a></li>
+		<li  ><a target="_blank" href="https://www.facebook.com/sharer/sharer.php?u={{ url('/').'/'.$post->url }}" title="Share on Facebook" ><i class="fab fa-facebook fa-2x post-share"></i></a></li>
+		<li  ><a target="_blank" href="https://twitter.com/home?status={{ url('/').'/'.$post->url }}" target="_blank" title="Share on Twitter" ><i class="fab fa-twitter fa-2x post-share"></i></a></li>
+		<li  ><a target="_blank" href="https://pinterest.com/pin/create/button/?url={{ url('/').'/'.$post->url }}&media={{ $post->thumbnailPath() }}&description=" target="_blank" title="Share on Pinterest" ><i class="fab fa-pinterest fa-2x post-share"></i></a></li>
 		<li class="dropdown">
 			<a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" title="Share via Email" ><i class="fas fa-envelope fa-2x post-share"></i></a>
 			<div class="dropdown-menu post-show-dropdown" aria-labelledby="dropdownMenuLink">
-				<a target="_blank" class="post-show-emailshare" href="https://mail.google.com/mail/?view=cm&fs=1&su=Check out this blogpost!&body=I thought you would like to read this post: {{ $post->url }}"   title="Share via Gmail"><img src="/hh/images/icon/mail/gmail.png" /> Gmail</a>
-				<a target="_blank" class="post-show-emailshare" href="https://outlook.live.com/default.aspx?rru=compose&subject=Check out this blogpost!&body=I thought you would like to read this post: {{ $post->url }}"   title="Share via Hotmail"><img src="/hh/images/icon/mail/hotmail.png" /> Hotmail</a>
-				<a target="_blank" class="post-show-emailshare" href="http://compose.mail.yahoo.com/?subj=Check out this blogpost!&body=I thought you would like to read this post: {{ $post->url }}"   title="Share via Yahoo"><img src="/hh/images/icon/mail/yahoo.png" /> Yahoo</a>
-				<a target="_blank" class="post-show-emailshare" href="http://mail.aol.com/mail/compose-message.aspx?subject=Check out this blogpost!&body=I thought you would like to read this post: {{ $post->url }}"   title="Share via AOL"><img src="/hh/images/icon/mail/aol.png" /> AOL</a>
-				<a target="_blank" class="post-show-emailshare" href="mailto:?subject=Check out this blogpost!&body=I thought you would like to read this post: {{ $post->url }}"  title="Share via mail"><img src="/hh/images/icon/mail/general.png" /> Other</a>
+				<a target="_blank" class="post-show-emailshare" href="https://mail.google.com/mail/?view=cm&fs=1&su=Check out this blogpost!&body=I thought you would like to read this post: {{ url('/').'/'.$post->url }}"   title="Share via Gmail"><img src="/hh/images/icon/mail/gmail.png" /> Gmail</a>
+				<a target="_blank" class="post-show-emailshare" href="https://outlook.live.com/default.aspx?rru=compose&subject=Check out this blogpost!&body=I thought you would like to read this post: {{ url('/').'/'.$post->url }}"   title="Share via Hotmail"><img src="/hh/images/icon/mail/hotmail.png" /> Hotmail</a>
+				<a target="_blank" class="post-show-emailshare" href="http://compose.mail.yahoo.com/?subj=Check out this blogpost!&body=I thought you would like to read this post: {{ url('/').'/'.$post->url }}"   title="Share via Yahoo"><img src="/hh/images/icon/mail/yahoo.png" /> Yahoo</a>
+				<a target="_blank" class="post-show-emailshare" href="http://mail.aol.com/mail/compose-message.aspx?subject=Check out this blogpost!&body=I thought you would like to read this post: {{ url('/').'/'.$post->url }}"   title="Share via AOL"><img src="/hh/images/icon/mail/aol.png" /> AOL</a>
+				<a target="_blank" class="post-show-emailshare" href="mailto:?subject=Check out this blogpost!&body=I thought you would like to read this post: {{ url('/').'/'.$post->url }}"  title="Share via mail"><img src="/hh/images/icon/mail/general.png" /> Other</a>
 			</div>
 		</li>
 	</div>

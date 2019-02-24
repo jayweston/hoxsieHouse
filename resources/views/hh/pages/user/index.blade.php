@@ -14,7 +14,6 @@
 @section('meta-pintrest') @stop
 
 @section('content')
-
 	@if (!Auth::guest()) @if (Auth::user()->type == App\Models\hh\User::TYPE_ADMIN)
 	<a href="/user/create" class="btn btn-primary">Add User</a>
 	@endif @endif

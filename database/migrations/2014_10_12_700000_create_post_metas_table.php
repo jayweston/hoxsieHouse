@@ -12,14 +12,15 @@ class CreatePostMetasTable extends Migration
 			/* Columns */
 			$table->increments('id');
 			$table->integer('post_id')->unsigned();
-			$table->string('title');
-			$table->string('description');
-			$table->double('lat', 15, 8);
-			$table->double('long', 15, 8);
-			$table->string('street');
-			$table->string('city');
-			$table->integer('zip');
-			$table->string('country');
+			$table->string('title')->nullable();
+			$table->string('description')->nullable();
+			$table->double('lat', 15, 8)->nullable();
+			$table->double('long', 15, 8)->nullable();
+			$table->string('street')->nullable();
+			$table->string('city')->nullable();
+			$table->string('state')->nullable();
+			$table->integer('zip')->nullable();
+			$table->string('country')->nullable();
 
 			/* Relationships */
 			$table->foreign('post_id')

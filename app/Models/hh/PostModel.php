@@ -61,8 +61,11 @@ class Post extends Model
 	public function meta()
 	{
 		$meta = PostMeta::where('post_id',$this->id)->first();
+		if ( empty($meta->id) ){
 			return new PostMeta();
-		return $meta;
+		}else{
+			return $meta;
+		}
 	}
 	/*
 	 * Return the tag models of all tags associated with this post.

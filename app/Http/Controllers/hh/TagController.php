@@ -21,9 +21,9 @@ class TagController extends Controller
 	/*
 	 * Show all uses of a given tag.
 	*/
-	public function show($id)
+	public function show($slug)
 	{
-		$tag = Tag::findOrFail($id);
+		$tag = Tag::where('name','=' ,$slug)->firstOrFail();
 		$view_data['tag'] = $tag;
 		return view('hh.pages.tag.show', $view_data);
 	}

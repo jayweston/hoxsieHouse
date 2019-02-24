@@ -13,7 +13,7 @@
 	@include('hh.includes.top-navbar')
 
 	@section('contents')
-		<div class="container">
+		<div id="body" class="container">
 			<div class="row">
 				<div class="col-md-12 col-lg-12 app-layout-background">
 					<br/><br/><br/><br/>

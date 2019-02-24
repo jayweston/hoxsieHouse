@@ -14,7 +14,7 @@ $hhRoutes = function() {
 	Route::get('/post/{id}/print', 'hh\PostController@printfriendly');
 	Route::resource('/post', 'hh\PostController',['except' => ['show']]);
 	Route::resource('/user', 'hh\UserController');
-	Route::resource('/tag', 'hh\TagController', ['only' => ['index','show','update','destroy']]);
+	Route::resource('/tag', 'hh\TagController', ['only' => ['index','update','destroy']]);
 	Route::resource('/postimage', 'hh\PostImageController', ['only' => ['store','update','destroy']]);
 	Route::resource('/postmeta', 'hh\PostMetaController', ['only' => ['store','update','destroy']]);
 	Route::resource('/posttag', 'hh\PostTagController', ['only' => ['update']]);
@@ -24,6 +24,9 @@ $hhRoutes = function() {
 	Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
 	Route::get('auth/{provider}/callback', 'Auth\LoginController@handleProviderCallback');
 	Route::get('/post/{type}/{id}/{slug}', 'hh\PostController@show');
+	Route::get('/tag/{slug}', 'hh\TagController@show');
+	Route::get('/location/{slug}', 'hh\PostMetaController@show');
+	Route::get('/location', 'hh\PostMetaController@index');
 	Route::post('/post/copy', 'hh\PostController@copy');
 	Route::post('login', 'Auth\LoginController@login');
 	Route::post('register', 'Auth\RegisterController@register');

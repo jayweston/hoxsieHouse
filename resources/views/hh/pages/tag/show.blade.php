@@ -14,13 +14,11 @@
 @section('meta-pintrest') @stop
 
 @section('content')
-	<div class="row text-center blog_container">
-		<div class="blog_container_image"><a href="https://HoxsieHouse.com"><img src="/hh/images/banner/travel.png" class="center-block img-responsive" /></a></div>
-	</div>
+	@include('hh.includes.banner')
 	@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\hh\User::TYPE_ADMIN) || (Auth::user()->type == App\Models\hh\User::TYPE_WRITER))
 		<h3>Change Tag</h3>
 		<div class="tag-edit">
-			{!! Form::model(['url' => 'tag/'.$tag->id, 'method' => 'patch']) !!}
+			{!! Form::open(['url' => 'tag/'.$tag->id, 'method' => 'put']) !!}
 				<div class="form-group">
 					{!! Form::label('name','Name') !!}
 					{!! Form::text('name', null, ['class' =>'form-control']) !!}
@@ -49,9 +47,9 @@
 	<div class="col-md-12 col-sm-12 col-xs-12">
 		@foreach ($tag->posts() as $post)
 			<div class="row @if($post->draft == true) post_draft @endif @if(!$post->isAvailable()) post_unAvailable @endif">
-				<div class="col-md-5 col-sm-5 col-xs-12"><a href="{{ $post->url }}"><img src="{{ $post->thumbnailPath() }}" class="img-responsive" /></a></div>
+				<div class="col-md-5 col-sm-5 col-xs-12"><a href="/{{ $post->url }}"><img src="{{ $post->thumbnailPath() }}" class="img-responsive" /></a></div>
 				<div class="col-md-7 col-sm-7 col-xs-12">
-					<div class="dashboard-post-title"><a href="{{ $post->url }}"><h3>{{ $post->title }}</h3></a></div>
+					<div class="dashboard-post-title"><a href="/{{ $post->url }}"><h3>{{ $post->title }}</h3></a></div>
 					<div class="dashboard-post-description">{{ $post->description() }}</div>
 					<div class="dashboard-post-date">{!! date_format(date_create($post->avialable_at),"j-F-Y") !!}</div>
 				</div>

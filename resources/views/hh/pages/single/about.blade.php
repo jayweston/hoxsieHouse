@@ -1,10 +1,7 @@
 @extends('hh.layouts.boarder')
 
 @section('content')
-	<div class="row text-center blog_container">
-		<div class="blog_banner_image"><a href="https://HoxsieHouse.com"><img src="/hh/images/banner/travel.png" class="center-block img-responsive" /></a></div>
-	</div>
-	<hr/>
+	@include('hh.includes.banner')
 	<div class="row">
 		<div class="text-center" ><img src="https://3.bp.blogspot.com/-p0-4zig1CEs/WeQ-5Gs5a3I/AAAAAAACIE8/i4tVPbfaQgou5JG9JWAEZ5-VWb_4Pz74ACLcBGAs/s200/IMG_4344.JPG" /></div>
 		<div class="text-center" >&nbsp;</div>
