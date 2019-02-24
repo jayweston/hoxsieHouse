@@ -1,4 +1,5 @@
 @if ($errors->any())
+	{{ dd(1) }}
 	<div class="alert alert-danger">
 		<button type="button" class="close" data-dismiss="alert">&times;</button>
 		<h4><i class="glyphicon glyphicon-warning-sign"></i> Warning:</h4>

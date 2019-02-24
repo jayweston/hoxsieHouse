@@ -64,7 +64,7 @@
 		<div class="post-box"><h4 class="post-box-title"><span>Tags</span></h4></div>
 		<div class="post-tags">
 			@foreach ($post->tags() as $tag)
-				<li><a href="/tag/{{ $tag->id }}"><span class="post-tag">{{ $tag->name }}</span></li></a>
+				<li><a href="/tag/{{ $tag->name }}"><span class="post-tag">{{ $tag->name }}</span></li></a>
 			@endforeach
 		</div>
 	@endif

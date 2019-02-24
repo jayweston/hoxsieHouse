@@ -33,10 +33,10 @@
 	{{-- Edit post content --}}
 	<div id="post_content">
 		<h2>Post Content</h2>
-		{!! Form::model(['url' => 'post/'.$post->id, 'method' => 'patch']) !!}
+		{!! Form::open(['url' => 'post/'.$post->id, 'method' => 'put']) !!}
 			<div class="form-group">
 				{!! Form::label('title','Title') !!}
-				{!! Form::text('title', null, ['class' =>'form-control']) !!}
+				{!! Form::text('title', $post->title, ['class' =>'form-control']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('type','Type') !!}
@@ -44,11 +44,11 @@
 			</div>
 			<div class="form-group">
 				{!! Form::label('summary','Summary') !!}
-				{!! Form::text('summary', null, ['class' =>'form-control']) !!}
+				{!! Form::text('summary', $post->summary, ['class' =>'form-control']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('content','Content') !!}
-				{!! Form::textarea('content', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+				{!! Form::textarea('content', $post->content, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
 			</div>
 			<div class="form-group">
 				<label for="avialable_at">Publish On</label>
@@ -61,7 +61,7 @@
 			</div>
 			<div class="form-group">
 				{!! Form::label('draft','Draft') !!}
-				{!! Form::select('draft',['1'=>'Yes','0'=>'No'] ,null, ['class' =>'form-control']) !!}
+				{!! Form::select('draft',['1'=>'Yes','0'=>'No'] ,$post->draft, ['class' =>'form-control']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::submit('Save', ['class' =>'btn btn-primary form-control']) !!}
@@ -73,42 +73,46 @@
 	<div id="post_meta">
 		<h2>Post Meta</h2>
 			@if (!empty($post->meta()->id))
-				{!! Form::model(['url' => 'postmeta/'.$post->meta()->id, 'method' => 'patch']) !!}
+				{!! Form::open(['url' => 'postmeta/'.$post->meta()->id, 'method' => 'patch']) !!}
 			@else
 				{!! Form::open(['url' => 'postmeta/', 'method' => 'post']) !!}
 			@endif
 				{{ Form::hidden('post_id',$post->id) }}
 			<div class="form-group">
 				{!! Form::label('title','Title') !!}
-				{!! Form::text('title', null, ['class' =>'form-control']) !!}
+				{!! Form::text('title', $post->meta()->title, ['class' =>'form-control']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('description','Description') !!}
-				{!! Form::text('description', null, ['class' =>'form-control']) !!}
+				{!! Form::text('description', $post->meta()->description, ['class' =>'form-control']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('lat','Latitude') !!}
-				{!! Form::text('lat', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+				{!! Form::text('lat', $post->meta()->lat, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('long','Longitude') !!}
-				{!! Form::text('long', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+				{!! Form::text('long', $post->meta()->long, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('street','Street') !!}
-				{!! Form::text('street', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+				{!! Form::text('street', $post->meta()->street, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('city','City') !!}
-				{!! Form::text('city', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+				{!! Form::text('city', $post->meta()->city, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+			</div>
+			<div class="form-group">
+				{!! Form::label('state','State') !!}
+				{!! Form::text('state', $post->meta()->state, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('zip','Zip') !!}
-				{!! Form::text('zip', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+				{!! Form::text('zip', $post->meta()->zip, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::label('country','Country') !!}
-				{!! Form::text('country', null, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
+				{!! Form::text('country', $post->meta()->country, ['class' =>'form-control', 'id' =>'mytextarea']) !!}
 			</div>
 			<div class="form-group">
 				{!! Form::submit('Save', ['class' =>'btn btn-primary form-control']) !!}

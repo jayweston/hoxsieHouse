@@ -7,6 +7,9 @@ rgba(76, 175, 80, 0.3)
 /*
  * Sitewide
 */
+#body{
+	background-color:white;
+}
 body {
 	-webkit-print-color-adjust: exact !important;
 }
@@ -95,7 +98,7 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 	color:#00001b;
 	font-weight: bold;
 }
-.post-tags li,.post-shares li{
+.post-tags li,.post-meta li,.post-shares li{
 	display: inline-block;
 }
 .post-tag{
@@ -164,10 +167,12 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 }
 .post-content-pictures img{
 	height: 300px;
+	max-height: 300px;
 	padding-top:10px;
 	padding-bottom:10px;
 	padding-right:10px;
 	padding-left:10px;
+	max-width:100%;
 }
 .post-content-paragraph{
 	font-size:1.12em;
@@ -448,6 +453,11 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 	border-right-style: solid;
 	border-right-color: #00001b;
 	border-right-width: medium;
+}
+.user-page-empty{
+    color: #00B3B3;
+    text-align: center;
+    font-weight: bold;
 }
 /*
  * Show single tag

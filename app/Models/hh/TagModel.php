@@ -49,6 +49,8 @@ class Tag extends Model
 					unset($post_ids[$elementKey]);
 			}
 		}
-		return Post::find($post_ids);
+		return Post::whereIn('id',$post_ids)->orderBy('avialable_at', 'desc')->get();
 	}
 }
+
+

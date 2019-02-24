@@ -62,3 +62,4 @@ class NotificationPermissionsController extends Controller
 		return redirect('post/'.$id.'/edit');
 	}
 }
+

@@ -24,7 +24,8 @@ class CommentController extends Controller
 		]);
 		$request->request->add(['user_id' => \Auth::id()]);
 		Comment::create($request->all());
-		return redirect('post/'.$request['post_id']);
+		$post = Post::findOrFail($request['post_id']);
+		return redirect($post->url);
 	}
 	/*
 	 * Allow admins to dete comments.
@@ -32,9 +33,9 @@ class CommentController extends Controller
 	public function destroy($id)
 	{
 		$comment = Comment::findOrFail($id);
-		$post_id = $comment->post_id;
+		$post = Post::findOrFail($comment->post_id);
 		$this->authorize('destroy', $comment);
 		$comment->delete();
-		return redirect('post/'.$post_id);
+		return redirect($post->url);
 	}
 }
