@@ -4,32 +4,36 @@ namespace App\Http\Controllers\dds;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
+use App\Models\dds\Drawing;
 use App\Http\Controllers\Controller;
 
 class DrawingsController extends Controller
 {
 	/*
-	 * Send a paginated array of given posts.
+	 * List all drawings.
 	*/
 	public function index()
 	{
-		$view_data['posts'] = '';
+		$pieces = Drawing::all();
+		$view_data['pieces'] = $pieces;
 		return view('dds.pages.single.dashboard', $view_data);
 	}
 	/*
-	 * Allow anyone to view posts that are not in draft mode or not published yet.
+	 * List drawings by category.
 	*/
 	public function category($category)
 	{
-		$view_data['post'] = '';
+		$pieces = Drawing::where('category','=' ,$category)->get();
+		$view_data['pieces'] = $pieces;
 		return view('dds.pages.drawings.category', $view_data);
 	}
 	/*
-	 * Allow anyone to view posts that are not in draft mode or not published yet.
+	 * Show listed drawing.
 	*/
 	public function piece($category, $piece)
 	{
-		$view_data['post'] = '';
+		$piece = Drawing::where('title','=' ,$piece)->firstOrFail();
+		$view_data['piece'] = $piece;
 		return view('dds.pages.drawings.piece', $view_data);
 	}
 }

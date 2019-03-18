@@ -16,12 +16,12 @@ class PostMetaController extends Controller
 	*/
 	public function index()
 	{
-		$metas_city = \DB::select(\DB::raw('SELECT city as name, COUNT(*) AS cnt FROM post_metas GROUP BY name'));
-		$metas_state = \DB::select(\DB::raw('SELECT state as name, COUNT(*) AS cnt FROM post_metas GROUP BY name'));
-		$metas_zip = \DB::select(\DB::raw('SELECT zip as name, COUNT(*) AS cnt FROM post_metas GROUP BY name'));
-		$metas_country = \DB::select(\DB::raw('SELECT country as name, COUNT(*) AS cnt FROM post_metas GROUP BY name'));
-		$metas = array_merge($metas_city,$metas_state,$metas_zip,$metas_country);
-		$view_data['metas'] = $metas;
+		$metas_city = \DB::select(\DB::raw('SELECT city as name, COUNT(*) AS cnt FROM post_metas GROUP BY name ORDER BY cnt DESC'));
+		$metas_state = \DB::select(\DB::raw('SELECT state as name, COUNT(*) AS cnt FROM post_metas GROUP BY name ORDER BY cnt DESC'));
+		$metas_country = \DB::select(\DB::raw('SELECT country as name, COUNT(*) AS cnt FROM post_metas GROUP BY name ORDER BY cnt DESC'));
+		$view_data['meta_city'] = $metas_city;
+		$view_data['meta_state'] = $metas_state;
+		$view_data['meta_country'] = $metas_country;
 		return view('hh.pages.meta.index', $view_data);
 	}
 	/*

@@ -15,18 +15,58 @@
 
 @section('content')
 	@include('hh.includes.banner')
-	<div class="post-box"><h4 class="post-box-title"><span>Locatoins</span></h4></div>
+	<div class="post-box"><h4 class="post-box-title"><span>Country</span></h4></div>
 	<div class="table-responsive">
 		<table class="table table-bordered table-striped">
 			<thead>
 				<tr>
-					<th>Name</th>
+					<th>Coutry</th>
 					<th>Times Used</th>
 				</tr>
 			</thead>
 
 			<tbody>
-				@foreach ($metas as $meta)
+				@foreach ($meta_country as $meta)
+					<tr>
+						<td>{{ $meta->name }}</td>
+						<td><a href="/location/{{ $meta->name }}" class="btn btn-primary">{{ $meta->cnt }}</a></td>
+					</tr>
+				@endforeach
+			</tbody>
+		</table>
+	</div>
+	<div class="post-box"><h4 class="post-box-title"><span>State</span></h4></div>
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>State</th>
+					<th>Times Used</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				@foreach ($meta_state as $meta)
+					<tr>
+						<td>{{ $meta->name }}</td>
+						<td><a href="/location/{{ $meta->name }}" class="btn btn-primary">{{ $meta->cnt }}</a></td>
+					</tr>
+				@endforeach
+			</tbody>
+		</table>
+	</div>
+	<div class="post-box"><h4 class="post-box-title"><span>City</span></h4></div>
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>City</th>
+					<th>Times Used</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				@foreach ($meta_city as $meta)
 					<tr>
 						<td>{{ $meta->name }}</td>
 						<td><a href="/location/{{ $meta->name }}" class="btn btn-primary">{{ $meta->cnt }}</a></td>
