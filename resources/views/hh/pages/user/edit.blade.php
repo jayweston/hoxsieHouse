@@ -18,7 +18,7 @@
 	{!! Form::open(['url' => 'user/'.$user->id, 'method' => 'patch']) !!}
 		<div class="form-group">
 			{!! Form::label('name','Name') !!}
-			{!! Form::text('name', null, ['class' =>'form-control']) !!}
+			{!! Form::text('name', $user->name, ['class' =>'form-control']) !!}
 		</div>
 		@if (!Auth::guest()) @if ((Auth::user()->type == App\Models\hh\User::TYPE_ADMIN))
 		<div class="form-group">

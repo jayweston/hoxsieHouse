@@ -2,6 +2,7 @@
 
 @section('content')
 	coming soon
+	{{ $piece->id }}
 @endsection
 
 @section('scripts')

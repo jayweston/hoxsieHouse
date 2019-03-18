@@ -50,15 +50,20 @@ $hhRoutes = function() {
 	});
 };
 Route::group(['domain' => 'HoxsieHouse.com'], $hhRoutes);
+Route::group(['domain' => 'www.HoxsieHouse.com'], $hhRoutes);
 Route::group(['domain' => '127.0.11.27'], $hhRoutes);
 Route::group(['middleware' => 'impersonate','domain' => '127.0.11.1'], $hhRoutes);
 Route::group(['middleware' => 'impersonate','domain' => '127.0.11.2'], $hhRoutes);
 Route::group(['middleware' => 'impersonate','domain' => '127.0.11.3'], $hhRoutes);
 Route::group(['domain' => '127.0.7.10'], function() {
-#	$users = DB::connection('foo')->select(...);
 	Route::get('/', 'dds\SinglePageController@dashboard');
 	Route::get('/about', 'dds\SinglePageController@about');
 	Route::get('/drawings/pencil', 'dds\DrawingsController@index');
-	Route::get('/drawings/pencil/{category}', 'dds\DrawingsController@category');
-	Route::get('/drawings/pencil/{category}/{piece}', 'dds\DrawingsController@piece');
+	Route::get('/drawings/pencil/{category}', 'dds\DrawingsController@category')->where('category', 'Celebrities|Nature|Animals');
+	Route::get('/drawings/pencil/{category}/{piece}', 'dds\DrawingsController@piece')->where('category', 'Celebrities|Nature|Animals');
+	Route::get('tmp', function () {
+		$post = DB::connection('dds')->table('pieces')->select('value')->get();
+		dd($post);
+	});
 });
+#https://stackoverflow.com/questions/31847054/how-to-use-multiple-databases-in-laravel
