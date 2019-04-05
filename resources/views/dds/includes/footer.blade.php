@@ -7,7 +7,7 @@
 	</ul>
 	<ul class="list-inline text-center footer-nav-title">Contact Info</ul>
 	<ul class="list-inline text-center footer-nav-link">
-		<li>Jeremy Allen | Delightful Drawings Studio | San Diego CA | DelightfulDrawingsStudio@gmail.com</li>
+		<li>Jeremy Allen | Delightful Drawings Studio | Miami, FL | Jeremy@DelightfulDrawingsStudio.com</li>
 	</ul>
 	@section('scripts')
 		<script type="text/javascript" src="/js/jquery-2.2.4.min.js"></script>
