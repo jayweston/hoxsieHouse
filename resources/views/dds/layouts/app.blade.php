@@ -4,7 +4,7 @@
 	@include('dds.includes.meta')
 
 	@section('css')
-		<link href="/css/bootstrap.min.css" rel="stylesheet">
+		<link href="/dds/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/dds/css/style.css" rel="stylesheet">
 	@show
 </head>
@@ -15,7 +15,7 @@
 		<div class="container">
 			<div class="row">
 				<div class="col-md-12 col-lg-12">
-					<br/><br/><br/>
+					<br/>
 					@yield('content')
 				</div>
 			</div>

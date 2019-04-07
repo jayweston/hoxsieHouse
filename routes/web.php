@@ -50,11 +50,11 @@ $hhRoutes = function() {
 	});
 };
 $ddsRoutes = function() {
-	Route::get('/', 'dds\SinglePageController@dashboard');
+	Route::get('/', 'dds\DrawingsController@index');
 	Route::get('/about', 'dds\SinglePageController@about');
 	Route::get('/drawings/pencil', 'dds\DrawingsController@index');
-	Route::get('/drawings/pencil/{category}', 'dds\DrawingsController@category')->where('category', 'Celebrities|Nature|Animals');
-	Route::get('/drawings/pencil/{category}/{piece}', 'dds\DrawingsController@piece')->where('category', 'Celebrities|Nature|Animals');
+	Route::get('/drawings/pencil/{category}', 'dds\DrawingsController@category')->where('category', 'Celebrities|Nature|Animals|Other');
+	Route::get('/drawings/pencil/{category}/{piece}', 'dds\DrawingsController@piece')->where('category', 'Celebrities|Nature|Animals|Other');
 	Route::get('tmp', function () {
 		$post = DB::connection('dds')->table('pieces')->select('value')->get();
 		dd($post);
