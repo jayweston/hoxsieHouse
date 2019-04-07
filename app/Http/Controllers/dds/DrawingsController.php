@@ -16,15 +16,16 @@ class DrawingsController extends Controller
 	{
 		$pieces = Drawing::all();
 		$view_data['pieces'] = $pieces;
-		return view('dds.pages.single.dashboard', $view_data);
+		return view('dds.pages.drawings.all', $view_data);
 	}
 	/*
 	 * List drawings by category.
 	*/
 	public function category($category)
 	{
-		$pieces = Drawing::where('category','=' ,$category)->get();
+		$pieces = Drawing::where('category','LIKE' ,'%'.$category.'%')->get();
 		$view_data['pieces'] = $pieces;
+		$view_data['category'] = $category;
 		return view('dds.pages.drawings.category', $view_data);
 	}
 	/*

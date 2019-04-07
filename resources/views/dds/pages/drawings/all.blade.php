@@ -8,7 +8,7 @@
 					<div class="card-body">
 						<h5 class="card-title">{{ $piece->title }}</h5>
 						<p class="card-text">{{ $piece->summary }}</p>
-						<p class="card-text"><a href="{{ $piece->title }}">link</a></p>
+						<p class="card-text"><a href="/drawings/pencil/{{ $piece->getCategories()[0] }}/{{ $piece->title }}">link</a></p>
 					</div>
 				</div>
 
