@@ -35,6 +35,7 @@ class DrawingsController extends Controller
 	{
 		$piece = Drawing::where('title','=' ,$piece)->firstOrFail();
 		$view_data['piece'] = $piece;
+		$view_data['category'] = $category;
 		return view('dds.pages.drawings.piece', $view_data);
 	}
 }
