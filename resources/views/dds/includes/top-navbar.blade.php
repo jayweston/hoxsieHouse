@@ -15,10 +15,9 @@
 					Art
 				</a>
 				<div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-					<a class="dropdown-item" href="/drawings/pencil/Celebrities">Celebrities</a>
-					<a class="dropdown-item" href="/drawings/pencil/Animals">Animals</a>
-					<a class="dropdown-item" href="/drawings/pencil/Nature">Nature</a>
-					<a class="dropdown-item" href="/drawings/pencil/Other">Other</a>
+					@foreach(App\Models\dds\Drawing::SITE_CATEGORIES as $category)
+						<a class="dropdown-item" href="/drawings/pencil/{{ $category }}">{{ $category }}</a>
+					@endforeach
 				</div>
 			</li>
 		</ul>

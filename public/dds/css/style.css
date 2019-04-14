@@ -43,7 +43,7 @@ a:focus, a:hover{
 	background-color: #415f57;
 	border-color: #415f57;
 }
-h1{
+h1,h6{
 	color: #415f57;
 }
 h5{
@@ -100,16 +100,22 @@ h5{
 	font-weight:700;
 }
 /*
- * Drawings category
+ * Dashboard category
 */
-
-.drawings_category_card{
-	margin-bottom: 50px !important;
+.dashboard_category_card{
+	margin-bottom: 25px !important;
+	margin-top: 25px !important;
 	min-width: 300px; 
 	max-width: 600px;
+	padding-right: 10px;
+	padding-left: 10px;
+	border: 0px;
 }
-.card {
-	border: 1px solid rgb(122,152,136);
+.dashboard_banner{
+	height:100%;
+}
+.dashboard_social_icons{
+	margin-bottom:25px;
 }
 /*
  * Single drawings
@@ -129,7 +135,6 @@ h5{
 	margin-top:15px;
 }
 .piece_icon {
-    /* display: inline-block; */
     width: 20px;
     height: 20px;
     vertical-align: middle;
@@ -140,3 +145,13 @@ h5{
 	padding-right:5px;
 	padding-left:5px;
 }
+/*
+ * Drawings category
+*/
+.drawings_category_card{
+	margin-bottom: 25px !important;
+	margin-top: 25px !important;
+	min-width: 315px; 
+	max-width: 600px;
+}
+
