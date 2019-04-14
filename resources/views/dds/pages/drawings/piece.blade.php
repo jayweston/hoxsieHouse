@@ -22,17 +22,23 @@
 			</div>
 			<div class="col">
 				<div class="row piece_row"><h1>{{ $piece->title }} by Jeremy Allen</h1></div>
-				<div class="row piece_row"><h5 class="text-muted">{{ $piece->summary }}</h5></div>
+				<div class="row piece_row"><h5>{{ $piece->summary }}</h5></div>
 				<div class="row piece_row"><div class="col text-center">Cost: ${{ $piece->value }}</div></div>
 				<div class="row piece_row">
-					<div class="col text-center"><a href="{{ $piece->ebay }}" class="btn btn-primary @if ($piece->ebay == '#') disabled @endif" role="button">eBay</a></div>
-					<div class="col text-center"><a href="{{ $piece->amazon }}" class="btn btn-primary @if ($piece->ebay == '#') disabled @endif" role="button">Amazon</a></div>
-					<div class="col text-center"><a href="{{ $piece->etsy }}" class="btn btn-primary @if ($piece->ebay == '#') disabled @endif" role="button">Etsy</a></div>
+					<div class="col text-center"><a href="{{ $piece->ebay }}" class="btn btn-primary {{ $piece->ebay == '#' ? 'disabled': '' }}" role="button">eBay</a></div>
+					<div class="col text-center"><a href="{{ $piece->amazon }}" class="btn btn-primary {{ $piece->amazon == '#' ? 'disabled': '' }}" role="button">Amazon</a></div>
+					<div class="col text-center"><a href="{{ $piece->etsy }}" class="btn btn-primary {{ $piece->etsy == '#' ? 'disabled': '' }}" role="button">Etsy</a></div>
 				</div>
-				<div class="row piece_row piece_description">{{ $piece->description }}</div>
+				<div class="row piece_row piece_description">
+					<p><h6>This is an original drawing by Jeremy Allen. Drawings are done on ___________ paper and finished with a ________ spray to protect against UV light and smugging. Frame is not included.</h6></p>
+					<ul>
+						<li><h6>Artwork comes directly from the Delightful Drawings Studio.</h6></li>
+						<li><h6>Artwork is mailed in a professional rigid tube mailer for protection in shipment.</h6></li>
+					</ul>
+				</div>
 				{{--
 				<div class="row piece_row">
-					@foreach($piece->getCategories() as $category)
+					@foreach($piece->getPieceCategories() as $category)
 						<div class="col">
 							<a href="/drawings/pencil/{{ $category }}/" class="btn btn-outline-primary btn-sm">{{ $category }}</a>
 						</div>

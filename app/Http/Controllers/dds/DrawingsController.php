@@ -16,7 +16,7 @@ class DrawingsController extends Controller
 	{
 		$pieces = Drawing::all();
 		$view_data['pieces'] = $pieces;
-		return view('dds.pages.drawings.all', $view_data);
+		return view('dds.pages.drawings.index', $view_data);
 	}
 	/*
 	 * List drawings by category.
