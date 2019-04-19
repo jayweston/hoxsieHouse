@@ -1,12 +1,28 @@
 @extends('dds.layouts.app')
 
+@if(!empty($piece->jpg))
+	@section('image',asset('dds/images/pieces/'.$piece->jpg))
+@endif
+
+@if(!empty($piece->title))
+	@section('title',$piece->title.' by Jeremy Allen')
+@endif
+
+@if(!empty($piece->summary))
+	@section('description',$piece->summary)
+@endif
+
+@if(!empty($piece->jpg))
+	@section('created_at',substr($piece->jpg, 4, 2).'-'.substr($piece->jpg, 6, 2).'-'.substr($piece->jpg, 0, 4))
+@endif
+
 @section('content')
 	<br/>
 	<div class="container">
 		<div class="row">
 			<div class="col">
-				<div class="row piece_row">
-					<img src="/dds/images/pieces/{{ $piece->jpg }}" width="100%"><br/>
+				<div class="row piece_row piece_image">
+					<img src="{{ asset('dds/images/pieces/'.$piece->jpg) }}"><br/>
 				</div>
 				<div class="row piece_row">
 					<a target="_blank" href="https://www.facebook.com/sharer.php?u={{ URL::current() }}" class="col btn btn-outline-primary piece_social_icon">
@@ -15,7 +31,7 @@
 					<a target="_blank" href="https://www.twitter.com/share?text={{ $piece->title }} by Jeremy Allen&amp;url={{ URL::current() }}" class="col btn btn-outline-primary piece_social_icon">
 						<span class="fa fa-twitter"></span>Tweet it
 					</a>
-					<a target="_blank" href="https://www.pinterest.com/pin/create/button/?url={{ URL::current() }}&amp;media={{ URL::to('/') }}/dds/images/pieces/{{ $piece->jpg }}&amp;description={{ $piece->title }} by Jeremy Allen" class="col btn btn-outline-primary piece_social_icon">
+					<a target="_blank" href="https://www.pinterest.com/pin/create/button/?url={{ URL::current() }}&amp;media={{ asset('dds/images/pieces/'.$piece->jpg) }}&amp;description={{ $piece->title }} by Jeremy Allen" class="col btn btn-outline-primary piece_social_icon">
 						<span class="fa fa-pinterest"></span>Pin it
 					</a>
 				</div>

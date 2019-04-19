@@ -3,7 +3,7 @@
 @section('content')
 	<br/>
 	<div class="container">
-		<div class="row"><img class="card-img-top dashboard_banner" src="/dds/images/Studio_logo.jpg" alt="Pencil drawing the words 'Delightful Drawings Studio'" /></div>
+		<div class="row"><img class="card-img-top dashboard_banner" src="/dds/images/dds_logo_cutout.png" alt="Pencil drawing the words 'Delightful Drawings Studio'" /></div>
 		<div class="row">
 			<div class="col align-self-center">
 				<ul class="list-unstyled text-center">
@@ -24,7 +24,7 @@
 									<div class="carousel-inner">
 										@foreach(App\Models\dds\Drawing::getCategoryImages($category) as $key => $jpg)
 											<div class="carousel-item {{ $key == 0 ? 'active': '' }}">
-												<img class="d-block w-100" src="/dds/images/pieces/{{ $jpg }}" alt="First slide">
+												<img class="d-block w-100" src="{{ asset('dds/images/pieces/'.$jpg) }}" alt="First slide">
 											</div>
 										@endforeach
 									</div>

@@ -1,5 +1,7 @@
 @extends('dds.layouts.app')
 
+@section('image',asset('dds/images/JeremyAllen.jpg'))
+
 @section('content')
 	<br/>
 	<div class="container">
@@ -10,7 +12,7 @@
 		</div>
 		<div class="row">
 			<div class="col about_image">
-				<span class="d-flex justify-content-center"><img src="dds/images/JeremyAllen.jpg" alt="Self portrait pencil drawing of the author (Jeremy Allen)." /></span>
+				<span class="d-flex justify-content-center"><img src="{{ asset('dds/images/JeremyAllen.jpg') }}" alt="Self portrait pencil drawing of the author (Jeremy Allen)." /></span>
 			</div>
 		</div>
 		<div class="row">
