@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm bg-light">
 	<a class="navbar-brand" href="/">
-		<img src="/dds/images/Studio_pencil.png" alt="Drawing of colored pencils that spell out Delightful Drawings Studio.">
+		<img src="{{ asset('dds/images/dds_logo_pencil_cutout.png') }}" alt="Drawing of colored pencils that spell out Delightful Drawings Studio.">
 	</a>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav ml-auto">

@@ -14,7 +14,7 @@
 @section('meta-google') {{-- http://www.google.com/webmasters/tools/richsnippets --}}
 	<meta itemprop="name" content="@yield('title','Delightful Drawings Studio')"/>
 	<meta itemprop="description" content="@yield('description','Awesome pencil drawings.')"/>
-	<meta itemprop="image" content="@yield('image', \URL::to('/hh/images/blog/thumbnail.png') )"/>
+	<meta itemprop="image" content="@yield('image', asset('dds/images/dds_logo_pencil.jpg') )"/>
 @show
 
 @section('meta-twitter') {{-- https://dev.twitter.com/docs/cards/validation/validator --}}
@@ -23,7 +23,7 @@
 	<meta name="twitter:title" content="@yield('title','Delightful Drawings Studio')">
 	<meta name="twitter:description" content="@yield('description','Awesome pencil drawings.')"/>
 	<meta name="twitter:creator" content="Delightful_Drawings_Studio"/>
-	<meta name="twitter:image:src" content="@yield('image', \URL::to('/hh/images/blog/thumbnail.png') )"/>
+	<meta name="twitter:image:src" content="@yield('image', asset('dds/images/dds_logo_pencil.jpg') )"/>
 	<meta name="twitter:domain" content="{{ URL::full() }}"/>
 @show
 
@@ -34,7 +34,7 @@
 	<meta property="profile:username" content="DelightfulDrawingsStudio"/>
 	<meta property="og:title" content="@yield('title','Delightful Drawings Studio')"/>
 	<meta property="og:description" content="@yield('description','Awesome pencil drawings.')"/>
-	<meta property="og:image" content="@yield('image', \URL::to('/hh/images/blog/thumbnail.png') )"/>
+	<meta property="og:image" content="@yield('image', asset('dds/images/dds_logo_pencil.jpg') )"/>
 	<meta property="og:url" content="{{ URL::full() }}"/>
 	<meta property="og:site_name" content="@yield('site_name','Delightful Drawings Studio')"/>
 	<meta property="og:see_also" content="{{ URL::to('/') }}"/>

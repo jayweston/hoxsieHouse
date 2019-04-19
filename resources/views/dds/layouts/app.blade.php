@@ -11,9 +11,10 @@
 	@include('dds.includes.meta')
 
 	@section('css')
-		<link href="/dds/css/bootstrap.min.css" rel="stylesheet">
-		<link href="/dds/css/font-awesome.css" rel="stylesheet">
-		<link href="/dds/css/style.css" rel="stylesheet">
+		<link rel="shortcut icon" href="{{ asset('dds/images/favicon.png') }}">
+		<link href="{{ asset('dds/css/bootstrap.min.css') }}" rel="stylesheet">
+		<link href="{{ asset('dds/css/font-awesome.css') }}" rel="stylesheet">
+		<link href="{{ asset('dds/css/style.css') }}" rel="stylesheet">
 	@show
 </head>
 <body id="app-layout">
