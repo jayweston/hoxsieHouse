@@ -53,6 +53,7 @@ $ddsRoutes = function() {
 	Route::get('/', 'dds\SinglePageController@dashboard');
 	Route::get('/about', 'dds\SinglePageController@about');
 	Route::get('/drawings/pencil', 'dds\DrawingsController@index');
+	Route::get('/drawings/purchased/{piece}', 'dds\DrawingsController@purchased');
 	Route::get('/drawings/pencil/{category}', 'dds\DrawingsController@category')->where('category', implode("|",App\Models\dds\Drawing::SITE_CATEGORIES));
 	Route::get('/drawings/pencil/{category}/{piece}', 'dds\DrawingsController@piece')->where('category', implode("|",App\Models\dds\Drawing::SITE_CATEGORIES));
 };

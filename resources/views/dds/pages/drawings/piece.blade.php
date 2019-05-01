@@ -39,11 +39,33 @@
 			<div class="col">
 				<div class="row piece_row"><h1>{{ $piece->title }} by Jeremy Allen</h1></div>
 				<div class="row piece_row"><h5>{{ $piece->summary }}</h5></div>
-				<div class="row piece_row"><div class="col text-center">Cost: ${{ $piece->value }}</div></div>
+				<div class="row piece_row"><div class="col text-center">{{ $piece->value == NULL ? 'Sold' : 'Cost: $'.$piece->value }}</div></div>
 				<div class="row piece_row">
 					<div class="col text-center"><a href="{{ $piece->ebay }}" class="btn btn-primary {{ $piece->ebay == '#' ? 'disabled': '' }}" role="button">eBay</a></div>
 					<div class="col text-center"><a href="{{ $piece->amazon }}" class="btn btn-primary {{ $piece->amazon == '#' ? 'disabled': '' }}" role="button">Amazon</a></div>
 					<div class="col text-center"><a href="{{ $piece->etsy }}" class="btn btn-primary {{ $piece->etsy == '#' ? 'disabled': '' }}" role="button">Etsy</a></div>
+					<div class="col text-center">
+						<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+							<input type="hidden" name="cmd" value="_xclick">
+							<input type="hidden" name="business" value="2T8WUKEW7XTMY">
+							<input type="hidden" name="lc" value="US">
+							<input type="hidden" name="item_name" value="{{ $piece->title }}">
+							<input type="hidden" name="item_number" value="{{ substr($piece->jpg,0,-4) }}">
+							<input type="hidden" name="amount" value="{{ $piece->value }}.00">
+							<input type="hidden" name="currency_code" value="USD">
+							<input type="hidden" name="button_subtype" value="services">
+							<input type="hidden" name="no_note" value="0">
+							<input type="hidden" name="cn" value="Add special instructions to the seller:">
+							<input type="hidden" name="no_shipping" value="2">
+							<input type="hidden" name="rm" value="1">
+							<input type="hidden" name="return" value="{{ secure_url('/drawings/purchased/'.substr($piece->jpg,0,-4)) }}">
+							<input type="hidden" name="cancel_return" value="{{ URL::current() }}">
+							<input type="hidden" name="tax_rate" value="0.000">
+							<input type="hidden" name="shipping" value="0.00">
+							<input type="hidden" name="bn" value="PP-BuyNowBF:btn_buynowCC_LG.gif:NonHosted">
+							<input type="submit" value="PayPal" class="btn btn-primary {{ $piece->paypal == '0' ? 'disabled': '' }}">
+						</form>
+					</div>
 				</div>
 				<div class="row piece_row piece_description">
 					<p><h6>This is an original drawing by Jeremy Allen. Drawings are done on ___________ paper and finished with a ________ spray to protect against UV light and smugging. Frame is not included.</h6></p>
