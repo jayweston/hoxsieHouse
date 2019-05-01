@@ -21,6 +21,7 @@
 	@include('dds.includes.top-navbar')
 
 	@section('contents')
+		@include('dds.includes.notifications')
 		@yield('content')
 	@show
 </body>
