@@ -41,9 +41,8 @@
 				<div class="row piece_row"><h5>{{ $piece->summary }}</h5></div>
 				<div class="row piece_row"><div class="col text-center">{{ $piece->value == NULL ? 'Sold' : 'Cost: $'.$piece->value }}</div></div>
 				<div class="row piece_row">
-					<div class="col text-center"><a href="{{ $piece->ebay }}" class="btn btn-primary {{ $piece->ebay == '#' ? 'disabled': '' }}" role="button">eBay</a></div>
-					<div class="col text-center"><a href="{{ $piece->amazon }}" class="btn btn-primary {{ $piece->amazon == '#' ? 'disabled': '' }}" role="button">Amazon</a></div>
-					<div class="col text-center"><a href="{{ $piece->etsy }}" class="btn btn-primary {{ $piece->etsy == '#' ? 'disabled': '' }}" role="button">Etsy</a></div>
+					<div class="col text-center"><a href="{{ $piece->ebay }}" class="btn btn-primary {{ $piece->ebay == '#' ? 'disabled': '' }}" role="button" target="_blank">eBay</a></div>
+					<div class="col text-center"><a href="{{ $piece->amazon }}" class="btn btn-primary {{ $piece->amazon == '#' ? 'disabled': '' }}" role="button" target="_blank">Amazon</a></div>
 					<div class="col text-center">
 						<form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
 							<input type="hidden" name="cmd" value="_xclick">
@@ -68,10 +67,11 @@
 					</div>
 				</div>
 				<div class="row piece_row piece_description">
-					<p><h6>This is an original drawing by Jeremy Allen. Drawings are done on ___________ paper and finished with a ________ spray to protect against UV light and smugging. Frame is not included.</h6></p>
+					<p><h6>{!! $piece->description !!}</h6></p>
+					<p><h6>This is an original drawing by Jeremy Allen. All pieces are done on acid free, medium-weight (70 lb.) drawing paper and finished with Sanford Prismacolor fixative spray to protect against UV light and smudging.</h6></p>
 					<ul>
-						<li><h6>Artwork comes directly from the Delightful Drawings Studio.</h6></li>
-						<li><h6>Artwork is mailed in a professional rigid tube mailer for protection in shipment.</h6></li>
+						<li><h6>Drawing is {{ $piece->width }} inches wide by {{ $piece->height }} inches height and have a 1 inch hand drawn boarder.</h6></li>
+						<li><h6>Artwork ships directly from the Delightful Drawings Studio in a rigid tube mailer for protection.</h6></li>
 					</ul>
 				</div>
 				{{--

@@ -3,6 +3,9 @@
 @section('content')
 	<br/>
 	<div class="container">
+		<div class="row"><div class="col text-center">
+			<h1 class="display-1">{{ $category }}</h1>
+		</div></div>
 		<div class="row">
 			<div class="card-deck">
 				@foreach($pieces as $key => $piece)

@@ -56,3 +56,11 @@
 	</div>
 @endif
 
+@if ($message = Session::get('successful_purchase'))
+	<div class="alert alert-success alert-block">
+		<button type="button" class="close" data-dismiss="alert">&times;</button>
+		<h4>Purchase Completed</h4>
+		{{ $message }}
+	</div>
+@endif
+
