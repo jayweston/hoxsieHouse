@@ -33,8 +33,7 @@ class DrawingsController extends Controller
 	*/
 	public function piece($category, $piece)
 	{
-		$piece = Drawing::where('title','=' ,str_replace('-', ' ', $piece))->firstOrFail();
-		$view_data['piece'] = $piece;
+		$view_data['piece'] = Drawing::where('title','=' ,str_replace('-', ' ', $piece))->firstOrFail();
 		$view_data['category'] = $category;
 		return view('dds.pages.drawings.piece', $view_data);
 	}
@@ -50,10 +49,9 @@ class DrawingsController extends Controller
 		$piece->paypal = 0;
 		$piece->value = NULL;
 		$piece->save();
-		$view_data['piece'] = $piece;
-		$view_data['category'] = $piece->getPieceCategories()[0];
-		return view('dds.pages.drawings.piece', $view_data)->with('success', 'Thank you for purchasing '.$piece->title.' by Jeremy Allen.  We will ship your drawing out shortly.');
+		$category = $piece->getPieceCategories()[0];
+		$title = str_replace(' ', '-', $piece->title);
+		return redirect('/drawings/pencil/'.$category.'/'.$title)->with('successful_purchase', 'Thank you for purchasing '.$piece->title.' by Jeremy Allen.  We will ship your drawing out shortly.');
 	}
 }
-
-
+http://127.0.7.10:8000/drawings/purchased/20180718
