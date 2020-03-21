@@ -54,4 +54,5 @@ class DrawingsController extends Controller
 		return redirect('/drawings/pencil/'.$category.'/'.$title)->with('successful_purchase', 'Thank you for purchasing '.$piece->title.' by Jeremy Allen.  We will ship your drawing out shortly.');
 	}
 }
-http://127.0.7.10:8000/drawings/purchased/20180718
+
+

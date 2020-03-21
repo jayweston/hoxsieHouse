@@ -2,15 +2,14 @@
 	<ul class="list-inline text-center footer_nav_title">Social Media</ul>
 	<ul class="list-inline text-center footer_nav_link">
 		<li class="list-inline-item"><a href="https://www.facebook.com/DelightfulDrawingsStudio/" target="_blank" title="Delightful Drawings Studio's official Facebook page">Facebook</a></li>
-		<li class="list-inline-item"><a href="/" target="_blank" title="Placeholder link">Instagram</a></li>
-		<li class="list-inline-item"><a href="/" target="_blank" title="Placeholder link">Pinterest</a></li>
+		<li class="list-inline-item"><a href="{{ url('/blank') }}" title="Placeholder link">Instagram</a></li>
+		<li class="list-inline-item"><a href="{{ url('/blank') }}" title="Placeholder link">Pinterest</a></li>
 	</ul>
 	<ul class="list-inline text-center footer_nav_title">Stores</ul>
 	<ul class="list-inline text-center footer_nav_link">
-		<li class="list-inline-item"><a href="/" target="_blank" title="Placeholder link">Amazon</a></li>
-		<li class="list-inline-item"><a href="/" target="_blank" title="Placeholder link">eBay</a></li>
-		<li class="list-inline-item"><a href="/" target="_blank" title="Placeholder link">Etsy</a></li>
-		<li class="list-inline-item"><a href="/" target="_blank" title="Placeholder link">Patreon</a></li>
+		<li class="list-inline-item"><a href="{{ url('/blank') }}" title="Placeholder link">Amazon</a></li>
+		<li class="list-inline-item"><a href="https://www.ebay.com/sch/i.html?_nkw=Drawing+%22Jeremy+Allen%22" target="_blank" title="Link to my art on eBay">eBay</a></li>
+		<li class="list-inline-item"><a href="{{ url('/blank') }}" title="Placeholder link">Patreon</a></li>
 	</ul>
 	<ul class="list-inline text-center footer_nav_title">Contact Info</ul>
 	<ul class="list-inline text-center footer_nav_text">
