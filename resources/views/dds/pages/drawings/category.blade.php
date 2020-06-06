@@ -13,7 +13,7 @@
 						<div class="card drawings_category_card mx-auto">
 							<a href="{{ url('/drawings/pencil/'.$category.'/'.str_replace(' ', '-', $piece->title)) }}"><img class="card-img-top" src="{{ asset('dds/images/pieces/'.$piece->jpg) }}" alt="Pencil drawing titled: {{ $piece->title }}"></a>
 							<div class="card-body">
-								<h5 class="card-title"><span><a href="{{ url('/drawings/pencil/'.$category.'/'.str_replace(' ', '-', $piece->title)) }}">{{ $piece->title }}</span><span class="pull-right">{{ $piece->value == NULL ? 'Sold' : '$'.$piece->value }}</a></span></h5>
+								<h5 class="card-title"><span><a href="{{ url('/drawings/pencil/'.$category.'/'.str_replace(' ', '-', $piece->title)) }}">{{ $piece->title }}</span><span class="pull-right">{{ $piece->value == NULL ? 'Sold' : '$'.$piece->price }}</a></span></h5>
 								<p class="card-text">{{ $piece->summary }}</p>
 							</div>
 						</div>

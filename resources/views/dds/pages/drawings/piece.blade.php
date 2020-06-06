@@ -39,7 +39,13 @@
 			<div class="col">
 				<div class="row piece_row"><h1>{{ $piece->title }} by Jeremy Allen</h1></div>
 				<div class="row piece_row"><h5>{{ $piece->summary }}</h5></div>
-				<div class="row piece_row"><div class="col text-center">{{ $piece->value == NULL ? 'Sold' : 'Cost: $'.$piece->value }}</div></div>
+				<div class="row piece_row">
+					@if($piece->price == NULL)
+						<div class="col text-center">{{ $piece->value == NULL ? 'Sold' : 'Cost: $'.$piece->value }}</div>
+					@else
+						<div class="col text-center">Cost: <del>{{ $piece->value == NULL ? 'Sold' : '$'.$piece->value }}</del> ${{ $piece->price }}</div>
+					@endif
+				</div>
 				<div class="row piece_row">
 					<div class="col text-center"><a href="{{ $piece->ebay }}" class="btn btn-primary {{ $piece->ebay == '#' ? 'disabled': '' }}" role="button" target="_blank">eBay</a></div>
 					<div class="col text-center"><a href="{{ $piece->amazon }}" class="btn btn-primary {{ $piece->amazon == '#' ? 'disabled': '' }}" role="button" target="_blank">Amazon</a></div>
