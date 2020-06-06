@@ -57,7 +57,9 @@ $ddsRoutes = function() {
 	Route::get('/drawings/purchased/{piece}', 'dds\DrawingsController@purchased');
 	Route::get('/drawings/pencil/{category}', 'dds\DrawingsController@category')->where('category', implode("|",App\Models\dds\Drawing::SITE_CATEGORIES));
 	Route::get('/drawings/pencil/{category}/{piece}', 'dds\DrawingsController@piece')->where('category', implode("|",App\Models\dds\Drawing::SITE_CATEGORIES));
+#	Route::get('tmp', function () {		dd();	});
 };
+
 
 Route::group(['domain' => 'HoxsieHouse.com'], $hhRoutes);
 Route::group(['domain' => 'www.HoxsieHouse.com'], $hhRoutes);
