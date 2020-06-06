@@ -9,7 +9,7 @@ class Drawing extends Model
 	protected $fillable = ["id","value","width","height","color","category","title","summary", "description","ebay","amazon","etsy","jpg"];
 	public $timestamps = false;
 	protected $connection = "dds";
-	const SITE_CATEGORIES = ['Celebrities','Nature','Animals','Other'];
+	const SITE_CATEGORIES = ['Cars','Celebrities','Charity','Nature','Animals','Other'];
 	/*
 	 * Return drawing categories.
 	*/
