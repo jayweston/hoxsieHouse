@@ -31,6 +31,7 @@ $hhRoutes = function() {
 	Route::post('login', 'Auth\LoginController@login');
 	Route::post('register', 'Auth\RegisterController@register');
 	Route::post('logout', 'Auth\LoginController@logout');
+/*
 	Route::get('tmp/{id}', function ($id) {
 		\Tinify\setKey(env('TINIFY_APIKEY'));
 		$post = App\Models\hh\Post::findOrFail($id);
@@ -48,7 +49,9 @@ $hhRoutes = function() {
 		$compressionsThisMonth = \Tinify\compressionCount();
 		dd($post->content);
 	});
+*/
 };
+
 $ddsRoutes = function() {
 	Route::get('/', 'dds\SinglePageController@dashboard');
 	Route::get('/about', 'dds\SinglePageController@about');
@@ -60,6 +63,11 @@ $ddsRoutes = function() {
 #	Route::get('tmp', function () {		dd();	});
 };
 
+$ctRoutes = function() {
+	Route::get('/', 'ct\SinglePageController@dashboard');
+	Route::get('/blank', 'ct\SinglePageController@blank');
+#	Route::get('tmp', function () {		dd();	});
+};
 
 Route::group(['domain' => 'HoxsieHouse.com'], $hhRoutes);
 Route::group(['domain' => 'www.HoxsieHouse.com'], $hhRoutes);
@@ -67,8 +75,13 @@ Route::group(['domain' => '127.0.11.27'], $hhRoutes);
 Route::group(['middleware' => 'impersonate','domain' => '127.0.11.1'], $hhRoutes);
 Route::group(['middleware' => 'impersonate','domain' => '127.0.11.2'], $hhRoutes);
 Route::group(['middleware' => 'impersonate','domain' => '127.0.11.3'], $hhRoutes);
+
 Route::group(['domain' => 'DelightfulDrawingsStudio.com'], $ddsRoutes);
 Route::group(['domain' => 'www.DelightfulDrawingsStudio.com'], $ddsRoutes);
 Route::group(['domain' => '127.0.7.10'], $ddsRoutes);
+
+Route::group(['domain' => 'checkeredtile.com'], $ctRoutes);
+Route::group(['domain' => 'www.checkeredtile.com'], $ctRoutes);
+Route::group(['domain' => '127.0.3.19'], $ctRoutes);
 
 #https://stackoverflow.com/questions/31847054/how-to-use-multiple-databases-in-laravel

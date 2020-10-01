@@ -224,6 +224,7 @@
 	<script src="/hh/js/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript">
 		tinymce.init({
+			relative_urls : false,
 			selector: '#mytextarea',
 			height: 500,
 			theme: 'modern',
