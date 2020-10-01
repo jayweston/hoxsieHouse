@@ -36,7 +36,7 @@
 		</div>
 	</div>
 	<div class="footer-copyright container">
-		<div class="copyright-text">© Copyright 2020 Daltile. All Rights Reserved.</div>
+		<div class="copyright-text">© Copyright 2020 Checkered Tile. All Rights Reserved.</div>
 	</div>
 	@section('scripts')
 		<script type="text/javascript" src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>

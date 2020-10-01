@@ -11,17 +11,28 @@ rgba(76, 175, 80, 0.3)
 a{
 	color: #000000;
 }
+
+
+
+
 /*
  * Topbar Nav
 */
 .navbar-brand img{
 	width:200px;
 }
+
 .navbar {
 	border-bottom-color: #000000;
 	border-bottom-width: thin;
 	border-bottom-style: solid;
+	background: white;
+	position: fixed;
+	top: auto;
+	width: 100%;
+	z-index: 5;
 }
+
 .nav-link:focus,.nav-link:hover{
 	color: #c8102e;
 	text-decoration: none;
@@ -29,12 +40,17 @@ a{
 	border-bottom-width: thick;
 	border-bottom-style: solid;
 }
+
+
+
+
 /*
  * Footer
 */
 .footer-section a{
 	color: #ffffff;
 }
+
 .footer-section {
 	background-color:#000000;
 	color: #ffffff;
@@ -67,3 +83,69 @@ a{
 	margin-left: auto;
 	margin-right: auto;
 }
+
+
+
+
+/*
+ * dashboard
+*/
+.dashboard-header{
+	margin-top: 75px;
+	text-transform: uppercase;
+	text-align: center;
+}
+
+.dashboard-services img{
+	border-radius: 50%;
+}
+
+.dashboard-services img:hover{
+	border-style: solid;
+	border-width: thick;
+}
+
+.dashboard_category_card{
+	PADDING-top: 86px;
+}
+
+.card{
+	border:none;
+}
+
+.card-title{
+	text-align: center;
+	text-transform: uppercase;
+}
+
+.card-text{
+	font-size: 16px;
+	line-height: 28px;
+}
+
+.list-group-item {
+	width: 95%;
+	margin: 1% !important;
+}
+
+@media (min-width: 576px) {
+	.list-group-item {
+		width: 47%;
+		margin: 5px 1.5% !important;
+	}
+}
+
+@media (min-width: 768px) {
+	.list-group-item {
+		width: 31.333%;
+		margin: 5px 1% !important;
+	}
+}
+
+@media (min-width: 992px) {
+	.list-group-item {
+		width: 23%;
+		margin: 5px 1% !important;
+	}
+}
+
