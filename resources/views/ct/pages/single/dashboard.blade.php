@@ -5,7 +5,8 @@
 @stop
 
 @section('content')
-	<div class="card dashboard_category_card mx-auto">
+	<div class="body-main card mx-auto">
+				@include('ct.includes.notifications')
 		<div id="dashboard-carousel" class="carousel slide" data-ride="carousel" data-interval="5000">
 			<div class="carousel-inner">
 				<div class="carousel-item active">
@@ -102,6 +103,49 @@
 							<p class="card-text">Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
 						</div>
 					</div>
+				</li>
+			</ul>
+		</section>
+	</div>
+
+	<div class="component rich-text col-xs-12">
+        	<div class="dashboard-header">
+			<h1>PORTFOLIO</h1>
+		</div>
+	</div>
+	<div class="container">
+		<section>
+			<ul class="list-group list-group-horizontal align-items-stretch flex-wrap dashboard-services">
+				<li class="list-group-item border-0">
+					<div class="portfolio-card-a"><div class="card portfolio-card-b">
+						<img src="https://digitalassets.daltile.com/content/dam/Daltile/website/images/1-1-ratio/DAL_Diplomacy_RES_02_LightGreyDarkGrey_2cm_web.jpg/jcr:content/renditions/cq5dam.web.570.570.jpeg?h=170&amp;la=en&amp;w=170" class="card-img-top">
+						<h5 class="card-title card-img-overlay portfolio-overlay">residential</h5>
+					</div></div>
+				</li>
+
+				<li class="list-group-item border-0">
+					<div class="portfolio-card-a"><div class="card portfolio-card-b">
+						<img src="https://digitalassets.daltile.com/content/dam/Daltile/website/images/homepage/DAL_Fonte_COM_02_PierWhite_web_270x270.jpg/jcr:content/renditions/cq5dam.web.570.570.jpeg?h=170&amp;la=en&amp;w=170" class="card-img-top">
+						<h5 class="card-title card-img-overlay portfolio-overlay">commercial</h5>
+					</div></div>
+				</li>
+				<li class="list-group-item border-0">
+					<div class="portfolio-card-a"><div class="card portfolio-card-b">
+						<img src="https://digitalassets.daltile.com/content/dam/Daltile/website/images/homepage/DAL_Florentine_COM_01_web_270X270.jpg/jcr:content/renditions/cq5dam.web.570.570.jpeg?h=170&amp;la=en&amp;w=170" class="card-img-top">
+						<h5 class="card-title card-img-overlay portfolio-overlay">Onyx</h5>
+					</div></div>
+				</li>
+				<li class="list-group-item border-0">
+					<div class="portfolio-card-a"><div class="card portfolio-card-b">
+						<img src="https://digitalassets.daltile.com/content/dam/Daltile/website/images/homepage/DAL_Fonte_RES_02_CU05_web_270x270.jpg/jcr:content/renditions/cq5dam.web.570.570.jpeg?h=170&amp;la=en&amp;w=170" class="card-img-top">
+						<h5 class="card-title card-img-overlay portfolio-overlay">Sandstone</h5>
+					</div></div>
+				</li>
+				<li class="list-group-item border-0">
+					<div class="portfolio-card-a"><div class="card portfolio-card-b">
+						<img src="https://digitalassets.daltile.com/content/dam/Daltile/website/images/homepage/REVO_RV70_PerspectiveGrey_RES_01_web_270x270.jpg/jcr:content/renditions/cq5dam.web.570.570.jpeg?h=170&amp;la=en&amp;w=170" class="card-img-top">
+						<h5 class="card-title card-img-overlay portfolio-overlay">Slate</h5>
+					</div></div>
 				</li>
 			</ul>
 		</section>

@@ -41,5 +41,14 @@
 	@section('scripts')
 		<script type="text/javascript" src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
 		<script type="text/javascript" src="{{ asset('ct/js/bootstrap.min.js') }}"></script>
+		<script>
+			$(window).resize(function () { 
+				$('.body-main').css('padding-top', parseInt($('#main-navbar').css("height")));
+			});
+
+			$(window).load(function () { 
+				$('.body-main').css('padding-top', parseInt($('#main-navbar').css("height")));        
+			});
+		</script>
 	@show
 </div>
