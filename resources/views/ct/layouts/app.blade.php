@@ -12,7 +12,6 @@
 <body id="app-layout">
 	@include('ct.includes.top-navbar')
 	@section('contents')
-		@include('ct.includes.notifications')
 		@yield('content')
 	@show
 </body>
