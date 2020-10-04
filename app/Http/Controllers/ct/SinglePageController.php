@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\ct;
 
+use Mail;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -21,11 +22,35 @@ class SinglePageController extends Controller
 
 	public function quote(Request $request)
 	{
+		$data = [
+			'name' => $request->name,
+			'ctype' => $request->ctype,
+			'contact' => $request->contact,
+			'ptype' => $request->ptype,
+			'timeframe' => $request->timeframe,
+			'description' => $request->description
+		];
+		Mail::send('ct.email.quote', $data, function ($message) {
+			$message->from('support@checkeredtile.com', 'CheckeredTile.com');
+			$message->to('support@checkeredtile.com');
+			$message->subject('Quote Request from Website');
+		});
 		return  \Redirect::back()->with('status', 'Your request for a quote has been submitted and we will ge back to you as soon as possible.');
 	}
 
 	public function contact(Request $request)
 	{
+		$data = [
+			'name' => $request->name,
+			'ctype' => $request->ctype,
+			'contact' => $request->contact,
+			'description' => $request->description
+		];
+		Mail::send('ct.email.contact', $data, function ($message) {
+			$message->from('support@checkeredtile.com', 'CheckeredTile.com');
+			$message->to('support@checkeredtile.com');
+			$message->subject('Contact Request from Website');
+		});
 		return  \Redirect::back()->with('status', 'Thank you for reaching out.');
 	}
 }

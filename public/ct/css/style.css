@@ -258,3 +258,7 @@ h1 {
 .dashboard-contact{
 	margin-bottom: 1.5em;
 }
+
+.carousel-indicators li, .carousel-control-next, .carousel-control-prev{
+	opacity: 1;
+}
