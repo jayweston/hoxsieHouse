@@ -312,15 +312,15 @@
 				<div class="modal-body">
 					{!! Form::open(['url' => 'quote', 'method' => 'post']) !!}
 						<div class="form-group">
-							{!! Form::label('title','Name') !!}
-							{!! Form::text('title','',['class' =>'form-control']) !!}
+							{!! Form::label('name','Name') !!}
+							{!! Form::text('name','',['class' =>'form-control']) !!}
 						</div>
 						<div class="form-group">
 							{!! Form::label('ctype','Contact Type') !!}<br/>
-							<span>E-mail</span> {!! Form ::radio('ctype','email') !!}
-							<span>Text</span> {!! Form ::radio('ctype','text') !!}
-							<span>Voice</span> {!! Form ::radio('ctype','phone') !!}
-							<span>Facebook</span> {!! Form ::radio('ctype','facebook') !!}
+							<span>E-mail</span> {!! Form ::radio('ctype','E-mail') !!}
+							<span>Text</span> {!! Form ::radio('ctype','Text') !!}
+							<span>Voice</span> {!! Form ::radio('ctype','Phone') !!}
+							<span>Facebook</span> {!! Form ::radio('ctype','Facebook') !!}
 						</div>
 						<div class="form-group">
 							{!! Form::label('contact','Contact Info') !!}
@@ -332,10 +332,10 @@
 						</div>
 						<div class="form-group">
 							{!! Form::label('timeframe','Project Timeframe') !!}<br/>
-							<span>Immeditely</span> {!! Form ::radio('timeframe','0') !!}
-							<span>1-4 Weeks</span> {!! Form ::radio('timeframe','1') !!}
-							<span>1-6 Months</span> {!! Form ::radio('timeframe','2') !!}
-							<span>6+ Months</span> {!! Form ::radio('timeframe','3') !!}
+							<span>Immeditely</span> {!! Form ::radio('timeframe','Immeditely') !!}
+							<span>1-4 Weeks</span> {!! Form ::radio('timeframe','1-4 Weeks') !!}
+							<span>1-6 Months</span> {!! Form ::radio('timeframe','1-6 Months') !!}
+							<span>6+ Months</span> {!! Form ::radio('timeframe','6+ Months') !!}
 						</div>
 						<div class="form-group">
 							{!! Form::label('description','Description') !!}
@@ -360,16 +360,16 @@
 				<div class="modal-body">
 					{!! Form::open(['url' => 'contact', 'method' => 'post']) !!}
 						<div class="form-group">
-							{!! Form::label('title','Name') !!}
-							{!! Form::text('title','',['class' =>'form-control']) !!}
+							{!! Form::label('name','Name') !!}
+							{!! Form::text('name','',['class' =>'form-control']) !!}
 						</div>
 						<div class="form-group">
 							{!! Form::label('ctype','Contact Type') !!}<br/>
-							<span>E-mail</span> {!! Form ::radio('ctype','email') !!}
-							<span>Text</span> {!! Form ::radio('ctype','text') !!}
-							<span>Voice</span> {!! Form ::radio('ctype','phone') !!}
-							<span>Facebook</span> {!! Form ::radio('ctype','facebook') !!}
-							<span>None</span> {!! Form ::radio('ctype','none') !!}
+							<span>E-mail</span> {!! Form ::radio('ctype','E-Mail') !!}
+							<span>Text</span> {!! Form ::radio('ctype','Text') !!}
+							<span>Voice</span> {!! Form ::radio('ctype','Phone') !!}
+							<span>Facebook</span> {!! Form ::radio('ctype','Facebook') !!}
+							<span>None</span> {!! Form ::radio('ctype','None') !!}
 						</div>
 						<div class="form-group">
 							{!! Form::label('contact','Contact Info') !!}
