@@ -66,6 +66,8 @@ $ddsRoutes = function() {
 $ctRoutes = function() {
 	Route::get('/', 'ct\SinglePageController@dashboard');
 	Route::get('/blank', 'ct\SinglePageController@blank');
+	Route::post('quote', 'ct\SinglePageController@quote');
+	Route::post('contact', 'ct\SinglePageController@contact');
 #	Route::get('tmp', function () {		dd();	});
 };
 
