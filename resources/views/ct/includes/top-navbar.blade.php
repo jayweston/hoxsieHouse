@@ -8,19 +8,19 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav ml-auto smooth-scroll">
 			<li class="nav-item ml-auto">
-				<a class="nav-link" href="{{ url('#home') }}" data-rel="back">HOME</a>
+				<a class="nav-link" href="{{ url('#home') }}" role="button" data-rel="back">HOME</a>
 			</li>
 			<li class="nav-item ml-auto">
-				<a class="nav-link" href="{{ url('#services') }}" data-rel="back">SERVICES</a>
+				<a class="nav-link" href="{{ url('#services') }}" role="button" data-rel="back">SERVICES</a>
 			</li>
 			<li class="nav-item ml-auto">
-				<a class="nav-link" href="{{ url('#about') }}">ABOUT US</a>
+				<a class="nav-link" href="{{ url('#about') }}" role="button" >ABOUT US</a>
 			</li>
 			<li class="nav-item ml-auto">
-				<a class="nav-link" href="{{ url('#portfolio') }}" data-rel="back">PORTFOLIO</a>
+				<a class="nav-link" href="{{ url('#portfolio') }}" role="button" data-rel="back">PORTFOLIO</a>
 			</li>
 			<li class="nav-item ml-auto">
-				<a class="nav-link" href="{{ url('#contact') }}">CONTACT US</a>
+				<a class="nav-link" href="{{ url('#contact') }}" role="button" >CONTACT US</a>
 			</li>
 		</ul>
 	</div>
