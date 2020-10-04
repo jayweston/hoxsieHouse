@@ -18,5 +18,14 @@ class SinglePageController extends Controller
 	{
 		return \Redirect::back()->with('status', 'Unfortunately we are still in the process of building out our site and this resource is not working yet.');
 	}
-}
 
+	public function quote(Request $request)
+	{
+		return  \Redirect::back()->with('status', 'Your request for a quote has been submitted and we will ge back to you as soon as possible.');
+	}
+
+	public function contact(Request $request)
+	{
+		return  \Redirect::back()->with('status', 'Thank you for reaching out.');
+	}
+}

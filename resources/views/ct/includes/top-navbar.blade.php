@@ -6,21 +6,21 @@
 		<span class="navbar-toggler-icon"></span>
 	</button>
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
-		<ul class="navbar-nav ml-auto">
+		<ul class="navbar-nav ml-auto smooth-scroll">
 			<li class="nav-item ml-auto">
-				<a class="nav-link" href="{{ url('/blank') }}">HOME</a>
+				<a class="nav-link" href="{{ url('#home') }}" data-rel="back">HOME</a>
 			</li>
 			<li class="nav-item ml-auto">
-				<a class="nav-link" href="{{ url('/blank') }}">ABOUT US</a>
+				<a class="nav-link" href="{{ url('#services') }}" data-rel="back">SERVICES</a>
 			</li>
 			<li class="nav-item ml-auto">
-				<a class="nav-link" href="{{ url('/blank') }}">SERVICES</a>
+				<a class="nav-link" href="{{ url('#about') }}">ABOUT US</a>
 			</li>
 			<li class="nav-item ml-auto">
-				<a class="nav-link" href="{{ url('/blank') }}">PORTFOLIO</a>
+				<a class="nav-link" href="{{ url('#portfolio') }}" data-rel="back">PORTFOLIO</a>
 			</li>
 			<li class="nav-item ml-auto">
-				<a class="nav-link" href="{{ url('/blank') }}">CONTACT US</a>
+				<a class="nav-link" href="{{ url('#contact') }}">CONTACT US</a>
 			</li>
 		</ul>
 	</div>
