@@ -14,7 +14,7 @@
 		<ul class="list-unstyled">
 			<li class="mb-5">
 				<div class="row align-items-center">
-					<div class="col-2"><i class="fa fa-check-circle fa-5x" aria-hidden="true"></i></div>
+					<div class="col-2 d-none d-sm-block"><i class="fa fa-check-circle fa-5x" aria-hidden="true"></i></div>
 					<div class="col-10">
 						<h4>We Are Bonded and Insured</h4>
 						<div>
@@ -26,7 +26,7 @@
 			</li>
 			<li>
 				<div class="row align-items-center">
-					<div class="col-2"><i class="fa fa-thumbs-up fa-5x" aria-hidden="true"></i></div>
+					<div class="col-2 d-none d-sm-block"><i class="fa fa-thumbs-up fa-5x" aria-hidden="true"></i></div>
 					<div class="col-10">
 						<h4>Satisfaction Guaranteed</h4>
 						<div>
