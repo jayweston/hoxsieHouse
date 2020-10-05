@@ -2,11 +2,10 @@
 
 namespace SocialiteProviders\Live;
 
-use SocialiteProviders\Manager\OAuth2\User;
-use Laravel\Socialite\Two\ProviderInterface;
 use SocialiteProviders\Manager\OAuth2\AbstractProvider;
+use SocialiteProviders\Manager\OAuth2\User;
 
-class Provider extends AbstractProvider implements ProviderInterface
+class Provider extends AbstractProvider
 {
     /**
      * Unique Provider Identifier.
@@ -21,10 +20,16 @@ class Provider extends AbstractProvider implements ProviderInterface
     /**
      * {@inheritdoc}
      */
+    protected $scopeSeparator = ' ';
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getAuthUrl($state)
     {
         return $this->buildAuthUrlFromBase(
-            'https://login.microsoftonline.com/common/oauth2/v2.0/authorize', $state
+            'https://login.microsoftonline.com/common/oauth2/v2.0/authorize',
+            $state
         );
     }
 
@@ -44,10 +49,11 @@ class Provider extends AbstractProvider implements ProviderInterface
         $response = $this->getHttpClient()->get(
             'https://graph.microsoft.com/v1.0/me',
             ['headers' => [
-                'Accept'=>'application/json',
+                'Accept'        => 'application/json',
                 'Authorization' => 'Bearer '.$token,
             ],
-        ]);
+            ]
+        );
 
         return json_decode($response->getBody()->getContents(), true);
     }
@@ -58,11 +64,11 @@ class Provider extends AbstractProvider implements ProviderInterface
     protected function mapUserToObject(array $user)
     {
         return (new User())->setRaw($user)->map([
-            'id' => $user['id'],
+            'id'       => $user['id'],
             'nickname' => null,
-            'name' => $user['displayName'],
-            'email' => $user['userPrincipalName'],
-            'avatar' => null,
+            'name'     => $user['displayName'],
+            'email'    => $user['userPrincipalName'],
+            'avatar'   => null,
         ]);
     }
 
