@@ -162,6 +162,7 @@ return [
 		Illuminate\Translation\TranslationServiceProvider::class,
 		Illuminate\Validation\ValidationServiceProvider::class,
 		Illuminate\View\ViewServiceProvider::class,
+		Collective\Html\HtmlServiceProvider::class,
 
 		/*
 		 * Package Service Providers...
@@ -175,9 +176,7 @@ return [
 		App\Providers\AuthServiceProvider::class,
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
-		Collective\Html\HtmlServiceProvider::class,
-		\SocialiteProviders\Manager\ServiceProvider::class,
-		msonowal\LaravelTinify\LaravelTinifyServiceProvider::class
+		\SocialiteProviders\Manager\ServiceProvider::class
     ],
 
     /*
@@ -228,8 +227,7 @@ return [
 		'View' => Illuminate\Support\Facades\View::class,
 		'Form' => Collective\Html\FormFacade::class,
 		'Html' => Collective\Html\HtmlFacade::class,
-		'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-		'Tinify' => msonowal\LaravelTinify\Facades\Tinify::class
+		'Socialite' => Laravel\Socialite\Facades\Socialite::class
     ],
 
 ];
