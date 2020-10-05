@@ -12,7 +12,7 @@ class SinglePageController extends Controller
 	public function dashboard()
 	{
 		$view_data['posts'] = '';
-		return view('ct.pages.single.dashboard', $view_data);
+		return view('ct.pages.dashboard', $view_data);
 	}
 
 	public function blank()

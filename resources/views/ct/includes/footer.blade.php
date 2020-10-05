@@ -62,6 +62,7 @@
 				$('.navbar-nav li').click(function(){
 					$('.navbar-nav li').removeClass('active');
 					$(this).addClass('active');
+					$('.navbar-collapse').collapse('hide');
 				});
 			});
 		</script>
