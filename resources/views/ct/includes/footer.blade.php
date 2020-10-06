@@ -36,20 +36,20 @@
 			</div>
 		</div>
 	</div>
---}}	
+--}}
 	<div class="footer-copyright container">
 		<div class="copyright-text">© Copyright 2020 Checkered Tile. All Rights Reserved.</div>
 	</div>
 	@section('scripts')
-		<script type="text/javascript" src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('ct/js/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 		<script>
-			$(window).resize(function () { 
+			$(window).resize(function () {
 				$('.body-main').css('padding-top', parseInt($('#main-navbar').css("height")));
 			});
 
-			$(window).load(function () { 
-				$('.body-main').css('padding-top', parseInt($('#main-navbar').css("height")));        
+			$(document).ready(function(){
+				$('.body-main').css('padding-top', parseInt($('#main-navbar').css("height")));
 			});
 		</script>
 		<script>

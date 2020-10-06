@@ -10,7 +10,7 @@
 	<link href='/hh/calendar/fullcalendar.css' rel='stylesheet' />
 	<link href='/hh/calendar/fullcalendar.print.css' rel='stylesheet' media='print' />
 	<script src='/hh/js/moment.min.js'></script>
-	<script src='/js/jquery-2.2.4.min.js'></script>
+	<script src='/js/jquery.min.js'></script>
 	<script src='/hh/calendar/fullcalendar.min.js'></script>
 	<script src='/hh/calendar/gcal.min.js'></script>
 	<script>
