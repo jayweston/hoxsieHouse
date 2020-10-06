@@ -1,7 +1,7 @@
 <div id="residentialModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="resModal" aria-hidden="true">
 	<div class="modal-dialog modal-md">
 		<div class="modal-content">
-			<div id="residential-carousel" class="carousel slide" data-ride="carousel1" data-interval="5000">
+			<div id="residential-carousel" class="portfolio-carousels carousel slide" data-ride="carousel1" data-interval="5000">
 				<div class="carousel-inner">
 					@foreach(File::glob(public_path('ct/images').'/*') as $path)
 						<div class="carousel-item @if ($loop->first) active @endif " >
@@ -17,9 +17,9 @@
 					<span class="carousel-control-next-icon" aria-hidden="true"></span>
 					<span class="sr-only">Next</span>
 				</a>
-				<ol class="carousel-indicators">
+				<ol class="carousel-indicators flex-wrap">
 					@foreach(File::glob(public_path('ct/images').'/*') as $path)
-						<li data-target="#residential-carousel" data-slide-to="{{ $loop->index }}" class="@if ($loop->first) active @endif">
+						<li data-target="#residential-carousel" data-slide-to="{{ $loop->index }}" class="@if ($loop->first) active @endif list-group-item border-0">
 							<img class="d-block w-100" src="{{ str_replace(public_path(), '', $path) }}" class="img-fluid">
 						</li>
 					@endforeach

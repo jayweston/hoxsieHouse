@@ -1,4 +1,5 @@
 <div id="home" class="body-main card mx-auto">
+{{--
 	<div id="dashboard-carousel" class="carousel slide" data-ride="carousel" data-interval="5000">
 		<div class="carousel-inner">
 			<div class="carousel-item active">
@@ -23,4 +24,5 @@
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
+--}}
 </div>

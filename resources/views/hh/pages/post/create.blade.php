@@ -64,9 +64,11 @@
 	@parent
 	<script type="text/javascript" src="/hh/js/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript" src="/hh/js/moment.min.js"></script>
+{{--
 	<script type="text/javascript" src="/js/bootstrap/transition.js"></script>
 	<script type="text/javascript" src="/js/bootstrap/collapse.js"></script>
 	<script type="text/javascript" src="/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
+--}}
 	<script type="text/javascript"> $(function () { $('#datetimepicker').datetimepicker({format: 'YYYY-MM-DD HH:mm:ss', defaultDate: new Date()}); }); </script>
 	<script type="text/javascript">
 		tinymce.init({
