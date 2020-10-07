@@ -52,15 +52,8 @@ a:focus, a:hover{
 table.table-bordered, table.table-bordered > thead > tr > th, table.table-bordered > tbody > tr > td{
 	border:1px solid #00001b;
 }
-.nav_default_text{
-	font-size:125%;
-	font-family: "Myriad pro Semibold";
-}
-#nav_account_dropdown{
-	font-size:125%;
-	font-family: "Myriad pro Semibold";
-}
-.navbar-default{
+
+#main-navbar{
 	padding-top: 5px;
 }
 .navbar-icons{
@@ -401,6 +394,9 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 /*
  * dashboard
 */
+.dashboard-post img {
+	width: 100%;
+}
 .dashboard-side-title{
 	color: #00001b;
 }
@@ -426,6 +422,7 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 }
 .blog_container_image img{
 	margin-bottom:20px;
+	width: 100%;
 }
 .blog_banner_image img{
 	width: 75%;
@@ -484,7 +481,7 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 /*
  * Navigation
 */
-.navbar-default {
+#main-navbar {
 	background-color: #00001b;
 	border-color: #00001b;
 	border-bottom: 1px solid #00B3B3;
@@ -493,14 +490,14 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 	right: 0px;
 	left: 0px;
 }
-.navbar-default .navbar-nav>li>a{
+#main-navbar .navbar-nav>li>a{
 	color: #00B3B3;
 	font-weight:700;
 }
-.navbar-default .navbar-nav>li>a:focus, .navbar-default .navbar-nav>li>a:hover{
+#main-navbar .navbar-nav>li>a:focus, #main-navbar .navbar-nav>li>a:hover{
 	color: #004D4D;
 }
-.navbar-default .navbar-nav>.open>a, .navbar-default .navbar-nav>.open>a:focus, .navbar-default .navbar-nav>.open>a:hover{
+#main-navbar .navbar-nav>.open>a, #main-navbar .navbar-nav>.open>a:focus, #main-navbar .navbar-nav>.open>a:hover{
 	color: #004D4D;
 	background-color: #00001b;
 }

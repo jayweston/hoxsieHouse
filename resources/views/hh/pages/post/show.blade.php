@@ -56,7 +56,7 @@
 	@if(!Auth::guest()) @if( (Auth::user()->type == App\Models\hh\User::TYPE_ADMIN) || (App\Models\hh\User::isPostMine($post->id)) )
 		<div class="form-group">
 			<a href="/post/{{ $post->id }}/edit" class="btn btn-primary pull-left">Edit</a>
-			{!! Form::open(['url' => 'post/'.$post->id, 'method' => 'delete']) !!}	{!! Form::submit('Delete', ['class' =>'btn btn-primary pull-right confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) !!}	{!! Form::close() !!}<br/>
+			{!! Form::open(['url' => 'post/'.$post->id, 'method' => 'delete']) !!}	{!! Form::submit('Delete', ['class' =>'btn btn-primary float-right confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) !!}	{!! Form::close() !!}<br/>
 		</div>
 		<hr/>
 	@endif @endif
@@ -139,7 +139,7 @@
 					<div class="panel-heading">
 						<ul class="list-inline">
 							<li>{{ $comment->user()->name }}</li>
-							<li class="pull-right">{{ $comment->timeElapsed() }}</li>
+							<li class="float-right">{{ $comment->timeElapsed() }}</li>
 						</ul>
 					</div>
 					<div class="panel-body">

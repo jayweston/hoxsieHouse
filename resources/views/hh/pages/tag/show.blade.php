@@ -38,7 +38,7 @@
 	<div class="tag-head-box">	
 		<span>Browsing Tag</span>
 		<h1>{{ $tag->name }}</h1>
-		<div class="pull-right">
+		<div class="float-right">
 			<span >Posts with tag</span>
 			<h1>{{ $tag->getPostCount() }} </h1>
 		</div>
