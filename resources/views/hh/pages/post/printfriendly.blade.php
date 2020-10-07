@@ -82,7 +82,7 @@
 					<div class="panel-heading">
 						<ul class="list-inline">
 							<li>{{ $comment->user()->name }}</li>
-							<li class="pull-right">{{ $comment->timeElapsed() }}</li>
+							<li class="float-right">{{ $comment->timeElapsed() }}</li>
 						</ul>
 					</div>
 					<div class="panel-body">

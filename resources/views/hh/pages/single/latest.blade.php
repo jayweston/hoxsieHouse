@@ -6,7 +6,7 @@
 		<h3>Crafts, Reviews, and Giveaways</h3>
 		<div class="blog_container_image"><a href="http://Crafts.HoxsieHouse.com"><img src="/hh/images/banner/nite_owl.png" /></a></div>
 		<div class="dashboard_post">
-			<div class="dashboard_post_date pull-right">
+			<div class="dashboard_post_date float-right">
 				15 May 2016
 			</div>
 			<div class="dashboard_post_title">
@@ -17,7 +17,7 @@
 			</div>
 		</div>
 		<div class="dashboard_post">
-			<div class="dashboard_post_date pull-right">
+			<div class="dashboard_post_date float-right">
 				15 May 2016
 			</div>
 			<div class="dashboard_post_title">
@@ -32,7 +32,7 @@
 		<h3>Thoughts, Ideas, and Life Stories</h3>
 		<div class="blog_container_image"><a href="http://StaciesPlace.HoxsieHouse.com"><img src="/hh/images/banner/stacies_place.png" /></a></div>
 		<div class="dashboard_post">
-			<div class="dashboard_post_date pull-right">
+			<div class="dashboard_post_date float-right">
 				15 May 2016
 			</div>
 			<div class="dashboard_post_title">
@@ -47,7 +47,7 @@
 		<h3>Lifestyle and Reviews</h3>
 		<div class="blog_container_image"><a href="http://Stacie.HoxsieHouse.com"><img src="/hh/images/banner/stacies_place_original.png" /></a></div>
 		<div class="dashboard_post">
-			<div class="dashboard_post_date pull-right">
+			<div class="dashboard_post_date float-right">
 				15 May 2016
 			</div>
 			<div class="dashboard_post_title">
@@ -62,7 +62,7 @@
 		<h3>Our Travels</h3>
 		<div class="blog_container_image"><a href="https://HoxsieHouse.com"><img src="/hh/images/banner/travel.png" /></a></div>
 		<div class="dashboard_post">
-			<div class="dashboard_post_date pull-right">
+			<div class="dashboard_post_date float-right">
 				15 May 2016
 			</div>
 			<div class="dashboard_post_title">
@@ -77,7 +77,7 @@
 		<h3>Our Wedding</h3>
 		<div class="blog_container_image"><a href="http://Wedding.HoxsieHouse.com"><img src="/hh/images/banner/wedding.png" /></a></div>
 		<div class="dashboard_post">
-			<div class="dashboard_post_date pull-right">
+			<div class="dashboard_post_date float-right">
 				15 May 2016
 			</div>
 			<div class="dashboard_post_title">
