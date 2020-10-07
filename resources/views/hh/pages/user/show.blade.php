@@ -83,7 +83,7 @@
 				@endif			
 				<div class="col-md-12 col-sm-12 col-xs-12">
 					<div class="col-md-6 col-sm-8 col-xs-7 @if($post->draft == true) post_draft @endif @if(!$post->isAvailable()) post_unAvailable @endif">
-						<div class="col-md-5 col-sm-5 hidden-xs"><a href="/post/{{ $comment->post()->id }}"><img src="{{ $comment->post()->thumbnailPath() }}" class="img-responsive" /></a></div>
+						<div class="col-md-5 col-sm-5 d-xs-none"><a href="/post/{{ $comment->post()->id }}"><img src="{{ $comment->post()->thumbnailPath() }}" class="img-responsive" /></a></div>
 						<div class="col-md-7 col-sm-7 col-xs-12 user-show-comments">
 							<div class="dashboard-post-title"><a href="/post/{{ $comment->post()->id }}"><h3>{{ $comment->post()->title }}</h3></a></div>
 							<div class="dashboard-post-description">{{ $comment->post()->description() }}</div>

@@ -29,11 +29,7 @@ a:focus, a:hover{
 	color: #00B3B3;
 	background-color: #00001b;
 	border-color: #00001b;
-}
-.panel-footer {
-	color: #00B3B3;
-	background-color: #00001b;
-	border-color: #00001b;
+	padding-left: 1em;
 }
 .btn-primary, .btn-primary:focus{
 	color: #00B3B3;
@@ -58,6 +54,9 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 }
 .navbar-icons{
 	    margin-top: -5px;
+}
+.img-responsive{
+	width: 100%;
 }
 /*
  * Edit post
@@ -348,6 +347,7 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 	opacity: 0.70;
 	filter: alpha(opacity=70);
 }
+
 /*
  * Post comments
 */
@@ -359,12 +359,15 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 }
 .level_2{
 	margin-left: 100px;
+	padding-bottom: 10px;
 }
 .level_3{
 	margin-left: 200px;
+	padding-bottom: 10px;
 }
 .level_4{
 	margin-left: 300px;
+	padding-bottom: 10px;
 }
 .post_comments{
 	border: 2px solid #000000;
@@ -375,7 +378,7 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 }
 .comment_textbox{
 	width:100%;
-	border:none;
+	border:solid;
 }
 .comment_textbox:focus{
 	outline: none;
@@ -394,7 +397,7 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 /*
  * dashboard
 */
-.dashboard-post img {
+.dashboard-post img{
 	width: 100%;
 }
 .dashboard-side-title{
@@ -458,6 +461,9 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 /*
  * Show single tag
 */
+.tag-posts img{ 
+	width: 100%;
+}
 .tag-head-box{
 	margin-bottom: 20px;
 	margin-top: 10px;
@@ -526,6 +532,10 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 /*
  * Footer
 */
+.footer-section ul{
+	margin-bottom: 0em;
+}
+
 #footer{
 	position: relative;
 	min-height: 50px;

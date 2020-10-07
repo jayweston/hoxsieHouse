@@ -15,7 +15,7 @@
 		                <div class="atclear"></div>
 			</div>
                 </div>
-                 <div class="panel-footer login-footer">
+                 <div class="login-footer">
                  </div>
             </div>
         </div>

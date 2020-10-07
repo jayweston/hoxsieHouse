@@ -15,8 +15,8 @@
 
 @section('content')
 	{{-- Display error messages for bad inputs --}}
-	<div class="alert alert-warning alert-block hidden" id="notification_error">
-		<button type="button" class="close" onclick="$('#notification_error').addClass('hidden')">&times;</button>
+	<div class="alert alert-warning alert-block d-none" id="notification_error">
+		<button type="button" class="close" onclick="$('#notification_error').addClass('d-none')">&times;</button>
 		<h4>Error</h4>
 		<div class="notification_message"></div>
 	</div>
@@ -149,8 +149,8 @@
 			<table class="table table-bordered table-striped">
 				<thead>
 					<tr>
-						<th class="hidden-xs col-sm-1 col-md-1 col-lg-1">Thumbnail</th>
-						<th class="hidden-xs col-sm-1 col-md-2 col-lg-2">Location</th>
+						<th class="d-xs-none col-sm-1 col-md-1 col-lg-1">Thumbnail</th>
+						<th class="d-xs-none col-sm-1 col-md-2 col-lg-2">Location</th>
 						<th class="col-xs-2 col-sm-2 col-md-3 col-lg-3">Image</th>
 						<th class="col-xs-9 col-sm-7 col-md-5 col-lg-5">Label</th>
 						<th class="col-xs-1 col-sm-1 col-md-1 col-lg-1">Delete</th>
@@ -160,8 +160,8 @@
 					{{ Form::open(['url' => 'postimage/'.$post->id, 'method' => 'patch']) }}
 						@foreach ($post->images as $image)
 							<tr>
-								<td class="hidden-xs col-sm-1 col-md-1 col-lg-1">{{ Form::radio('Thumbnail', $image->id, $image->thumbnail, []) }}</td>
-								<td class="hidden-xs col-sm-1 col-md-2 col-lg-2">/hh/images/blog/{{ $post->id }}/{{ $image->name }}</td>
+								<td class="d-xs-none col-sm-1 col-md-1 col-lg-1">{{ Form::radio('Thumbnail', $image->id, $image->thumbnail, []) }}</td>
+								<td class="d-xs-none col-sm-1 col-md-2 col-lg-2">/hh/images/blog/{{ $post->id }}/{{ $image->name }}</td>
 								<td class="col-xs-2 col-sm-2 col-md-3 col-lg-3"><img src="/hh/images/blog/{{ $post->id }}/{{ $image->name }}" style="max-height:90%; max-width:90%" /></td>
 								<td class="col-xs-9 col-sm-8 col-md-5 col-lg-5">{!! Form::text($image->id."_label", $image->label, []) !!}</td>
 								<td class="col-xs-1 col-sm-1 col-md-1 col-lg-1">{{ Form::checkbox($image->id."_delete", $image->id, '0', []) }}</td>
@@ -181,7 +181,7 @@
 			<div class="table-responsive">
 				<table class="table table-bordered table-striped">
 					<thead>
-						<tr>
+						<tr class="d-flex">
 							<th class="col-xs-2 col-sm-2 col-md-2 col-lg-2">Order</th>
 							<th class="col-xs-5 col-sm-5 col-md-5 col-lg-5">Existing Tag</th>
 							<th class="col-xs-5 col-sm-5 col-md-5 col-lg-5">New Tag</th>
@@ -189,7 +189,7 @@
 					</thead>
 					<tbody>
 						@for($i=0; $i<10; $i++)
-							<tr>
+							<tr class="d-flex">
 								<td class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
 									{!! Form::select($i.'[]',['0'=> 'Remove', '1'=>'1','2'=>'2','3'=>'3','4'=>'4','5'=>'5','6'=>'6','7'=>'7','8'=>'8','9'=>'9','10'=>'10'] ,$i+1, ['class' =>'form-control', 'data-id'=>App\Models\hh\PostTag::getPostTag($post->id ,$i+1)->id, 'data-url'=>'posttag']) !!}
 								</td>
@@ -217,11 +217,9 @@
 @section('scripts')
 	@parent
 	<script type="text/javascript" src="/hh/js/moment.min.js"></script>
-{{--
 	<script type="text/javascript" src="/js/bootstrap/transition.js"></script>
 	<script type="text/javascript" src="/js/bootstrap/collapse.js"></script>
 	<script type="text/javascript" src="/js/bootstrap/bootstrap-datetimepicker.min.js"></script>
---}}
 	<script type="text/javascript"> $(function () { $('#datetimepicker').datetimepicker({format: 'YYYY-MM-DD HH:mm:ss'}); }); </script>
 	<script src="/hh/js/tinymce/tinymce.min.js"></script>
 	<script type="text/javascript">
@@ -229,7 +227,7 @@
 			relative_urls : false,
 			selector: '#mytextarea',
 			height: 500,
-			theme: 'modern',
+			theme: 'silver',
 			plugins: 'print preview fullpage searchreplace autolink directionality visualblocks visualchars fullscreen image link media template codesample table charmap hr pagebreak nonbreaking anchor toc insertdatetime advlist lists textcolor wordcount imagetools contextmenu colorpicker textpattern help',
 			toolbar1: 'formatselect | bold italic strikethrough forecolor backcolor | link | alignleft aligncenter alignright alignjustify  | numlist bullist outdent indent  | removeformat',
 			image_advtab: true,

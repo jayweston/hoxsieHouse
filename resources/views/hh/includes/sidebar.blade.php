@@ -1,4 +1,4 @@
-<div class="col-md-4 col-sm-5 hidden-xs"><div class="col-md-12 col-sm-12">
+<div class="col-md-4 col-sm-5 d-xs-none"><div class="col-md-12 col-sm-12">
 	<div class="row dashboard_post">
 		<h4 class="text-center dashboard-side-title">Our Other Blogs</h4>
 		<div class="blog_container_image">

@@ -55,7 +55,7 @@
 	{{-- Admin controls --}}
 	@if(!Auth::guest()) @if( (Auth::user()->type == App\Models\hh\User::TYPE_ADMIN) || (App\Models\hh\User::isPostMine($post->id)) )
 		<div class="form-group">
-			<a href="/post/{{ $post->id }}/edit" class="btn btn-primary pull-left">Edit</a>
+			<a href="/post/{{ $post->id }}/edit" class="btn btn-primary float-left">Edit</a>
 			{!! Form::open(['url' => 'post/'.$post->id, 'method' => 'delete']) !!}	{!! Form::submit('Delete', ['class' =>'btn btn-primary float-right confirm', 'data-confirm' => 'Are you sure you want to delete this post?']) !!}	{!! Form::close() !!}<br/>
 		</div>
 		<hr/>
@@ -145,17 +145,17 @@
 					<div class="panel-body">
 						{{ $comment->comment }}
 					</div>
-					<div class="panel-footer">
+					<div>
 						<ul class="list-inline">
-							<li>
+							<li class="list-inline-item">
 								@if( App\Models\hh\Comment::canComment($comment->level) )
-									<a href="javascript:void(0)" class="ajax-show-reply btn btn-primary">reply</a>
+									<a href="javascript:void(0)" class="ajax-show-reply btn btn-primary float-left">reply</a>
 								@endif
 							</li>
-							<li>
+							<li class="list-inline-item">
 								@if ( !Auth::guest() ) @if ( Auth::user()->type == App\Models\hh\User::TYPE_ADMIN )
 									{{ Form::open(['url' => 'comment/'.$comment->id, 'method' => 'delete']) }}
-									{!! Form::button('delete', ['type'=>'submit', 'class' => 'btn btn-primary confirm', 'data-confirm' => 'Are you sure you want to delete this comment?']) !!}</span>
+									{!! Form::button('delete', ['type'=>'submit', 'class' => 'btn btn-primary confirm float-right', 'data-confirm' => 'Are you sure you want to delete this comment?']) !!}</span>
 									{{ Form::close() }}
 								@endif @endif
 							</li>
@@ -164,7 +164,7 @@
 				</div>
 			</div>
 			@if( App\Models\hh\Comment::canComment($comment->level) )
-				<div class="comment comment_reply hidden level_{{ $comment->level+1 }}">
+				<div class="comment comment_reply d-none level_{{ $comment->level+1 }}">
 					<div class="panel panel-default">
 						<div class="panel-heading">Reply to {{ $comment->user()->name }}'s comment</div>
 						<div class="panel-body">
@@ -172,10 +172,10 @@
 								{!! Form::hidden('post_id',$post->id) !!}
 								{!! Form::hidden('parent_id',$comment->id) !!}
 								{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
-								{!! Form::submit('111', ['type'=>'submit', 'class' =>'comment-submit-action hidden']) !!}
+								{!! Form::submit('111', ['type'=>'submit', 'class' =>'comment-submit-action d-none']) !!}
 							{!! Form::close() !!}
 						</div>
-						<div class="panel-footer"><a href="javascript:void(0)" class="comment-submit-link btn btn-primary">save</a></div>
+						<div><a href="javascript:void(0)" class="comment-submit-link btn btn-primary">save</a></div>
 					</div>
 				</div>
 			@endif
@@ -191,10 +191,10 @@
 					{!! Form::open(['url' => 'comment/', 'method' => 'post']) !!}
 						{!! Form::hidden('post_id',$post->id) !!}
 						{!! Form::textarea('comment', null, ['class'=>'comment_textbox']) !!}<br/>
-						{!! Form::submit('111', ['type'=>'submit', 'class' =>'comment-submit-action hidden']) !!}
+						{!! Form::submit('111', ['type'=>'submit', 'class' =>'comment-submit-action d-none']) !!}
 					{!! Form::close() !!}
 				</div>
-				<div class="panel-footer"><a href="javascript:void(0)" class="comment-submit-link btn btn-primary">save</a></div>
+				<a href="javascript:void(0)" class="comment-submit-link btn btn-primary">save</a>
 			</div>
 		</div>
 	@endif
@@ -206,7 +206,7 @@
 	<script>
 		$(function () {
 			$('.ajax-show-reply').on('click', function () {
-				$(this).parent().parent().parent().parent().parent().next('.comment_reply').toggleClass('hidden');
+				$(this).parent().parent().parent().parent().parent().next('.comment_reply').toggleClass('d-none');
 			});
 			$('.comment-submit-link').on('click', function () {
 				$(this).parent().parent().find('.comment-submit-action').click();

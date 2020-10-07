@@ -14,11 +14,11 @@
 			Right side dropdown for users
 		--}}
 		<ul class="navbar-nav navbar-right">
-			<li class="nav-item hidden-xs"><a class="nav-link" data-svc="facebook" data-svc-id="TheStaciesPlace" title="Follow on Facebook" href="https://www.facebook.com/TheStaciesPlace" target="_blank"><i class="fab fa-2x fa-facebook"></i></a></li>
-			<li class="nav-item hidden-xs"><a class="nav-link" data-svc="instagram" data-svc-id="StaciesPlace" title="Follow on Instagram" href="https://instagram.com/StaciesPlace" target="_blank"><i class="fab fa-2x fa-instagram"></i></a></li>
-			<li class="nav-item hidden-xs"><a class="nav-link" data-svc="twitter" data-svc-id="Stacies_Place" title="Follow on Twitter" href="https://twitter.com/stacies_place" target="_blank"><i class="fab fa-2x fa-twitter"></i></a></li>
-			<li class="nav-item hidden-xs"><a class="nav-link" data-svc="pinterest" data-svc-id="Stacies_Place" title="Follow on Pinterest" href="https://www.pinterest.com/Stacies_Place" target="_blank"><i class="fab fa-2x fa-pinterest"></i></a></li>
-			<li class="nav-item hidden-xs"><a class="nav-link" data-svc="snapchat" data-svc-id="staciesplace" title="Follow on Snapchat" href="https://www.snapchat.com/add/staciesplace" target="_blank"><i class="fab fa-2x fa-snapchat"></i></a></li>
+			<li class="nav-item d-none d-md-block"><a class="nav-link" data-svc="facebook" data-svc-id="TheStaciesPlace" title="Follow on Facebook" href="https://www.facebook.com/TheStaciesPlace" target="_blank"><i class="fab fa-2x fa-facebook"></i></a></li>
+			<li class="nav-item d-none d-md-block"><a class="nav-link" data-svc="instagram" data-svc-id="StaciesPlace" title="Follow on Instagram" href="https://instagram.com/StaciesPlace" target="_blank"><i class="fab fa-2x fa-instagram"></i></a></li>
+			<li class="nav-item d-none d-md-block"><a class="nav-link" data-svc="twitter" data-svc-id="Stacies_Place" title="Follow on Twitter" href="https://twitter.com/stacies_place" target="_blank"><i class="fab fa-2x fa-twitter"></i></a></li>
+			<li class="nav-item d-none d-md-block"><a class="nav-link" data-svc="pinterest" data-svc-id="Stacies_Place" title="Follow on Pinterest" href="https://www.pinterest.com/Stacies_Place" target="_blank"><i class="fab fa-2x fa-pinterest"></i></a></li>
+			<li class="nav-item d-none d-md-block"><a class="nav-link" data-svc="snapchat" data-svc-id="staciesplace" title="Follow on Snapchat" href="https://www.snapchat.com/add/staciesplace" target="_blank"><i class="fab fa-2x fa-snapchat"></i></a></li>
 			@if (Auth::guest())
 				<li class="nav-item dropdown">
 					<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Guest</a>
