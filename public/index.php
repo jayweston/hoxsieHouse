@@ -1,5 +1,10 @@
 <?php
-ini_set('display_errors', 1);
+
+
+#phpinfo();
+#ini_set('display_errors', 1);
+
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
