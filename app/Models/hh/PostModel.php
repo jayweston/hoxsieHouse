@@ -5,6 +5,7 @@ namespace App\Models\hh;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Filesystem\Filesystem;
+use Image;
 
 class Post extends Model
 {
@@ -137,7 +138,8 @@ class Post extends Model
 		$content = $this->content;
 		preg_match_all('/<img[^>]+>/i',$content, $results);
 		$urls = [];
-		\File::makeDirectory(public_path().'/hh/images/blog/'.$this->id.'/');
+		$path = public_path().'/hh/images/blog/'.$this->id.'/';		
+		\File::isDirectory($path) or \File::makeDirectory($path, 0777, true, true);
 		foreach ($results as $result){
 			$result = str_replace('<img src="','',$result);
 			foreach ($result as $string){
@@ -146,13 +148,12 @@ class Post extends Model
 				array_push($urls,$test);
 			}
 		}
-		\Tinify\setKey(env('TINIFY_APIKEY'));
 		foreach ($urls as $i=>$url){
 			$filename = preg_replace('/^.*\/\s*/', '', $url);
 			$filename = str_replace(' ', '', $filename);
 			$filename = str_replace('%', '', $filename);
-			$image = \Tinify\fromUrl($url);
-			$resized = $image->resize(["method" => "scale","height" => 300]);
+			$image = Image::make($url);
+			$resized = $image->resize(null, 300, function ($constraint) {$constraint->aspectRatio();});
 			$resized->toFile('hh/images/blog/'.$this->id.'/'.$filename);
 			$image = new PostImage();
 			$image->thumbnail = 0;
