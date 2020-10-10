@@ -138,8 +138,8 @@ class Post extends Model
 		$content = $this->content;
 		preg_match_all('/<img[^>]+>/i',$content, $results);
 		$urls = [];
-		$path = public_path().'/hh/images/blog/'.$this->id.'/';		
-		\File::isDirectory($path) or \File::makeDirectory($path, 0777, true, true);
+		$path = public_path().'/hh/images/blog/'.$this->id.'/';
+		if (!\File::isDirectory($path)) \File::makeDirectory($path, 0777, true);
 		foreach ($results as $result){
 			$result = str_replace('<img src="','',$result);
 			foreach ($result as $string){
@@ -153,8 +153,8 @@ class Post extends Model
 			$filename = str_replace(' ', '', $filename);
 			$filename = str_replace('%', '', $filename);
 			$image = Image::make($url);
-			$resized = $image->resize(null, 300, function ($constraint) {$constraint->aspectRatio();});
-			$resized->toFile('hh/images/blog/'.$this->id.'/'.$filename);
+			$resized = $image->resize(null, 500, function ($constraint) {$constraint->aspectRatio();});
+			$resized->save('hh/images/blog/'.$this->id.'/'.$filename);
 			$image = new PostImage();
 			$image->thumbnail = 0;
 			if($i == 0){$image->thumbnail = 1;}
@@ -167,6 +167,8 @@ class Post extends Model
 			$filename = preg_replace('/^.*\/\s*/', '', $url);
 			$content = str_replace($url,'/hh/images/blog/'.$this->id.'/'.$filename,$content);
 		}
+		$this->content = $content;
+		$this->save();
 		return true;
 	}
 	/*
