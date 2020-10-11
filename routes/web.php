@@ -31,25 +31,48 @@ $hhRoutes = function() {
 	Route::post('login', 'Auth\LoginController@login');
 	Route::post('register', 'Auth\RegisterController@register');
 	Route::post('logout', 'Auth\LoginController@logout');
-/*
-	Route::get('tmp/{id}', function ($id) {
-		\Tinify\setKey(env('TINIFY_APIKEY'));
+	Route::get('dmp/{id}', function ($id) {
 		$post = App\Models\hh\Post::findOrFail($id);
-		dd($post->content);
-		$dir = 'hh/images/blog/'.$post->id.'/';
-		$files = scandir($dir);
-		unset($files[0]);
-		unset($files[1]);
-		foreach ($files as $file){
-			$image = \Tinify\fromFile($dir.$file);
-			\File::delete(public_path().$dir.$file);
-			$resized = $image->resize(["method" => "scale","height" => 300]);
-			$resized->toFile($dir.$file);
+		$content = $post->content;
+		preg_match_all('/<img[^>]+>/i',$content, $results);
+		$urls = [];
+		foreach ($results as $result){
+			$result = str_replace('<img src="','',$result);
+			foreach ($result as $string){
+				$parts = explode('"',$string);
+				$test = $parts['0'];
+				array_push($urls,$test);
+			}
 		}
-		$compressionsThisMonth = \Tinify\compressionCount();
-		dd($post->content);
+		foreach ($urls as $url){
+			$filename = preg_replace('/^.*\/\s*/', '', $url);
+			$content = str_replace($url,'/hh/images/blog/'.$post->id.'/'.$filename,$content);
+		}
+		echo $content;
+		dd($content);
 	});
-*/
+	Route::get('fix/{id}', function ($id) {
+		$post = App\Models\hh\Post::findOrFail($id);
+
+
+		$content = $post->content;
+		preg_match_all('/<img[^>]+>/i',$content, $results);
+		$urls = [];
+		foreach ($results as $result){
+			$result = str_replace('<img src="','',$result);
+			foreach ($result as $string){
+				$parts = explode('"',$string);
+				$test = $parts['0'];
+				array_push($urls,$test);
+			}
+		}
+		foreach ($urls as $url){
+			$filename = preg_replace('/^.*\/\s*/', '', $url);
+			$content = str_replace($url,'/hh/images/blog/'.$post->id.'/'.$filename,$content);
+		}
+		$post->content = $content;
+		$post->save();
+	});
 };
 
 $ddsRoutes = function() {
