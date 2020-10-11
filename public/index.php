@@ -1,13 +1,10 @@
 <?php
 
-<<<<<<< HEAD
-
 #phpinfo();
 #ini_set('display_errors', 1);
 
 
-=======
->>>>>>> develop
+
 /**
  * Laravel - A PHP Framework For Web Artisans
  *
