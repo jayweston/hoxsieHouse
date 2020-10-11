@@ -6,7 +6,7 @@
 		<div class="col-xs-12 col-sm-6 col-md-4 col-lg-4">
 			<a href="{{ $post->url }}">
 				@if($key == 0)
-					<img src="/hh/images/swipe_icon.png" class="swipe_image hidden" />
+					<img src="/hh/images/swipe_icon.png" class="swipe_image d-none" />
 				@endif
 				<div class="thumbnail_transform @if($post->draft == true) post_draft @endif @if(!$post->isAvailable()) post_unAvailable @endif">
 					<figure>
@@ -69,7 +69,7 @@
 			$('#nav_post_{{ $post_type }}').addClass('active');
 			$('#nav_post_dropdown').addClass('active');
 			if (supportsTouch){
-				$( ".swipe_image" ).removeClass("hidden");
+				$( ".swipe_image" ).removeClass("d-none");
 				window.setTimeout( removeSwipe, 10000 );
 			}else{
 				removeSwipe();				

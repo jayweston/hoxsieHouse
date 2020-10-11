@@ -18,7 +18,7 @@
 		<li class="list-inline-item">Jeremy@DelightfulDrawingsStudio.com</li>
 	</ul>
 	@section('scripts')
-		<script type="text/javascript" src="{{ asset('js/jquery-2.2.4.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('dds/js/bootstrap.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
+		<script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 	@show
 </div>

@@ -44,7 +44,10 @@ h1 {
 	outline: 0;
 	box-shadow: 0 0 0 0.2rem rgba(130,33,11,.25);
 }
-
+.list-group {
+	-ms-flex-direction: unset;
+	flex-direction: unset;
+}
 
 
 /*
@@ -70,7 +73,7 @@ h1 {
 	width:200px;
 }
 
-.navbar-top {
+#main-navbar {
 	border-bottom-color: #82210B;
 	border-bottom-width: thin;
 	border-bottom-style: solid;
@@ -215,10 +218,27 @@ h1 {
 /*
  * dashboard-carousel
 */
-.carousel-indicators li, .carousel-control-next, .carousel-control-prev{
+.portfolio-carousels .carousel-indicators li,#residential-carousel .carousel-control-next,#residential-carousel .carousel-control-prev{
 	opacity: 1;
 }
 
+.portfolio-carousels .carousel-indicators {
+	bottom: unset;
+	margin-right: 0%;
+	margin-left: 0%;
+	margin-top: 3px;
+}
+
+.portfolio-carousels .residential-carousel ol li{
+	background-color:pink;
+}
+
+.portfolio-carousels .list-group-item {
+	background: none;
+	height: unset;
+	padding: 2px 2px 2px 2px;
+	width: 10%;
+}
 
 
 
@@ -294,20 +314,20 @@ h1 {
 	align-items: center;
 }
 
-.list-group-item {
+.dashboard-services .list-group-item {
 	width: 95%;
 	margin: 1% !important;
 }
 
 @media (min-width: 768px) {
-	.list-group-item {
+	.dashboard-services .list-group-item {
 		width: 47%;
 		margin: 5px 1% !important;
 	}
 }
 
 @media (min-width: 992px) {
-	.list-group-item {
+	.dashboard-services .list-group-item {
 		width: 31.3%;
 		margin: 5px 1% !important;
 	}

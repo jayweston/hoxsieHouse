@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	@include('hh.includes.meta')
-	
+
 	@section('css')
 		<link href="/css/bootstrap.min.css" rel="stylesheet">
 		<link href="/hh/css/style.css" rel="stylesheet">
