@@ -171,6 +171,11 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 	padding-bottom:10px;
 	text-align: center;
 }
+.post-content-credit{
+	font-size: .75em;
+   	margin-top: -10px;
+	padding-top: 0px;
+}
 /*
  * Post Paginations
 */
@@ -487,6 +492,7 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 /*
  * Navigation
 */
+
 #main-navbar {
 	background-color: #00001b;
 	border-color: #00001b;
@@ -507,28 +513,17 @@ table.table-bordered, table.table-bordered > thead > tr > th, table.table-border
 	color: #004D4D;
 	background-color: #00001b;
 }
-.navbar-collapse.collapse {
-  display: block!important;
-}
-
-.navbar-nav>li, .navbar-nav {
-  float: left !important;
-}
-
-.navbar-nav.navbar-right:last-child {
-  margin-right: -15px !important;
-}
-
-.navbar-right {
-  float: right!important;
-}
-.dropdown-menu>li>a{
+.dropdown-item{
 	color:#00B3B3;
 }
-.dropdown-menu>li>a:focus, .dropdown-menu>li>a:hover{
+.dropdown-item:focus, .dropdown-item:hover{
 	color: #004D4D;
 	background-color: #00B3B3;
 }
+.navbar-toggler .navbar-toggler-icon {
+	background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,179,179, 1)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
+}
+
 /*
  * Footer
 */

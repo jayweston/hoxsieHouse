@@ -8,9 +8,9 @@
 			<div class="col align-self-center">
 				<ul class="list-unstyled text-center">
 					<li class="dashboard_social_icons"><a href="https://www.facebook.com/DelightfulDrawingsStudio/" target="_blank" title="Delightful Drawings Studio's official Facebook page"><span class="fa fa-facebook fa-3x"></span></a></li>
-					<li class="dashboard_social_icons"><a href="{{ url('/blank') }}" title="Placeholder link"><span class="fa fa-instagram fa-3x"></span></a></li>
-					<li class="dashboard_social_icons"><a href="{{ url('/blank') }}" title="Placeholder link"><span class="fa fa-pinterest-p fa-3x"></span></a></li>
-					<li class="dashboard_social_icons"><a href="{{ url('/blank') }}" title="Placeholder link"><span class="fab fa-patreon fa-3x"></span></a></li>
+					<li class="dashboard_social_icons"><a href="{{ url('/blank') }}" title="Placeholder link"><span class="fab fa-3x fa-instagram"></span></a></li>
+					<li class="dashboard_social_icons"><a href="{{ url('/blank') }}" title="Placeholder link"><span class="fab fa-3x fa-pinterest-p"></span></a></li>
+					<li class="dashboard_social_icons"><a href="{{ url('/blank') }}" title="Placeholder link"><span class="fab fa-3x fa-patreon"></span></a></li>
 				</ul>
 			</div>
 			<div class="col-10">
