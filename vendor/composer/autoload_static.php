@@ -466,6 +466,7 @@ class ComposerStaticInit0ae0f1196db2acaeba6062509c89ad5a
         'App\\Http\\Middleware\\RedirectIfAuthenticated' => __DIR__ . '/../..' . '/app/Http/Middleware/RedirectIfAuthenticated.php',
         'App\\Http\\Middleware\\TrimStrings' => __DIR__ . '/../..' . '/app/Http/Middleware/TrimStrings.php',
         'App\\Http\\Middleware\\VerifyCsrfToken' => __DIR__ . '/../..' . '/app/Http/Middleware/VerifyCsrfToken.php',
+        'App\\Models\\ct\\Tile' => __DIR__ . '/../..' . '/app/Models/ct/TileModel.php',
         'App\\Models\\dds\\Drawing' => __DIR__ . '/../..' . '/app/Models/dds/DrawingModel.php',
         'App\\Models\\hh\\Comment' => __DIR__ . '/../..' . '/app/Models/hh/CommentModel.php',
         'App\\Models\\hh\\NotificationPermission' => __DIR__ . '/../..' . '/app/Models/hh/NotificationPermissionsModel.php',

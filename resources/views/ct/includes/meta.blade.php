@@ -34,7 +34,7 @@
 	<meta property="profile:username" content="CheckeredTileClassic"/>
 	<meta property="og:title" content="@yield('title','Checkered Tile Classic')"/>
 	<meta property="og:description" content="@yield('description','Tile work in Nampa, Boise, Meridian.')"/>
-	<meta property="og:image" content="@yield('image', asset('ct/CTClassic.png') )"/>
+	<meta property="og:image" content="@yield('image', asset('ct/CT.png') )"/>
 	<meta property="og:url" content="{{ URL::full() }}"/>
 	<meta property="og:site_name" content="@yield('site_name','Checkered Tile Classic')"/>
 	<meta property="og:see_also" content="{{ URL::to('/') }}"/>
