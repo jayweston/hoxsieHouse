@@ -162,8 +162,21 @@ h1 {
 	margin-bottom: 1.5em;
 }
 
+.dashboard-contacts .list-group-item, .dashboard-contacts .list-group-item {
 
+	margin: 1% !important;
+	margin-left: auto !important;
+	margin-right: auto !important;
+}
 
+@media (min-width: 650px) {
+	.dashboard-contacts .list-group-item, .dashboard-contacts .list-group-item {
+		width: 31.3%;
+		margin: 5px 1% !important;
+		margin-left: auto !important;
+		margin-right: auto !important;
+	}
+}
 
 /*
  * dashboard-about
