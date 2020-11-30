@@ -14,7 +14,7 @@
 			@foreach(File::directories(public_path('ct/portfolio')) as $path)
 				<li class="list-group-item border-0">
 					<div class="portfolio-card-a" data-toggle="modal" data-target="#residentialModal-{{ App\Models\ct\Tile::getFolder($path) }}"><div class="card portfolio-card-b">
-						<img src="https://digitalassets.daltile.com/content/dam/Daltile/website/images/1-1-ratio/DAL_Diplomacy_RES_02_LightGreyDarkGrey_2cm_web.jpg/jcr:content/renditions/cq5dam.web.570.570.jpeg?h=170&amp;la=en&amp;w=170" class="card-img-top">
+						<img src="{{ str_replace(public_path(), '', $path) }}/feature.jpg" class="card-img-top">
 						<h5 class="card-title card-img-overlay portfolio-overlay">{{ App\Models\ct\Tile::getFolderName($path) }}</h5>
 					</div></div>
 				</li>

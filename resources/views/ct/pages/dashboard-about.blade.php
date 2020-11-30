@@ -18,7 +18,7 @@
 					<div class="col-10">
 						<h4>We Are Bonded and Insured</h4>
 						<div>
-							<p>Checkered Tile is a fully licensed, bonded, and insured tile company. Established in 2020, Checkered Tile is a locally owned company.</p>
+							<p>Checkered Tile is a fully licensed and insured tile company. Established in 2020, Checkered Tile is a locally owned company.</p>
 							<p>Idaho Contractors lic ########</p>
 						</div>						
 					</div>
