@@ -1,8 +1,8 @@
 <div class="footer-section">
 	<div class="footer-social container">
-        	<div class="mb-3">Follow Checkered Tile Online</div>
+        	<div class="h5 mb-3">Follow Checkered Tile Online</div>
     	
-		<ul class="list-inline">
+		<ul class="h2 list-inline">
 			<li class="list-inline-item mr-3"><a href="{{ url('/blank') }}" title="Placeholder link"><i class="fab fa-facebook"></i></a></li>
 			<li class="list-inline-item mr-3"><a href="{{ url('/blank') }}" title="Placeholder link"><i class="fab fa-instagram"></i></a></li>
 			<li class="list-inline-item mr-3"><a href="{{ url('/blank') }}" title="Placeholder link"><i class="fab fa-pinterest"></i></a></li>
@@ -41,8 +41,8 @@
 		<div class="copyright-text">© Copyright 2020 Checkered Tile. All Rights Reserved.</div>
 	</div>
 	@section('scripts')
-		<script type="text/javascript" src="{{ asset('js/jquery.min.js') }}"></script>
-		<script type="text/javascript" src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
+		<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>	
 		<script>
 			$(window).resize(function () {
 				$('.body-main').css('padding-top', parseInt($('#main-navbar').css("height")));

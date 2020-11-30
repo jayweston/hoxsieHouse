@@ -1,19 +1,18 @@
-<nav id="main-navbar" class="navbar-top navbar navbar-expand-md">
-	<div class="container collapse navbar-collapse"><div class="row"><div class="col-md-12 col-lg-12">
-		{{--
-			Left side dropdown for posts
-		--}}
-		<ul class="navbar-nav">
-			<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-			<li class="nav-item"><a class="nav-link" href="/tag/Teardrop">Teardrop</a></li>
-			<li class="nav-item"><a class="nav-link" href="/tag/Solar">Solar</a></li>
-			<li class="nav-item"><a class="nav-link" href="/calendars">Calendar</a></li>
-			<li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-		</ul>
-		{{--
-			Right side dropdown for users
-		--}}
-		<ul class="navbar-nav navbar-right">
+<nav id="main-navbar" class="navbar navbar-expand-sm">
+	<div class="container">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="/">Home</a></li>
+				<li class="nav-item"><a class="nav-link" href="/tag/Teardrop">Teardrop</a></li>
+				<li class="nav-item"><a class="nav-link" href="/tag/Solar">Solar</a></li>
+				<li class="nav-item"><a class="nav-link" href="/calendars">Calendar</a></li>
+				<li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+			</ul>
+		</div>
+		<ul class="navbar-nav ml-auto">
 			<li class="nav-item d-none d-md-block"><a class="nav-link" data-svc="facebook" data-svc-id="TheStaciesPlace" title="Follow on Facebook" href="https://www.facebook.com/TheStaciesPlace" target="_blank"><i class="fab fa-2x fa-facebook"></i></a></li>
 			<li class="nav-item d-none d-md-block"><a class="nav-link" data-svc="instagram" data-svc-id="StaciesPlace" title="Follow on Instagram" href="https://instagram.com/StaciesPlace" target="_blank"><i class="fab fa-2x fa-instagram"></i></a></li>
 			<li class="nav-item d-none d-md-block"><a class="nav-link" data-svc="twitter" data-svc-id="Stacies_Place" title="Follow on Twitter" href="https://twitter.com/stacies_place" target="_blank"><i class="fab fa-2x fa-twitter"></i></a></li>
@@ -50,6 +49,6 @@
 				</li>
 			@endif
 		</ul>
-	</div></div></div>
+	</div>
 </nav>
 <form id="logout-form" action="/logout" method="POST" style="display: none;">{{ csrf_field() }}</form>

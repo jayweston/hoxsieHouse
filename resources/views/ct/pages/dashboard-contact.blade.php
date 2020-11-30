@@ -10,14 +10,18 @@
 </div>
 <div class="container dashboard-contact">
 	<section>
-		<div class="row align-items-center">
-			<div class="col-6 text-center">
-				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#QuoteModal">Request Quote</button>
-			</div>
-			<div class="col-6 text-center">
-				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ContactModal">Contact Us</button>
-			</div>
-		</div>
+		<ul class="list-group list-group-horizontal align-items-stretch flex-wrap dashboard-contacts">
+			<li class="list-group-item text-center border-0">
+				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#ContactModal">Message Us</button>
+			</li>
+			<li class="list-group-item text-center border-0">
+				<a href="tel:5554280940" class="btn btn-info btn-lg">Call Us</a>
+			</li>
+			<li class="list-group-item text-center border-0">
+				<button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#QuoteModal">Request Quote</button>			
+			</li>
+		</ul>
+
 	</section>
 </div>
 

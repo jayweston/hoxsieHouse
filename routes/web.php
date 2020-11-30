@@ -31,48 +31,12 @@ $hhRoutes = function() {
 	Route::post('login', 'Auth\LoginController@login');
 	Route::post('register', 'Auth\RegisterController@register');
 	Route::post('logout', 'Auth\LoginController@logout');
+/*
 	Route::get('dmp/{id}', function ($id) {
 		$post = App\Models\hh\Post::findOrFail($id);
-		$content = $post->content;
-		preg_match_all('/<img[^>]+>/i',$content, $results);
-		$urls = [];
-		foreach ($results as $result){
-			$result = str_replace('<img src="','',$result);
-			foreach ($result as $string){
-				$parts = explode('"',$string);
-				$test = $parts['0'];
-				array_push($urls,$test);
-			}
-		}
-		foreach ($urls as $url){
-			$filename = preg_replace('/^.*\/\s*/', '', $url);
-			$content = str_replace($url,'/hh/images/blog/'.$post->id.'/'.$filename,$content);
-		}
-		echo $content;
 		dd($content);
-	});
-	Route::get('fix/{id}', function ($id) {
-		$post = App\Models\hh\Post::findOrFail($id);
+*/
 
-
-		$content = $post->content;
-		preg_match_all('/<img[^>]+>/i',$content, $results);
-		$urls = [];
-		foreach ($results as $result){
-			$result = str_replace('<img src="','',$result);
-			foreach ($result as $string){
-				$parts = explode('"',$string);
-				$test = $parts['0'];
-				array_push($urls,$test);
-			}
-		}
-		foreach ($urls as $url){
-			$filename = preg_replace('/^.*\/\s*/', '', $url);
-			$content = str_replace($url,'/hh/images/blog/'.$post->id.'/'.$filename,$content);
-		}
-		$post->content = $content;
-		$post->save();
-	});
 };
 
 $ddsRoutes = function() {

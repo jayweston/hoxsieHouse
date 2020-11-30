@@ -29,6 +29,7 @@ return array(
     'App\\Http\\Middleware\\RedirectIfAuthenticated' => $baseDir . '/app/Http/Middleware/RedirectIfAuthenticated.php',
     'App\\Http\\Middleware\\TrimStrings' => $baseDir . '/app/Http/Middleware/TrimStrings.php',
     'App\\Http\\Middleware\\VerifyCsrfToken' => $baseDir . '/app/Http/Middleware/VerifyCsrfToken.php',
+    'App\\Models\\ct\\Tile' => $baseDir . '/app/Models/ct/TileModel.php',
     'App\\Models\\dds\\Drawing' => $baseDir . '/app/Models/dds/DrawingModel.php',
     'App\\Models\\hh\\Comment' => $baseDir . '/app/Models/hh/CommentModel.php',
     'App\\Models\\hh\\NotificationPermission' => $baseDir . '/app/Models/hh/NotificationPermissionsModel.php',
