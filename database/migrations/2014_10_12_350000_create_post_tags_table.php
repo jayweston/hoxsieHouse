@@ -8,12 +8,12 @@ class CreatePostTagsTable extends Migration
 	public function up()
 	{
 		Schema::create('post_tags', function (Blueprint $table) {
+			$table->engine = 'InnoDB';
 			/* Columns */
 			$table->increments('id');
 			$table->integer('post_id')->unsigned();
 			$table->integer('tag_id')->unsigned();
-			$table->timestamps();
-			$table->softDeletes();
+			$table->integer('order')->unsigned();
 
 			/* Relationships */
 			$table->foreign('post_id')
@@ -29,6 +29,10 @@ class CreatePostTagsTable extends Migration
 			$table->unique([
 				'post_id',
 				'tag_id'
+			]);
+			$table->unique([
+				'post_id',
+				'order'
 			]);
 		});
 	}

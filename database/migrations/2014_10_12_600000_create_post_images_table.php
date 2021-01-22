@@ -8,12 +8,14 @@ class CreatePostImagesTable extends Migration
 	public function up()
 	{
 		Schema::create('post_images', function (Blueprint $table) {
+			$table->engine = 'InnoDB';
 			/* Columns */
 			$table->increments('id');
 			$table->integer('post_id')->unsigned();
+			$table->integer('old_post_id')->unsigned()->nullable();
 			$table->string('name');
-			$table->string('label');
-			$table->integer('order')->unsigned();
+			$table->string('label')->nullable();
+			$table->boolean('thumbnail');
 			$table->timestamps();
 
 			/* Relationships */

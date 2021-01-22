@@ -1,0 +1,171 @@
+/* 
+Main		#162626		rgb(22,38,38) 		dark
+Contrast	#7a9888		rgb(122,152,136) 	light
+Alt		#415f57		rgb(65,95,87) 		medium
+rgba(76, 175, 80, 0.3)
+*/
+
+/*
+ * Sitewide
+*/
+a{
+	color:#7a9888;
+}
+a:focus, a:hover{
+	color: #162626;
+	text-decoration: none;
+}
+.btn-primary, .btn-primary:focus{
+	color: #7a9888;
+	background-color: #162626;
+	border-color: #162626;
+}
+.btn-primary.disabled, .btn-primary:disabled{
+	color: #7a9888;
+	background-color: #415f57;
+	border-color: #415f57;
+}
+.btn-primary:hover, .btn-primary:active, .btn-primary.active.focus, .btn-primary.active:focus, .btn-primary.active:hover, .btn-primary:active.focus, .btn-primary:active:focus, .btn-primary:active:hover, .open>.dropdown-toggle.btn-primary.focus, .open>.dropdown-toggle.btn-primary:focus, .open>.dropdown-toggle.btn-primary:hover{
+	color: #162626;
+	background-color: #7a9888;
+	border-color: #7a9888;
+}
+.btn-sm{
+	padding: .15rem .15rem;
+	font-size: .675rem;
+}
+.btn-outline-primary {
+	color: #162626;
+	border-color: #162626;
+}
+.btn-outline-primary:hover, .btn-outline-primary:active, .btn-outline-primary.active.focus, .btn-outline-primary.active:focus, .btn-outline-primary.active:hover, .btn-outline-primary:active.focus, .btn-outline-primary:active:focus, .btn-outline-primary:active:hover, .open>.dropdown-toggle.btn-outline-primary.focus, .open>.dropdown-toggle.btn-outline-primary:focus, .open>.dropdown-toggle.btn-outline-primary:hover{
+	color: #162626;
+	background-color: #415f57;
+	border-color: #415f57;
+}
+h1,h3,h6{
+	color: #415f57;
+}
+h5{
+	color: #7a9888;
+}
+/*
+ * Navigation Bar
+*/
+.bg-light {
+    background-color: #162626!important;
+}
+.nav-item a, .nav-item a:focus, .nav-item a:hover{
+	color: #415f57;
+	font-weight:700;
+}
+.nav-item a{
+	color: #7a9888;
+	font-weight:700;
+}
+.dropdown-menu, .dropdown-item:focus, .dropdown-item:hover{
+	background-color: #162626!important;
+}
+.navbar-brand img{
+	width:200px;
+}
+/*
+ * Footer
+*/
+#footer{
+	position: relative;
+	min-height: 50px;
+	margin-top: 20px;
+	border-top: 1px solid #7a9888;
+	padding-top: 10px;
+	padding-bottom: 10px;
+	width: 100%;
+	background-color: #162626;
+
+}
+.footer_nav_title{
+	color: #415f57;
+	font-weight:700;
+}
+.footer_nav_text, .footer_nav_link, .footer_nav_link li a:focus, .footer_nav_link li a:hover{
+	color: #7a9888;
+	font-weight:700;
+}
+.footer_nav_link li a{
+	font-weight:700;
+}
+
+.footer_nav_title{
+	margin-block-end: 0em;
+}
+.footer_nav_link, .footer_nav_link li a:focus, .footer_nav_link li a:hover{
+	color: #7a9888;
+	font-weight:700;
+}
+/*
+ * Dashboard category
+*/
+.dashboard_category_card{
+	margin-bottom: 25px !important;
+	margin-top: 25px !important;
+	min-width: 300px; 
+	max-width: 600px;
+	padding-right: 10px;
+	padding-left: 10px;
+	border: 0px;
+}
+.dashboard_banner{
+	height:100%;
+}
+.dashboard_social_icons{
+	margin-bottom:25px;
+}
+/*
+ * Single drawings
+*/
+.piece_row{
+	width: 97%;
+}
+.piece_row .col{
+	margin-left: 2.5px;
+	margin-right: 2.5px;
+	margin-top:10px;
+}
+.piece_row .col .fa{
+	margin-right: 5px;
+}
+.piece_description{
+	margin-top:15px;
+}
+.piece_icon {
+    width: 20px;
+    height: 20px;
+    vertical-align: middle;
+    fill: currentColor;
+}
+.piece_social_icon{
+	min-width:87px;
+	padding-right:5px;
+	padding-left:5px;
+}
+.piece_image img{
+	width:100%;
+	height:100%;
+}
+/*
+ * Drawings category
+*/
+.drawings_category_card{
+	margin-bottom: 25px !important;
+	margin-top: 25px !important;
+	min-width: 315px; 
+	max-width: 600px;
+}
+/*
+ * About Author
+*/
+.about_image span img{
+	width: 75%; 
+	height: 75%;
+}
+

@@ -8,21 +8,21 @@ class CreatePostsTable extends Migration
 	public function up()
 	{
 		Schema::create('posts', function (Blueprint $table) {
+			$table->engine = 'InnoDB';
 			/* Columns */
 			$table->increments('id');
 			$table->integer('user_id')->unsigned();
-			$table->enum('post_type', [
+			$table->enum('type', [
 				'foodie',
 				'review',
 				'travel'
 			]);
 			$table->boolean('draft')->default(false);
-			$table->string('title');
+			$table->string('title')->unique();
 			$table->longText('content');
-			$table->string('summary');
+			$table->string('summary')->nullable();
 			$table->dateTime('avialable_at');
 			$table->timestamps();
-			$table->softDeletes();
 
 			/* Relationships */
 			$table->foreign('user_id')
