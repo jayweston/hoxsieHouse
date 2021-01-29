@@ -5,6 +5,8 @@ namespace Illuminate\Foundation;
 use Closure;
 use Illuminate\Container\Container;
 use Illuminate\Contracts\Foundation\Application as ApplicationContract;
+use Illuminate\Contracts\Foundation\CachesConfiguration;
+use Illuminate\Contracts\Foundation\CachesRoutes;
 use Illuminate\Contracts\Http\Kernel as HttpKernelContract;
 use Illuminate\Events\EventServiceProvider;
 use Illuminate\Filesystem\Filesystem;
@@ -24,14 +26,14 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class Application extends Container implements ApplicationContract, HttpKernelInterface
+class Application extends Container implements ApplicationContract, CachesConfiguration, CachesRoutes, HttpKernelInterface
 {
     /**
      * The Laravel framework version.
      *
      * @var string
      */
-    const VERSION = '6.20.13';
+    const VERSION = '8.25.0';
 
     /**
      * The base path for the Laravel installation.
@@ -111,6 +113,13 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     protected $databasePath;
 
     /**
+     * The custom language file path defined by the developer.
+     *
+     * @var string
+     */
+    protected $langPath;
+
+    /**
      * The custom storage path defined by the developer.
      *
      * @var string
@@ -144,6 +153,13 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      * @var string
      */
     protected $namespace;
+
+    /**
+     * The prefixes of absolute cache paths for use during normalization.
+     *
+     * @var string[]
+     */
+    protected $absoluteCachePathPrefixes = ['/', '\\'];
 
     /**
      * Create a new Illuminate application instance.
@@ -186,9 +202,11 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         $this->instance(Container::class, $this);
         $this->singleton(Mix::class);
 
-        $this->instance(PackageManifest::class, new PackageManifest(
-            new Filesystem, $this->basePath(), $this->getCachedPackagesPath()
-        ));
+        $this->singleton(PackageManifest::class, function () {
+            return new PackageManifest(
+                new Filesystem, $this->basePath(), $this->getCachedPackagesPath()
+            );
+        });
     }
 
     /**
@@ -396,7 +414,30 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      */
     public function langPath()
     {
-        return $this->resourcePath().DIRECTORY_SEPARATOR.'lang';
+        if ($this->langPath) {
+            return $this->langPath;
+        }
+
+        if (is_dir($path = $this->resourcePath().DIRECTORY_SEPARATOR.'lang')) {
+            return $path;
+        }
+
+        return $this->basePath().DIRECTORY_SEPARATOR.'lang';
+    }
+
+    /**
+     * Set the language file directory.
+     *
+     * @param  string  $path
+     * @return $this
+     */
+    public function useLangPath($path)
+    {
+        $this->langPath = $path;
+
+        $this->instance('path.lang', $path);
+
+        return $this;
     }
 
     /**
@@ -848,13 +889,17 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      * Boot the given service provider.
      *
      * @param  \Illuminate\Support\ServiceProvider  $provider
-     * @return mixed
+     * @return void
      */
     protected function bootProvider(ServiceProvider $provider)
     {
+        $provider->callBootingCallbacks();
+
         if (method_exists($provider, 'boot')) {
-            return $this->call([$provider, 'boot']);
+            $this->call([$provider, 'boot']);
         }
+
+        $provider->callBootedCallbacks();
     }
 
     /**
@@ -899,7 +944,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     /**
      * {@inheritdoc}
      */
-    public function handle(SymfonyRequest $request, $type = self::MASTER_REQUEST, $catch = true)
+    public function handle(SymfonyRequest $request, int $type = self::MASTER_REQUEST, bool $catch = true)
     {
         return $this[HttpKernelContract::class]->handle(Request::createFromBase($request));
     }
@@ -942,7 +987,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      */
     public function configurationIsCached()
     {
-        return file_exists($this->getCachedConfigPath());
+        return is_file($this->getCachedConfigPath());
     }
 
     /**
@@ -972,7 +1017,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      */
     public function getCachedRoutesPath()
     {
-        return $this->normalizeCachePath('APP_ROUTES_CACHE', 'cache/routes.php');
+        return $this->normalizeCachePath('APP_ROUTES_CACHE', 'cache/routes-v7.php');
     }
 
     /**
@@ -1008,9 +1053,22 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
             return $this->bootstrapPath($default);
         }
 
-        return Str::startsWith($env, '/')
+        return Str::startsWith($env, $this->absoluteCachePathPrefixes)
                 ? $env
                 : $this->basePath($env);
+    }
+
+    /**
+     * Add new prefix to list of absolute path prefixes.
+     *
+     * @param  string  $prefix
+     * @return $this
+     */
+    public function addAbsoluteCachePathPrefix($prefix)
+    {
+        $this->absoluteCachePathPrefixes[] = $prefix;
+
+        return $this;
     }
 
     /**
@@ -1020,7 +1078,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
      */
     public function isDownForMaintenance()
     {
-        return file_exists($this->storagePath().'/framework/down');
+        return is_file($this->storagePath().'/framework/down');
     }
 
     /**
@@ -1076,6 +1134,17 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     public function getLoadedProviders()
     {
         return $this->loadedProviders;
+    }
+
+    /**
+     * Determine if the given service provider is loaded.
+     *
+     * @param  string  $provider
+     * @return bool
+     */
+    public function providerIsLoaded(string $provider)
+    {
+        return isset($this->loadedProviders[$provider]);
     }
 
     /**
@@ -1143,6 +1212,26 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
     }
 
     /**
+     * Get the current application locale.
+     *
+     * @return string
+     */
+    public function currentLocale()
+    {
+        return $this->getLocale();
+    }
+
+    /**
+     * Get the current application fallback locale.
+     *
+     * @return string
+     */
+    public function getFallbackLocale()
+    {
+        return $this['config']->get('app.fallback_locale');
+    }
+
+    /**
      * Set the current application locale.
      *
      * @param  string  $locale
@@ -1155,6 +1244,19 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         $this['translator']->setLocale($locale);
 
         $this['events']->dispatch(new LocaleUpdated($locale));
+    }
+
+    /**
+     * Set the current application fallback locale.
+     *
+     * @param  string  $fallbackLocale
+     * @return void
+     */
+    public function setFallbackLocale($fallbackLocale)
+    {
+        $this['config']->set('app.fallback_locale', $fallbackLocale);
+
+        $this['translator']->setFallback($fallbackLocale);
     }
 
     /**
@@ -1197,6 +1299,7 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
             'hash.driver'          => [\Illuminate\Contracts\Hashing\Hasher::class],
             'translator'           => [\Illuminate\Translation\Translator::class, \Illuminate\Contracts\Translation\Translator::class],
             'log'                  => [\Illuminate\Log\LogManager::class, \Psr\Log\LoggerInterface::class],
+            'mail.manager'         => [\Illuminate\Mail\MailManager::class, \Illuminate\Contracts\Mail\Factory::class],
             'mailer'               => [\Illuminate\Mail\Mailer::class, \Illuminate\Contracts\Mail\Mailer::class, \Illuminate\Contracts\Mail\MailQueue::class],
             'auth.password'        => [\Illuminate\Auth\Passwords\PasswordBrokerManager::class, \Illuminate\Contracts\Auth\PasswordBrokerFactory::class],
             'auth.password.broker' => [\Illuminate\Auth\Passwords\PasswordBroker::class, \Illuminate\Contracts\Auth\PasswordBroker::class],
@@ -1238,8 +1341,11 @@ class Application extends Container implements ApplicationContract, HttpKernelIn
         $this->serviceProviders = [];
         $this->resolvingCallbacks = [];
         $this->terminatingCallbacks = [];
+        $this->beforeResolvingCallbacks = [];
         $this->afterResolvingCallbacks = [];
+        $this->globalBeforeResolvingCallbacks = [];
         $this->globalResolvingCallbacks = [];
+        $this->globalAfterResolvingCallbacks = [];
     }
 
     /**

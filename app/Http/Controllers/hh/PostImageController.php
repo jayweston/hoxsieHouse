@@ -40,6 +40,7 @@ class PostImageController extends Controller
 					$image->post_id = $request['post'];
 					$image->old_post_id = $request['post'];
 					$image->save();
+					if (!\File::isDirectory(public_path().'/hh/images/blog/'.$request['post'].'/')) \File::makeDirectory(public_path().'/hh/images/blog/'.$request['post'].'/', 0777, true);
 					\File::move(storage_path().'/app/'.$file->getClientOriginalName(), public_path().'/hh/images/blog/'.$request['post'].'/'.$file->getClientOriginalName());
 				}
 			}

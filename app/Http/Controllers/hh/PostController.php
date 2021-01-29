@@ -99,6 +99,10 @@ class PostController extends Controller
 
 		$request->request->add(['user_id' => \Auth::user()->id]);
 		$post = Post::create($request->all());
+
+		$path = public_path().'/hh/images/blog/'.$post->id.'/';
+		if (!\File::isDirectory($path)) \File::makeDirectory($path, 0777, true);
+		
 		return redirect($post->url);
 	}
 	/*
