@@ -12,13 +12,14 @@ $hhRoutes = function() {
 	Route::get('/about', 'hh\SinglePageController@about');
 	Route::get('/calendars', 'hh\SinglePageController@calendar');
 	Route::get('/post/{id}/print', 'hh\PostController@printfriendly');
+	Route::get('/post/create', 'hh\PostController@create');
 	Route::resource('/post', 'hh\PostController',['except' => ['show']]);
 	Route::resource('/user', 'hh\UserController');
 	Route::resource('/tag', 'hh\TagController', ['only' => ['index','update','destroy']]);
 	Route::resource('/postimage', 'hh\PostImageController', ['only' => ['store','update','destroy']]);
 	Route::resource('/postmeta', 'hh\PostMetaController', ['only' => ['store','update','destroy']]);
-	Route::resource('/posttag', 'hh\PostTagController', ['only' => ['update']]);
 	Route::resource('/comment', 'hh\CommentController', ['only' => ['store','destroy']]);
+	Route::resource('/posttag', 'hh\PostTagController', ['only' => ['update']]);
 	Route::get('login', 'Auth\LoginController@showLoginForm');
 	Route::get('register', 'Auth\RegisterController@showRegistrationForm');
 	Route::get('auth/{provider}', 'Auth\LoginController@redirectToProvider');
@@ -58,12 +59,12 @@ $ctRoutes = function() {
 #	Route::get('tmp', function () {		dd();	});
 };
 
-Route::group(['domain' => 'HoxsieHouse.com'], $hhRoutes);
-Route::group(['domain' => 'www.HoxsieHouse.com'], $hhRoutes);
-Route::group(['domain' => '127.0.11.27'], $hhRoutes);
-Route::group(['middleware' => 'impersonate','domain' => '127.0.11.1'], $hhRoutes);
-Route::group(['middleware' => 'impersonate','domain' => '127.0.11.2'], $hhRoutes);
-Route::group(['middleware' => 'impersonate','domain' => '127.0.11.3'], $hhRoutes);
+Route::domain('HoxsieHouse.com')->name('hh.')->group($hhRoutes);
+Route::domain('www.HoxsieHouse.com')->name('whh.')->group($hhRoutes);
+Route::domain('127.0.11.27')->name('logout.')->group($hhRoutes);
+Route::middleware(['impersonate'])->domain('127.0.11.1')->name('admin.')->group($hhRoutes);
+Route::middleware(['impersonate'])->domain('127.0.11.2')->name('writer.')->group($hhRoutes);
+Route::middleware(['impersonate'])->domain('127.0.11.3')->name('viewer.')->group($hhRoutes);
 
 Route::group(['domain' => 'DelightfulDrawingsStudio.com'], $ddsRoutes);
 Route::group(['domain' => 'www.DelightfulDrawingsStudio.com'], $ddsRoutes);

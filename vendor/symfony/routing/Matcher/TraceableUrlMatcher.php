@@ -29,7 +29,7 @@ class TraceableUrlMatcher extends UrlMatcher
 
     protected $traces;
 
-    public function getTraces($pathinfo)
+    public function getTraces(string $pathinfo)
     {
         $this->traces = [];
 
@@ -50,7 +50,7 @@ class TraceableUrlMatcher extends UrlMatcher
         return $traces;
     }
 
-    protected function matchCollection($pathinfo, RouteCollection $routes)
+    protected function matchCollection(string $pathinfo, RouteCollection $routes)
     {
         // HEAD and GET are equivalent as per RFC
         if ('HEAD' === $method = $this->context->getMethod()) {
@@ -146,7 +146,7 @@ class TraceableUrlMatcher extends UrlMatcher
 
             $this->addTrace('Route matches!', self::ROUTE_MATCHES, $name, $route);
 
-            return $this->getAttributes($route, $name, array_replace($matches, $hostMatches, isset($status[1]) ? $status[1] : []));
+            return $this->getAttributes($route, $name, array_replace($matches, $hostMatches, $status[1] ?? []));
         }
 
         return [];
