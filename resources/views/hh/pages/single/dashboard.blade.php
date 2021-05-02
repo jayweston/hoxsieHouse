@@ -14,10 +14,11 @@
 				</div>
 				<hr/>
 			@endforeach
+			<div class="d-flex justify-content-center">
+				{!! $posts->render('pagination::bootstrap-4') !!}
+			</div>
 		</div></div>
 		@include('hh.includes.sidebar')
 	</div>
-	<div class="row text-center">
-		{!! $posts->render() !!}
-	</div>
+
 @endsection

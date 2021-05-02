@@ -9,8 +9,8 @@
 	@parent
 	<link href='/hh/calendar/fullcalendar.css' rel='stylesheet' />
 	<link href='/hh/calendar/fullcalendar.print.css' rel='stylesheet' media='print' />
+	<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 	<script src='/hh/js/moment.min.js'></script>
-	<script src='/js/jquery.min.js'></script>
 	<script src='/hh/calendar/fullcalendar.min.js'></script>
 	<script src='/hh/calendar/gcal.min.js'></script>
 	<script>
