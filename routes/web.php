@@ -59,6 +59,12 @@ $ctRoutes = function() {
 #	Route::get('tmp', function () {		dd();	});
 };
 
+$fdrRoutes = function() {
+	Route::get('/', 'fdr\SinglePageController@dashboard');
+	Route::resource('/post', 'fdr\PostController',['except' => ['show']]);
+	Route::resource('/user', 'fdr\UserController');
+};
+
 Route::domain('HoxsieHouse.com')->name('hh.')->group($hhRoutes);
 Route::domain('www.HoxsieHouse.com')->name('whh.')->group($hhRoutes);
 Route::domain('127.0.11.27')->name('logout.')->group($hhRoutes);
@@ -74,4 +80,5 @@ Route::group(['domain' => 'checkeredtile.com'], $ctRoutes);
 Route::group(['domain' => 'www.checkeredtile.com'], $ctRoutes);
 Route::group(['domain' => '127.0.3.19'], $ctRoutes);
 
+Route::group(['domain' => '127.0.13.37'], $fdrRoutes);
 #https://stackoverflow.com/questions/31847054/how-to-use-multiple-databases-in-laravel

@@ -2,7 +2,9 @@
 
 namespace SocialiteProviders\Manager\OAuth1;
 
+use GuzzleHttp\Client;
 use GuzzleHttp\Exception\BadResponseException;
+use InvalidArgumentException;
 use League\OAuth1\Client\Credentials\TemporaryCredentials;
 use League\OAuth1\Client\Server\Server as BaseServer;
 use SocialiteProviders\Manager\ConfigTrait;
@@ -37,16 +39,17 @@ abstract class Server extends BaseServer
      * the temporary credentials identifier as passed back by the server
      * and finally the verifier code.
      *
-     * @param \League\OAuth1\Client\Credentials\TemporaryCredentials $temporaryCredentials
-     * @param string                                                 $temporaryIdentifier
-     * @param string                                                 $verifier
+     * @param  \League\OAuth1\Client\Credentials\TemporaryCredentials  $temporaryCredentials
+     * @param  string  $temporaryIdentifier
+     * @param  string  $verifier
+     * @return array
      *
-     * @return \League\OAuth1\Client\Credentials\TokenCredentials
+     * @throws \InvalidArgumentException
      */
     public function getTokenCredentials(TemporaryCredentials $temporaryCredentials, $temporaryIdentifier, $verifier)
     {
         if ($temporaryIdentifier !== $temporaryCredentials->getIdentifier()) {
-            throw new \InvalidArgumentException(
+            throw new InvalidArgumentException(
                 'Temporary identifier passed back by server does not match that of stored temporary credentials.
                 Potential man-in-the-middle.'
             );
@@ -60,7 +63,7 @@ abstract class Server extends BaseServer
         $headers = $this->getHeaders($temporaryCredentials, 'POST', $uri, $bodyParameters);
 
         try {
-            if ('GuzzleHttp\\Client' === get_class($client)) {
+            if ($client instanceof Client) {
                 $response = $client->post($uri, [
                     'headers'     => $headers,
                     'form_params' => $bodyParameters,
@@ -69,7 +72,7 @@ abstract class Server extends BaseServer
                 $response = $client->post($uri, $headers, $bodyParameters)->send();
             }
         } catch (BadResponseException $e) {
-            return $this->handleTokenCredentialsBadResponse($e);
+            $this->handleTokenCredentialsBadResponse($e);
         }
 
         return [
@@ -81,8 +84,7 @@ abstract class Server extends BaseServer
     /**
      * Set the scopes of the requested access.
      *
-     * @param array $scopes
-     *
+     * @param  array  $scopes
      * @return $this
      */
     public function scopes(array $scopes)
@@ -95,8 +97,7 @@ abstract class Server extends BaseServer
     /**
      * Set the custom parameters of the request.
      *
-     * @param array $parameters
-     *
+     * @param  array  $parameters
      * @return $this
      */
     public function with(array $parameters)
@@ -109,9 +110,8 @@ abstract class Server extends BaseServer
     /**
      * Format the given scopes.
      *
-     * @param array  $scopes
-     * @param string $scopeSeparator
-     *
+     * @param  array  $scopes
+     * @param  string  $scopeSeparator
      * @return string
      */
     protected function formatScopes(array $scopes, $scopeSeparator)

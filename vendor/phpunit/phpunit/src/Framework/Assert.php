@@ -1321,7 +1321,9 @@ abstract class Assert
      * @throws ExpectationFailedException
      *
      * @psalm-template ExpectedType
+     *
      * @psalm-param ExpectedType $expected
+     *
      * @psalm-assert =ExpectedType $actual
      */
     public static function assertSame($expected, $actual, string $message = ''): void
@@ -1364,7 +1366,9 @@ abstract class Assert
      * @throws ExpectationFailedException
      *
      * @psalm-template ExpectedType of object
+     *
      * @psalm-param class-string<ExpectedType> $expected
+     *
      * @psalm-assert =ExpectedType $actual
      */
     public static function assertInstanceOf(string $expected, $actual, string $message = ''): void
@@ -1388,7 +1392,9 @@ abstract class Assert
      * @throws ExpectationFailedException
      *
      * @psalm-template ExpectedType of object
+     *
      * @psalm-param class-string<ExpectedType> $expected
+     *
      * @psalm-assert !ExpectedType $actual
      */
     public static function assertNotInstanceOf(string $expected, $actual, string $message = ''): void
@@ -2534,6 +2540,13 @@ abstract class Assert
         return new IsTrue;
     }
 
+    /**
+     * @psalm-template CallbackInput of mixed
+     *
+     * @psalm-param callable(CallbackInput $callback): bool $callback
+     *
+     * @psalm-return Callback<CallbackInput>
+     */
     public static function callback(callable $callback): Callback
     {
         return new Callback($callback);

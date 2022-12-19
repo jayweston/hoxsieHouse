@@ -3,7 +3,10 @@
 namespace SocialiteProviders\Manager\OAuth1;
 
 use Illuminate\Http\RedirectResponse;
+use InvalidArgumentException;
 use Laravel\Socialite\One\AbstractProvider as BaseProvider;
+use League\OAuth1\Client\Credentials\CredentialsException;
+use League\OAuth1\Client\Credentials\TemporaryCredentials;
 use League\OAuth1\Client\Credentials\TokenCredentials;
 use SocialiteProviders\Manager\ConfigTrait;
 use SocialiteProviders\Manager\Contracts\ConfigInterface as Config;
@@ -27,8 +30,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     protected $credentialsResponseBody;
 
     /**
-     * @param string $providerName
-     *
+     * @param  string  $providerName
      * @return string
      */
     public static function serviceContainerKey($providerName)
@@ -41,8 +43,8 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      */
     public function user()
     {
-        if (!$this->hasNecessaryVerifier()) {
-            throw new \InvalidArgumentException('Invalid request. Missing OAuth verifier.');
+        if (! $this->hasNecessaryVerifier()) {
+            throw new InvalidArgumentException('Invalid request. Missing OAuth verifier.');
         }
 
         $token = $this->getToken();
@@ -55,7 +57,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
         if ($user instanceof User) {
             parse_str($token['credentialsResponseBody'], $credentialsResponseBody);
 
-            if (!$credentialsResponseBody || !is_array($credentialsResponseBody)) {
+            if (! $credentialsResponseBody || ! is_array($credentialsResponseBody)) {
                 throw new CredentialsException('Unable to parse token credentials response.');
             }
 
@@ -85,11 +87,11 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Redirect the user to the authentication page for the provider.
      *
-     * @return RedirectResponse
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function redirect()
     {
-        if (!$this->isStateless()) {
+        if (! $this->isStateless()) {
             $this->request->getSession()->put(
                 'oauth.temp', $temp = $this->server->getTemporaryCredentials()
             );
@@ -104,8 +106,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Indicates that the provider should operate as stateless.
      *
-     * @param mixed $stateless
-     *
+     * @param  mixed  $stateless
      * @return $this
      */
     public function stateless($stateless = true)
@@ -118,8 +119,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Set the scopes of the requested access.
      *
-     * @param array $scopes
-     *
+     * @param  array  $scopes
      * @return $this
      */
     public function scopes(array $scopes)
@@ -132,8 +132,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     /**
      * Set the custom parameters of the request.
      *
-     * @param array $parameters
-     *
+     * @param  array  $parameters
      * @return $this
      */
     public function with(array $parameters)
@@ -144,8 +143,7 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
     }
 
     /**
-     * @param Config $config
-     *
+     * @param  Config  $config
      * @return $this
      */
     public function setConfig(Config $config)
@@ -162,14 +160,16 @@ abstract class AbstractProvider extends BaseProvider implements ProviderInterfac
      */
     protected function getToken()
     {
-        if (!$this->isStateless()) {
+        if (! $this->isStateless()) {
             $temp = $this->request->getSession()->get('oauth.temp');
 
             return $this->server->getTokenCredentials(
                 $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')
             );
         }
-        $temp = unserialize($this->request->session()->get('oauth_temp'));
+        $temp = unserialize($this->request->session()->get('oauth_temp'), [
+            'allowed_classes' => [TemporaryCredentials::class],
+        ]);
 
         return $this->server->getTokenCredentials(
                 $temp, $this->request->get('oauth_token'), $this->request->get('oauth_verifier')

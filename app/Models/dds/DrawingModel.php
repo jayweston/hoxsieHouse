@@ -8,8 +8,11 @@ class Drawing extends Model
 {
 	protected $fillable = ["id","value","width","height","color","category","title","summary", "description","ebay","amazon","etsy","jpg"];
 	public $timestamps = false;
-	protected $connection = "dds";
 	const SITE_CATEGORIES = ['Cars','Celebrities','Charity','Nature','Animals','Other'];
+	/*
+	 * Select the database to use.
+	*/
+	protected $connection = "dds";
 	/*
 	 * Return drawing categories.
 	*/
