@@ -1091,6 +1091,15 @@
             'aliases' => array(),
             'dev_requirement' => true,
         ),
+        'spatie/laravel-html' => array(
+            'pretty_version' => '3.5.0',
+            'version' => '3.5.0.0',
+            'reference' => 'ead179a8b6802647027486049f5209bd23b610a9',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../spatie/laravel-html',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
         'spatie/laravel-ignition' => array(
             'pretty_version' => '1.7.0',
             'version' => '1.7.0.0',
