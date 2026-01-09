@@ -162,7 +162,6 @@ return [
 		Illuminate\Translation\TranslationServiceProvider::class,
 		Illuminate\Validation\ValidationServiceProvider::class,
 		Illuminate\View\ViewServiceProvider::class,
-		Collective\Html\HtmlServiceProvider::class,
 
 		/*
 		 * Package Service Providers...
@@ -177,7 +176,8 @@ return [
 		App\Providers\EventServiceProvider::class,
 		App\Providers\RouteServiceProvider::class,
 		\SocialiteProviders\Manager\ServiceProvider::class,
-		Intervention\Image\ImageServiceProvider::class
+		Intervention\Image\ImageServiceProvider::class,
+		Spatie\Html\HtmlServiceProvider::class
     ],
 
     /*
@@ -227,9 +227,11 @@ return [
 		'Validator' => Illuminate\Support\Facades\Validator::class,
 		'View' => Illuminate\Support\Facades\View::class,
 		'Form' => Collective\Html\FormFacade::class,
-		'Html' => Collective\Html\HtmlFacade::class,
+//		'Html' => Collective\Html\HtmlFacade::class,
 		'Socialite' => Laravel\Socialite\Facades\Socialite::class,
-		'Image' => Intervention\Image\Facades\Image::class
+		'Image' => Intervention\Image\Facades\Image::class,
+//		'Form' => Spatie\Html\Elements\Form::class,
+                'Html' => Spatie\Html\Facades\Html::class
     ],
 
 ];
