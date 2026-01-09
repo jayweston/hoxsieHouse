@@ -47,7 +47,10 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	public static function getUserTypesDropdown()
 	{
 		// Get all possible sql enums for type in user table.
-		$type = \DB::select(\DB::raw('SHOW COLUMNS FROM users WHERE Field = "type"'))[0]->Type;
+		$results = \DB::select('SHOW COLUMNS FROM users WHERE Field = "type"');
+		foreach ($results as $row){
+			$type = $row->Type;
+		}
 		preg_match('/^enum\((.*)\)$/', $type, $matches);
 		$values = [];
 		foreach(explode(',', $matches[1]) as $value){

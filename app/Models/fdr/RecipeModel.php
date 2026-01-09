@@ -25,7 +25,10 @@ class Recipe extends Model
 	public static function getRecipeTypesDropdown()
 	{
 		// Get all possible sql enums for type in recipe table.
-		$type = \DB::select(\DB::raw('SHOW COLUMNS FROM recipes WHERE Field = "type"'))[0]->Type;
+		$results = \DB::select('SHOW COLUMNS FROM posts WHERE Field = "type"');
+		foreach ($results as $row){
+			$type = $row->Type;
+		}
 		preg_match('/^enum\((.*)\)$/', $type, $matches);
 		$values = array();
 		foreach(explode(',', $matches[1]) as $value){

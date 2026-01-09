@@ -5,6 +5,7 @@ namespace Spatie\Html\Elements;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Spatie\Html\BaseElement;
+use Spatie\Html\Elements\Attributes\Autocomplete;
 use Spatie\Html\Elements\Attributes\Autofocus;
 use Spatie\Html\Elements\Attributes\Disabled;
 use Spatie\Html\Elements\Attributes\Name;
@@ -12,9 +13,27 @@ use Spatie\Html\Elements\Attributes\ReadonlyTrait;
 use Spatie\Html\Elements\Attributes\Required;
 use Spatie\Html\Selectable;
 
+/**
+ * @method static multipleIf(bool $condition)
+ * @method static multipleIfNotNull(bool $condition)
+ * @method static multipleUnless(bool $condition)
+ * @method static optionsIf(bool $condition, iterable $options)
+ * @method static optionsIfNotNull(bool $condition, iterable $options)
+ * @method static optionsUnless(bool $condition, iterable $options)
+ * @method static optgroupIf(bool $condition, string $label, iterable $options)
+ * @method static optgroupIfNotNull(bool $condition, string $label, iterable $options)
+ * @method static optgroupUnless(bool $condition, string $label, iterable $options)
+ * @method static placeholderIf(bool $condition, string|null $text)
+ * @method static placeholderIfNotNull(bool $condition, string|null $text)
+ * @method static placeholderUnless(bool $condition, string|null $text)
+ * @method static valueIf(bool $condition, string|iterable $value)
+ * @method static valueIfNotNull(bool $condition, string|iterable $value)
+ * @method static valueUnless(bool $condition, string|iterable $value)
+ */
 class Select extends BaseElement
 {
     use Autofocus;
+    use Autocomplete;
     use Disabled;
     use Name;
     use Required;
@@ -124,7 +143,9 @@ class Select extends BaseElement
 
     protected function applyValueToOptions()
     {
-        $value = Collection::make($this->value);
+        $value = $this->value instanceof \Illuminate\Support\Collection
+            ? $this->value
+            : Collection::make($this->value);
 
         if (! $this->hasAttribute('multiple')) {
             $value = $value->take(1);

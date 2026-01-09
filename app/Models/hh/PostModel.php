@@ -82,7 +82,10 @@ class Post extends Model
 	public static function isValidPostType($string)
 	{
 		// Get all possible sql enums for type in post table.
-		$type = \DB::select(\DB::raw('SHOW COLUMNS FROM posts WHERE Field = "type"'))[0]->Type;
+		$results = \DB::select('SHOW COLUMNS FROM posts WHERE Field = "type"');
+                foreach ($results as $row){
+                    $type = $row->Type;
+		}
 		preg_match('/^enum\((.*)\)$/', $type, $matches);
 		$values = array();
 		foreach(explode(',', $matches[1]) as $value){
@@ -98,7 +101,10 @@ class Post extends Model
 	public static function getPostTypesDropdown()
 	{
 		// Get all possible sql enums for type in post table.
-		$type = \DB::select(\DB::raw('SHOW COLUMNS FROM posts WHERE Field = "type"'))[0]->Type;
+		$results = \DB::select('SHOW COLUMNS FROM posts WHERE Field = "type"');
+		foreach ($results as $row){
+		    $type = $row->Type;
+		}
 		preg_match('/^enum\((.*)\)$/', $type, $matches);
 		$values = array();
 		foreach(explode(',', $matches[1]) as $value){

@@ -16,9 +16,9 @@ class PostMetaController extends Controller
 	*/
 	public function index()
 	{
-		$metas_city = \DB::select(\DB::raw('SELECT city as name, COUNT(*) AS cnt FROM post_metas GROUP BY name ORDER BY cnt DESC'));
-		$metas_state = \DB::select(\DB::raw('SELECT state as name, COUNT(*) AS cnt FROM post_metas GROUP BY name ORDER BY cnt DESC'));
-		$metas_country = \DB::select(\DB::raw('SELECT country as name, COUNT(*) AS cnt FROM post_metas GROUP BY name ORDER BY cnt DESC'));
+		$metas_city = \DB::raw('SELECT city as name, COUNT(*) AS cnt FROM post_metas GROUP BY name ORDER BY cnt DESC');
+		$metas_state = \DB::raw('SELECT state as name, COUNT(*) AS cnt FROM post_metas GROUP BY name ORDER BY cnt DESC');
+		$metas_country = \DB::raw('SELECT country as name, COUNT(*) AS cnt FROM post_metas GROUP BY name ORDER BY cnt DESC');
 		$view_data['meta_city'] = $metas_city;
 		$view_data['meta_state'] = $metas_state;
 		$view_data['meta_country'] = $metas_country;
